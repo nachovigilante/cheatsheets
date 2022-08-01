@@ -2,25 +2,42 @@ import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
 import { marked } from "marked";
+import { useEffect } from "react";
+import Head from "next/head";
+const { highlight } = require("highlight.js");
 
 type CheatsheetPageProps = {
     frontmatter: {
         title: string;
         image: string;
     };
-    slug: string;
     content: string;
 };
 
 const CheatsheetPage = ({
     frontmatter: { title, image },
-    slug,
     content,
 }: CheatsheetPageProps) => {
+
+    useEffect(() => {
+        marked.setOptions({
+            highlight: (code) => {
+                return highlight(code).value;
+            },
+        });
+    }, []);
+
     return (
         <>
+            <Head>
+                <title>{title}</title>
+            </Head>
             <img src={image} alt={title} />
-            <div dangerouslySetInnerHTML={{ __html: marked(content) }} />
+            <h1 style={{ margin: "auto", width: "fit-content" }}>{title}</h1>
+            <div
+                className="cheatsheet"
+                dangerouslySetInnerHTML={{ __html: marked(content) }}
+            />
         </>
     );
 };
@@ -57,7 +74,6 @@ export const getStaticProps = async ({ params: { slug } }) => {
     return {
         props: {
             frontmatter,
-            slug,
             content,
         } as CheatsheetPageProps,
     };

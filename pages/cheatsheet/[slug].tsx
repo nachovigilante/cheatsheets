@@ -4,7 +4,13 @@ import path from "path";
 import { marked } from "marked";
 import { useEffect } from "react";
 import Head from "next/head";
-const { highlight } = require("highlight.js");
+const { highlightAuto } = require("highlight.js");
+
+marked.setOptions({
+    highlight: (code) => {
+        return highlightAuto(code).value;
+    },
+});
 
 type CheatsheetPageProps = {
     frontmatter: {
@@ -18,15 +24,6 @@ const CheatsheetPage = ({
     frontmatter: { title, image },
     content,
 }: CheatsheetPageProps) => {
-
-    useEffect(() => {
-        marked.setOptions({
-            highlight: (code) => {
-                return highlight(code).value;
-            },
-        });
-    }, []);
-
     return (
         <>
             <Head>

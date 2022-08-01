@@ -1,16 +1,52 @@
 import type { NextPage } from "next";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 import Head from "next/head";
+import Cheatsheet, { CheatsheetType } from "../components/Cheatsheet";
 
-const Home : NextPage = () => {
+const Home: NextPage = ({ cheatsheets }: { cheatsheets: CheatsheetType[] }) => {
     return (
         <div>
             <Head>
                 <title>Cheatsheets</title>
             </Head>
-
-            <h1>AAA</h1>
+            <h1>Cheatsheets</h1>
+            <ul>
+                {cheatsheets.map((c) => (
+                    <li key={c.slug}>
+                        <Cheatsheet cheatsheet={c}/>
+                    </li>
+                ))}
+            </ul>
         </div>
     );
-}
+};
+
+export const getStaticProps = async () => {
+    const files = fs.readdirSync(path.join("cheatsheets"));
+
+    const cheatsheets = files.map((file) => {
+        const slug = file.replace(".md", "");
+
+        const markdownWithMeta = fs.readFileSync(
+            path.join("cheatsheets", file),
+            "utf8"
+        );
+
+        const { data: frontmatter } = matter(markdownWithMeta);
+
+        return {
+            slug,
+            frontmatter,
+        } as CheatsheetType;
+    });
+
+    return {
+        props: {
+            cheatsheets,
+        },
+    };
+};
 
 export default Home;

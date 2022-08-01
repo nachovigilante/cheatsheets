@@ -1,11 +1,8 @@
 ---
 title: HTML y CSS
 image: "/assets/images/html-css.png"
+lang: "html"
 ---
-
-# Cheatsheet de HTML y CSS
-
-<link href="./assets/style/style.css" rel="stylesheet"></link>
 
 ## Tags / elementos
 
@@ -18,7 +15,7 @@ Dentro debe ir el nombre de la etiqueta.
 
 #### Etiqueta de clausura (`</tag>`)
 
-Indica el final de un elemento. Siempre debe iniciar con el símbolo de menor seguido de la barra diagonal </ y terminar con el signo de mayor >.
+Indica el final de un elemento. Siempre debe iniciar con el símbolo de menor seguido de la barra diagonal `</` y terminar con el signo de mayor `>`.
 Nuevamente, dentro debe ir el nombre de la etiqueta.
 
 #### Atributos (nombre=“valor”)
@@ -43,7 +40,7 @@ Todo aquello que escribamos entre las etiquetas de apertura y cierre de un eleme
 ## Estructura básica de un documento HTML
 
 ```html
-<!DOCTYPE html> 2
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />

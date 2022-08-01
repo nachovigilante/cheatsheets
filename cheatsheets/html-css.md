@@ -1,3 +1,8 @@
+---
+title: HTML y CSS
+image: "/assets/images/html-css.png"
+---
+
 # Cheatsheet de HTML y CSS
 
 <link href="./assets/style/style.css" rel="stylesheet"></link>

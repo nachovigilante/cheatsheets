@@ -32,7 +32,7 @@ const CheatsheetPage = ({
                 <title>{title}</title>
             </Head>
             {/* <img src={image} alt={title} /> */}
-            <h1 style={{ margin: "auto", width: "fit-content" }}>{title}</h1>
+            <h1 style={{ margin: "40px auto 10px", width: "fit-content" }}>{title}</h1>
             <div
                 className="cheatsheet"
                 dangerouslySetInnerHTML={{ __html: marked(content) }}

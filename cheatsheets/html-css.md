@@ -1,6 +1,6 @@
 ---
 title: HTML y CSS
-image: "/assets/images/html-css.png"
+image: "/assets/images/html-css.jpg"
 lang: "html"
 ---
 

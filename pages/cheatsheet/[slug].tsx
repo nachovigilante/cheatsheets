@@ -2,11 +2,13 @@ import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
 import { marked } from "marked";
-import { useEffect } from "react";
 import Head from "next/head";
 const { highlightAuto } = require("highlight.js");
+import "highlight.js/styles/github-dark.css";
+import React from "react";
 
 marked.setOptions({
+    langPrefix: 'hljs language-',
     highlight: (code) => {
         return highlightAuto(code).value;
     },
@@ -29,7 +31,7 @@ const CheatsheetPage = ({
             <Head>
                 <title>{title}</title>
             </Head>
-            { /* <img src={image} alt={title} /> */ }
+            {/* <img src={image} alt={title} /> */}
             <h1 style={{ margin: "auto", width: "fit-content" }}>{title}</h1>
             <div
                 className="cheatsheet"

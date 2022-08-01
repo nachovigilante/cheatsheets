@@ -49,8 +49,6 @@ Todo aquello que escribamos entre las etiquetas de apertura y cierre de un eleme
 </html>
 ```
 
-(_Los números son simplemente para poder referirnos a las líneas por separado, no son parte de la estructura_)
-
 **Línea 1:**
 Utilizamos el tag ‘DOCTYPE’ para avisarle al navegador la versión que utilizaremos de HTML. Si utilizaremos la última (siempre en nuestro caso) indicamos directamente ‘html’.
 
@@ -120,7 +118,7 @@ Esta etiqueta nos permite escribir texto en la página
 **Código:**
 
 ```html
-<p>
+<p class="parrafo">
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure eos velit
     delectus excepturi saepe, consectetur recusandae, impedit autem nostrum
     nihil omnis, quaerat ipsa optio cumque? Expedita pariatur cumque nisi ea.
@@ -146,7 +144,7 @@ Estas etiquetas nos permiten listar otros elementos para organizar mejor nuestra
 **Código:**
 
 ```html
-<ul>
+<ul class="lista-desordenada">
     <li>Item 1</li>
     <li>Item 2</li>
     <li>Item 3</li>
@@ -168,7 +166,7 @@ Estas etiquetas nos permiten listar otros elementos para organizar mejor nuestra
 **Código:**
 
 ```html
-<ol>
+<ol class="lista-ordenada">
     <li>Item 1</li>
     <li>Item 2</li>
     <li>Item 3</li>
@@ -194,13 +192,13 @@ La etiqueta `<a>` nos permite crear enlaces o hipervínculos a otras páginas de
 **Código:**
 
 ```html
-<a href="./perfil.html">Ir a mi perfil</a>
+<a href="./perfil.html">Ir hacia mi perfil</a>
 ```
 
 **Resultado:**
 
 <div class="result">
-    <a href="./perfil.html">Ir a mi perfil</a>
+    <a href="./perfil.html">Ir hacia mi perfil</a>
 </div>
 
 **Código:**
@@ -224,23 +222,23 @@ La etiqueta `<img>` nos permite incrustar imágenes en nuestra página, ya sea p
 **Código:**
 
 ```html
-<img src="https://picsum.photos/500/500" alt="Imagen aleatoria" />
+<img src="https://picsum.photos/500/500" />
 ```
 
 **Resultado:**
 
 <div class="result">
-    <img src="https://picsum.photos/500/500" alt="Imagen aleatoria" />
+    <img height="200" width="200" src="https://picsum.photos/500/500" />
 </div>
 
 **Código:**
 
 ```html
-<img src="./assets/images/logo_ort.jpg" alt="Logo de ORT" />
+<img src="./assets/images/logo_ort.jpg" />
 ```
 
 <div class="result">
-    <img src="./assets/images/logo_ort.jpg" alt="Logo de ORT" />
+    <img src="./assets/images/logo_ort.jpg" />
 </div>
 
 **Resultado:**
@@ -288,6 +286,7 @@ Para diferenciar estas etiquetas y enviar la información de manera ordenada, de
 
 ```html
 <form action="./handler.php" method="POST">
+    <!-- Dentro pueden ir inputs, textareas y selects -->
     <input type="text" name="usuario" />
     <input type="password" name="contrasenia" />
     <input type="submit" value="Iniciar sesión" />
@@ -307,7 +306,11 @@ Si el usuario ingresa, por ejemplo: pepe como usuario y 123 como contraseña y c
 **Resultado (en handler.php):**
 
 ```php
-$_POST = ["usuario" => "pepe", "contrasenia" => "123"]
+/* Si se llena el formulario con estos datos */
+$_POST = [
+    "usuario" => "pepe",
+    "contrasenia" => "123"
+]
 ```
 
 Es decir, el array $\_POST en el handler.php tendrá definido como clave “usuario” y como valor “pepe”, y “contrasenia” como otra clave, cuyo valor es “123”.
@@ -343,5 +346,7 @@ La etiqueta `<select>` nos permite crear una lista de valores seleccionables par
 **Resultado (en el handler):**
 
 ```php
-$_POST = ["pais" => *value de la opción seleccionada*]
+$_POST = [
+    "pais" => 0 /* Si se selecciona la opción Argentina */
+]
 ```

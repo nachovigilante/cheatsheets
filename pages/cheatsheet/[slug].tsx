@@ -32,7 +32,7 @@ const CheatsheetPage = ({
             <Head>
                 <title>{title}</title>
             </Head>
-            <img src={image} alt={title} />
+            { /* <img src={image} alt={title} /> */ }
             <h1 style={{ margin: "auto", width: "fit-content" }}>{title}</h1>
             <div
                 className="cheatsheet"

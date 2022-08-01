@@ -306,11 +306,12 @@ Si el usuario ingresa, por ejemplo: pepe como usuario y 123 como contraseña y c
 **Resultado (en handler.php):**
 
 ```php
-/* Si se llena el formulario con estos datos */
-$_POST = [
-    "usuario" => "pepe",
-    "contrasenia" => "123"
-]
+<?php
+    $_POST = [
+        "usuario" => "pepe",
+        "contrasenia" => "123"
+    ];
+?>
 ```
 
 Es decir, el array $\_POST en el handler.php tendrá definido como clave “usuario” y como valor “pepe”, y “contrasenia” como otra clave, cuyo valor es “123”.
@@ -346,7 +347,9 @@ La etiqueta `<select>` nos permite crear una lista de valores seleccionables par
 **Resultado (en el handler):**
 
 ```php
-$_POST = [
-    "pais" => 0 /* Si se selecciona la opción Argentina */
-]
+<?php
+    $_POST = [
+        "pais" => 0 /* Si se selecciona la opción Argentina */
+    ];
+?>
 ```

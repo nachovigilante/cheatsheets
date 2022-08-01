@@ -2,11 +2,14 @@
 
 :root {
     --bg-color: #fafafa;
+    --sec-bg-color: #fafafa;
     --font-color: #282828;
+    --accent-color: #32336b;
 }
 
 [data-theme="dark"] {
     --bg-color: #282828;
+    --sec-bg-color: #282828;
     --font-color: #fafafa;
 }
 

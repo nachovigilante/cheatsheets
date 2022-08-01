@@ -1,14 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&display=swap");
 
+:root {
+    --bg-color: #fafafa;
+    --font-color: #282828;
+}
+
+[data-theme="dark"] {
+    --bg-color: #282828;
+    --font-color: #fafafa;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    color: var(--font-color);
 }
 
+.app,
 html,
 body {
     font-family: "Fira Code", monospace;
+    background-color: var(--bg-color);
+    color: var(--font-color);
+    min-height: 100vh;
 }
 
 a {

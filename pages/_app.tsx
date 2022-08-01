@@ -6,7 +6,7 @@ import Header from "../components/layout/Header";
 import { useState } from "react";
 
 function App({ Component, pageProps }: AppProps) {
-    const [theme, setTheme] = useState(true);
+    const [theme, setTheme] = useState(false);
 
     return (
         <>

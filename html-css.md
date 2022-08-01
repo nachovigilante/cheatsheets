@@ -1,5 +1,7 @@
 # Cheatsheet de HTML y CSS
 
+<link href="./assets/style/style.css" rel="stylesheet"></link>
+
 ## Tags / elementos
 
 ### Sintaxis de un elemento

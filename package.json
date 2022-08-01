@@ -11,6 +11,7 @@
     },
     "dependencies": {
         "gray-matter": "^4.0.3",
+        "highlight.js": "^11.6.0",
         "marked": "^4.0.18",
         "next": "12.2.3",
         "react": "18.2.0",

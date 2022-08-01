@@ -1,5 +1,5 @@
 ---
-title: PHP Cheatsheet
+title: PHP
 image: "/assets/images/php.webp"
 ---
 
@@ -49,8 +49,8 @@ En este ejemplo, la asignación es `$i = 0` creando una variable `$i` y dándole
 
 ```php
 $suma = 0;
-for($indice = 10; $i >= 0; $i -= 2){
-    $suma += $indice;
+for($i = 10; $i >= 0; $i -= 2){
+    $suma += $i;
 }
 ```
 

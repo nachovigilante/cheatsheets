@@ -3,17 +3,21 @@
     flex-direction: column;
     width: 250px;
     border-radius: 10px;
-    padding: 15px;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow);
+    margin: 20px;
 
     img {
         height: 90px;
         width: 100%;
-        border-radius: 7px;
-        margin-bottom: 15px;
+        border-radius: 10px 10px 0px 0px;
+    }
+
+    h3 {
+        width: 100%;
+        padding: 17px;
     }
 
     &:hover {
-        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+        box-shadow: var(--hover-shadow);
     }
 }

@@ -29,8 +29,7 @@
     .result,
     code {
         padding: 20px;
-        border: 1px solid grey;
-        border-radius: 8px;
+        border-radius: 10px;
         margin-bottom: 20px;
 
         h2 {
@@ -38,8 +37,12 @@
             margin: initial;
         }
 
-        ul li {
-            margin: initial;
+        ul, ol {
+            padding-left: 20px;
+
+            li {
+                margin: initial;
+            }
         }
 
         p {
@@ -48,7 +51,14 @@
     }
 
     .result {
+        background-color: var(--bg-color);
+        border: 1px solid grey;
         font-family: initial;
+
+        * {
+            color: var(--font-color);
+            background-color: initial;
+        }
     }
 
     code {

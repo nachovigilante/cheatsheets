@@ -5,12 +5,17 @@
     --sec-bg-color: #fafafa;
     --font-color: #282828;
     --accent-color: #32336b;
+    --shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    --hover-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+    --border: 1px solid grey;
 }
 
 [data-theme="dark"] {
     --bg-color: #282828;
     --sec-bg-color: #282828;
     --font-color: #fafafa;
+    --shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+    --hover-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
 }
 
 * {
@@ -32,4 +37,11 @@ body {
 a {
     color: inherit;
     text-decoration: none;
+}
+
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    list-style-type: none;
 }

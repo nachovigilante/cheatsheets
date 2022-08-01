@@ -11,8 +11,7 @@ const Home: NextPage = ({ cheatsheets }: { cheatsheets: CheatsheetType[] }) => {
             <Head>
                 <title>Cheatsheets</title>
             </Head>
-            <h1>Cheatsheets</h1>
-            <ul>
+            <ul className="list">
                 {cheatsheets.map((c) => (
                     <li key={c.slug}>
                         <Cheatsheet cheatsheet={c}/>

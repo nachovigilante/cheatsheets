@@ -3,6 +3,30 @@ title: HTML y CSS
 image: "/assets/images/html-css.jpg"
 ---
 
+## Índice
+
+- [Índice](#índice)
+- [Tags / elementos](#tags--elementos)
+  - [Sintaxis de un elemento](#sintaxis-de-un-elemento)
+    - [Etiqueta de apertura (`<tag>`)](#etiqueta-de-apertura-tag)
+    - [Etiqueta de clausura (`</tag>`)](#etiqueta-de-clausura-tag)
+    - [Atributos (nombre=“valor”)](#atributos-nombrevalor)
+    - [Contenido](#contenido)
+- [Estructura básica de un documento HTML](#estructura-básica-de-un-documento-html)
+- [Elementos en línea o en bloque](#elementos-en-línea-o-en-bloque)
+  - [Elementos en línea](#elementos-en-línea)
+  - [Elementos en bloque](#elementos-en-bloque)
+- [Etiquetas de texto](#etiquetas-de-texto)
+  - [Headers _(h1 al h6, no confundir con header)_](#headers-h1-al-h6-no-confundir-con-header)
+  - [Párrafos](#párrafos)
+- [Listas](#listas)
+  - [Listas no ordenadas](#listas-no-ordenadas)
+  - [Listas ordenadas](#listas-ordenadas)
+- [Hipervínculos o enlaces](#hipervínculos-o-enlaces)
+- [Imágenes](#imágenes)
+
+<br>
+
 ## Tags / elementos
 
 ### Sintaxis de un elemento

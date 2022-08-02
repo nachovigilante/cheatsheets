@@ -3,6 +3,36 @@ title: PHP
 image: "/assets/images/php.webp"
 ---
 
+## Índice
+
+- [Índice](#índice)
+- [Estructuras básicas](#estructuras-básicas)
+  - [IF](#if)
+  - [FOR](#for)
+    - [Asignación](#asignación)
+    - [Condición](#condición)
+    - [Modificación](#modificación)
+  - [FOREACH](#foreach)
+    - [Asignación](#asignación-1)
+  - [WHILE](#while)
+  - [Tipos de datos implícitos](#tipos-de-datos-implícitos)
+  - [ARRAY (funciones para strings)](#array-funciones-para-strings)
+    - [Operadores y funciones sobre arrays](#operadores-y-funciones-sobre-arrays)
+  - [Arrays asociativos](#arrays-asociativos)
+  - [Funciones](#funciones)
+    - [Parámetros](#parámetros)
+    - [Return y tipos de retorno](#return-y-tipos-de-retorno)
+  - [Cosas útiles](#cosas-útiles)
+    - [Función echo](#función-echo)
+    - [Función var_dump](#función-var_dump)
+    - [Función include / include_once](#función-include--include_once)
+    - [Rutas absolutas](#rutas-absolutas)
+    - [Rutas relativas](#rutas-relativas)
+  - [Extras (100% opcionales)](#extras-100-opcionales)
+    - [Operadores ternarios](#operadores-ternarios)
+
+<br>
+
 ## Estructuras básicas
 
 ### IF

@@ -4,12 +4,13 @@ import "../styles/globals.scss";
 import "../styles/cheatsheet.scss";
 import Header from "../components/layout/Header";
 import { useState } from "react";
+import { ThemeProvider } from "../contexts/ThemeContext";
 
 function App({ Component, pageProps }: AppProps) {
-    const [theme, setTheme] = useState(false);
+    const [theme, setTheme] = useState(true);
 
     return (
-        <>
+        <ThemeProvider>
             <Head>
                 <meta
                     name="viewport"
@@ -18,11 +19,11 @@ function App({ Component, pageProps }: AppProps) {
             </Head>
             <div className="app" data-theme={theme ? "light" : "dark"}>
                 <div id="root">
-                    <Header switchTheme={() => setTheme(!theme)} />
+                    <Header />
                     <Component {...pageProps} />
                 </div>
             </div>
-        </>
+        </ThemeProvider>
     );
 }
 

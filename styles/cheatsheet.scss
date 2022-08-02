@@ -2,6 +2,7 @@
     margin: auto;
     max-width: 1100px;
     padding: 0 50px 30px;
+    background-color: var(--doc-bg-color);
 
     h2,
     h3,
@@ -37,7 +38,8 @@
             margin: initial;
         }
 
-        ul, ol {
+        ul,
+        ol {
             padding-left: 20px;
 
             li {
@@ -51,7 +53,7 @@
     }
 
     .result {
-        background-color: var(--bg-color);
+        background-color: var(--doc-bg-color);
         border: 1px solid grey;
         font-family: initial;
 
@@ -64,6 +66,12 @@
     code {
         padding: 2px 3px;
         border-radius: 3px;
+
+        .hljs {
+            *{
+                color: white;
+            }
+        }
     }
 
     .hljs {

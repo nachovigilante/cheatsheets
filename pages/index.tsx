@@ -11,13 +11,15 @@ const Home: NextPage = ({ cheatsheets }: { cheatsheets: CheatsheetType[] }) => {
             <Head>
                 <title>Cheatsheets</title>
             </Head>
-            <ul className="list">
-                {cheatsheets.map((c) => (
-                    <li key={c.slug}>
-                        <Cheatsheet cheatsheet={c}/>
-                    </li>
-                ))}
-            </ul>
+            <div className="container">
+                <ul className="list">
+                    {cheatsheets.map((c) => (
+                        <li key={c.slug}>
+                            <Cheatsheet cheatsheet={c} />
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 };

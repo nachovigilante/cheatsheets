@@ -8,7 +8,7 @@ import "highlight.js/styles/github-dark.css";
 import React from "react";
 
 marked.setOptions({
-    langPrefix: 'hljs language-',
+    langPrefix: "hljs language-",
     highlight: (code) => {
         return highlightAuto(code).value;
     },
@@ -32,7 +32,17 @@ const CheatsheetPage = ({
                 <title>{title}</title>
             </Head>
             {/* <img src={image} alt={title} /> */}
-            <h1 style={{ margin: "40px auto 10px", width: "fit-content" }}>{title}</h1>
+            <h1
+                style={{
+                    padding: "40px 10px",
+                    margin: "0 auto",
+                    maxWidth: "1100px",
+                    textAlign: "center",
+                    backgroundColor: "var(--doc-bg-color)",
+                }}
+            >
+                {title}
+            </h1>
             <div
                 className="cheatsheet"
                 dangerouslySetInnerHTML={{ __html: marked(content) }}

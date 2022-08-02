@@ -39,6 +39,7 @@ const CheatsheetPage = ({
                     maxWidth: "1100px",
                     textAlign: "center",
                     backgroundColor: "var(--doc-bg-color)",
+                    color: "var(--doc-font-color)",
                 }}
             >
                 {title}

@@ -5,36 +5,30 @@ import matter from "gray-matter";
 import Head from "next/head";
 import Cheatsheet, { CheatsheetType } from "../components/Cheatsheet";
 import { useState } from "react";
-
-const Loading = () => {
-    return (
-        <div>
-            <h1>Loading...</h1>
-        </div>
-    );
-}
+import Loading from "../components/utils/Loading";
 
 const Home: NextPage = ({ cheatsheets }: { cheatsheets: CheatsheetType[] }) => {
-const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     return (
-        <div>
+        <div className="container">
             <Head>
                 <title>Cheatsheets</title>
             </Head>
-            <div className="container">
-                {loading ? (
-                    <Loading />
-                ) : (
-                    <ul className="list">
-                        {cheatsheets.map((c) => (
-                            <li key={c.slug}>
-                                <Cheatsheet cheatsheet={c} onClick={() => setLoading(true)} />
-                            </li>
-                        ))}
-                    </ul>
-                )}
-            </div>
+            {loading ? (
+                <Loading />
+            ) : (
+                <ul className="list">
+                    {cheatsheets.map((c) => (
+                        <li key={c.slug}>
+                            <Cheatsheet
+                                cheatsheet={c}
+                                onClick={() => setLoading(true)}
+                            />
+                        </li>
+                    ))}
+                </ul>
+            )}
         </div>
     );
 };

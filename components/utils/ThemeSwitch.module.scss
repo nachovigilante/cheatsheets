@@ -48,7 +48,7 @@
         box-shadow: var(--shadow);
         
         svg path {
-            fill: var(--font-color);
+            fill: var(--bg-color);
         }
     }
     
@@ -58,7 +58,7 @@
             background-color: #111111;
             
             svg path {
-                fill: var(--font-color);
+                fill: var(--acc-color);
             }
         }
 

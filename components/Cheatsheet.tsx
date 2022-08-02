@@ -9,10 +9,10 @@ export type CheatsheetType = {
     };
 };
 
-const Cheatsheet = ({ cheatsheet }: { cheatsheet: CheatsheetType }) => {
+const Cheatsheet = ({ cheatsheet, onClick }: { cheatsheet: CheatsheetType, onClick : () => void }) => {
     return (
         <Link href={`/cheatsheet/${cheatsheet.slug}`}>
-            <a className={styles["cheatsheet"]}>
+            <a className={styles["cheatsheet"]} onClick={onClick}>
                 <img
                     src={cheatsheet.frontmatter.image}
                     alt={cheatsheet.frontmatter.title}

@@ -4,6 +4,9 @@
     background-color: var(--sec-bg-color);
     padding: 20px 40px;
     height: var(--header-height);
+    position: fixed;
+    top: 0;
+    width: 100%;
 
     h1 {
         color: white;

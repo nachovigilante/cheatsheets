@@ -40,6 +40,7 @@ const CheatsheetPage = ({
                     textAlign: "center",
                     backgroundColor: "var(--doc-bg-color)",
                     color: "var(--doc-font-color)",
+                    marginTop: "var(--header-height)",
                 }}
             >
                 {title}

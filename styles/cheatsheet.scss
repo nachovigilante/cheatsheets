@@ -19,9 +19,7 @@
     }
 
     ul {
-        li {
-            margin: 15px 0px;
-        }
+        padding-left: 30px;
     }
 
     p {
@@ -51,6 +49,16 @@
         p {
             margin: initial;
         }
+
+        a:link {
+            color: blue;
+            text-decoration: underline;
+        }
+
+        a:visited {
+            color: purple;
+            text-decoration: underline;
+        }
     }
 
     .result {
@@ -65,13 +73,13 @@
     }
 
     code {
-        padding: 3px 4px;
+        padding: 2px 4px;
         border-radius: 3px;
         background-color: #0d1117;
         color: #e2e2e2;
 
         .hljs {
-            *{
+            * {
                 color: white;
             }
         }
@@ -84,6 +92,10 @@
 
     a {
         color: #3c3cff;
-        text-decoration: underline;
+
+        &:hover {
+            font-weight: 500;
+            text-decoration: underline;
+        }
     }
 }

@@ -36,6 +36,9 @@ body {
     background-color: var(--bg-color);
     color: var(--font-color);
     min-height: 100vh;
+
+    /* Para los anchor scrolls */
+    scroll-padding-top: 100px;
 }
 
 a {

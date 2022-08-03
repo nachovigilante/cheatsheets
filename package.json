@@ -6,9 +6,9 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
+        "prod": "next build && next start",
         "lint": "next lint",
-        "pretty": "prettier --write **/*.{js,jsx,ts,tsx,json,css,scss}",
-        "server": "next build && node server.js"
+        "pretty": "prettier --write **/*.{js,jsx,ts,tsx,json,css,scss}"
     },
     "dependencies": {
         "@svgr/webpack": "^6.3.1",
@@ -16,7 +16,7 @@
         "highlight.js": "^11.6.0",
         "marked": "^4.0.18",
         "next": "12.2.3",
-        "next-pwa": "^5.5.5",
+        "next-pwa": "5.5.4",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "sass": "^1.54.0"

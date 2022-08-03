@@ -1,0 +1,25 @@
+.floating-button {
+    position: fixed;
+    bottom: 40px;
+    right: 50px;
+    z-index: 999;
+    background-color: var(--acc-color);
+    border-radius: 50%;
+    width: 65px;
+    height: 65px;
+    box-shadow: var(--shadow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.15s ease-in-out;
+    cursor: pointer;
+    border: none;
+
+    &:hover {
+        background-color: var(--acc-color-hover);
+    }
+    
+    &:active {
+        background-color: var(--acc-color-active);
+    }
+}

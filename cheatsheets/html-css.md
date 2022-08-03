@@ -24,6 +24,7 @@ image: "/assets/images/html-css.jpg"
   - [Listas ordenadas](#listas-ordenadas)
 - [Hipervínculos o enlaces](#hipervínculos-o-enlaces)
 - [Imágenes](#imágenes)
+- [Formularios](#formularios)
 
 <br>
 
@@ -55,9 +56,9 @@ Todo aquello que escribamos entre las etiquetas de apertura y cierre de un eleme
 <html>
 <h1 class="titulo">Este es el título</h1>
 <!--
-    En este caso, h1 es el nombre del tag. 
-    class es el nombre del atributo y titulo su valor.
-    Este es el título será el contenido de esta etiqueta.
+En este caso, h1 es el nombre del tag. 
+class es el nombre del atributo y titulo su valor.
+Este es el título será el contenido de esta etiqueta.
 -->
 </html>
 ```
@@ -152,7 +153,8 @@ Esta etiqueta nos permite escribir texto en la página
 <p class="parrafo">
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure eos velit
     delectus excepturi saepe, consectetur recusandae, impedit autem nostrum
-    nihil omnis, quaerat ipsa optio cumque? Expedita pariatur cumque nisi ea.
+    nihil omnis, quaerat ipsa optio cumque? Expedita pariatur cumque nisi
+    ea.
 </p>
 </html>
 ```
@@ -287,9 +289,10 @@ La etiqueta `<img>` nos permite incrustar imágenes en nuestra página, ya sea p
 
 **Resultado:**
 
-Importante: el atributo ‘alt’ es muy importante a la hora de hacer nuestra página accesible para personas no videntes.
+**Importante:** el atributo ‘alt’ es muy importante a la hora de hacer nuestra página accesible para personas no videntes.
 
-Formularios
+## Formularios
+
 La etiqueta `<form>` nos permite crear formularios en los cuales los usuarios pueden completar datos y enviarlos a ser procesados.
 
 **Código:**
@@ -360,7 +363,6 @@ $_POST = [
     "contrasenia" => "123"
 ];
 ?>
-</html>
 ```
 
 Es decir, el array $\_POST en el handler.php tendrá definido como clave “usuario” y como valor “pepe”, y “contrasenia” como otra clave, cuyo valor es “123”.
@@ -403,5 +405,4 @@ $_POST = [
     "pais" => 0 /* Si se selecciona la opción Argentina */
 ];
 ?>
-</html>
 ```

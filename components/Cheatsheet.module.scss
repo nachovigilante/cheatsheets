@@ -5,16 +5,20 @@
     border-radius: 10px;
     box-shadow: var(--shadow);
     margin: 20px;
+    background-color: var(--sec-bg-color);
 
     img {
-        height: 90px;
+        height: 150px;
         width: 100%;
         border-radius: 10px 10px 0px 0px;
+        background-color: var(--font-color);
     }
 
-    h3 {
+    span {
         width: 100%;
         padding: 17px;
+        color: white;
+        font-size: 20px;
     }
 
     &:hover {

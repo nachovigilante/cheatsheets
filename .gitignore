@@ -32,4 +32,15 @@ yarn-error.log*
 # vercel
 .vercel
 
+# Service Worker
+**/public/*.worker.js
+**/public/*.worker.js.map
+**/public/sw.js
+**/public/sw.js.map
+**/public/workbox-*.js
+**/public/worker-*.js
+**/public/workbox-*.js.map
+**/public/worker-*.js.map
 
+# Anim
+**/anim/

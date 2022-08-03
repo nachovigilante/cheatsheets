@@ -1,4 +1,22 @@
 .header {
-    background-color: var(--accent-color);
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--sec-bg-color);
     padding: 20px 40px;
+    height: var(--header-height);
+    position: fixed;
+    top: 0;
+    width: 100%;
+
+    .home {
+        display: flex;
+        align-items: center;
+
+        h1 {
+            color: white;
+            font-size: 25px;
+            margin-left: 20px;
+            margin-top: 3px;
+        }
+    }
 }

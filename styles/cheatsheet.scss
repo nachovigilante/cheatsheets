@@ -1,7 +1,10 @@
 .cheatsheet {
     margin: auto;
+    margin-bottom: 80px;
     max-width: 1100px;
     padding: 0 50px 30px;
+    background-color: var(--doc-bg-color);
+    color: var(--doc-font-color);
 
     h2,
     h3,
@@ -17,9 +20,7 @@
     }
 
     ul {
-        li {
-            margin: 15px 0px;
-        }
+        padding-left: 30px;
     }
 
     p {
@@ -37,7 +38,8 @@
             margin: initial;
         }
 
-        ul, ol {
+        ul,
+        ol {
             padding-left: 20px;
 
             li {
@@ -48,26 +50,80 @@
         p {
             margin: initial;
         }
+
+        a {
+            &:link {
+                color: blue;
+                text-decoration: underline;
+            }
+    
+            &:visited {
+                color: purple;
+                text-decoration: underline;
+            }
+
+            &:hover {
+                font-weight: initial;
+            }
+        }
     }
 
     .result {
-        background-color: var(--bg-color);
+        background-color: var(--doc-bg-color);
         border: 1px solid grey;
         font-family: initial;
 
         * {
-            color: var(--font-color);
+            color: var(--doc-font-color);
             background-color: initial;
         }
     }
 
     code {
-        padding: 2px 3px;
+        padding: 2px 4px;
         border-radius: 3px;
+        background-color: #0d1117;
+        color: #e2e2e2;
+
+        .hljs {
+            * {
+                color: white;
+            }
+        }
     }
 
     .hljs {
         border-radius: 8px;
         margin: 10px 0px;
+
+        // Hack porque el hljs no highlightea bien el php
+        &.language-php {
+            padding: 0 1em;
+
+            .hljs-meta {
+                display: none;
+            }
+        }
+
+        // Hack porque el hljs tampoco highlightea bien el html
+        &.language-html {
+            padding: 0 1em;
+
+            .hljs-tag {
+                &:first-child, &:last-child {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    a {
+        color: var(--doc-link-color);
+        font-weight: 500;
+
+        &:hover {
+            font-weight: 600;
+            text-decoration: underline;
+        }
     }
 }

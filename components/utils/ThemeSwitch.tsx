@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
-import MoonIcon from "../../public/icons/Moon.svg";
-import SunIcon from "../../public/icons/Sun.svg";
+import MoonIcon from "../../public/assets/icons/Moon.svg";
+import SunIcon from "../../public/assets/icons/Sun.svg";
 import { ThemeContext } from "../../contexts/ThemeContext";
 
 import styles from "./ThemeSwitch.module.scss";

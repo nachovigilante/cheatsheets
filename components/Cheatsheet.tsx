@@ -17,7 +17,7 @@ const Cheatsheet = ({ cheatsheet, onClick }: { cheatsheet: CheatsheetType, onCli
                     src={cheatsheet.frontmatter.image}
                     alt={cheatsheet.frontmatter.title}
                 />
-                <h3>{cheatsheet.frontmatter.title}</h3>
+                <span>{cheatsheet.frontmatter.title}</span>
             </a>
         </Link>
     );

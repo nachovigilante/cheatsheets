@@ -13,7 +13,7 @@ const Home: NextPage = ({ cheatsheets }: { cheatsheets: CheatsheetType[] }) => {
     return (
         <div className="container">
             <Head>
-                <title>Cheatsheets</title>
+                <title>TIC Cheatsheets</title>
             </Head>
             {loading ? (
                 <Loading />

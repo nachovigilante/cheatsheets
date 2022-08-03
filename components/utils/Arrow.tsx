@@ -1,4 +1,4 @@
-import ArrowIcon from "../../public/icons/Arrow.svg";
+import ArrowIcon from "../../public/assets/icons/Arrow.svg";
 import styles from "./Arrow.module.scss";
 
 export const enum ArrowDirection {
@@ -9,8 +9,6 @@ export const enum ArrowDirection {
 }
 
 const Arrow = ({ direction }: { direction: ArrowDirection }) => {
-    console.log(direction);
-
     return (
         <div className={[styles["arrow"], styles[direction]].join(" ")}>
             <ArrowIcon />

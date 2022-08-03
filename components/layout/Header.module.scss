@@ -8,8 +8,15 @@
     top: 0;
     width: 100%;
 
-    h1 {
-        color: white;
-        font-size: 25px;
+    .home {
+        display: flex;
+        align-items: center;
+
+        h1 {
+            color: white;
+            font-size: 25px;
+            margin-left: 20px;
+            margin-top: 3px;
+        }
     }
 }

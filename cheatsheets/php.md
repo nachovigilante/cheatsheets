@@ -13,7 +13,7 @@ image: "/assets/images/php.webp"
     - [Condición](#condición)
     - [Modificación](#modificación)
   - [FOREACH](#foreach)
-    - [Asignación](#asignación-1)
+    - [Asignación foreach](#asignación-foreach)
   - [WHILE](#while)
   - [Tipos de datos implícitos](#tipos-de-datos-implícitos)
   - [ARRAY (funciones para strings)](#array-funciones-para-strings)
@@ -38,7 +38,7 @@ image: "/assets/images/php.webp"
 ### IF
 
 ```php
-<?php 
+<?php
 if( condición ){
     // Lo que pasa si vale la condición
 } else {
@@ -50,7 +50,7 @@ if( condición ){
 ### FOR
 
 ```php
-<?php 
+<?php
 for( asignación; condición; modificación ){
     // Cuerpo del ciclo
 }
@@ -72,7 +72,7 @@ Es la instrucción que se encarga de modificar la variable índice y se ejecuta 
 **Ejemplo:**
 
 ```php
-<?php 
+<?php
 for($i = 0; $i < 15; $i++){
     echo( $i );
 }
@@ -84,7 +84,7 @@ En este ejemplo, la asignación es `$i = 0` creando una variable `$i` y dándole
 **Ejemplo 2:**
 
 ```php
-<?php 
+<?php
 $suma = 0;
 for($i = 10; $i >= 0; $i -= 2){
     $suma += $i;
@@ -97,14 +97,14 @@ En este segundo ejemplo, la asignación es `$indice = 10`, creando una variable 
 ### FOREACH
 
 ```php
-<?php 
+<?php
 foreach( asignación ){
     // Cuerpo del ciclo
 }
 ?>
 ```
 
-#### Asignación
+#### Asignación foreach
 
 Existen 2 tipos de asignación en un ciclo foreach: en la primera se asigna una única variable la cual contendrá el valor de cada uno de los elementos; en la segunda se asignan 2 valores, la clave (valor con el que se accede en el arra) y el valor (lo que está almacenado en la posición valor del array).
 **Importante:** modificar la variable que contiene el valor no modificará el array.
@@ -112,7 +112,7 @@ Existen 2 tipos de asignación en un ciclo foreach: en la primera se asigna una 
 **Ejemplo:**
 
 ```php
-<?php 
+<?php
 $miarray = array(10, 5, 8, 7, 6);
 foreach($mirray as $valor){
     echo( $valor );
@@ -125,7 +125,7 @@ En este ejemplo al escribir `$miarray as $valor`, indicamos que la variable `$va
 **Ejemplo 2:**
 
 ```php
-<?php 
+<?php
 $miarray = array("hola", "chau", "foreach", "test", "prueba");
 foreach($miarray as $clave => $valor){
     echo( "En el lugar $clave del array se encuentra el valor $valor <br>" );
@@ -147,7 +147,7 @@ En el lugar 4 del array se encuentra el valor prueba
 ### WHILE
 
 ```php
-<?php 
+<?php
 while( condición ){
     // Cuerpo del ciclo
 }
@@ -172,7 +172,7 @@ _Operadores y funciones sobre strings_
 **‘.’**: este operador nos permite concatenar dos strings, por ejemplo:
 
 ```php
-<?php 
+<?php
 $a = "hola";
 $b = "chau";
 $c = $a . $b;
@@ -184,7 +184,7 @@ echo( $c ); // "holachau"
 **‘.=’**: este operador utiliza el operador ‘.’ uniendo el string de la derecha al ya existente de la izquierda, por ejemplo:
 
 ```php
-<?php 
+<?php
 $a = "hola";
 $b = "chau";
 $a .= $b;
@@ -196,7 +196,7 @@ echo( $a ); // "holachau"
 **‘[]’**: este operador nos permite acceder a un caracter específico de un string, por ejemplo:
 
 ```php
-<?php 
+<?php
 $a = "abcdef";
 
 echo( $a[3] ); // "d"
@@ -206,7 +206,7 @@ echo( $a[3] ); // "d"
 **‘strlen( string )’**: esta función devuelve el largo de un string, por ejemplo:
 
 ```php
-<?php 
+<?php
 $a = "hola";
 
 echo( strlen($a) ); // 4
@@ -216,7 +216,7 @@ echo( strlen($a) ); // 4
 **‘substr( string, inicio, cantidad )’**: esta función devuelve un substring (parte de un string) empezando en la posición inicio y del largo cantidad, por ejemplo:
 
 ```php
-<?php 
+<?php
 $a = "abcdef";
 
 echo( substr($a, 2, 2) ); // "cd"
@@ -226,7 +226,7 @@ echo( substr($a, 2, 2) ); // "cd"
 También se puede omitir el largo, entonces se calculará el substring desde la posición inicio hasta el final del string original:
 
 ```php
-<?php 
+<?php
 echo( substr($a, 2) ); // "cdef"
 ?>
 ```
@@ -234,7 +234,7 @@ echo( substr($a, 2) ); // "cdef"
 También se pueden utilizar valores de inicio negativos, entonces se contará la posición inicio desde el final del string:
 
 ```php
-<?php 
+<?php
 echo( substr($a, -2, 2) ); // "ef"
 ?>
 ```
@@ -250,7 +250,7 @@ Una lista de valores, la cual se puede recorrer para acceder a cada uno de ellos
 **‘array( valores )’**: esta función nos permite crear un array con los valores especificados, por ejemplo:
 
 ```php
-<?php 
+<?php
 $a = array(1, 5, 6, 10);
 
 echo( $a ); // [1, 5, 6, 10]
@@ -260,7 +260,7 @@ echo( $a ); // [1, 5, 6, 10]
 **‘[]’**: este operador nos permite acceder a un valor específico de un array, por ejemplo:
 
 ```php
-<?php 
+<?php
 $a = array("hola", "chau", "test", "prueba");
 
 echo( $a[2] ); // test
@@ -270,7 +270,7 @@ echo( $a[2] ); // test
 **‘count( array )’**: esta función permite ver la cantidad de elementos que contiene el array pasado como parámetro, por ejemplo:
 
 ```php
-<?php 
+<?php
 $a = array(1.6, 1.9, 5.8);
 
 echo( count($a) ); // 3
@@ -280,7 +280,7 @@ echo( count($a) ); // 3
 **‘array_push( array, valor )’**: esta función permite agregar un elemento al final del array, por ejemplo:
 
 ```php
-<?php 
+<?php
 $a = array(5, 9, 40, 7);
 array_push($a, 100);
 
@@ -295,7 +295,7 @@ Los arrays en PHP tienen una particularidad, si bien podemos utilizarlos como ar
 **Ejemplo de creación de un array asociativo:**
 
 ```php
-<?php 
+<?php
 $a = array("Nacho" => 22, "Juan" => 30, "Miguel" => 52);
 ?>
 ```
@@ -303,15 +303,15 @@ $a = array("Nacho" => 22, "Juan" => 30, "Miguel" => 52);
 **Ejemplo de acceso a un elemento:**
 
 ```php
-<?php 
-echo( $a["Juan"] ); // 30 
+<?php
+echo( $a["Juan"] ); // 30
 ?>
 ```
 
 ### Funciones
 
 ```php
-<?php 
+<?php
 function nombreDeFuncion( parámetros ){
     // Cuerpo de la función
 }
@@ -321,7 +321,7 @@ function nombreDeFuncion( parámetros ){
 Podemos pensar en las funciones como máquinas que realizan una operación sobre los parámetros que les damos. Nos ayudan a hacer el código más legible y a reutilizar código sin tener que volver a escribirlo. Por ejemplo, si tuviera un arreglo al cual lo quiero ordenar y luego mostrar solo los valores ubicados en índices pares podría hacer lo siguiente:
 
 ```php
-<?php 
+<?php
 $a = array(5, 7, 3, 9);
 
 // Código para ordenar (unas 15 líneas)
@@ -335,7 +335,7 @@ for($i = 0; $i < count($a); $i += 2){
 Luego, si quisiera mostrar realizar el mismo procedimiento pero en un array `$b`, debería escribir nuevamente todo el código. Además, cada vez que leo el código anterior, debo tomarme un tiempo para entender lo que hace. Si utilizáramos funciones podríamos hacer lo siguiente:
 
 ```php
-<?php 
+<?php
 function ordenar($arrayAOrdenar){
 // Código de ordenar el array
 return $arrayAOrdenar;
@@ -351,7 +351,7 @@ return $arrayAOrdenar;
 Entonces, para cada array al cual queremos realizarle este procedimiento deberíamos escribir únicamente lo siguiente:
 
 ```php
-<?php 
+<?php
 $a = array(5, 7, 3, 9);
 $a = ordenar($a);
 mostrarPosPares($a);
@@ -365,7 +365,7 @@ Además, se puede notar cómo se entiende automáticamente qué hace este códig
 Los parámetros son los valores que recibe una función, y con los cuales operará. Una vez que se llama a una función con determinados valores, ésta creará las variables de sus parámetros de acuerdo al orden en que se presentan los valores, una vez que termina la función estas variables desaparecen, y no pueden ser accedidas fuera de la misma. A este concepto se le llama scope o alcance de las variables, y explica en qué rango del código existe una variable dada. Por ejemplo:
 
 ```php
-<?php 
+<?php
 function sumaTotal($array){
     $total = 0;
     foreach($array as $value){
@@ -389,7 +389,7 @@ Todas las funciones de PHP pueden separarse en 2 tipos: funciones con retorno y 
 Dentro de una función, una vez que se utiliza la sentencia return, se termina automáticamente la ejecución de la misma. Por ejemplo:
 
 ```php
-<?php 
+<?php
 function test($a, $b){
     return $a + $b;
     echo( "Esto no se ejecuta");
@@ -400,7 +400,7 @@ function test($a, $b){
 Esta característica se puede aprovechar a nuestro favor a la hora de crear funciones. Si tuviésemos nuestro return en una estructura condicional, sabemos que lo demás se ejecutará solo si no valía la condición anterior, por ejemplo:
 
 ```php
-<?php 
+<?php
 function estaEnArray($array, $buscado) {
     foreach ($array as $elemento) {
         if ($elemento == $buscado) {
@@ -417,7 +417,7 @@ En este ejemplo sabemos que si termina el `foreach`, es que nunca realizamos un 
 También podemos aprovechar esto para realizar validaciones sobre los datos:
 
 ```php
-<?php 
+<?php
 function sumaTotal($array){
     if(!is_array($array)){
         return -1;
@@ -449,7 +449,7 @@ Una función parecida a `echo`, pero que recibe cualquier tipo de variable y mue
 Esta función nos permite incluir otro archivo de PHP en el archivo actual, brindándonos la posibilidad de tener una mejor distribución de nuestras funciones y constantes globales y permitiendo, además, reutilizar código.
 
 ```php
-<?php 
+<?php
 include_once( ruta del archivo );
 ?>
 ```
@@ -475,7 +475,7 @@ Si nosotros estamos en el archivo `index.php`, entonces para acceder a la carpet
 Si estamos ubicados en el archivo `index.php` y queremos incluir `functions.php`:
 
 ```php
-<?php 
+<?php
 include_once("../test/functions.php");
 ?>
 ```
@@ -487,7 +487,7 @@ include_once("../test/functions.php");
 Los operadores son una forma de escribir "una suerte de if" (notar la letra y las comillas) de manera corta, sirven para evaluar una condición y devolver un valor dependiendo de si el resultado es verdadero o falso. Se escriben de la siguiente manera:
 
 ```php
-<?php 
+<?php
 echo( condition ? "resultado si es verdadero" : "resultado si es falso" );
 ?>
 ```
@@ -495,7 +495,7 @@ echo( condition ? "resultado si es verdadero" : "resultado si es falso" );
 **Ejemplo:**
 
 ```php
-<?php 
+<?php
 $a = 5;
 echo( $a < 10 ? "a es menor a 5" : "a es mayor 5" );
 ?>

@@ -1,0 +1,16 @@
+{
+    "name": "TIC Cheatsheets",
+    "short_name": "TIC Cheatsheetsd",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0c043f",
+    "theme_color": "#0c043f",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/icons/Sun.svg",
+            "type": "image/svg",
+            "sizes": "26x26"
+        }
+    ]
+}

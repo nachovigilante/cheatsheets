@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+
+const withPWA = require("next-pwa");
+
 const nextConfig = {
     webpack: (config) => {
         config.module.rules.push({
@@ -8,8 +11,11 @@ const nextConfig = {
         });
         return config;
     },
+    pwa: {
+        dest: "public",
+    },
     reactStrictMode: true,
     swcMinify: true,
 };
 
-module.exports = nextConfig;
+module.exports = withPWA(nextConfig);

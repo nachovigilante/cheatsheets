@@ -1,4 +1,4 @@
-import ArrowIcon from "../../public/icons/arrow.svg";
+import ArrowIcon from "../../public/icons/Arrow.svg";
 import styles from "./Arrow.module.scss";
 
 export const enum ArrowDirection {

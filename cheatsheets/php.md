@@ -1,6 +1,6 @@
 ---
 title: PHP
-image: "/assets/images/php.webp"
+image: "/assets/images/php.png"
 ---
 
 ## Índice

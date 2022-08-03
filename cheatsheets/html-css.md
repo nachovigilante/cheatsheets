@@ -1,6 +1,6 @@
 ---
 title: HTML y CSS
-image: "/assets/images/html-css.jpg"
+image: "/assets/images/html-css.png"
 ---
 
 ## Índice
@@ -265,26 +265,26 @@ La etiqueta `<img>` nos permite incrustar imágenes en nuestra página, ya sea p
 
 ```html
 <html>
-<img src="https://picsum.photos/500/500" alt="Random" />
+<img src="https://picsum.photos/500/500" alt="Random image" />
 </html>
 ```
 
 **Resultado:**
 
 <div class="result">
-    <img height="200" width="200" src="https://picsum.photos/500/500" />
+    <img height="200" width="200" src="https://picsum.photos/500/500" alt="Random image" />
 </div>
 
 **Código:**
 
 ```html
 <html>
-<img src="./assets/images/logo_ort.jpg" />
+<img src="/assets/images/logo-ort.jpg" alt="ORT" />
 </html>
 ```
 
 <div class="result">
-    <img src="./assets/images/logo_ort.jpg" />
+    <img height="121" width="206" src="/assets/images/logo-ort.jpg" alt="ORT"/>
 </div>
 
 **Resultado:**
@@ -312,21 +312,34 @@ La etiqueta `<input>`, en todas sus variantes, nos permite guardar información 
 Existen muchos tipos de `<input>`, y éste se indica en el atributo ‘type’. Algunos ejemplos de éstos son:
 
 <div class="result">
-    <input type="text">
-    <input type="number">
-    <input type="password">
-    <input type="email">
-    <input type="color">
-    <input type="date">
-    <input type="month">
-    <input type="week">
-    <input type="time">
-    <input type="datetime">
-    <input type="range">
-    <input type="checkbox">
-    <input type="radio">
-    <input type="submit">
-    <input type="file">
+    <label for="text">Texto:</label>
+    <input name="text" type="text"><br>
+    <label for="email">Email:</label>
+    <input name="email" type="email"><br>
+    <label for="password">Contraseña:</label>
+    <input name="password" type="password"><br>
+    <label for="number">Número:</label>
+    <input name="number" type="number"><br>
+    <label for="date">Fecha:</label>
+    <input name="date" type="date"><br>
+    <label for="time">Hora:</label>
+    <input name="time" type="time"><br>
+    <label for="color">Color:</label>
+    <input name="color" type="color"><br>
+    <label for="range">Rango:</label>
+    <input name="range" type="range"><br>
+    <label for="search">Búsqueda:</label>
+    <input name="search" type="search"><br>
+    <label for="url">URL:</label>
+    <input name="url" type="url"><br>
+    <label for="checkbox">Checkbox:</label>
+    <input name="checkbox" type="checkbox"><br>
+    <label for="radio">Radio:</label>
+    <input name="radio" type="radio"><br>
+    <label for="file">Archivo:</label>
+    <input name="file" type="file"><br>
+    <label for="submit">Enviar:</label>
+    <input name="submit" type="submit"><br>
 </div>
 
 Para diferenciar estas etiquetas y enviar la información de manera ordenada, debemos utilizar el atributo ‘name’.

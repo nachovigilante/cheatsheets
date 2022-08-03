@@ -6,6 +6,8 @@ import Head from "next/head";
 const { highlightAuto } = require("highlight.js");
 import "highlight.js/styles/github-dark.css";
 import React from "react";
+import FloatingButton from "../../components/utils/FloatingButton";
+import Arrow, { ArrowDirection } from "../../components/utils/Arrow";
 
 marked.setOptions({
     langPrefix: "hljs language-",
@@ -49,6 +51,9 @@ const CheatsheetPage = ({
                 className="cheatsheet"
                 dangerouslySetInnerHTML={{ __html: marked(content) }}
             />
+            <FloatingButton onClick={() => window.scrollTo(0, 0)}>
+                <Arrow direction={ArrowDirection.up} />
+            </FloatingButton>
         </>
     );
 };

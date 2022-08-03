@@ -3,7 +3,8 @@ import styles from "./Loading.module.scss";
 const Loading = () => {
     return (
         <div className={styles["loading"]}>
-            <h1>Loading...</h1>
+            <div className={styles["loading-logo"]} />
+            <h1>Cargando...</h1>
         </div>
     );
 };

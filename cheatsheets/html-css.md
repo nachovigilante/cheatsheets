@@ -52,17 +52,20 @@ Todo aquello que escribamos entre las etiquetas de apertura y cierre de un eleme
 **Ejemplo:**
 
 ```html
+<html>
 <h1 class="titulo">Este es el título</h1>
 <!--
     En este caso, h1 es el nombre del tag. 
     class es el nombre del atributo y titulo su valor.
     Este es el título será el contenido de esta etiqueta.
 -->
+</html>
 ```
 
 ## Estructura básica de un documento HTML
 
 ```html
+<html>
 <!DOCTYPE html>
 <html>
     <head>
@@ -71,25 +74,26 @@ Todo aquello que escribamos entre las etiquetas de apertura y cierre de un eleme
     </head>
     <body></body>
 </html>
+</html>
 ```
 
-- **Línea 1:**
-Utilizamos el tag ‘DOCTYPE’ para avisarle al navegador la versión que utilizaremos de HTML. Si utilizaremos la última (siempre en nuestro caso) indicamos directamente ‘html’.
+-   **Línea 1:**
+    Utilizamos el tag ‘DOCTYPE’ para avisarle al navegador la versión que utilizaremos de HTML. Si utilizaremos la última (siempre en nuestro caso) indicamos directamente ‘html’.
 
-- **Líneas 2 a 10:**
-Etiqueta de html, el cual contendrá a todo el documento.
+-   **Líneas 2 a 10:**
+    Etiqueta de html, el cual contendrá a todo el documento.
 
-- **Líneas 3 a 6:**
-Etiqueta de head. Esta etiqueta incluye configuración de la página web, en su mayoría (excepto por la etiqueta title), contiene cosas que no se verán de manera directa en la página.
+-   **Líneas 3 a 6:**
+    Etiqueta de head. Esta etiqueta incluye configuración de la página web, en su mayoría (excepto por la etiqueta title), contiene cosas que no se verán de manera directa en la página.
 
-- **Línea 4:**
-Etiqueta de metadata (meta). Contendrá información correspondiente a alguna configuración en particular. En este caso contiene información sobre el grupo de caracteres de codificación que se utilizan en la página, siendo su valor “utf-8”, que indica que la página puede contener vocales con tilde y la letra ‘ñ’.
+-   **Línea 4:**
+    Etiqueta de metadata (meta). Contendrá información correspondiente a alguna configuración en particular. En este caso contiene información sobre el grupo de caracteres de codificación que se utilizan en la página, siendo su valor “utf-8”, que indica que la página puede contener vocales con tilde y la letra ‘ñ’.
 
-- **Líneas 7 a 9:**
-Etiqueta de body. Esta etiqueta contiene todos los tags que se visualizarán en la página.
+-   **Líneas 7 a 9:**
+    Etiqueta de body. Esta etiqueta contiene todos los tags que se visualizarán en la página.
 
-- **Línea 8:**
-Contenido del body, es decir, todas las etiquetas y/o texto que se incluyen en la página.
+-   **Línea 8:**
+    Contenido del body, es decir, todas las etiquetas y/o texto que se incluyen en la página.
 
 ## Elementos en línea o en bloque
 
@@ -116,12 +120,14 @@ Las etiquetas `<h1>`, `<h2>`, ..., `<h6>` representan títulos y subtítulos en 
 **Código:**
 
 ```html
-<h1>Esto es un h1</h1>
-<h2>Esto es un h2</h2>
-<h3>Esto es un h3</h3>
-<h4>Esto es un h4</h4>
-<h5>Esto es un h5</h5>
-<h6>Esto es un h6</h6>
+<html>
+<h1>Esto es un título</h1>
+<h2>Esto es un subtítulo</h2>
+<h3>Esto es un sub-subtítulo</h3>
+<h4>Esto es un sub-sub-subtítulo</h4>
+<h5>Esto es un sub-sub-sub-subtítulo</h5>
+<h6>Esto es un sub-sub-sub-sub-subtítulo</h6>
+</html>
 ```
 
 **Resultado:**
@@ -142,11 +148,13 @@ Esta etiqueta nos permite escribir texto en la página
 **Código:**
 
 ```html
+<html>
 <p class="parrafo">
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure eos velit
     delectus excepturi saepe, consectetur recusandae, impedit autem nostrum
     nihil omnis, quaerat ipsa optio cumque? Expedita pariatur cumque nisi ea.
 </p>
+</html>
 ```
 
 **Resultado:**
@@ -168,11 +176,13 @@ Estas etiquetas nos permiten listar otros elementos para organizar mejor nuestra
 **Código:**
 
 ```html
+<html>
 <ul class="lista-desordenada">
     <li>Item 1</li>
     <li>Item 2</li>
     <li>Item 3</li>
 </ul>
+</html>
 ```
 
 **Resultado:**
@@ -190,11 +200,13 @@ Estas etiquetas nos permiten listar otros elementos para organizar mejor nuestra
 **Código:**
 
 ```html
+<html>
 <ol class="lista-ordenada">
     <li>Item 1</li>
     <li>Item 2</li>
     <li>Item 3</li>
 </ol>
+</html>
 ```
 
 **Resultado:**
@@ -216,19 +228,23 @@ La etiqueta `<a>` nos permite crear enlaces o hipervínculos a otras páginas de
 **Código:**
 
 ```html
+<html>
 <a href="./perfil.html">Ir hacia mi perfil</a>
+</html>
 ```
 
 **Resultado:**
 
 <div class="result">
-    <a href="./perfil.html">Ir hacia mi perfil</a>
+    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Ir hacia mi perfil</a>
 </div>
 
 **Código:**
 
 ```html
+<html>
 <a href="https://www.campus.ort.edu.ar">Ir al campus</a>
+</html>
 ```
 
 **Resultado:**
@@ -246,7 +262,9 @@ La etiqueta `<img>` nos permite incrustar imágenes en nuestra página, ya sea p
 **Código:**
 
 ```html
-<img src="https://picsum.photos/500/500" />
+<html>
+<img src="https://picsum.photos/500/500" alt="Random" />
+</html>
 ```
 
 **Resultado:**
@@ -258,7 +276,9 @@ La etiqueta `<img>` nos permite incrustar imágenes en nuestra página, ya sea p
 **Código:**
 
 ```html
+<html>
 <img src="./assets/images/logo_ort.jpg" />
+</html>
 ```
 
 <div class="result">
@@ -275,9 +295,11 @@ La etiqueta `<form>` nos permite crear formularios en los cuales los usuarios pu
 **Código:**
 
 ```html
+<html>
 <form action="" method="">
     <!-- inputs y selects -->
 </form>
+</html>
 ```
 
 El atributo ‘action’ llevará como valor la ruta al archivo donde se enviarán los datos.
@@ -309,12 +331,14 @@ Para diferenciar estas etiquetas y enviar la información de manera ordenada, de
 **Código (en formulario):**
 
 ```html
+<html>
 <form action="./handler.php" method="POST">
     <!-- Dentro pueden ir inputs, textareas y selects -->
     <input type="text" name="usuario" />
     <input type="password" name="contrasenia" />
     <input type="submit" value="Iniciar sesión" />
 </form>
+</html>
 ```
 
 **Resultado (en el front):**
@@ -331,11 +355,12 @@ Si el usuario ingresa, por ejemplo: pepe como usuario y 123 como contraseña y c
 
 ```php
 <?php
-    $_POST = [
-        "usuario" => "pepe",
-        "contrasenia" => "123"
-    ];
+$_POST = [
+    "usuario" => "pepe",
+    "contrasenia" => "123"
+];
 ?>
+</html>
 ```
 
 Es decir, el array $\_POST en el handler.php tendrá definido como clave “usuario” y como valor “pepe”, y “contrasenia” como otra clave, cuyo valor es “123”.
@@ -347,6 +372,7 @@ La etiqueta `<select>` nos permite crear una lista de valores seleccionables par
 **Código:**
 
 ```html
+<html>
 <select name="pais">
     <option value="0">Argentina</option>
     <option value="1">Brasil</option>
@@ -354,6 +380,7 @@ La etiqueta `<select>` nos permite crear una lista de valores seleccionables par
     <option value="3">Uruguay</option>
     <option value="4">Paraguay</option>
 </select>
+</html>
 ```
 
 **Resultado (en el front):**
@@ -372,8 +399,9 @@ La etiqueta `<select>` nos permite crear una lista de valores seleccionables par
 
 ```php
 <?php
-    $_POST = [
-        "pais" => 0 /* Si se selecciona la opción Argentina */
-    ];
+$_POST = [
+    "pais" => 0 /* Si se selecciona la opción Argentina */
+];
 ?>
+</html>
 ```

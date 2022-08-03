@@ -8,6 +8,7 @@
     --sec-bg-color-active: #1f0f6c;
     --font-color: #e2e2e2;
     --doc-font-color: #282828;
+    --doc-link-color: #3c3cff;
     --acc-color: #e61366;
     --acc-color-hover: #be1559;
     --acc-color-active: #a20f4e;
@@ -21,6 +22,7 @@
     --doc-bg-color: #1f1657;
     --bg-color-hover: #0c0631;
     --doc-font-color: #e2e2e2;
+    --doc-link-color: var(--acc-color);
 }
 
 * {

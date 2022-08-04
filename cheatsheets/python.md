@@ -3,22 +3,34 @@ title: Python
 image: "/assets/images/piton.jpeg"
 ---
 
+## Índice
+
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
 <!-- code_chunk_output -->
 
+- [Índice](#índice)
 - [Variables](#variables)
 - [Types](#types)
-- [Conditionals](#conditionals)
-- [Loops](#loops)
-- [Functions](#functions)
-- [List](#list)
-- [Dictionaries](#dictionaries)
-- [List and Dictionary Comprehensions](#list-and-dictionary-comprehensions)
-- [Classes](#classes)
+  - [Type Casting](#type-casting)
+- [Estructuras Básicas](#estructuras-básicas)
+  - [Condicionales](#condicionales)
+  - [Loops](#loops)
+  - [Funciones](#funciones)
+  - [List](#list)
+  - [Diccionarios](#diccionarios)
+  - [Otras expresiones](#otras-expresiones)
+    - [List Comprehensions](#list-comprehensions)
+    - [Dictionary Comprehensions](#dictionary-comprehensions)
+    - [Ternary Operator](#ternary-operator)
+      - [Aún mas expresiones](#aún-mas-expresiones)
+- [Clases](#clases)
 - [Typing](#typing)
+- [Modules](#modules)
 
 <!-- /code_chunk_output -->
+
+<br>
 
 ## Variables
     
@@ -37,24 +49,30 @@ c = a + " " + b
 
 ## Types
 
+En Python todo es un objeto con tipo, sin embargo las variables no exigen un tipo.
+
+Se puede checkear el tipo de un valor contenido en una variable usando la función `type()`
+
 ```python
+type(10)
+# <class 'int'>
 type(x)
 # <class 'int'>
-type(y)
-# <class 'int'>
-type(z)
-# <class 'int'>
+type(Python <3")
+# <class 'str'>
 type(a)
 # <class 'str'>
-type(b)
-# <class 'str'>
-type(c)
-# <class 'str'>
+```
 
+### Type Casting
+
+Llamando a la clase de un tipo, se puede "castear" un valor de un tipo a otro.
+
+```python
 int("15")
 # 15
 
-int("3f",16)
+int("3f", 16)
 # 63
 
 int(15.56)
@@ -62,9 +80,6 @@ int(15.56)
 
 float("-11.24e8")
 # -11.24e8
-
-round(15.56,1)
-# 15.6
 
 bool(x)
 # True
@@ -74,9 +89,6 @@ str(x)
 
 chr(64)
 # "A"
-
-repr(x)
-# "1"
 
 bytes([72,9,64])
 # b"H\x09@"
@@ -89,21 +101,11 @@ dict([(3,"three"),(1,"one")])
 
 set(["one","two"])
 # {'one', 'two'}
-
-':'.join(['toto','12','pswd'])
-# 'toto:12:pswd'
-
-"words with spaces".split()
-# ['words', 'with', 'spaces']
-
-"1,4,8,2".split(",")
-# ['1', '4', '8', '2']
-
-[int(x) for x in ('1','29','-3')]
-# [1,29,-3]
 ```
 
-## Conditionals
+## Estructuras Básicas
+
+### Condicionales
 
 ```python
 if x > y:
@@ -114,10 +116,9 @@ else:
     print("x is equal to y")
 ```
 
-## Loops
+### Loops
 
 ```python
-
 x = 0
 while x < 10:
     x += 1
@@ -133,33 +134,64 @@ for l in "Hello World":
     print(l)
 ```
 
-## Functions
+### Funciones
 
 ```python
 def add(x, y):
     return x + y
 ```
 
-## List
+### List
 
 ```python
 x = [1, 2, 3]
 ```
 
-## Dictionaries
+### Diccionarios
 
 ```python
 x = {'a': 1, 'b': 2}
 ```
 
-## List and Dictionary Comprehensions
+### Otras expresiones
+
+#### List Comprehensions
 
 ```python
 x = [i for i in range(10)]
+# [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+[int(x) for x in ('1','29','-3')]
+# [1,29,-3]
+```
+
+#### Dictionary Comprehensions
+
+```python
 y = {i: i for i in range(10)}
 ```
 
-## Classes
+#### Ternary Operator
+
+```python
+x = 1 if y > 2 else 0
+```
+
+##### Aún mas expresiones
+
+```python
+':'.join(['toto','12','pswd'])
+# 'toto:12:pswd'
+
+"words with spaces".split()
+# ['words', 'with', 'spaces']
+
+"1,4,8,2".split(",")
+# ['1', '4', '8', '2']
+
+```
+
+## Clases
 
 ```python
 class Car:
@@ -176,9 +208,10 @@ print(myCar)
 ```
 
 ## Typing
-    
-```python
 
+Python 3.6+ permite el modulo `typing` para definir tipos de datos.
+
+```python
 age : int = 21
 name : str = "John"
 people : list = ["John", "Jane", "Bob"]
@@ -186,4 +219,22 @@ people : list = ["John", "Jane", "Bob"]
 
 def greeting(name: str) -> str:
     return 'Hello ' + name
+```
+
+## Modules
+
+```python
+import math
+math.sqrt(25)
+# 5.0
+
+import random
+random.randint(1, 10)
+# 8
+
+import PIL.Image as Image
+im = Image.open("/assets/images/python.jpg")
+im.show()
+
+```
 

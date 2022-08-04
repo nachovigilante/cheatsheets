@@ -22,4 +22,9 @@
     &:active {
         background-color: var(--acc-color-active);
     }
+
+    @media screen and (max-width: 620px) {
+        width: 55px;
+        height: 55px;
+    }
 }

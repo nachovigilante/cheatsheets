@@ -72,4 +72,8 @@
             flex-grow: 1;
         }
     }
+
+    @media screen and (max-width: 620px) {
+        --size: 20px;
+    }
 }

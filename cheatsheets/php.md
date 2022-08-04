@@ -15,21 +15,21 @@ image: "/assets/images/php.png"
   - [FOREACH](#foreach)
     - [Asignación foreach](#asignación-foreach)
   - [WHILE](#while)
-  - [Tipos de datos implícitos](#tipos-de-datos-implícitos)
+- [Tipos de datos implícitos](#tipos-de-datos-implícitos)
   - [ARRAY (funciones para strings)](#array-funciones-para-strings)
     - [Operadores y funciones sobre arrays](#operadores-y-funciones-sobre-arrays)
   - [Arrays asociativos](#arrays-asociativos)
-  - [Funciones](#funciones)
-    - [Parámetros](#parámetros)
-    - [Return y tipos de retorno](#return-y-tipos-de-retorno)
-  - [Cosas útiles](#cosas-útiles)
-    - [Función echo](#función-echo)
-    - [Función var_dump](#función-var_dump)
-    - [Función include / include_once](#función-include--include_once)
-    - [Rutas absolutas](#rutas-absolutas)
-    - [Rutas relativas](#rutas-relativas)
-  - [Extras (100% opcionales)](#extras-100-opcionales)
-    - [Operadores ternarios](#operadores-ternarios)
+- [Funciones](#funciones)
+  - [Parámetros](#parámetros)
+  - [Return y tipos de retorno](#return-y-tipos-de-retorno)
+- [Cosas útiles](#cosas-útiles)
+  - [Función echo](#función-echo)
+  - [Función var_dump](#función-var_dump)
+  - [Función include / include_once](#función-include--include_once)
+  - [Rutas absolutas](#rutas-absolutas)
+  - [Rutas relativas](#rutas-relativas)
+- [Extras (100% opcionales)](#extras-100-opcionales)
+  - [Operadores ternarios](#operadores-ternarios)
 
 <br>
 
@@ -154,7 +154,7 @@ while( condición ){
 ?>
 ```
 
-### Tipos de datos implícitos
+## Tipos de datos implícitos
 
 **Int**
 Un número entero que puede ser negativo o positivo.
@@ -308,7 +308,7 @@ echo( $a["Juan"] ); // 30
 ?>
 ```
 
-### Funciones
+## Funciones
 
 ```php
 <?php
@@ -360,7 +360,7 @@ mostrarPosPares($a);
 
 Además, se puede notar cómo se entiende automáticamente qué hace este código, ya que los nombres de las funciones nos permiten abstraernos del procedimiento interno y utilizarlo como una caja negra.
 
-#### Parámetros
+### Parámetros
 
 Los parámetros son los valores que recibe una función, y con los cuales operará. Una vez que se llama a una función con determinados valores, ésta creará las variables de sus parámetros de acuerdo al orden en que se presentan los valores, una vez que termina la función estas variables desaparecen, y no pueden ser accedidas fuera de la misma. A este concepto se le llama scope o alcance de las variables, y explica en qué rango del código existe una variable dada. Por ejemplo:
 
@@ -383,7 +383,7 @@ echo( $array );
 
 Este concepto de scope también se aplica a las estructuras como ciclos, es decir, cualquier variable que se cree dentro de un ciclo for (por ejemplo), no se podrá acceder por fuera ya que se destruirá una vez terminado el ciclo.
 
-#### Return y tipos de retorno
+### Return y tipos de retorno
 
 Todas las funciones de PHP pueden separarse en 2 tipos: funciones con retorno y funciones sin retorno. En programación, a las funciones sin retorno se las llama `void`, mientras que a las funciones con retorno se las define por el tipo de dato que devuelven.
 Dentro de una función, una vez que se utiliza la sentencia return, se termina automáticamente la ejecución de la misma. Por ejemplo:
@@ -434,17 +434,17 @@ function sumaTotal($array){
 
 En este caso, queremos retornar `-1` si el parámetro que se envía no es un array, para evitar que el código tire error. (Notar que esta forma de avisar no es válida si el array puede tener números negativos)
 
-### Cosas útiles
+## Cosas útiles
 
-#### Función echo
+### Función echo
 
 La función echo nos permite escribir strings en el lugar donde la llamamos. Es importante notar que cuando uno llama a la función con parámetros que no son strings, éstos se convierten en strings de una manera determinada dependiendo de su tipo de datos. Importante: las variables booleanas no cuentan con esta forma rápida de transformarse en string, por lo que no serán mostradas en un `echo`.
 
-#### Función var_dump
+### Función var_dump
 
 Una función parecida a `echo`, pero que recibe cualquier tipo de variable y muestra información importante de la misma. Se utiliza mucho para mostrar arrays asociativos.
 
-#### Función include / include_once
+### Función include / include_once
 
 Esta función nos permite incluir otro archivo de PHP en el archivo actual, brindándonos la posibilidad de tener una mejor distribución de nuestras funciones y constantes globales y permitiendo, además, reutilizar código.
 
@@ -454,11 +454,11 @@ include_once( ruta del archivo );
 ?>
 ```
 
-#### Rutas absolutas
+### Rutas absolutas
 
 Las rutas absolutas son una forma de ubicar un archivo en una computadora/servidor de manera global, es decir, desde cualquier ubicación arbitraria, es posible acceder al archivo especificado por medio de estas. Las utilizamos todos los días por ejemplo en el explorador de archivos, por ejemplo, todos tenemos los archivos para correr PHP en ‘C:\AppServ\www’ la cual es una ruta absoluta.
 
-#### Rutas relativas
+### Rutas relativas
 
 Las rutas relativas, en cambio, son una forma de ubicar un archivo desde una ubicación específica. Podemos pensarlo como las direcciones que le damos a alguien que ya está ubicado en una ruta, para llegar a la que queremos. Para esta tarea, utilizaremos los siguientes comandos:
 
@@ -480,9 +480,9 @@ include_once("../test/functions.php");
 ?>
 ```
 
-### Extras (100% opcionales)
+## Extras (100% opcionales)
 
-#### Operadores ternarios
+### Operadores ternarios
 
 Los operadores son una forma de escribir "una suerte de if" (notar la letra y las comillas) de manera corta, sirven para evaluar una condición y devolver un valor dependiendo de si el resultado es verdadero o falso. Se escriben de la siguiente manera:
 

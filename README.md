@@ -14,8 +14,18 @@ Para proponer algún cambio que agregue información o mejore algo en el repo ha
 
 - Hacer un fork al repo
 - Realizar algún cambio detallando en el/los commits (utilizando [conventional commits](https://www.conventionalcommits.org/)) lo realizado
-- Hacer un PR
+- [Hacer un PR](#ejemplo-de-PR) con el/los commits realizados
 - Esperar la respuesta al PR
+
+### Ejemplo de PR
+
+En esta sección podemos ver un [ejemplo de un PR](https://github.com/nachovigilante/cheatsheets/pull/1) que realizó [@Sponja](https://github.com/Sponja-) para arreglar un problema en el índice del cheatsheet de PHP.
+
+![Ejemplo de PR](/public/assets/images/PR.png)
+
+El PR puede recibir una respuesta positiva o negativa, si la respuesta es positiva el cambio se acepta y si es negativa se rechaza, lo que no significa que la corrección o el arreglo no es necesario, sino que tal vez es necesario mejorar la corrección antes de aceptarla.
+
+Una vez que el PR es aceptado, el cambio se aplica al repo y se generará un nuevo commit con el cambio, como el que podemos [ver en este commit](https://github.com/nachovigilante/cheatsheets/commit/1fc56153a09720a09a724b600c7386423c83cd66).
 
 ## Agregar nuevos cheatsheets
 

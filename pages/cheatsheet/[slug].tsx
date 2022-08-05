@@ -5,15 +5,18 @@ import { marked } from "marked";
 import Head from "next/head";
 const { highlightAuto } = require("highlight.js");
 import "highlight.js/styles/github-dark.css";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import FloatingButton from "../../components/utils/FloatingButton";
 import Arrow, { ArrowDirection } from "../../components/utils/Arrow";
+import { LoadingContext } from "../../contexts/LoadingContext";
+import router from "next/router";
+import hljs from "highlight.js";
 
 marked.setOptions({
     langPrefix: "hljs language-",
-    highlight: (code) => {
-        return highlightAuto(code).value;
-    },
+    //highlight: (code) => {
+    //    return highlightAuto(code).value;
+    //},
 });
 
 type CheatsheetPageProps = {
@@ -28,12 +31,16 @@ const CheatsheetPage = ({
     frontmatter: { title, image },
     content,
 }: CheatsheetPageProps) => {
+    const { setLoading } = useContext(LoadingContext);
+
+    router.events.on("routeChangeStart", () => setLoading(true));
+    router.events.on("routeChangeComplete", () => setLoading(false));
+
     return (
         <>
             <Head>
                 <title>{title}</title>
             </Head>
-            {/* <img src={image} alt={title} /> */}
             <h1
                 style={{
                     padding: "40px 10px",
@@ -50,6 +57,15 @@ const CheatsheetPage = ({
             <div
                 className="cheatsheet"
                 dangerouslySetInnerHTML={{ __html: marked(content) }}
+                ref={(el) => {
+                    if (el) {
+                        el.querySelectorAll<HTMLElement>("pre code").forEach(
+                            (block) => {
+                                hljs.highlightElement(block);
+                            }
+                        );
+                    }
+                }}
             />
             <FloatingButton onClick={() => window.scrollTo(0, 0)}>
                 <Arrow direction={ArrowDirection.up} />

@@ -4,31 +4,29 @@ import path from "path";
 import matter from "gray-matter";
 import Head from "next/head";
 import Cheatsheet, { CheatsheetType } from "../components/Cheatsheet";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Loading from "../components/utils/Loading";
+import { LoadingContext } from "../contexts/LoadingContext";
 
 const Home: NextPage = ({ cheatsheets }: { cheatsheets: CheatsheetType[] }) => {
-    const [loading, setLoading] = useState(false);
+
+    const { setLoading } = useContext(LoadingContext);
 
     return (
         <div className="container">
             <Head>
                 <title>TIC Cheatsheets</title>
             </Head>
-            {loading ? (
-                <Loading />
-            ) : (
-                <ul className="list">
-                    {cheatsheets.map((c) => (
-                        <li key={c.slug}>
-                            <Cheatsheet
-                                cheatsheet={c}
-                                onClick={() => setLoading(true)}
-                            />
-                        </li>
-                    ))}
-                </ul>
-            )}
+            <ul className="list">
+                {cheatsheets.map((c) => (
+                    <li key={c.slug}>
+                        <Cheatsheet
+                            cheatsheet={c}
+                            onClick={() => setLoading(true)}
+                        />
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };

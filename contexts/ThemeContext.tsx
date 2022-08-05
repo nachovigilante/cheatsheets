@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import Head from "next/head";
+import { useLocalStorage } from "usehooks-ts";
 
 export type ThemeType = "light" | "dark";
 
@@ -12,7 +13,7 @@ type ThemeContextType = {
 export const ThemeContext = createContext(null as null | ThemeContextType);
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-    const [theme, setTheme] = useState("light" as ThemeType);
+    const [theme, setTheme] = useLocalStorage("light", null);
 
     return (
         <>

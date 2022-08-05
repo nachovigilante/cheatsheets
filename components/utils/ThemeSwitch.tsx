@@ -11,12 +11,9 @@ const ThemeSwitch = () => {
 
     return (
         <div
-            className={[
-                styles["switch"],
-                theme === "dark" ? styles["on"] : "",
-            ].join(" ")}
+            className={[styles["switch"], theme === "dark" ? styles["on"] : ""].join(" ")}
             onClick={() => {
-                setTheme((theme) => (theme === "dark" ? "light" : "dark"));
+                setTheme((theme) => (theme === "light" ? "dark" : "light"));
             }}
         >
             <div className={["shadow-small", styles["switch-body"]].join(" ")}>

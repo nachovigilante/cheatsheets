@@ -8,7 +8,7 @@ import { useState } from "react";
 import Loading from "../components/utils/Loading";
 
 const Home: NextPage = ({ cheatsheets }: { cheatsheets: CheatsheetType[] }) => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     return (
         <div className="container">

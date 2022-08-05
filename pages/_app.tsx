@@ -7,7 +7,7 @@ import { useState } from "react";
 import { ThemeProvider } from "../contexts/ThemeContext";
 
 function App({ Component, pageProps }: AppProps) {
-    const [theme, setTheme] = useState(true);
+    const [theme] = useState(true);
 
     return (
         <ThemeProvider>
@@ -17,11 +17,9 @@ function App({ Component, pageProps }: AppProps) {
                     content="width=device-width, initial-scale=1"
                 />
             </Head>
-            <div className="app" data-theme={theme ? "light" : "dark"}>
-                <div id="root">
-                    <Header />
-                    <Component {...pageProps} />
-                </div>
+            <div id="root">
+                <Header />
+                <Component {...pageProps} />
             </div>
         </ThemeProvider>
     );

@@ -7,13 +7,13 @@ export type ThemeType = "light" | "dark";
 
 type ThemeContextType = {
     theme: ThemeType;
-    setTheme: Dispatch<SetStateAction<ThemeType>>;
+    setTheme: any;
 };
 
 export const ThemeContext = createContext(null as null | ThemeContextType);
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-    const [theme, setTheme] = useLocalStorage("light", null);
+    const [theme, setTheme] = useLocalStorage("theme", "light");
 
     return (
         <>
@@ -23,8 +23,8 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
                     content={theme === "light" ? "#e2e2e2" : "#282828"}
                 />
             </Head>
-            <ThemeContext.Provider value={{ theme, setTheme }}>
-                <div className={"app"} data-theme={theme}>
+            <ThemeContext.Provider value={{ theme: theme === "dark" ? "dark" : "light", setTheme }}>
+                <div className="app" data-theme={theme}>
                     {children}
                 </div>
             </ThemeContext.Provider>

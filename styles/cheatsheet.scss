@@ -1,11 +1,27 @@
-.cheatsheet {
+.doc {
+    background-color: var(--doc-bg-color);
+    color: var(--doc-font-color);
+    border-radius: var(--doc-border-radius);
     margin: auto;
     margin-bottom: 80px;
     max-width: 1100px;
     padding: 0 50px 30px;
-    background-color: var(--doc-bg-color);
-    color: var(--doc-font-color);
+    box-shadow: var(--shadow);
+    margin-top: calc(var(--header-height) + 50px);
 
+    h1 {
+        padding: 40px 10px;
+        margin: 0 auto;
+        max-width: 1100px;
+        text-align: center;
+        background-color: var(--doc-bg-color);
+        color: var(--doc-font-color);
+        border-radius: 8px 8px 0px 0px;
+        user-select: none;
+    }
+}
+
+.cheatsheet {
     h2,
     h3,
     h4,
@@ -56,7 +72,7 @@
                 color: blue;
                 text-decoration: underline;
             }
-    
+
             &:visited {
                 color: purple;
                 text-decoration: underline;

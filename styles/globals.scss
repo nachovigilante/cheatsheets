@@ -9,11 +9,12 @@
     --font-color: #e2e2e2;
     --doc-font-color: #282828;
     --doc-link-color: #3c3cff;
+    --doc-border-radius: 8px;
     --acc-color: #e61366;
     --acc-color-hover: #be1559;
     --acc-color-active: #a20f4e;
-    --shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3);
-    --hover-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
+    --shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.3);
+    --hover-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.7);
     --border: 1px solid grey;
     --header-height: 85px;
 }
@@ -63,6 +64,7 @@ a {
     list-style-type: none;
     margin: auto;
     width: 100%;
+    user-select: none;
 
     @media screen and (max-width: 1200px) {
         width: 910px;

@@ -41,32 +41,22 @@ const CheatsheetPage = ({
             <Head>
                 <title>{title}</title>
             </Head>
-            <h1
-                style={{
-                    padding: "40px 10px",
-                    margin: "0 auto",
-                    maxWidth: "1100px",
-                    textAlign: "center",
-                    backgroundColor: "var(--doc-bg-color)",
-                    color: "var(--doc-font-color)",
-                    marginTop: "calc(var(--header-height) + 50px)",
-                }}
-            >
-                {title}
-            </h1>
-            <div
-                className="cheatsheet"
-                dangerouslySetInnerHTML={{ __html: marked(content) }}
-                ref={(el) => {
-                    if (el) {
-                        el.querySelectorAll<HTMLElement>("pre code").forEach(
-                            (block) => {
+            <div className="doc">
+                <h1>{title}</h1>
+                <div
+                    className="cheatsheet"
+                    dangerouslySetInnerHTML={{ __html: marked(content) }}
+                    ref={(el) => {
+                        if (el) {
+                            el.querySelectorAll<HTMLElement>(
+                                "pre code"
+                            ).forEach((block) => {
                                 hljs.highlightElement(block);
-                            }
-                        );
-                    }
-                }}
-            />
+                            });
+                        }
+                    }}
+                />
+            </div>
             <FloatingButton onClick={() => window.scrollTo(0, 0)}>
                 <Arrow direction={ArrowDirection.up} />
             </FloatingButton>

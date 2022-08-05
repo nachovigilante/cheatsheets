@@ -1,6 +1,6 @@
 .arrow {
-    height: 33px;
-    width: 33px;
+    height: 28px;
+    width: 28px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,5 +23,10 @@
 
     svg path {
         fill: #e2e2e2; 
+    }
+
+    @media screen and (max-width: 620px) {
+        width: 25px;
+        height: 25px;
     }
 }

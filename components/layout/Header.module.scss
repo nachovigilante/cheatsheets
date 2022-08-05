@@ -15,6 +15,10 @@
 
         svg {
             filter: drop-shadow(0px 0px 7px rgb(0,0,0, 0.8));
+
+            @media screen and (max-width: 620px) {
+                width: 35px;
+            }
         }
 
         h1 {
@@ -22,6 +26,11 @@
             font-size: 25px;
             margin-left: 20px;
             margin-top: 3px;
+
+            @media screen and (max-width: 620px) {
+                font-size: 20px;
+                margin-left: 10px;
+            }
         }
     }
 }

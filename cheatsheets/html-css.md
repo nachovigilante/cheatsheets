@@ -53,20 +53,17 @@ Todo aquello que escribamos entre las etiquetas de apertura y cierre de un eleme
 **Ejemplo:**
 
 ```html
-<html>
 <h1 class="titulo">Este es el título</h1>
 <!--
 En este caso, h1 es el nombre del tag. 
 class es el nombre del atributo y titulo su valor.
 Este es el título será el contenido de esta etiqueta.
 -->
-</html>
 ```
 
 ## Estructura básica de un documento HTML
 
 ```html
-<html>
 <!DOCTYPE html>
 <html>
     <head>
@@ -74,7 +71,6 @@ Este es el título será el contenido de esta etiqueta.
         <title>Hello world</title>
     </head>
     <body></body>
-</html>
 </html>
 ```
 
@@ -121,14 +117,12 @@ Las etiquetas `<h1>`, `<h2>`, ..., `<h6>` representan títulos y subtítulos en 
 **Código:**
 
 ```html
-<html>
 <h1>Esto es un título</h1>
 <h2>Esto es un subtítulo</h2>
 <h3>Esto es un sub-subtítulo</h3>
 <h4>Esto es un sub-sub-subtítulo</h4>
 <h5>Esto es un sub-sub-sub-subtítulo</h5>
 <h6>Esto es un sub-sub-sub-sub-subtítulo</h6>
-</html>
 ```
 
 **Resultado:**
@@ -149,14 +143,11 @@ Esta etiqueta nos permite escribir texto en la página
 **Código:**
 
 ```html
-<html>
 <p class="parrafo">
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure eos velit
     delectus excepturi saepe, consectetur recusandae, impedit autem nostrum
-    nihil omnis, quaerat ipsa optio cumque? Expedita pariatur cumque nisi
-    ea.
+    nihil omnis, quaerat ipsa optio cumque? Expedita pariatur cumque nisi ea.
 </p>
-</html>
 ```
 
 **Resultado:**
@@ -178,13 +169,11 @@ Estas etiquetas nos permiten listar otros elementos para organizar mejor nuestra
 **Código:**
 
 ```html
-<html>
 <ul class="lista-desordenada">
     <li>Item 1</li>
     <li>Item 2</li>
     <li>Item 3</li>
 </ul>
-</html>
 ```
 
 **Resultado:**
@@ -202,13 +191,11 @@ Estas etiquetas nos permiten listar otros elementos para organizar mejor nuestra
 **Código:**
 
 ```html
-<html>
 <ol class="lista-ordenada">
     <li>Item 1</li>
     <li>Item 2</li>
     <li>Item 3</li>
 </ol>
-</html>
 ```
 
 **Resultado:**
@@ -230,9 +217,7 @@ La etiqueta `<a>` nos permite crear enlaces o hipervínculos a otras páginas de
 **Código:**
 
 ```html
-<html>
 <a href="./perfil.html">Ir hacia mi perfil</a>
-</html>
 ```
 
 **Resultado:**
@@ -244,9 +229,7 @@ La etiqueta `<a>` nos permite crear enlaces o hipervínculos a otras páginas de
 **Código:**
 
 ```html
-<html>
 <a href="https://www.campus.ort.edu.ar">Ir al campus</a>
-</html>
 ```
 
 **Resultado:**
@@ -264,9 +247,7 @@ La etiqueta `<img>` nos permite incrustar imágenes en nuestra página, ya sea p
 **Código:**
 
 ```html
-<html>
 <img src="https://picsum.photos/500/500" alt="Random image" />
-</html>
 ```
 
 **Resultado:**
@@ -278,9 +259,7 @@ La etiqueta `<img>` nos permite incrustar imágenes en nuestra página, ya sea p
 **Código:**
 
 ```html
-<html>
 <img src="/assets/images/logo-ort.jpg" alt="ORT" />
-</html>
 ```
 
 <div class="result">
@@ -298,11 +277,9 @@ La etiqueta `<form>` nos permite crear formularios en los cuales los usuarios pu
 **Código:**
 
 ```html
-<html>
 <form action="" method="">
     <!-- inputs y selects -->
 </form>
-</html>
 ```
 
 El atributo ‘action’ llevará como valor la ruta al archivo donde se enviarán los datos.
@@ -347,14 +324,12 @@ Para diferenciar estas etiquetas y enviar la información de manera ordenada, de
 **Código (en formulario):**
 
 ```html
-<html>
 <form action="./handler.php" method="POST">
     <!-- Dentro pueden ir inputs, textareas y selects -->
     <input type="text" name="usuario" />
     <input type="password" name="contrasenia" />
     <input type="submit" value="Iniciar sesión" />
 </form>
-</html>
 ```
 
 **Resultado (en el front):**
@@ -370,12 +345,10 @@ Si el usuario ingresa, por ejemplo: pepe como usuario y 123 como contraseña y c
 **Resultado (en handler.php):**
 
 ```php
-<?php
 $_POST = [
     "usuario" => "pepe",
     "contrasenia" => "123"
 ];
-?>
 ```
 
 Es decir, el array $\_POST en el handler.php tendrá definido como clave “usuario” y como valor “pepe”, y “contrasenia” como otra clave, cuyo valor es “123”.
@@ -387,7 +360,6 @@ La etiqueta `<select>` nos permite crear una lista de valores seleccionables par
 **Código:**
 
 ```html
-<html>
 <select name="pais">
     <option value="0">Argentina</option>
     <option value="1">Brasil</option>
@@ -395,7 +367,6 @@ La etiqueta `<select>` nos permite crear una lista de valores seleccionables par
     <option value="3">Uruguay</option>
     <option value="4">Paraguay</option>
 </select>
-</html>
 ```
 
 **Resultado (en el front):**
@@ -413,9 +384,7 @@ La etiqueta `<select>` nos permite crear una lista de valores seleccionables par
 **Resultado (en el handler):**
 
 ```php
-<?php
 $_POST = [
     "pais" => 0 /* Si se selecciona la opción Argentina */
 ];
-?>
 ```

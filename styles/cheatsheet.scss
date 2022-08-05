@@ -95,26 +95,6 @@
     .hljs {
         border-radius: 8px;
         margin: 10px 0px;
-
-        // Hack porque el hljs no highlightea bien el php
-        &.language-php {
-            padding: 0 1em;
-
-            .hljs-meta {
-                display: none;
-            }
-        }
-
-        // Hack porque el hljs tampoco highlightea bien el html
-        &.language-html {
-            padding: 0 1em;
-
-            .hljs-tag {
-                &:first-child, &:last-child {
-                    display: none;
-                }
-            }
-        }
     }
 
     a {

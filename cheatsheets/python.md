@@ -58,7 +58,7 @@ type(10)
 # <class 'int'>
 type(x)
 # <class 'int'>
-type(Python <3")
+type("Python <3")
 # <class 'str'>
 type(a)
 # <class 'str'>

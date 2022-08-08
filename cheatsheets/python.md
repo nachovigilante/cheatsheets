@@ -11,13 +11,12 @@ image: "/assets/images/piton.jpeg"
 
 - [Índice](#índice)
 - [Variables](#variables)
-- [Types](#types)
+- [Tipos](#tipos)
   - [Type Casting](#type-casting)
+- [Condicionales](#condicionales)
+- [Loops](#loops)
 - [Estructuras Básicas](#estructuras-básicas)
-  - [Condicionales](#condicionales)
-  - [Loops](#loops)
-  - [Funciones](#funciones)
-  - [List](#list)
+  - [Listas](#listas)
     - [Acceso y asignación](#acceso-y-asignación)
     - [Agregar y quitar elementos](#agregar-y-quitar-elementos)
     - [Longitud](#longitud)
@@ -31,6 +30,10 @@ image: "/assets/images/piton.jpeg"
     - [Dictionary Comprehensions](#dictionary-comprehensions)
     - [Ternary Operator](#ternary-operator)
       - [Aún mas expresiones](#aún-mas-expresiones)
+- [Funciones](#funciones)
+  - [Declaración](#declaración)
+    - [Buenas Prácticas](#buenas-prácticas)
+  - [Uso](#uso)
 - [Clases](#clases)
 - [Typing](#typing)
 - [Modules](#modules)
@@ -40,6 +43,8 @@ image: "/assets/images/piton.jpeg"
 <br>
 
 ## Variables
+
+Las variables no exigen un tipo, entonces para declararlas simplemente son `nombre = valor`. Una variable puede cambiar el tipo de dato que contiene
     
 ```python
 x = 1
@@ -49,12 +54,12 @@ z = x + y
 
 a = "Hello"
 b = "World"
-c = a + " " + b
-# c = "Hello World"
-
+z = a + " " + b
+# z = "Hello World"
 ```
+Esto se debe a que Python es un lenguaje de **tipado dinámico**, es decir, los tipos de datos se determinan al correr el programa y no de antes.
 
-## Types
+## Tipos
 
 En Python todo es un objeto con tipo, sin embargo las variables no exigen un tipo.
 
@@ -109,10 +114,7 @@ dict([(3,"three"),(1,"one")])
 set(["one","two"])
 # {'one', 'two'}
 ```
-
-## Estructuras Básicas
-
-### Condicionales
+## Condicionales
 
 ```python
 if x > y:
@@ -123,7 +125,7 @@ else:
     print("x is equal to y")
 ```
 
-### Loops
+## Loops
 
 ```python
 x = 0
@@ -141,14 +143,10 @@ for l in "Hello World":
     print(l)
 ```
 
-### Funciones
 
-```python
-def add(x, y):
-    return x + y
-```
+## Estructuras Básicas
 
-### List
+### Listas
 Las listas en Python son una estructura de datos que permite guardar muchos elementos en una  ́unica variable. Se
 parecen a los arrays en otros lenguajes, pero con algunas diferencias fundamentales:
 - Son de longitud variable, es decir, puedo agregar y sacar elementos de una misma lista
@@ -281,6 +279,56 @@ x = 1 if y > 2 else 0
 # ['1', '4', '8', '2']
 
 ```
+
+## Funciones
+
+Las funciones en programación son las mismas que en matemática. Simplemente son estructuras que dada una o más entradas, devuelven una salida asociada. Son una especie de caja negra que hace ciertas cosas con la entrada para devolver una salida apropiada.
+
+Las funciones no son estrictamente necesarias en python. Podríamos construir cualquier programa sin usarlas, pero se vuelve extremadamente engorroso hacerlo. Las funciones traen ciertas ventajas a la hora de programar:
+
+- Abstraen comportamiento
+- Reducen código repetido
+- Mejoran la legibilidad del código
+- Hacen al código más mantenible y mejorable
+
+### Declaración
+
+Hay 2 partes en el uso de funciones. Por un lado la **declaración**, que es crear la función y "describir" su comportamiento, y la otra es el uso, donde llamamos la función para una entrada concreta.
+
+Para declarar una función, y las partes de dicha declaración, usemos un ejemplo:
+```python
+def duplica(factor):
+    producto = factor * 2
+    return producto`    
+```
+
+Analizemos sus partes:
+- `def`: Palabra reservada del lenguaje para decir que estamos declarando una función
+- `duplica`: Nombre de la función que estamos declarando
+- `factor`: Nombre del parámetro (entrada) de la función. Puedo tener más de un parámetro, van separados por comas.
+- `return`: Palabra reservada del lenguaje para decir que estamos devolviendo de una función. Si `return` se omite entonces la función devuelve `None`.
+
+#### Buenas Prácticas
+Al declarar una función, es de buenas prácticas:
+- Nombre apropiado para la función.
+- Nombres apropiados para los parámetros.
+- Un único `return`, y explícito, incluso cuando no deseo devolver nada.
+- Parametrizar lo más posible el rol que cumple la función para evitar funciones duplicadas.
+- Evitar usar cosas declaradas fuera de la función que no fueron pasadas por parámetro.
+- Evitar funciones ultra largas. Partir la función en otras funciones si esto tiene sentido para el problema.
+
+### Uso
+Las funciones están para ser usadas, y luego de declararlas, puedo usarlas pasándole los parámetros correspondientes. La idea es que los valores que le pasé van a reemplazar los parámetros en la declaración.
+```python
+def resta(minuendo,sustraendo):
+    diferencia = minuendo - sustraendo
+    return diferencia
+    
+resultado = resta(5,2) #3
+```
+La idea es que el primer parámetro (`5`) va a ser el minuendo, y el segundo (`2`) el sustraendo. Luego, lo que esté como `return` es lo que la función va a devolver. En este caso, el resultado se va a guardar en la variable `resultado`.
+
+A una función le podemos pasar de parámetros otras variables, cuentas, otros llamados de función, etc, además de valores concretos. Lo importante es que estén definidos previamente y que se puedan resolver a valores concretos al momento de llamar la función.
 
 ## Clases
 

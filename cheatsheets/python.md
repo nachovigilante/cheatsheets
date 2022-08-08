@@ -18,6 +18,9 @@ image: "/assets/images/piton.jpeg"
   - [Loops](#loops)
   - [Funciones](#funciones)
   - [List](#list)
+    - [Acceso y asignación](#acceso-y-asignación)
+    - [Agregar y quitar elementos](#agregar-y-quitar-elementos)
+    - [Longitud](#longitud)
   - [Diccionarios](#diccionarios)
   - [Otras expresiones](#otras-expresiones)
     - [List Comprehensions](#list-comprehensions)
@@ -142,10 +145,67 @@ def add(x, y):
 ```
 
 ### List
+Las listas en Python son una estructura de datos que permite guardar muchos elementos en una  ́unica variable. Se
+parecen a los arrays en otros lenguajes, pero con algunas diferencias fundamentales:
+- Son de longitud variable, es decir, puedo agregar y sacar elementos de una misma lista
+- Los elementos de una lista pueden ser de distinto tipo de datos, por ejemplo,
+```python
+[4,8,'Mario',5.8]
+```
+es una lista válida.
+
+#### Acceso y asignación
+
+Para acceder a un elemento de una lista, podemos accederlo mediante su posición o índice. **Las listas en Python están indexadas desde 0, no 1**. Por ejemplo, si tengo la siguiente lista:
+```python
+lista = [4,5,0.25,'x']
+lista[0] #4
+lista[2] #0.25
+lista[3] #'x'
+```
+Puedo no solo acceder, sino también modificar elementos en una lista. Para eso uso operadores de asignación como =, o de modificación como += sobre el elemento deseado:
+```python
+lista = [4,5,0.25,'x']
+lista[0] = 'Ort'
+lista[2] = 1
+lista[3] += 'y'
+lista == ['ORT',5,1,'xy']
+```
+#### Agregar y quitar elementos
+
+Para agregar elementos a una lista en python, podemos usar el método `append`. Un método, por ahora, podemos pensarlo simplemente como una función pero con una sintaxis especial. `append` agrega el elemento pasado por parámetero al final de la lista.
 
 ```python
-x = [1, 2, 3]
+lista = [4,5,'x',9]
+lista.append(11)
+print(lista) #[4,5,'x',9,11]
 ```
+Para agregar un elemento en algun posición específica de la lista se puede usar el método `insert`.
+
+```python
+#Completar ejemplo de insert
+```
+
+Para sacar elementos de la lista, podemos usar el método `pop`, que toma como parámetro el índice que se desea eliminar.
+
+```python
+lista = [4,5,'x',9]
+lista.pop(1)
+print(lista) #[4,'x',9]
+```
+Para sacar un elemento basado en su valor, se puede usar `remove`, que saca la primera aparición del elemento pasado por parámetro.
+
+```python
+#Completar ejemplo de remove
+```
+#### Longitud
+
+Muchas veces cuantos elementos hay en una lista es desconocido, y para eso existe la función `len`.
+```python
+lista = [4,5,'x',9]
+print(len(lista)) #4
+```
+
 
 ### Diccionarios
 

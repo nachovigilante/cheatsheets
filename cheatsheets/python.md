@@ -21,6 +21,10 @@ image: "/assets/images/piton.jpeg"
     - [Acceso y asignación](#acceso-y-asignación)
     - [Agregar y quitar elementos](#agregar-y-quitar-elementos)
     - [Longitud](#longitud)
+    - [Recorriendo listas](#recorriendo-listas)
+      - [Mediante índices](#mediante-índices)
+      - [Mediante elementos](#mediante-elementos)
+      - [Mediante índices y elementos](#mediante-índices-y-elementos)
   - [Diccionarios](#diccionarios)
   - [Otras expresiones](#otras-expresiones)
     - [List Comprehensions](#list-comprehensions)
@@ -148,11 +152,7 @@ def add(x, y):
 Las listas en Python son una estructura de datos que permite guardar muchos elementos en una  ́unica variable. Se
 parecen a los arrays en otros lenguajes, pero con algunas diferencias fundamentales:
 - Son de longitud variable, es decir, puedo agregar y sacar elementos de una misma lista
-- Los elementos de una lista pueden ser de distinto tipo de datos, por ejemplo,
-```python
-[4,8,'Mario',5.8]
-```
-es una lista válida.
+- Los elementos de una lista pueden ser de distinto tipo de datos, por ejemplo, `[4,8,'Mario',5.8]` es una lista válida.
 
 #### Acceso y asignación
 
@@ -205,7 +205,38 @@ Muchas veces cuantos elementos hay en una lista es desconocido, y para eso exist
 lista = [4,5,'x',9]
 print(len(lista)) #4
 ```
+#### Recorriendo listas
 
+Las listas contienen muchos elementos, y en muchos casos la solución a nuestro problema implica recorrerlas. A continuación discutimos algunas formas de hacer esto.
+
+##### Mediante índices
+Los índices de una lista arrancan en 0 y terminan en la longitud - 1. Por eso, `range(len(l))` nos da los índices de la lista guardada en `l`, ya que range por default arranca en 0 y no incluye el valor final (`len(l)`). Usándolo en un `for`:
+
+```python
+l = [6,'x',9,25]
+for indice in range(len(l)):
+    l[indice] #Obtengo los elementos usando el índice para acceder al valor
+```
+
+Entiendo que la sintaxis es medio rara y bastante menos intuitiva que un lenguaje como `C#`, pero entiendan que el `for` necesita por parámetro estos iterables, y por eso el `range`.
+
+##### Mediante elementos
+Otras veces no necesitamos la posición del elemento, y podemos aprovechar la sintaxis del `for` a nuestro favor:
+
+```python
+l = [6,'x',9,25]
+for elemento in l:
+    elemento #Va a ser cada elemento de la lista de izquierda a derecha (6,'x', etc)
+```
+
+##### Mediante índices y elementos
+La forma más elegante, pero a la vez menos intuitiva, de recorrer listas cuando necesito su posición además de su valor, es mediante `enumerate`. Esta función genera un iterable de pares índice, valor dada una lista, y entonces podemos usar la siguiente sintaxis:
+```python
+l = [6,'x',9,25]
+for indice,elemento in enumerate(l):
+        indice   #posición actual
+        elemento #elemento actual
+```
 
 ### Diccionarios
 

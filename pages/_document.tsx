@@ -6,7 +6,7 @@ const Document = () => {
             <Head>
                 <link rel="manifest" href="/manifest.json" />
                 <link rel="shortcut icon" href="/favicon.ico" />
-                <meta name="theme-color" content="#0c043f" />
+                <meta name="theme-color" content="#170c60" />
                 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
                 <meta name="apple-mobile-web-app-capable" content="yes" />
                 <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />

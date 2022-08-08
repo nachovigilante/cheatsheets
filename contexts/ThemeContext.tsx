@@ -16,12 +16,6 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <>
-            <Head>
-                <meta
-                    name="theme-color"
-                    content={theme === "light" ? "#e2e2e2" : "#282828"}
-                />
-            </Head>
             <ThemeContext.Provider value={{ theme: theme === "dark" ? "dark" : "light", setTheme }}>
                 <div className="app" data-theme={theme}>
                     {children}

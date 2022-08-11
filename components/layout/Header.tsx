@@ -25,6 +25,13 @@ const NavBar = () => {
                     Cheatsheets
                 </a>
             </Link>
+            <a
+                href="https://github.com/nachovigilante/cheatsheets"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles["github-link"]}
+                aria-label="Repositorio en GitHub"
+            />
         </div>
     );
 };

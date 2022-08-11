@@ -34,4 +34,19 @@
             }
         }
     }
+
+    .navbar{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        a {
+            margin: 0 12px;
+            
+            &.active {
+                color: var(--acc-color);
+                font-weight: 600;
+            }
+        }
+    }
 }

@@ -6,6 +6,7 @@ import Head from "next/head";
 import Cheatsheet, { CheatsheetType } from "../components/Cheatsheet";
 import { useContext } from "react";
 import { LoadingContext } from "../contexts/LoadingContext";
+import router from "next/router";
 
 const CheatsheetList = ({ cheatsheets }: { cheatsheets: CheatsheetType[] }) => {
     const { setLoading } = useContext(LoadingContext);
@@ -23,7 +24,16 @@ const CheatsheetList = ({ cheatsheets }: { cheatsheets: CheatsheetType[] }) => {
     );
 };
 
-const Cheatsheets: NextPage = ({ cheatsheets }: { cheatsheets: CheatsheetType[] }) => {
+const Cheatsheets: NextPage = ({
+    cheatsheets,
+}: {
+    cheatsheets: CheatsheetType[];
+}) => {
+    const { setLoading } = useContext(LoadingContext);
+
+    router.events.on("routeChangeStart", () => setLoading(true));
+    router.events.on("routeChangeComplete", () => setLoading(false));
+
     return (
         <div className="container">
             <Head>

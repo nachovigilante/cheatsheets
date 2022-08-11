@@ -101,12 +101,32 @@
         background-color: #0d1117;
         padding: 2px 4px;
     }
-    
+
     pre {
         padding: 10px;
         background-color: #0d1117;
         border-radius: 8px;
         margin: 10px 0px;
+        overflow-x: scroll;
+
+        &::-webkit-scrollbar {
+            height: 12px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        
+        &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            height: 10px;
+            background: rgb(44, 42, 42);
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background: rgb(44, 42, 42);
+        }
 
         code {
             padding: 0;

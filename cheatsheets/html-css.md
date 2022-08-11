@@ -70,26 +70,28 @@ Este es el título será el contenido de esta etiqueta.
         <meta charset="utf-8" />
         <title>Hello world</title>
     </head>
-    <body></body>
+    <body>
+        <h1>Hola mundo</h1>
+    </body>
 </html>
 ```
 
--   **Línea 1:**
+- **Línea 1:**
     Utilizamos el tag ‘DOCTYPE’ para avisarle al navegador la versión que utilizaremos de HTML. Si utilizaremos la última (siempre en nuestro caso) indicamos directamente ‘html’.
 
--   **Líneas 2 a 10:**
+- **Líneas 2 a 10:**
     Etiqueta de html, el cual contendrá a todo el documento.
 
--   **Líneas 3 a 6:**
+- **Líneas 3 a 6:**
     Etiqueta de head. Esta etiqueta incluye configuración de la página web, en su mayoría (excepto por la etiqueta title), contiene cosas que no se verán de manera directa en la página.
 
--   **Línea 4:**
+- **Línea 4:**
     Etiqueta de metadata (meta). Contendrá información correspondiente a alguna configuración en particular. En este caso contiene información sobre el grupo de caracteres de codificación que se utilizan en la página, siendo su valor “utf-8”, que indica que la página puede contener vocales con tilde y la letra ‘ñ’.
 
--   **Líneas 7 a 9:**
+- **Líneas 7 a 9:**
     Etiqueta de body. Esta etiqueta contiene todos los tags que se visualizarán en la página.
 
--   **Línea 8:**
+- **Línea 8:**
     Contenido del body, es decir, todas las etiquetas y/o texto que se incluyen en la página.
 
 ## Elementos en línea o en bloque

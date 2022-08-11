@@ -45,7 +45,7 @@ image: "/assets/images/piton.jpeg"
 ## Variables
 
 Las variables no exigen un tipo, entonces para declararlas simplemente son `nombre = valor`. Una variable puede cambiar el tipo de dato que contiene
-    
+
 ```python
 x = 1
 y = 2
@@ -57,6 +57,7 @@ b = "World"
 z = a + " " + b
 # z = "Hello World"
 ```
+
 Esto se debe a que Python es un lenguaje de **tipado dinámico**, es decir, los tipos de datos se determinan al correr el programa y no de antes.
 
 ## Tipos
@@ -114,6 +115,7 @@ dict([(3,"three"),(1,"one")])
 set(["one","two"])
 # {'one', 'two'}
 ```
+
 ## Condicionales
 
 ```python
@@ -143,25 +145,29 @@ for l in "Hello World":
     print(l)
 ```
 
-
 ## Estructuras Básicas
 
 ### Listas
-Las listas en Python son una estructura de datos que permite guardar muchos elementos en una  ́unica variable. Se
+
+Las listas en Python son una estructura de datos que permite guardar muchos elementos en una ́unica variable. Se
 parecen a los arrays en otros lenguajes, pero con algunas diferencias fundamentales:
+
 - Son de longitud variable, es decir, puedo agregar y sacar elementos de una misma lista
 - Los elementos de una lista pueden ser de distinto tipo de datos, por ejemplo, `[4,8,'Mario',5.8]` es una lista válida.
 
 #### Acceso y asignación
 
 Para acceder a un elemento de una lista, podemos accederlo mediante su posición o índice. **Las listas en Python están indexadas desde 0, no 1**. Por ejemplo, si tengo la siguiente lista:
+
 ```python
 lista = [4,5,0.25,'x']
 lista[0] #4
 lista[2] #0.25
 lista[3] #'x'
 ```
+
 Puedo no solo acceder, sino también modificar elementos en una lista. Para eso uso operadores de asignación como =, o de modificación como += sobre el elemento deseado:
+
 ```python
 lista = [4,5,0.25,'x']
 lista[0] = 'Ort'
@@ -169,6 +175,7 @@ lista[2] = 1
 lista[3] += 'y'
 lista == ['ORT',5,1,'xy']
 ```
+
 #### Agregar y quitar elementos
 
 Para agregar elementos a una lista en python, podemos usar el método `append`. Un método, por ahora, podemos pensarlo simplemente como una función pero con una sintaxis especial. `append` agrega el elemento pasado por parámetero al final de la lista.
@@ -178,6 +185,7 @@ lista = [4,5,'x',9]
 lista.append(11)
 print(lista) #[4,5,'x',9,11]
 ```
+
 Para agregar un elemento en algun posición específica de la lista se puede usar el método `insert`.
 
 ```python
@@ -191,23 +199,28 @@ lista = [4,5,'x',9]
 lista.pop(1)
 print(lista) #[4,'x',9]
 ```
+
 Para sacar un elemento basado en su valor, se puede usar `remove`, que saca la primera aparición del elemento pasado por parámetro.
 
 ```python
 #Completar ejemplo de remove
 ```
+
 #### Longitud
 
 Muchas veces cuantos elementos hay en una lista es desconocido, y para eso existe la función `len`.
+
 ```python
 lista = [4,5,'x',9]
 print(len(lista)) #4
 ```
+
 #### Recorriendo listas
 
 Las listas contienen muchos elementos, y en muchos casos la solución a nuestro problema implica recorrerlas. A continuación discutimos algunas formas de hacer esto.
 
 ##### Mediante índices
+
 Los índices de una lista arrancan en 0 y terminan en la longitud - 1. Por eso, `range(len(l))` nos da los índices de la lista guardada en `l`, ya que range por default arranca en 0 y no incluye el valor final (`len(l)`). Usándolo en un `for`:
 
 ```python
@@ -219,6 +232,7 @@ for indice in range(len(l)):
 Entiendo que la sintaxis es medio rara y bastante menos intuitiva que un lenguaje como `C#`, pero entiendan que el `for` necesita por parámetro estos iterables, y por eso el `range`.
 
 ##### Mediante elementos
+
 Otras veces no necesitamos la posición del elemento, y podemos aprovechar la sintaxis del `for` a nuestro favor:
 
 ```python
@@ -228,7 +242,9 @@ for elemento in l:
 ```
 
 ##### Mediante índices y elementos
+
 La forma más elegante, pero a la vez menos intuitiva, de recorrer listas cuando necesito su posición además de su valor, es mediante `enumerate`. Esta función genera un iterable de pares índice, valor dada una lista, y entonces podemos usar la siguiente sintaxis:
+
 ```python
 l = [6,'x',9,25]
 for indice,elemento in enumerate(l):
@@ -296,20 +312,24 @@ Las funciones no son estrictamente necesarias en python. Podríamos construir cu
 Hay 2 partes en el uso de funciones. Por un lado la **declaración**, que es crear la función y "describir" su comportamiento, y la otra es el uso, donde llamamos la función para una entrada concreta.
 
 Para declarar una función, y las partes de dicha declaración, usemos un ejemplo:
+
 ```python
 def duplica(factor):
     producto = factor * 2
-    return producto`    
+    return producto`
 ```
 
 Analizemos sus partes:
+
 - `def`: Palabra reservada del lenguaje para decir que estamos declarando una función
 - `duplica`: Nombre de la función que estamos declarando
 - `factor`: Nombre del parámetro (entrada) de la función. Puedo tener más de un parámetro, van separados por comas.
 - `return`: Palabra reservada del lenguaje para decir que estamos devolviendo de una función. Si `return` se omite entonces la función devuelve `None`.
 
 #### Buenas Prácticas
+
 Al declarar una función, es de buenas prácticas:
+
 - Nombre apropiado para la función.
 - Nombres apropiados para los parámetros.
 - Un único `return`, y explícito, incluso cuando no deseo devolver nada.
@@ -318,14 +338,17 @@ Al declarar una función, es de buenas prácticas:
 - Evitar funciones ultra largas. Partir la función en otras funciones si esto tiene sentido para el problema.
 
 ### Uso
+
 Las funciones están para ser usadas, y luego de declararlas, puedo usarlas pasándole los parámetros correspondientes. La idea es que los valores que le pasé van a reemplazar los parámetros en la declaración.
+
 ```python
 def resta(minuendo,sustraendo):
     diferencia = minuendo - sustraendo
     return diferencia
-    
+
 resultado = resta(5,2) #3
 ```
+
 La idea es que el primer parámetro (`5`) va a ser el minuendo, y el segundo (`2`) el sustraendo. Luego, lo que esté como `return` es lo que la función va a devolver. En este caso, el resultado se va a guardar en la variable `resultado`.
 
 A una función le podemos pasar de parámetros otras variables, cuentas, otros llamados de función, etc, además de valores concretos. Lo importante es que estén definidos previamente y que se puedan resolver a valores concretos al momento de llamar la función.
@@ -376,4 +399,3 @@ im = Image.open("/assets/images/python.jpg")
 im.show()
 
 ```
-

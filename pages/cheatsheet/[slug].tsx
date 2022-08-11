@@ -1,22 +1,28 @@
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
-import { marked } from "marked";
 import Head from "next/head";
-const { highlightAuto } = require("highlight.js");
 import "highlight.js/styles/github-dark.css";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import FloatingButton from "../../components/utils/FloatingButton";
 import Arrow, { ArrowDirection } from "../../components/utils/Arrow";
 import { LoadingContext } from "../../contexts/LoadingContext";
 import router from "next/router";
 import hljs from "highlight.js";
+import marked from "marked-katex";
+import katex from "katex";
 
 marked.setOptions({
-    langPrefix: "hljs language-",
-    //highlight: (code) => {
-    //    return highlightAuto(code).value;
-    //},
+    highlight: function (code, lang) {
+        if (typeof lang === "undefined") {
+            return hljs.highlightAuto(code).value;
+        } else if (lang === "nohighlight") {
+            return code;
+        } else {
+            return hljs.highlight(lang, code).value;
+        }
+    },
+    kaTex: katex,
 });
 
 type CheatsheetPageProps = {
@@ -45,15 +51,8 @@ const CheatsheetPage = ({
                 <h1>{title}</h1>
                 <div
                     className="cheatsheet"
-                    dangerouslySetInnerHTML={{ __html: marked(content) }}
-                    ref={(el) => {
-                        if (el) {
-                            el.querySelectorAll<HTMLElement>(
-                                "pre code"
-                            ).forEach((block) => {
-                                hljs.highlightElement(block);
-                            });
-                        }
+                    dangerouslySetInnerHTML={{
+                        __html: marked(content),
                     }}
                 />
             </div>

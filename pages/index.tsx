@@ -9,7 +9,6 @@ import Loading from "../components/utils/Loading";
 import { LoadingContext } from "../contexts/LoadingContext";
 
 const Home: NextPage = ({ cheatsheets }: { cheatsheets: CheatsheetType[] }) => {
-
     const { setLoading } = useContext(LoadingContext);
 
     return (

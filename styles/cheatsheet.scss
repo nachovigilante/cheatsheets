@@ -96,21 +96,21 @@
     }
 
     code {
-        padding: 2px 4px;
         border-radius: 3px;
-        background-color: #0d1117;
         color: #e2e2e2;
-
-        .hljs {
-            * {
-                color: white;
-            }
-        }
+        background-color: #0d1117;
+        padding: 2px 4px;
     }
-
-    .hljs {
+    
+    pre {
+        padding: 10px;
+        background-color: #0d1117;
         border-radius: 8px;
         margin: 10px 0px;
+
+        code {
+            padding: 0;
+        }
     }
 
     a {

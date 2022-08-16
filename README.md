@@ -46,7 +46,7 @@ image: "/assets/images/{nombre_de_la_imágen}"
 
 - La primer sección debe ser llamada "Índice" y debe contener una tabla de contenidos (`TOC`), con la misma estructura que la presente en los cheatsheets que se encuentran actualmente en la carpeta `/cheatsheets/`, seguida de un `<br>` por razones puramente estéticas
 
-### Recomendaciones 
+### Recomendaciones
 
 - Citar las fuentes de información para acelerar el proceso de verificación y validación
 - Hacer uso de las herramientas que brinda markdown para mejorar la legibilidad de la información, aligerando también el proceso de feedback

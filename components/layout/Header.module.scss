@@ -56,5 +56,22 @@
                 font-weight: 600;
             }
         }
+
+        @media screen and (max-width: 620px) {
+            display: none;
+        }
+    }
+
+    .menu {
+        display: none;
+        cursor: pointer;
+        background-color: transparent;
+        outline: none;
+        border: none;
+        color: white;
+        
+        @media screen and (max-width: 620px) {
+            display: flex;
+        }
     }
 }

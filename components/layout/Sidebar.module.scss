@@ -1,0 +1,66 @@
+.sidebar {
+    padding: 30px;
+    height: 100vh;
+    width: 280px;
+    position: fixed;
+    background-color: #170c60;
+    box-shadow: var(--shadow);
+    right: -280px;
+    top: 0;
+    transition: right 0.3s ease-in-out;
+
+    .sidebar-header {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+
+        h1 {
+            font-size: 25px;
+        }
+    }
+
+    .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-self: start;
+
+        .divisor {
+            height: 0;
+            width: 100%;
+            align-self: center;
+            border-bottom: 2px solid white;
+        }
+
+        a {
+            width: 100%;
+            padding: 15px 20px;
+
+            &.active {
+                color: var(--acc-color);
+                font-weight: 600;
+            }
+
+            &.github-link {
+                height: 40px;
+                width: 40px;
+                background-image: url(/assets/icons/GitHubLogo.png);
+                background-size: 75%;
+                border-radius: 50%;
+                background-repeat: no-repeat;
+                background-position: center;
+                align-self: center;
+                border-bottom: none;
+                margin-top: 20px;
+            }
+
+            &:hover {
+                background-color: var(--sec-bg-color-hover);
+            }
+        }
+    }
+
+    &.open {
+        right: 0;
+    }
+}

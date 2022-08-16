@@ -1,25 +1,23 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Header.module.scss";
 import Logo from "../../public/assets/icons/Logo.svg";
 import ThemeSwitch from "../utils/ThemeSwitch";
 import { useRouter } from "next/router";
+import Sidebar from "./Sidebar";
 
 const NavBar = () => {
-    const router = useRouter();
+    const { pathname } = useRouter();
+
     return (
         <div className={styles["navbar"]}>
             <Link href="/">
-                <a className={router.pathname === "/" ? styles["active"] : ""}>
-                    Home
-                </a>
+                <a className={pathname === "/" ? styles["active"] : ""}>Home</a>
             </Link>
             <Link href="/cheatsheets">
                 <a
                     className={
-                        router.pathname === "/cheatsheets"
-                            ? styles["active"]
-                            : ""
+                        pathname === "/cheatsheets" ? styles["active"] : ""
                     }
                 >
                     Cheatsheets
@@ -38,6 +36,7 @@ const NavBar = () => {
 
 const Header = () => {
     const { pathname } = useRouter();
+    const [open, setOpen] = useState(false);
 
     return (
         <header className={styles["header"]}>
@@ -48,6 +47,8 @@ const Header = () => {
                 </a>
             </Link>
             {pathname === "/cheatsheet/[slug]" ? <ThemeSwitch /> : <NavBar />}
+            {pathname !== "/cheatsheet/[slug]" ? <Sidebar open={open} setOpen={setOpen}/> : null}
+            {pathname !== "/cheatsheet/[slug]" ? <button className={styles["menu"]} onClick={() => setOpen(true)}>Menu</button> : null}
         </header>
     );
 };

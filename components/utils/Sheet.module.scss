@@ -1,0 +1,39 @@
+.sheet {
+    --height: calc(var(--width) * 1.415);
+    --left-margin: calc(var(--width) / 8 + 5px);
+    --row-height: calc(var(--height) / 20);
+
+    background-color: #f3f3f3;
+    height: var(--height);
+    width: var(--width);
+    padding-top: var(--row-height);
+
+    .line {
+        &.vertical {
+            width: 0;
+            height: var(--height);
+            border: 1px solid #e61366;
+            position: absolute;
+            margin-left: var(--left-margin);
+            margin-top: calc(-1 * var(--row-height));
+
+            &:nth-child(2) {
+                margin-left: calc(var(--left-margin) + 5px);
+            }
+
+            z-index: 2;
+        }
+
+        &.horizontal {
+            width: calc(var(--width) - (var(--left-margin) + 5px));
+            height: 0;
+            border: 1px solid #bdbdbd;
+            margin-top: var(--row-height);
+            margin-left: calc(var(--left-margin) + 5px);
+
+            &:nth-child(3) {
+                margin-top: 0;
+            }
+        }
+    }
+}

@@ -1,6 +1,7 @@
 .header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     background-color: var(--sec-bg-color);
     padding: 20px 40px;
     height: var(--header-height);
@@ -14,7 +15,7 @@
         align-items: center;
 
         svg {
-            filter: drop-shadow(0px 0px 7px rgb(0,0,0, 0.3));
+            filter: drop-shadow(0px 0px 7px rgb(0, 0, 0, 0.3));
 
             @media screen and (max-width: 620px) {
                 width: 35px;
@@ -35,7 +36,7 @@
         }
     }
 
-    .navbar{
+    .navbar {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -46,11 +47,11 @@
             &.github-link {
                 height: 30px;
                 width: 30px;
-                background-image: url('/assets/icons/GitHubLogo.png');
+                background-image: url("/assets/icons/GitHubLogo.png");
                 background-size: contain;
-                background-repeat: no-repeat;   
+                background-repeat: no-repeat;
             }
-            
+
             &.active {
                 color: var(--acc-color);
                 font-weight: 600;
@@ -64,12 +65,44 @@
 
     .menu {
         display: none;
+        align-items: center;
+        flex-direction: column;
         cursor: pointer;
-        background-color: transparent;
-        outline: none;
-        border: none;
-        color: white;
-        
+        height: 28px;
+        width: 30px;
+
+        .line {
+            position: absolute;
+            height: 4px;
+            width: 30px;
+            background-color: white;
+            transition: all 0.3s ease-in-out;
+            border-radius: 2px;
+
+            &:first-child {
+                margin-top: 12px;
+            }
+
+            &:last-child {
+                margin-top: 24px;
+            }
+        }
+
+        &.active {
+            .line {
+                transform: rotate(-45deg);
+                margin-top: 12px;
+
+                &:first-child {
+                    transform: rotate(45deg);
+                }
+
+                &:last-child {
+                    opacity: 0;
+                }
+            }
+        }
+
         @media screen and (max-width: 620px) {
             display: flex;
         }

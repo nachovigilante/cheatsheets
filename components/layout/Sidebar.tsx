@@ -19,12 +19,6 @@ const Sidebar = ({
         >
             <div className={styles["sidebar-header"]}>
                 <h1>Menú</h1>
-                <button
-                    className={styles["close"]}
-                    onClick={() => setOpen(false)}
-                >
-                    Close
-                </button>
             </div>
             <nav className={styles["sidebar-nav"]}>
                 <Link href="/">

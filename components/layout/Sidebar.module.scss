@@ -1,5 +1,5 @@
 .sidebar {
-    padding: 30px;
+    padding: 27px 30px;
     height: 100vh;
     width: 280px;
     position: fixed;
@@ -22,8 +22,8 @@
     .sidebar-nav {
         display: flex;
         flex-direction: column;
-        align-items: start;
-        justify-self: start;
+        align-items: flex-start;
+        justify-self: flex-start;
 
         .divisor {
             height: 0;

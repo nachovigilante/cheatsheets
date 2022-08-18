@@ -6,6 +6,25 @@ import ThemeSwitch from "../utils/ThemeSwitch";
 import { useRouter } from "next/router";
 import Sidebar from "./Sidebar";
 
+const MenuButton = ({
+    open,
+    onClick,
+}: {
+    open: boolean;
+    onClick: () => void;
+}) => {
+    return (
+        <div
+            className={[styles["menu"], open ? styles["active"] : ""].join(" ")}
+            onClick={onClick}
+        >
+            <div className={styles["line"]} />
+            <div className={styles["line"]} />
+            <div className={styles["line"]} />
+        </div>
+    );
+};
+
 const NavBar = () => {
     const { pathname } = useRouter();
 
@@ -47,8 +66,12 @@ const Header = () => {
                 </a>
             </Link>
             {pathname === "/cheatsheet/[slug]" ? <ThemeSwitch /> : <NavBar />}
-            {pathname !== "/cheatsheet/[slug]" ? <Sidebar open={open} setOpen={setOpen}/> : null}
-            {pathname !== "/cheatsheet/[slug]" ? <button className={styles["menu"]} onClick={() => setOpen(true)}>Menu</button> : null}
+            {pathname !== "/cheatsheet/[slug]" ? (
+                <Sidebar open={open} setOpen={setOpen} />
+            ) : null}
+            {pathname !== "/cheatsheet/[slug]" ? (
+                <MenuButton onClick={() => setOpen((o) => !o)} open={open} />
+            ) : null}
         </header>
     );
 };

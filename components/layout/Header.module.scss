@@ -37,77 +37,89 @@
         }
     }
 
-    .navbar {
+    .right {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
 
-        a {
-            margin: 0 12px;
-            text-decoration: none;
-            color: var(--font-color);
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-            &.github-link {
-                height: 30px;
-                width: 30px;
-                background-image: url("/assets/icons/GitHubLogo.png");
-                background-size: contain;
-                background-repeat: no-repeat;
+            a {
+                margin: 0 12px;
+                text-decoration: none;
+                color: var(--font-color);
+
+                &.github-link {
+                    height: 30px;
+                    width: 30px;
+                    background-image: url("/assets/icons/GitHubLogo.png");
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                }
+
+                &.active {
+                    color: var(--acc-color);
+                    font-weight: 600;
+                }
             }
 
-            &.active {
-                color: var(--acc-color);
-                font-weight: 600;
+            @media screen and (max-width: 770px) {
+                display: none;
+            }
+
+            &.cheatsheet {
+                margin-right: 15px;
             }
         }
 
-        @media screen and (max-width: 620px) {
+        .menu {
             display: none;
-        }
-    }
-
-    .menu {
-        display: none;
-        align-items: center;
-        flex-direction: column;
-        cursor: pointer;
-        height: 28px;
-        width: 30px;
-
-        .line {
-            position: absolute;
-            height: 4px;
+            align-items: center;
+            flex-direction: column;
+            cursor: pointer;
+            height: 28px;
             width: 30px;
-            background-color: white;
-            transition: all 0.3s ease-in-out;
-            border-radius: 2px;
 
-            &:first-child {
-                margin-top: 12px;
-            }
-
-            &:last-child {
-                margin-top: 24px;
-            }
-        }
-
-        &.active {
             .line {
-                transform: rotate(-45deg);
-                margin-top: 12px;
+                position: absolute;
+                height: 4px;
+                width: 30px;
+                background-color: white;
+                transition: all 0.3s ease-in-out;
+                border-radius: 2px;
 
                 &:first-child {
-                    transform: rotate(45deg);
+                    margin-top: 12px;
                 }
 
                 &:last-child {
-                    opacity: 0;
+                    margin-top: 24px;
                 }
             }
-        }
 
-        @media screen and (max-width: 620px) {
-            display: flex;
+            &.active {
+                .line {
+                    transform: rotate(-45deg);
+                    margin-top: 12px;
+
+                    &:first-child {
+                        transform: rotate(45deg);
+                    }
+
+                    &:last-child {
+                        opacity: 0;
+                    }
+                }
+            }
+
+            @media screen and (max-width: 770px) {
+                display: flex;
+            }
+
+            &.cheatsheet {
+                margin-left: 25px;
+            }
         }
     }
 }

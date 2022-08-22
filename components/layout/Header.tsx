@@ -13,9 +13,15 @@ const MenuButton = ({
     open: boolean;
     onClick: () => void;
 }) => {
+    const { pathname } = useRouter();
+
     return (
         <div
-            className={[styles["menu"], open ? styles["active"] : ""].join(" ")}
+            className={[
+                styles["menu"],
+                open ? styles["active"] : "",
+                pathname === "/cheatsheet/[slug]" ? styles["cheatsheet"] : "",
+            ].join(" ")}
             onClick={onClick}
         >
             <div className={styles["line"]} />
@@ -29,9 +35,16 @@ const NavBar = () => {
     const { pathname } = useRouter();
 
     return (
-        <div className={styles["navbar"]}>
+        <div
+            className={[
+                styles["navbar"],
+                pathname === "/cheatsheet/[slug]" ? styles["cheatsheet"] : "",
+            ].join(" ")}
+        >
             <Link href="/">
-                <a className={pathname === "/" ? styles["active"] : ""}>Home</a>
+                <a className={pathname === "/" ? styles["active"] : ""}>
+                    <i className="fa-solid fa-house"></i> Home
+                </a>
             </Link>
             <Link href="/cheatsheets">
                 <a
@@ -39,7 +52,7 @@ const NavBar = () => {
                         pathname === "/cheatsheets" ? styles["active"] : ""
                     }
                 >
-                    Cheatsheets
+                    <i className="fa-solid fa-file-lines"></i> Cheatsheets
                 </a>
             </Link>
             <a
@@ -65,13 +78,12 @@ const Header = () => {
                     <h1>TIC Cheatsheets</h1>
                 </a>
             </Link>
-            {pathname === "/cheatsheet/[slug]" ? <ThemeSwitch /> : <NavBar />}
-            {pathname !== "/cheatsheet/[slug]" ? (
+            <div className={styles["right"]}>
+                <NavBar />
+                {pathname === "/cheatsheet/[slug]" ? <ThemeSwitch /> : null}
                 <Sidebar open={open} setOpen={setOpen} />
-            ) : null}
-            {pathname !== "/cheatsheet/[slug]" ? (
                 <MenuButton onClick={() => setOpen((o) => !o)} open={open} />
-            ) : null}
+            </div>
         </header>
     );
 };

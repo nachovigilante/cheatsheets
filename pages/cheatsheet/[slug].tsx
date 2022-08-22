@@ -7,6 +7,7 @@ import React, { useContext } from "react";
 import FloatingButton from "../../components/utils/FloatingButton";
 import Arrow, { ArrowDirection } from "../../components/utils/Arrow";
 import { LoadingContext } from "../../contexts/LoadingContext";
+import { ThemeContext } from "../../contexts/ThemeContext";
 import router from "next/router";
 import hljs from "highlight.js";
 import marked from "marked-katex";
@@ -38,6 +39,7 @@ const CheatsheetPage = ({
     content,
 }: CheatsheetPageProps) => {
     const { setLoading } = useContext(LoadingContext);
+    const { theme } = useContext(ThemeContext);
 
     router.events.on("routeChangeStart", () => setLoading(true));
     router.events.on("routeChangeComplete", () => setLoading(false));
@@ -47,7 +49,7 @@ const CheatsheetPage = ({
             <Head>
                 <title>{title}</title>
             </Head>
-            <div className="doc">
+            <div className={["doc", theme].join(" ")}>
                 <h1>{title}</h1>
                 <div
                     className="cheatsheet"

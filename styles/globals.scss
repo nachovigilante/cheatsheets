@@ -1,29 +1,32 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&display=swap");
 
 :root {
-    --doc-bg-color: #e2e2e2;
+    /* Colors */
     --bg-color: #0c043f;
     --sec-bg-color: #170c60;
     --sec-bg-color-hover: #170b52;
     --sec-bg-color-active: #1f0f6c;
     --font-color: #e2e2e2;
-    --doc-font-color: #282828;
-    --doc-link-color: #3c3cff;
-    --doc-border-radius: 8px;
     --acc-color: #e61366;
     --acc-color-hover: #be1559;
     --acc-color-active: #a20f4e;
+
+    /* Misc */
     --shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.3);
     --hover-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.7);
     --border: 1px solid grey;
     --header-height: 85px;
-}
 
-[data-theme="dark"] {
-    --doc-bg-color: #170c60;
-    --bg-color-hover: #0c0631;
-    --doc-font-color: #e2e2e2;
-    --doc-link-color: var(--acc-color);
+    /* Doc styles */
+    --doc-bg-color: #e2e2e2;
+    --doc-font-color: #282828;
+    --doc-link-color: #3c3cff;
+    --doc-border-radius: 8px;
+
+    /* Dark mode doc styles */
+    --dark-doc-bg-color: #170c60;
+    --dark-doc-font-color: #e2e2e2;
+    --dark-doc-link-color: var(--acc-color);
 }
 
 * {

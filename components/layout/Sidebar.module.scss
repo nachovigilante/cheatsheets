@@ -29,16 +29,19 @@
             height: 0;
             width: 100%;
             align-self: center;
-            border-bottom: 2px solid white;
+            border-bottom: 1px solid var(--font-color);
         }
 
         a {
             width: 100%;
             padding: 15px 20px;
+            text-decoration: none;
+            color: var(--font-color);
+            font-weight: 500;
 
             &.active {
                 color: var(--acc-color);
-                font-weight: 600;
+                font-weight: 700;
             }
 
             &.github-link {

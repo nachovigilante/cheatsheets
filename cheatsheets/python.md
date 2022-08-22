@@ -166,6 +166,15 @@ lista[2] #0.25
 lista[3] #'x'
 ```
 
+Podemos acceder a varios elementos de una lista rapidamente utilizando sus posiciones o indices. Este metedo se llama `slicing` y se basa en el sistema de indices. Comienza desde el indice que le pasamos y termina en el segundo termino que le ponemos. Cabe resaltar que no incluye el termino final. 
+
+```python
+lista[1:3] #[5,0.25]
+lista[1:] #[5,0.25,'x']
+lista[:2] #[4,5]
+lista[1:-1] #[5,0.25]
+```
+
 Puedo no solo acceder, sino también modificar elementos en una lista. Para eso uso operadores de asignación como =, o de modificación como += sobre el elemento deseado:
 
 ```python

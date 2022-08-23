@@ -44,7 +44,7 @@ image: "/assets/images/piton.jpeg"
     - [Métodos](#métodos)
     - [Objetos/Instancias](#objetosinstancias)
   - [Métodos especiales](#métodos-especiales)
-    - [`__str__`](#__str__)
+    - [\_\_str\_\_](#__str__)
 - [Typing](#typing)
 - [Modules](#modules)
 
@@ -456,7 +456,7 @@ Son las instancias concretas del problema. Se crean como `NombreDeClase(parámet
 
 Así como `__init__` es el nombre del método especial reservado para los constructures, existen otros muy útiles.
 
-#### `__str__`
+#### \_\_str\_\_
 
 ¿Que pasa si imprimo un objeto?
 

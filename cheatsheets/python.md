@@ -35,6 +35,14 @@ image: "/assets/images/piton.jpeg"
     - [Buenas Prácticas](#buenas-prácticas)
   - [Uso](#uso)
 - [Clases](#clases)
+    - [Problema de ejemplo](#problema-de-ejemplo)
+  - [Declaración de clases](#declaración-de-clases)
+  - [Constructores e instanciación](#constructores-e-instanciación)
+  - [Self](#self)
+  - [Definiciones](#definiciones)
+    - [Atributos](#atributos)
+    - [Métodos](#métodos)
+    - [Objetos/Instancias](#objetosinstancias)
 - [Typing](#typing)
 - [Modules](#modules)
 
@@ -355,19 +363,92 @@ A una función le podemos pasar de parámetros otras variables, cuentas, otros l
 
 ## Clases
 
+Las clases son una de las formas fundamentales de programar en python, y son la base de **OOP** (**O**bject **O**riented **P**rogrammming). Son una forma de representar entidades del problemas, objetos del mundo real. Se va a entender mejor en la práctica. 
+
+Al igual que funciones, no proveen ninguna funcionalidad nueva, pero simplifican sustancialmente programar. Algunas de sus ventajas:
+
+- Agregan semántica al código, dejando más en evidencia la relación entre el programa y el problema a resolver
+- **Modularizan** el código, es decir, permite partir el problema en pedazos más chicos.
+- Evitan código repetido
+- Permiten que los programas sean más mantenibles y escalables
+
+¡Bastante ambicioso! Tengan en cuenta que esta es una introducción básica, y estas ventajas se ven mejor en el uso y con estrategias más avanzadas
+
+#### Problema de ejemplo
+*Para explicar clases y objetos, planteemos un problema. Estamos haciendo una red social, y queremos modelar a los usuarios. Obviamente no vamos a modelar el problema entero.*
+
+### Declaración de clases
+
+¿Como arrancamos? Para declarar una clase, usamos el keyword `class`. De los usuarios, por ahora, solo queremos el nombre de usuario y la contraseña (no se enojen por la falta de seguridad, es un ejemplo). Como se ve en python:
+
 ```python
-class Car:
-    def __init__(self, color, model):
-        self.color = color
-        self.model = model
-    def __str__(self):
-        return "This is a " + self.color + " " + self.model + "."
-
-myCar = Car("red", "Ford")
-print(myCar)
-# This is a red Ford.
-
+class Usuario:
+    def __init__(self, nombre_usuario, contraseña):
+        self.nombre_usuario = nombre_usuario
+        self.contraseña = contraseña
 ```
+¡Un montón de cosas! Vayamos despacio
+
+- `def __init__`: Esto es un método. Un método no es nada más que una función asociada a una clase/objeto. Como ven, la sintaxis es igual que funciones salvo que están dentro del keyword class. **Siempre tienen como primer parámetro al `self`**, (lo vemos en más detalle en otra sección). ¿Y ese nombre extraño? Es un nombre especial, en la sección de **constructores** lo vamos a ver con más detalle.
+- `self.nombre_usuario` y `self.contraseña`: Estos son atributos, que no son nada más que variables asociadas a una clase/objeto. Es decir, a donde vaya el objeto, van los atributos.
+
+¿Sigue siendo críptico? Profundizemos
+
+### Constructores e instanciación
+
+Los constructores son un método fundamental. Son esenciales en toda declaración de clases (con algunas excepciones, lo vemos más adelante), y son lo que permite **construir instancias de clase**. ¿Qué es esto? Lo que pasa es que todo muy lindo con la idea abstracta de usuario, pero en la vida real, hay usuarios concretos, todos con un nombre y contraseña particular. El constructor es lo que nos permite pasar a estas instancias concretas, que son las que va a usar el programa.
+
+Los constructores se declaran con `__init__`. Siguiendo con el problema:
+
+```python
+class Usuario:
+    def __init__(self, nombre_usuario, contraseña):
+        self.nombre_usuario = nombre_usuario
+        self.contraseña = contraseña
+usuario1 = Usuario("Chona","contraseña_segura") #Llama al constructor de usuario (implícitamente) con esos datos y crea una instancia de este
+usuario2 = Usuario("Julian","1234") #Llama al constructor de usuario con otros datos y crea otra instancia
+print(usuario1.nombre_usuario) #Chona
+print(usuario2.nombre_usuario) #Julian
+```
+Se habrán dado cuenta que la forma de acceder a los atributos es de la forma `objeto.nombre_atributo`. Un objeto son estas instancias concretas que hablábamos anteriormente, y son la forma en que se usan las clases, las clases por sí solas no hacen nada. Es como declarar una función y no usarla.
+
+Características importantes de los constructores:
+
+- Cómo todo método, el primer parámetro es el `self`.
+- Se tienen que declarar todos los atributos que va a tener el objeto con algún valor (pasado o no por parámetro). Hay formas de agregar atributos nuevos fuera del constructor, pero es propenso a errores.
+- Se llaman de forma implícita cuando hago `NombreDeClase(parámetros_del_constructor)`. Se puede llamar explícitamente con `NombreDeClase.__init__(parámetros_del_constructor)`
+
+### Self
+ En muchos casos los métodos no solo dependen de parámetros si no también de características del objeto que lo llamó. Esto es el `self`, y es la forma que tiene la clase de referirse a este objeto. En otros lenguajes suele aparecer como `this`. Veamos un ejemplo
+
+```python
+class Usuario:
+    def __init__(self, nombre_usuario, contraseña):
+        self.nombre_usuario = nombre_usuario
+        self.contraseña = contraseña
+    #Defino un método que devuelve True si la contraseña pasada por parámetro es la correcta, False si no.
+    def login(self,contraseña_ingresada): 
+        return self.contraseña == contraseña_ingresada
+
+usuario1 = Usuario("Chona","contraseña_segura")
+usuario2 = Usuario("Julian","1234") 
+print(usuario1.login("1234")) #False. self es usuario1, cuya contraseña es "contraseña_segura" 
+print(usuario2.login("1234")) #True. self es usuario2, cuya contraseña es "1234" 
+```
+Como se ve, la forma de llamar a un método es de la forma `Objeto.nombreDeMétodo()`. **El `self` no se pasa por parámetro, se llama de forma implícita**, y toma el valor del objeto que llama al método.
+
+El `self` es siempre el primer parámetro en la declaración de un método, y como se llama implícitamente, llamar un método siempre tiene un parámetro obligatorio menos que en la declaración. El llamado de un método también se dice **mensaje**.
+
+Se le puede cambiar el nombre al self simplemente cambiando el nombre del primer parámetro, pero no es recomendado.
+
+### Definiciones
+Resumamos un poco lo visto hasta ahora acumulando algunas de las definiciones y términos que estuvimos viendo.
+#### Atributos
+Variables asociadas a una clase/objeto. Se acceden como `Objeto.nombreDeAtributo`
+#### Métodos
+Funciones asociadas a una clase/objeto. Se acceden como `Objeto.nombreDeMétodo()`.  **Siempre tienen como primer parámetro al `self`**, que es implícito. Los llamados a métodos se dicen **mensajes**.
+#### Objetos/Instancias
+Son las instancias concretas del problema. Se crean como `NombreDeClase(parámetros_del_constructor)`, y **solo pueden ser creados si existe un constructor** (Método de nombre `__init__`).
 
 ## Typing
 

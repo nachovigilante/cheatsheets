@@ -486,7 +486,9 @@ print(usuario1)
 
 ## Typing
 
-Python 3.6+ permite el modulo `typing` para definir tipos de datos.
+Python 3.6+ permite el modulo `typing` para definir tipos de datos. **El tipado no fuerza tipos a variables o parámetros de funciones, el intérprete los ignora.** Son para uso del programador, ya sea como forma de documentar/aclarar código o para uso de aplicaciones externas como editores de texto,etc.
+
+Los tipos se aclaran de la forma `: type`
 
 ```python
 age : int = 21
@@ -496,6 +498,15 @@ people : list = ["John", "Jane", "Bob"]
 
 def greeting(name: str) -> str:
     return 'Hello ' + name
+```
+
+La notación `->` está para tipar el tipo de retorno de una función.
+
+Puedo detallar aún más los tipos, por ejemplo
+
+```python
+people : list[str] = ["John", "Jane", "Bob"]
+phone_numbers : dict[str,int] = {"John":43338900,"Jane":73335901}
 ```
 
 ## Modules

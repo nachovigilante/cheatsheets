@@ -43,6 +43,8 @@ image: "/assets/images/piton.jpeg"
     - [Atributos](#atributos)
     - [Métodos](#métodos)
     - [Objetos/Instancias](#objetosinstancias)
+  - [Métodos especiales](#métodos-especiales)
+    - [`__str__`](#__str__)
 - [Typing](#typing)
 - [Modules](#modules)
 
@@ -449,6 +451,38 @@ Variables asociadas a una clase/objeto. Se acceden como `Objeto.nombreDeAtributo
 Funciones asociadas a una clase/objeto. Se acceden como `Objeto.nombreDeMétodo()`.  **Siempre tienen como primer parámetro al `self`**, que es implícito. Los llamados a métodos se dicen **mensajes**.
 #### Objetos/Instancias
 Son las instancias concretas del problema. Se crean como `NombreDeClase(parámetros_del_constructor)`, y **solo pueden ser creados si existe un constructor** (Método de nombre `__init__`).
+
+### Métodos especiales
+
+Así como `__init__` es el nombre del método especial reservado para los constructures, existen otros muy útiles.
+
+#### `__str__`
+
+¿Que pasa si imprimo un objeto?
+
+```python
+class Usuario:
+    def __init__(self, nombre_usuario, contraseña):
+        self.nombre_usuario = nombre_usuario
+        self.contraseña = contraseña
+usuario1 = Usuario("Chona","1234")
+print(usuario1) #<__main__.Usuario object at 0x7f8d244b2c10>
+```
+¿Qué es eso? Por default, python imprime objetos de esa forma bastante críptica. Si queremos que al imprimir `Usuario` nos de algo apropiado, tenemos que definirle la  forma de imprimir nuestras clases. Para ello hay que definir el método `__str__`.
+
+```python
+class Usuario:
+    def __init__(self, nombre_usuario, contraseña):
+        self.nombre_usuario = nombre_usuario
+        self.contraseña = contraseña
+    def __str__(self):
+        return "Usuario cuyo nombre es " + self.nombre_usuario 
+usuario1 = Usuario("Chona","1234")
+print(usuario1) 
+#Usuario cuyo nombre es Chona
+```
+
+¡Mucho mejor! El método `__str__` también se llama cuando uso `str()`. **Al definir `__str__` debo retornar un string** (texto). Además, `__str__` no toma parámetros (salvo el self).
 
 ## Typing
 

@@ -35,7 +35,7 @@ image: "/assets/images/piton.jpeg"
     - [Buenas Prácticas](#buenas-prácticas)
   - [Uso](#uso)
 - [Clases](#clases)
-    - [Problema de ejemplo](#problema-de-ejemplo)
+  - [Problema de ejemplo](#problema-de-ejemplo)
   - [Declaración de clases](#declaración-de-clases)
   - [Constructores e instanciación](#constructores-e-instanciación)
   - [Self](#self)
@@ -374,7 +374,7 @@ Al igual que funciones, no proveen ninguna funcionalidad nueva, pero simplifican
 
 ¡Bastante ambicioso! Tengan en cuenta que esta es una introducción básica, y estas ventajas se ven mejor en el uso y con estrategias más avanzadas
 
-#### Problema de ejemplo
+### Problema de ejemplo
 *Para explicar clases y objetos, planteemos un problema. Estamos haciendo una red social, y queremos modelar a los usuarios. Obviamente no vamos a modelar el problema entero.*
 
 ### Declaración de clases

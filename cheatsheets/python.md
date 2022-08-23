@@ -14,6 +14,8 @@ image: "/assets/images/piton.jpeg"
 - [Tipos](#tipos)
   - [Type Casting](#type-casting)
 - [Condicionales](#condicionales)
+  - [Operadores de comparación](#operadores-de-comparación)
+  - [Operadores lógicos](#operadores-lógicos)
 - [Loops](#loops)
 - [Estructuras Básicas](#estructuras-básicas)
   - [Listas](#listas)
@@ -128,14 +130,47 @@ set(["one","two"])
 
 ## Condicionales
 
+Los condicionales son unas de las estructuras más básicas de la programación imperativa. Controlan el flujo de ejecución basado en alguna condición. En python, esto se logra mediante if´s
+```python
+if condición:
+    # Código si condición es verdadera
+else:
+    # Código si condición es falsa
+```
+Donde `condición` es cualquier cosa que devuelva un valor **booleano** (`True` o `False`). Por ejemplo, si quiero ver si un número es más grande que otro,
 ```python
 if x > y:
-    print("x is greater than y")
-elif x < y:
-    print("x is less than y")
+    print(x,"es más grande que",y)
 else:
-    print("x is equal to y")
+    print(x,"NO es más grande que",y)
 ```
+A veces, uno quiere evaluar más de una condición. Una opción es meter if´s adentro de if´s, pero python nos da otra opción, el `elif` (else if).
+```python
+if condición1:
+    # Código si condición1 es verdadera
+elif condición2:
+    # Código si condición1 es falsa, pero condición2 es verdadera
+else:
+    # Código si tanto condición1 como condicón 2 es falsa
+```
+Como ven, el elif tiene sentido cuando la condición depende de alguna forma del primer if. Si no tiene que ver, corresponden if´s separados. Uno puede agregar tantos elif como desee, siguiendo la lógica de que solo se ejecutan si todos las condiciones anteriores son falsas pero la de este elif es verdadera.
+
+### Operadores de comparación
+Como vimos en el ejemplo anterior, las condiciones deben ser código que devuelva True o False. Una forma muy común de hacer esto son los operadores de comparación, que comparan dos elementos y devuelven verdadero o falso dependiendo dicho operador. Algunos de los más usados:
+
+- `==`: Toma dos valores. Devuelve verdadero si son **iguales**, falso si no. **Es un doble igual. El igual solo es el de asignación de variables**.
+- `!=`: Toma dos valores. Devuelve verdadero si son **distintos**, falso si no.
+- `>`: Toma dos valores. Devuelve verdadero el valor de la derecha es **mayor** al valor de la izquierda, falso si no.
+- `<`: Toma dos valores. Devuelve verdadero el valor de la derecha es **menor** al valor de la izquierda, falso si no.
+- `>=`: Toma dos valores. Devuelve verdadero el valor de la derecha es **mayor o igual** al valor de la izquierda, falso si no.
+- `<=`: Toma dos valores. Devuelve verdadero el valor de la derecha es **menor o igual** al valor de la izquierda, falso si no.
+
+### Operadores lógicos
+No solo existen operadores de comparación, si no también operadores lógicos, que son operaciones **entre booleanos**.
+
+- `and`: Toma dos expresiones booleanas, devuelve verdadero si **ambos** valores son verdaderos, falso si no.
+- `or`: Toma dos expresiones booleanas, devuelve verdadero si **algún** valor es verdadero, falso si ninguno lo es.
+- `not`: Toma **una única** expresión booleana, y la invierte. True se convierte en False y viceversa.
 
 ## Loops
 

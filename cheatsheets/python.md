@@ -266,12 +266,12 @@ lista[0::2] #[4,0.25]
 Del mismo modo, es posible hacer estas operaciones con **strings**, ya que estos técnicamente son y funcionan como listas.
 
 ```pyhton
-string = "neumatico"
-string[2:5] #'uma'
+string = "neumático"
+string[2:5] #'umá'
 string[:2] #'ne'
-string[4:] #'atico'
-string[2:-3] #'umat'
-string[2::2] #'uaio'
+string[4:] #'ático'
+string[2:-3] #'umát'
+string[2::2] #'uáio'
 ```
 
 ### Diccionarios

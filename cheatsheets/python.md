@@ -166,16 +166,6 @@ lista[2] #0.25
 lista[3] #'x'
 ```
 
-Podemos acceder a varios elementos de una lista rápidamente utilizando sus posiciones o índices. Este método se llama **slicing** y se basa en la siguiente estructura `lista[comienzo:final:pasos]`. Si no se indica el numero de pasos, por default se recorre a la lista de 1 por 1. Cabe resaltar que el índice de final no incluye esa posición. Los numeros negativos indican los últimos indices de la lista. El -1 es el último, el -2 el anteúltimo y asi sucesivamente. 
-
-```python
-lista[1:3] #[5,0.25]
-lista[1:] #[5,0.25,'x']
-lista[:2] #[4,5]
-lista[1:-1] #[5,0.25]
-lista[0::2] #[4,0.25]
-```
-
 Puedo no solo acceder, sino también modificar elementos en una lista. Para eso uso operadores de asignación como `=`, o de modificación como `+=` sobre el elemento deseado:
 
 ```python
@@ -260,6 +250,28 @@ l = [6,'x',9,25]
 for indice,elemento in enumerate(l):
         indice   #posición actual
         elemento #elemento actual
+```
+
+#### Sublistas
+
+Podemos crear sublistas a partir de los elementos de una lista. Este método se llama **slicing** y se basa en la siguiente estructura `lista[comienzo:final:pasos]`. Si no se indica el numero de pasos, por default se recorre a la lista de 1 por 1. Cabe resaltar que el índice de final no incluye esa posición. Los numeros negativos indican los últimos indices de la lista. El -1 es el último, el -2 el anteúltimo y asi sucesivamente. 
+
+```python
+lista[1:3] #[5,0.25]
+lista[1:] #[5,0.25,'x']
+lista[:2] #[4,5]
+lista[1:-1] #[5,0.25]
+lista[0::2] #[4,0.25]
+```
+Del mismo modo, es posible hacer estas operaciones con **strings**, ya que estos técnicamente son y funcionan como listas.
+
+```pyhton
+string = "neumatico"
+string[2:5] #'uma'
+string[:2] #'ne'
+string[4:] #'atico'
+string[2:-3] #'umat'
+string[2::2] #'uaio'
 ```
 
 ### Diccionarios

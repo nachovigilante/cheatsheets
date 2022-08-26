@@ -134,8 +134,9 @@ let numero7 = 0o777; // Octal: 503
 
 ```javascript
 let cadena = "Hola"; // Comillas dobles
-let cadena2 = "Hola"; // Comillas simples
-let cadena3 = `Hola`; // Comillas que aceptan multilinea y variables
+let cadena2 = 'Hola'; // Comillas simples
+let cadena3 = `${cadena}   
+Mundo`; // Comillas que aceptan multilinea y variables 
 ```
 
 #### Booleanos

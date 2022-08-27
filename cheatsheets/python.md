@@ -218,7 +218,7 @@ lista = [4,5,0.25,'x']
 lista[0] = 'Ort'
 lista[2] = 1
 lista[3] += 'y'
-lista == ['ORT',5,1,'xy']
+lista == ['Ort',5,1,'xy']
 ```
 
 #### Agregar y quitar elementos

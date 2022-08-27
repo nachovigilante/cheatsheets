@@ -264,7 +264,18 @@ lista[:2] #[4,5]
 lista[1:-1] #[5,0.25]
 lista[0::2] #[4,0.25]
 ```
-Del mismo modo, es posible hacer estas operaciones con **strings**, ya que estos técnicamente son y funcionan como listas.
+
+### Diccionarios
+
+```python
+x = {'a': 1, 'b': 2}
+```
+
+### Strings
+
+#### Substrings
+
+Tal como podíamos hacer con las listas, con los strings podemos crear **substrings** a partir de un string con el método slicing. La estructura se mantiene, la cual es la siguiente `string[comienzo:final:pasos]`.
 
 ```pyhton
 string = "neumático"
@@ -273,12 +284,6 @@ string[:2] #'ne'
 string[4:] #'ático'
 string[2:-3] #'umát'
 string[2::2] #'uáio'
-```
-
-### Diccionarios
-
-```python
-x = {'a': 1, 'b': 2}
 ```
 
 ### Otras expresiones

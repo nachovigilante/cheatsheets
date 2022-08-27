@@ -24,6 +24,7 @@ image: "/assets/images/piton.jpeg"
       - [Mediante índices](#mediante-índices)
       - [Mediante elementos](#mediante-elementos)
       - [Mediante índices y elementos](#mediante-índices-y-elementos)
+    - [Sublistas](#sublistas)
   - [Diccionarios](#diccionarios)
   - [Otras expresiones](#otras-expresiones)
     - [List Comprehensions](#list-comprehensions)

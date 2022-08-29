@@ -277,7 +277,7 @@ x = {'a': 1, 'b': 2}
 
 Tal como podíamos hacer con las listas, con los strings podemos crear **substrings** a partir de un string con el método slicing. La estructura se mantiene, la cual es la siguiente `string[comienzo:final:pasos]`.
 
-```pyhton
+```python
 string = "neumático"
 string[2:5] #'umá'
 string[:2] #'ne'

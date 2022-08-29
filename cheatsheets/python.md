@@ -28,6 +28,8 @@ image: "/assets/images/piton.jpeg"
       - [Mediante índices y elementos](#mediante-índices-y-elementos)
     - [Sublistas](#sublistas)
   - [Diccionarios](#diccionarios)
+  - [Strings](#strings)
+    - [Substrings](#substrings)
   - [Otras expresiones](#otras-expresiones)
     - [List Comprehensions](#list-comprehensions)
     - [Dictionary Comprehensions](#dictionary-comprehensions)

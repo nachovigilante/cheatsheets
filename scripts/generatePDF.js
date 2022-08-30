@@ -10,9 +10,9 @@ const puppeteer = require("puppeteer");
     const CSSfiles = fs
         .readdirSync(CSSpath)
         .filter((fn) => fn.endsWith(".css"));
-    const CSScontents = CSSfiles.map(async (file) => {
-        fs.readFileSync(CSSpath + file, "utf8");
-    });
+    const CSScontents = CSSfiles.map((file) =>
+        fs.readFileSync(CSSpath + file, "utf8")
+    );
 
     const browser = await puppeteer.launch({
         headless: true,
@@ -28,8 +28,12 @@ const puppeteer = require("puppeteer");
         waitUntil: ["networkidle0"],
     });
 
-    CSScontents.map(async (c) => await page.addStyleTag({ content: c }));
+    Promise.all(
+        CSScontents.map(async (c) => await page.addStyleTag({ content: c }))
+    );
     await page.evaluateHandle("document.fonts.ready");
+
+    // console.log((await page.content()).toString('utf8'));
 
     await page.pdf({
         path: "public/test.pdf",

@@ -9,10 +9,12 @@
         "prod": "next build && next start",
         "lint": "next lint",
         "pretty": "prettier --write **/*.{js,jsx,ts,tsx,json,css,scss}",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "postbuild": "node ./scripts/generatePDF.js"
     },
     "dependencies": {
         "@svgr/webpack": "^6.3.1",
+        "fs": "^0.0.1-security",
         "gray-matter": "^4.0.3",
         "highlight.js": "^11.6.0",
         "katex": "^0.16.0",
@@ -33,6 +35,7 @@
         "eslint": "8.20.0",
         "eslint-config-next": "12.2.3",
         "husky": "^8.0.0",
+        "puppeteer": "^17.0.0",
         "typescript": "^4.7.4"
     }
 }

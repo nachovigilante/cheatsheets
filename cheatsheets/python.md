@@ -26,7 +26,10 @@ image: "/assets/images/piton.jpeg"
       - [Mediante índices](#mediante-índices)
       - [Mediante elementos](#mediante-elementos)
       - [Mediante índices y elementos](#mediante-índices-y-elementos)
+    - [Sublistas](#sublistas)
   - [Diccionarios](#diccionarios)
+  - [Strings](#strings)
+    - [Substrings](#substrings)
   - [Otras expresiones](#otras-expresiones)
     - [List Comprehensions](#list-comprehensions)
     - [Dictionary Comprehensions](#dictionary-comprehensions)
@@ -211,7 +214,7 @@ lista[2] #0.25
 lista[3] #'x'
 ```
 
-Puedo no solo acceder, sino también modificar elementos en una lista. Para eso uso operadores de asignación como =, o de modificación como += sobre el elemento deseado:
+Puedo no solo acceder, sino también modificar elementos en una lista. Para eso uso operadores de asignación como `=`, o de modificación como `+=` sobre el elemento deseado:
 
 ```python
 lista = [4,5,0.25,'x']
@@ -297,10 +300,37 @@ for indice,elemento in enumerate(l):
         elemento #elemento actual
 ```
 
+#### Sublistas
+
+Podemos crear sublistas a partir de los elementos de una lista. Este método se llama **slicing** y se basa en la siguiente estructura `lista[comienzo:final:pasos]`. Si no se indica el numero de pasos, por default se recorre a la lista de 1 por 1. Cabe resaltar que el índice de final no incluye esa posición. Los numeros negativos indican los últimos indices de la lista. El -1 es el último, el -2 el anteúltimo y asi sucesivamente. 
+
+```python
+lista[1:3] #[5,0.25]
+lista[1:] #[5,0.25,'x']
+lista[:2] #[4,5]
+lista[1:-1] #[5,0.25]
+lista[0::2] #[4,0.25]
+```
+
 ### Diccionarios
 
 ```python
 x = {'a': 1, 'b': 2}
+```
+
+### Strings
+
+#### Substrings
+
+Tal como podíamos hacer con las listas, con los strings podemos crear **substrings** a partir de un string con el método slicing. La estructura se mantiene, la cual es la siguiente `string[comienzo:final:pasos]`.
+
+```python
+string = "neumático"
+string[2:5] #'umá'
+string[:2] #'ne'
+string[4:] #'ático'
+string[2:-3] #'umát'
+string[2::2] #'uáio'
 ```
 
 ### Otras expresiones

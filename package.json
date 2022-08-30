@@ -8,7 +8,8 @@
         "start": "next start",
         "prod": "next build && next start",
         "lint": "next lint",
-        "pretty": "prettier --write **/*.{js,jsx,ts,tsx,json,css,scss}"
+        "pretty": "prettier --write **/*.{js,jsx,ts,tsx,json,css,scss}",
+        "prepare": "husky install"
     },
     "dependencies": {
         "@svgr/webpack": "^6.3.1",
@@ -25,10 +26,13 @@
         "usehooks-ts": "^2.6.0"
     },
     "devDependencies": {
+        "@commitlint/cli": "^17.1.2",
+        "@commitlint/config-conventional": "^17.1.0",
         "@types/node": "^18.6.3",
         "@types/react": "^18.0.15",
         "eslint": "8.20.0",
         "eslint-config-next": "12.2.3",
+        "husky": "^8.0.0",
         "typescript": "^4.7.4"
     }
 }

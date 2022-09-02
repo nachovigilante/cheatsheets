@@ -6,12 +6,14 @@ import "highlight.js/styles/github-dark.css";
 import React, { useContext } from "react";
 import FloatingButton from "../../components/utils/FloatingButton";
 import Arrow, { ArrowDirection } from "../../components/utils/Arrow";
+import DownloadIcon from "../../public/assets/icons/DownloadIcon.svg";
 import { LoadingContext } from "../../contexts/LoadingContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import router from "next/router";
 import hljs from "highlight.js";
 import marked from "marked-katex";
 import katex from "katex";
+import FloatingButtons from "../../components/layout/FloatingButtons";
 
 marked.setOptions({
     highlight: function (code, lang) {
@@ -32,17 +34,21 @@ type CheatsheetPageProps = {
         image: string;
     };
     content: string;
+    slug: string;
 };
 
 const CheatsheetPage = ({
     frontmatter: { title, image },
     content,
+    slug,
 }: CheatsheetPageProps) => {
     const { setLoading } = useContext(LoadingContext);
     const { theme } = useContext(ThemeContext);
 
     router.events.on("routeChangeStart", () => setLoading(true));
     router.events.on("routeChangeComplete", () => setLoading(false));
+
+    console.log(slug);
 
     return (
         <>
@@ -58,9 +64,14 @@ const CheatsheetPage = ({
                     }}
                 />
             </div>
-            <FloatingButton onClick={() => window.scrollTo(0, 0)}>
-                <Arrow direction={ArrowDirection.up} />
-            </FloatingButton>
+            <FloatingButtons>
+                <FloatingButton onClick={() => window.scrollTo(0, 0)} ariaLabel="Scroll to the top">
+                    <Arrow direction={ArrowDirection.up} />
+                </FloatingButton>
+                <FloatingButton link={`/download/${slug}.pdf`} ariaLabel="Download PDF" download>
+                    <DownloadIcon height="28" width="28" />
+                </FloatingButton>
+            </FloatingButtons>
         </>
     );
 };
@@ -98,6 +109,7 @@ export const getStaticProps = async ({ params: { slug } }) => {
         props: {
             frontmatter,
             content,
+            slug,
         } as CheatsheetPageProps,
     };
 };

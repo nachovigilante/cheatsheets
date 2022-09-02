@@ -1,8 +1,4 @@
 .floating-button {
-    position: fixed;
-    bottom: 40px;
-    right: 50px;
-    z-index: 1;
     background-color: var(--acc-color);
     border-radius: 50%;
     width: 65px;
@@ -26,5 +22,9 @@
     @media screen and (max-width: 620px) {
         width: 55px;
         height: 55px;
+    }
+
+    &:first-child {
+        margin-right: 10px;
     }
 }

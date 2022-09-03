@@ -65,10 +65,17 @@ const CheatsheetPage = ({
                 />
             </div>
             <FloatingButtons>
-                <FloatingButton onClick={() => window.scrollTo(0, 0)} ariaLabel="Scroll to the top">
+                <FloatingButton
+                    onClick={() => window.scrollTo(0, 0)}
+                    ariaLabel="Scroll to the top"
+                >
                     <Arrow direction={ArrowDirection.up} />
                 </FloatingButton>
-                <FloatingButton link={`/download/${slug}.pdf`} ariaLabel="Download PDF" download>
+                <FloatingButton
+                    link={`/download/${slug}.pdf`}
+                    ariaLabel="Download PDF"
+                    download
+                >
                     <DownloadIcon height="28" width="28" />
                 </FloatingButton>
             </FloatingButtons>

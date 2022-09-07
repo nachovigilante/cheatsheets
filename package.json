@@ -10,7 +10,8 @@
         "lint": "next lint",
         "pretty": "prettier --write **/*.{js,jsx,ts,tsx,json,css,scss}",
         "prepare": "husky install",
-        "postbuild": "node ./scripts/generatePDF.js"
+        "postbuild": "node ./scripts/generatePDF.js",
+        "unix": "sed -i 's/.cmd//g' .husky/commit-msg && echo '\n\n.husky/' >> .gitignore"
     },
     "dependencies": {
         "@svgr/webpack": "^6.3.1",

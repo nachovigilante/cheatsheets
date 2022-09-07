@@ -1,6 +1,6 @@
 ---
 title: Python
-image: "/assets/images/piton.jpeg"
+image: "/assets/images/python.png"
 ---
 
 ## Índice

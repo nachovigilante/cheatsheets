@@ -17,6 +17,12 @@ Para proponer algún cambio que agregue información o mejore algo en el repo ha
 - [Hacer un PR](#ejemplo-de-PR) con el/los commits realizados
 - Esperar la respuesta al PR
 
+### Convención para el commit message
+
+Para los commits, vamos a utilizar una convención llamada [conventional commits](https://www.conventionalcommits.org/). El proyecto está configurado para que no se pueda committear si no se sigue esta convención.
+
+**Importante si usas linux o mac:** correr `npm run unix` una vez o no van a poder commitear.
+
 ### Ejemplo de PR
 
 En esta sección podemos ver un [ejemplo de un PR](https://github.com/nachovigilante/cheatsheets/pull/1) que realizó [@Sponja](https://github.com/Sponja-) para arreglar un problema en el índice del cheatsheet de PHP.

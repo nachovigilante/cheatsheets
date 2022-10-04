@@ -12,6 +12,13 @@ image: "/assets/images/nodejs.png"
 - [Instalar dependencias de desarrollo](#instalar-dependencias-de-desarrollo)
 - [Instalar dependencias de forma global](#instalar-dependencias-de-forma-global)
 - [Sección `scripts`](#sección-scripts)
+- [Express](#express)
+  - [Crear un servidor](#crear-un-servidor)
+  - [MySQL](#mysql)
+    - [Conexión](#conexión)
+    - [Consultas](#consultas)
+      - [Consultas sin parámetros](#consultas-sin-parámetros)
+      - [Consultas con parámetros](#consultas-con-parámetros)
 
 <br>
 
@@ -65,15 +72,15 @@ Esta sección del archivo `package.json` es donde podemos añadir comandos que q
 
 ```json
 {
-  "name": "node",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "npx nodemon index.js"
-  },
-  "author": "",
-  "license": "ISC"
+    "name": "node",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "npx nodemon index.js"
+    },
+    "author": "",
+    "license": "ISC"
 }
 ```
 
@@ -82,3 +89,100 @@ Y luego ejecutarlo con el siguiente comando:
 ```bash
 npm run dev
 ```
+
+## Express
+
+Para instalar Express deberemos ejecutar el siguiente comando:
+
+```bash
+npm install express
+```
+
+### Crear un servidor
+
+Para crear un servidor con Express deberemos crear un archivo `index.js` y añadir el siguiente código:
+
+```js
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+    res.send("Hello World!");
+});
+
+app.listen(3000, () => {
+    console.log("Example app listening on port 3000!");
+});
+```
+
+Y luego ejecutarlo con el siguiente comando:
+
+```bash
+node index.js
+```
+
+### MySQL
+
+Para instalar MySQL deberemos ejecutar el siguiente comando:
+
+```bash
+npm install mysql2
+```
+
+#### Conexión
+
+Para conectarnos a la base de datos deberemos añadir el siguiente código:
+
+```js
+const mysql = require("mysql2");
+
+const connection = mysql.createConnection({
+    host: "localhost",
+    user: "usuario",
+    password: "contraseña",
+    database: "nombre_de_la_db",
+});
+
+connection.connect((err) => {
+    if (err) {
+        console.error("Error conectándose: " + err);
+        return;
+    }
+
+    console.log("Base de datos conectada");
+});
+```
+
+#### Consultas
+
+##### Consultas sin parámetros
+
+Para hacer consultas a la base de datos deberemos añadir el siguiente código:
+
+```js
+connection.query("SELECT * FROM tabla", (err, rows) => {
+    if (err) {
+        console.error("Error consultando: " + err);
+        return;
+    }
+
+    console.log(rows);
+});
+```
+
+##### Consultas con parámetros
+
+Para hacer consultas a la base de datos con parámetros deberemos añadir el siguiente código:
+
+```js
+connection.query("SELECT * FROM tabla WHERE id = ?", [id], (err, rows) => {
+    if (err) {
+        console.error("Error consultando: " + err);
+        return;
+    }
+
+    console.log(rows);
+});
+```
+
+En este caso, incluimos en la consulta un `?` en cada lugar donde queramos incluir un parámetro. Luego, como segundo parámetro de la función `query` incluimos un array con los parámetros que queremos incluir en la consulta, en el mismo orden en el que queremos que aparezcan en la consulta.

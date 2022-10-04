@@ -14,11 +14,11 @@ image: "/assets/images/nodejs.png"
 - [Sección `scripts`](#sección-scripts)
 - [Express](#express)
   - [Crear un servidor](#crear-un-servidor)
-  - [MySQL](#mysql)
-    - [Conexión](#conexión)
-    - [Consultas](#consultas)
-      - [Consultas sin parámetros](#consultas-sin-parámetros)
-      - [Consultas con parámetros](#consultas-con-parámetros)
+- [MySQL](#mysql)
+  - [Conexión](#conexión)
+  - [Consultas](#consultas)
+    - [Consultas sin parámetros](#consultas-sin-parámetros)
+    - [Consultas con parámetros](#consultas-con-parámetros)
 
 <br>
 
@@ -121,7 +121,7 @@ Y luego ejecutarlo con el siguiente comando:
 node index.js
 ```
 
-### MySQL
+## MySQL
 
 Para instalar MySQL deberemos ejecutar el siguiente comando:
 
@@ -129,7 +129,7 @@ Para instalar MySQL deberemos ejecutar el siguiente comando:
 npm install mysql2
 ```
 
-#### Conexión
+### Conexión
 
 Para conectarnos a la base de datos deberemos añadir el siguiente código:
 
@@ -153,9 +153,9 @@ connection.connect((err) => {
 });
 ```
 
-#### Consultas
+### Consultas
 
-##### Consultas sin parámetros
+#### Consultas sin parámetros
 
 Para hacer consultas a la base de datos deberemos añadir el siguiente código:
 
@@ -170,7 +170,7 @@ connection.query("SELECT * FROM tabla", (err, rows) => {
 });
 ```
 
-##### Consultas con parámetros
+#### Consultas con parámetros
 
 Para hacer consultas a la base de datos con parámetros deberemos añadir el siguiente código:
 

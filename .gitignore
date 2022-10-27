@@ -46,4 +46,4 @@ yarn-error.log*
 **/anim/
 
 # Download
-**/download/
+**/download/*.pdf

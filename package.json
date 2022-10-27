@@ -4,13 +4,13 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
-        "build": "next build",
+        "build": "node ./scripts/generatePDF.js && next build",
         "start": "next start",
         "prod": "next build && next start",
         "lint": "next lint",
         "pretty": "prettier --write **/*.{js,jsx,ts,tsx,json,css,scss}",
         "prepare": "husky install",
-        "postbuild": "node ./scripts/generatePDF.js",
+        "pdf": "node ./scripts/generatePDF.js",
         "unix": "sed -i 's/.cmd//g' .husky/commit-msg && git update-index --assume-unchanged .husky/commit-msg && chmod ug+x .husky/*"
     },
     "dependencies": {

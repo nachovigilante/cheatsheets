@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
-        "build": "node ./scripts/generatePDF.js && next build",
+        "build": "next build && node ./scripts/generatePDF.js",
         "start": "next start",
         "prod": "next build && next start",
         "lint": "next lint",

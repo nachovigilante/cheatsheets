@@ -10,6 +10,7 @@ const Sheet = ({ width }: { width: number }) => {
             {Array.from({ length: 18 }, (_, i) => (
                 <div
                     className={[styles["horizontal"], styles["line"]].join(" ")}
+                    key={i}
                 />
             ))}
         </div>

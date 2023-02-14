@@ -143,6 +143,38 @@
         }
     }
 
+    table {
+        border-collapse: collapse;
+        border-radius: 10px;
+        border-style: hidden; /* hide standard table (collapsed) border */
+        box-shadow: 0 0 0 1px #666; /* this draws the table border  */
+
+        th,
+        td {
+            padding: 7px 15px;
+            border-right: 1px solid #666;
+
+            &:last-child {
+                border-right: none;
+            }
+        }
+
+        thead, thead tr {
+            background-color: #666;
+            color: #fff;
+            font-weight: 500;
+            border-radius: 10px 10px 0 0;
+
+            th:first-child {
+                border-top-left-radius: 10px;
+            }
+
+            th:last-child {
+                border-top-right-radius: 10px;
+            }
+        }
+    }
+
     &.dark {
         background-color: var(--dark-doc-bg-color);
         color: var(--dark-doc-font-color);

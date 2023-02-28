@@ -60,9 +60,9 @@ CSS es un lenguaje de hojas de estilo que nos permite darle estilo a nuestros do
 
 ### Criterios para el estilo que se aplica
 
--   Si alguna regla tiene una especificidad mayor, se aplica ese estilo. Que una regla tenga una especificidad mayor significa que tiene un selector más específico, por ejemplo un selector de ID tiene más especificidad que un selector de clase y un selector de clase tiene más especificidad que un selector de elemento.
--   De no aplicar ninguna regla adicional, el estilo que se aplica es el que está más abajo en el documento (o documentos) CSS. El orden en que se importan los documentos CSS también es importante, ya que si se importa un documento CSS después de otro, el estilo que se aplica es el del documento CSS que se importó después.
--   `!important` es una palabra clave que se puede usar para forzar que se aplique un estilo, aunque tenga una especificidad menor que otro estilo o esté más arriba. Se usa así: `color: red !important;`. **Se recomienda no usar esta palabra clave**, ya que puede causar problemas de mantenimiento en el código.
+- Si alguna regla tiene una especificidad mayor, se aplica ese estilo. Que una regla tenga una especificidad mayor significa que tiene un selector más específico, por ejemplo un selector de ID tiene más especificidad que un selector de clase y un selector de clase tiene más especificidad que un selector de elemento.
+- De no aplicar ninguna regla adicional, el estilo que se aplica es el que está más abajo en el documento (o documentos) CSS. El orden en que se importan los documentos CSS también es importante, ya que si se importa un documento CSS después de otro, el estilo que se aplica es el del documento CSS que se importó después.
+- `!important` es una palabra clave que se puede usar para forzar que se aplique un estilo, aunque tenga una especificidad menor que otro estilo o esté más arriba. Se usa así: `color: red !important;`. **Se recomienda no usar esta palabra clave**, ya que puede causar problemas de mantenimiento en el código.
 
 Estas reglas no implican que un estilo descarta al otro completamente, es decir, las reglas que se pisan son las que sobreescriben las reglas con más especificidad, pero no se eliminan. Por ejemplo, si tenemos el siguiente código:
 
@@ -261,12 +261,12 @@ El resultado sería:
 
 Las unidades de CSS se utilizan para especificar el tamaño de las propiedades CSS. Existen diferentes tipos de unidades, pero las más comunes son:
 
--   `px`: Un pixel.
--   `em`: Un múltiplo del tamaño de la fuente del elemento.
--   `rem`: Un múltiplo del tamaño de la fuente del elemento raíz.
--   `%`: Un porcentaje del tamaño del elemento padre.
--   `vh`: Un porcentaje del tamaño de la ventana del navegador.
--   `vw`: Un porcentaje del ancho de la ventana del navegador.
+- `px`: Un pixel.
+- `em`: Un múltiplo del tamaño de la fuente del elemento.
+- `rem`: Un múltiplo del tamaño de la fuente del elemento raíz.
+- `%`: Un porcentaje del tamaño del elemento padre.
+- `vh`: Un porcentaje del tamaño de la ventana del navegador.
+- `vw`: Un porcentaje del ancho de la ventana del navegador.
 
 ## Disposición de elementos
 
@@ -1093,10 +1093,10 @@ Este valor establece que el elemento se posiciona de forma absoluta respecto a l
 
 El box model es el modelo de caja que se utiliza para representar los elementos HTML en la pantalla. Cada elemento HTML se representa como una caja rectangular que contiene tanto el contenido como el relleno, el borde y el margen. El box model se compone de los siguientes elementos:
 
--   Content: es el contenido del elemento HTML.
--   Padding: es el espacio que hay entre el contenido y el borde.
--   Border: es el borde que rodea al contenido y al padding.
--   Margin: es el espacio que hay entre el borde y los elementos vecinos.
+- Content: es el contenido del elemento HTML.
+- Padding: es el espacio que hay entre el contenido y el borde.
+- Border: es el borde que rodea al contenido y al padding.
+- Margin: es el espacio que hay entre el borde y los elementos vecinos.
 
 Diagrama del box model:
 

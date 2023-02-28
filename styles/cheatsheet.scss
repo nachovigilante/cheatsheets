@@ -94,6 +94,15 @@
             }
         }
 
+        .css-result{
+            background-color: var(--doc-bg-color);
+            border: 1px solid grey;
+            font-family: initial;
+            border-radius: 10px;
+            padding: 5px 20px;
+            margin-bottom: 20px;
+        }
+
         code {
             border-radius: 3px;
             color: #e2e2e2;

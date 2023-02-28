@@ -6,6 +6,8 @@ image: "/assets/images/css.png"
 ## Índice
 
 - [Índice](#índice)
+- [CSS](#css)
+  - [Criterios para el estilo que se aplica](#criterios-para-el-estilo-que-se-aplica)
 - [Tipos de seletores](#tipos-de-seletores)
   - [Seletores de elemento](#seletores-de-elemento)
   - [Seletores de clase](#seletores-de-clase)
@@ -48,8 +50,72 @@ image: "/assets/images/css.png"
     - [Absolute](#absolute)
       - [z-index](#z-index)
     - [Fixed](#fixed)
+- [Box model](#box-model)
 
 <br>
+
+## CSS
+
+CSS es un lenguaje de hojas de estilo que nos permite darle estilo a nuestros documentos HTML. CSS nos permite cambiar el color de los textos, el tamaño de las fuentes, el color de fondo, la posición de los elementos, etc. Se llama CSS por "Cascading Style Sheets" (hojas de estilo en cascada), ya que los estilos se aplican de arriba hacia abajo, y si hay dos estilos que se intentan aplciar al mismo elemento, el que predomina es el que está más abajo.
+
+### Criterios para el estilo que se aplica
+
+-   Si alguna regla tiene una especificidad mayor, se aplica ese estilo. Que una regla tenga una especificidad mayor significa que tiene un selector más específico, por ejemplo un selector de ID tiene más especificidad que un selector de clase y un selector de clase tiene más especificidad que un selector de elemento.
+-   De no aplicar ninguna regla adicional, el estilo que se aplica es el que está más abajo en el documento (o documentos) CSS. El orden en que se importan los documentos CSS también es importante, ya que si se importa un documento CSS después de otro, el estilo que se aplica es el del documento CSS que se importó después.
+-   `!important` es una palabra clave que se puede usar para forzar que se aplique un estilo, aunque tenga una especificidad menor que otro estilo o esté más arriba. Se usa así: `color: red !important;`. **Se recomienda no usar esta palabra clave**, ya que puede causar problemas de mantenimiento en el código.
+
+Estas reglas no implican que un estilo descarta al otro completamente, es decir, las reglas que se pisan son las que sobreescriben las reglas con más especificidad, pero no se eliminan. Por ejemplo, si tenemos el siguiente código:
+
+```css
+p {
+    color: red;
+}
+
+.intro {
+    color: blue;
+}
+```
+
+Y en el HTML:
+
+```html
+<p class="intro">Hola</p>
+<p>Mundo</p>
+```
+
+<div class="css-result result-0">
+    <p class="intro" style="color: blue;">Hola</p>
+    <p style="color: red;">Mundo</p>
+</div>
+
+En este caso la regla `color` del selector de clase `.intro` sobreescribe la regla `color` del selector de elemento `h1`, pero no se elimina. Por lo tanto, el color del texto es azul en el párrafo con la clase `intro`, pero rojo en el párrafo sin clase.
+
+Otro ejemplo:
+
+```css
+p {
+    color: red;
+    font-size: 30px;
+}
+
+.intro {
+    color: blue;
+}
+```
+
+Y en el HTML:
+
+```html
+<p class="intro">Hola</p>
+<p>Mundo</p>
+```
+
+<div class="css-result result-1">
+    <p class="intro" style="color: blue; font-size: 30px;">Hola</p>
+    <p style="color: red; font-size: 30px;">Mundo</p>
+</div>
+
+En este caso la regla `color` del selector de clase `.intro` sobreescribe la regla `color` del selector de elemento `h1`. Por lo tanto, el color del texto es azul en el párrafo con la clase `intro`, pero rojo en el párrafo sin clase. Sin embargo, la regla `font-size` del selector de elemento `h1` no se sobreescribe, por lo que el tamaño de la fuente es de 30px en ambos párrafos.
 
 ## Tipos de seletores
 
@@ -1023,3 +1089,102 @@ En este ejemplo el elemento "4" se posiciona de forma absoluta respecto al eleme
 
 Este valor establece que el elemento se posiciona de forma absoluta respecto a la ventana del navegador. Su desplazamiento se realiza mediante las propiedades top, right, bottom y left, y no afecta a los elementos que se encuentren a su alrededor de ninguna manera ya que virtualmente desaparece de la página a la hora de desplazar el resto de elementos. A diferencia del valor absolute, este valor se desplaza cuando se hace scroll en la página junto con ella. Por ejemplo el header de la página en la que estás leyendo este cheatsheet.
 
+## Box model
+
+El box model es el modelo de caja que se utiliza para representar los elementos HTML en la pantalla. Cada elemento HTML se representa como una caja rectangular que contiene tanto el contenido como el relleno, el borde y el margen. El box model se compone de los siguientes elementos:
+
+-   Content: es el contenido del elemento HTML.
+-   Padding: es el espacio que hay entre el contenido y el borde.
+-   Border: es el borde que rodea al contenido y al padding.
+-   Margin: es el espacio que hay entre el borde y los elementos vecinos.
+
+Diagrama del box model:
+
+<style>
+    .result-17 {
+        border: none !important;
+    }
+
+    .margin {
+        background: #f1f1f1;
+        padding: 45px;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        border: 2px dashed #bbb;
+        transition: all .25s ease-in-out;
+        color: black;
+    }
+    .margin:before {
+        content: "Margin";
+        font-size: 1.4em;
+        position: absolute;
+        left: 0;
+        top: 1.8%;
+        width: 100%;
+        text-align: center;
+        font-family: "Fira Code", monospace;
+    }
+    .border {
+        padding: 45px;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        background: var(--acc-color);
+    }
+    .border:before {
+        content: "Border";
+        font-size: 1.4em;
+        color: black;
+        position: absolute;
+        left: 0;
+        top: 2.5%;
+        width: 100%;
+        text-align: center;
+        font-family: "Fira Code", monospace;
+    }
+    .padding {
+        color: black;
+        padding: 45px;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        background: #f1f1f1;
+    }
+    .padding:before {
+        content: "Padding";
+        font-size: 1.4em;
+        position: absolute;
+        left: 0.5%;
+        top: 3.7%;
+        width: 100%;
+        text-align: center;
+        font-family: "Fira Code", monospace;
+    }
+    .content {
+        padding: 20px;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        background: white;
+        border: 2px dashed #bbb;
+    }
+    .content:before {
+        content: "Content";
+        font-size: 1.4em;
+        display: block;
+        text-align: center;
+        line-height: 3.5;
+        font-family: "Fira Code", monospace;
+    }
+</style>
+
+<div class="css-result result-17">
+    <div class="margin">
+        <div class="border w3-theme">
+            <div class="padding">
+                <div class="content"></div>
+            </div>
+        </div>
+    </div>
+</div>

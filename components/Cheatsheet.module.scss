@@ -19,9 +19,16 @@
         padding: 17px;
         color: white;
         font-size: 20px;
+        text-decoration: underline;
+        text-decoration-color: var(--sec-bg-color);
     }
 
     &:hover {
         box-shadow: var(--hover-shadow);
+
+        span {
+            color: var(--acc-color);
+            transition: 0.2s;
+        }
     }
 }

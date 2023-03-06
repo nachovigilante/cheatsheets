@@ -6,6 +6,8 @@
     box-shadow: var(--shadow);
     margin: 20px;
     background-color: var(--sec-bg-color);
+    text-decoration: none;
+    
 
     img {
         height: 150px;
@@ -19,8 +21,6 @@
         padding: 17px;
         color: white;
         font-size: 20px;
-        text-decoration: underline;
-        text-decoration-color: var(--sec-bg-color);
     }
 
     &:hover {

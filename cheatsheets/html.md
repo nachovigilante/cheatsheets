@@ -1,6 +1,6 @@
 ---
-title: HTML y CSS
-image: "/assets/images/html-css.png"
+title: HTML
+image: "/assets/images/html.png"
 ---
 
 ## Índice

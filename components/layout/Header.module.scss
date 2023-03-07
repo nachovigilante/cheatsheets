@@ -6,6 +6,7 @@
     padding: 20px 40px;
     height: var(--header-height);
     position: fixed;
+    z-index: 1000;
     top: 0;
     width: 100%;
     box-shadow: var(--shadow);

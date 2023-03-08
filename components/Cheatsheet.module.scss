@@ -6,6 +6,8 @@
     box-shadow: var(--shadow);
     margin: 20px;
     background-color: var(--sec-bg-color);
+    text-decoration: none;
+    
 
     img {
         height: 150px;
@@ -23,5 +25,10 @@
 
     &:hover {
         box-shadow: var(--hover-shadow);
+
+        span {
+            color: var(--acc-color);
+            transition: 0.2s;
+        }
     }
 }

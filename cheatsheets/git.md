@@ -12,70 +12,64 @@ Git es un sistema de control de versiones distribuido, es decir, que cada usuari
 ### Crear un nuevo repositorio
 
 ```bash
-
 git init
 ```
 
 ### Clonar un repositorio
 
 ```bash
-
 git clone https://www.github.com/username/repo.git
 ```
 
 ### Añadir un archivo
 
 ```bash
-
 git add file.txt
 ```
 
 ### Añadir todos los archivos
 
 ```bash
-
 git add .
 ```
 
 ### Hacer un commit
 
 ```bash
-
 git commit -m "Mensaje del commit"
 ```
 
 #### Descripción completa
 
 ```bash
-
 git commit -m "Mensaje del commit" -m "Descripción del commit"
 ```
 
 ### Hacer un push
 
 ```bash
-
-git push origin master
+git push origin main
 ```
+
+Puede también ser en repositorios más viejos que sea `git push origin master`. Master o Main son los nombres de la branch que están pusheando, y puede variar si están pusheando otra branch.
 
 ### Hacer un pull
 
 ```bash
-
-git pull origin master
+git pull origin main
 ```
+
+Al igual que en push, en repositiorios más viejos puede ser `git pull origin master`
 
 ### Ver el estado del repositorio
 
 ```bash
-
 git status
 ```
 
 ### Ver el historial de commits
 
 ```bash
-
 git log
 ```
 

@@ -1,6 +1,6 @@
 ---
 title: "NEXT.JS V12"
-image: "/assets/images/nextjs.jpg"
+image: "/assets/images/nextjs.png"
 ---
 
 ### Índice

@@ -5,9 +5,11 @@ image: "/assets/images/git-github.png"
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
-## Git
+## ¿Qué es?
 
 Git es un sistema de control de versiones distribuido, es decir, que cada usuario tiene una copia completa del repositorio. Esto nos permite trabajar de forma local y sincronizar los cambios con el repositorio remoto cuando queramos.
+
+## Comandos básicos
 
 ### Crear un nuevo repositorio
 
@@ -72,6 +74,45 @@ git status
 ```bash
 git log
 ```
+
+## Branches
+
+### Nueva branch
+
+```bash
+git checkout -b <nombre-de-branch>
+```
+
+La opción -b es para crear la branch, de otra forma `checkout` solo nos deja movernos entre branches existentes. Si se quiere crear una branch sin movernos, es `git branch <nombre-de-branch>`.
+
+### Ver branches existentes
+
+```bash
+git branch
+```
+
+### Moverse entre branches
+
+```bash
+git checkout <nombre-de-branch>
+```
+
+### Moverse a una branch remota
+
+```bash
+git fetch
+git switch <nombre-de-branch>
+```
+
+Se hace `git fetch` antes del `switch` para que el repositorio local conozca que existe esa branch en el repositorio remoto.
+
+### Mergear branches
+
+```bash
+git merge <nombre-de-branch-a-mergear>
+```
+
+Se mergea sobre la branch actual la branch a mergear.
 
 ## GitHub
 

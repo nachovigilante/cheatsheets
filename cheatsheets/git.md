@@ -85,7 +85,7 @@ Para crear un nuevo repositorio deberemos ir a la página de [GitHub](www.github
 <img src="/assets/images/images/home_create.png"  width="100%" alt="Home Create Highlight">
 <img src="/assets/images/images/new.png"  width="100%"  alt="New">
 <img src="/assets/images/images/new_bottom.png"  width="100%" alt="New Button">
-<img src="/assets/images/images/new_bottom_create.png"  width="100%" alt="New Highlight">
+<img src="/assets/images/images/new_bottom_button.png"  width="100%" alt="New Highlight">
 
 ### Clonar un repositorio de GitHub
 

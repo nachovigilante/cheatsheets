@@ -1,0 +1,10 @@
+.background {
+    background-image: url(/assets/images/bg.svg);
+    background-size: 200%;
+    width: 100vw;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: fixed;
+    z-index: 0;
+}

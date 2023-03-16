@@ -1,0 +1,69 @@
+.terminal {
+    border-radius: 15px;
+    border: 3px solid #504e54;
+
+    .titleBar {
+        background-color: #2a2831;
+        font-family: "Space Mono", monospace;
+        height: 80px;
+        font-size: 25px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid black;
+        border-radius: 15px 15px 0px 0px;
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            padding: 20px;
+            align-self: start;
+
+            div {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+
+                &.close {
+                    background-color: #ff5f56;
+                }
+
+                &.minimize {
+                    background-color: #ffbd2e;
+                }
+
+                &.maximize {
+                    background-color: #27c93f;
+                }
+            }
+        }
+
+        .title {
+            flex: 1;
+            text-align: center;
+        }
+    }
+
+    .content {
+        display: flex;
+        border-radius: 0px 0px 15px 15px;
+
+        .sideBar {
+            background-color: #242229;
+            padding: 20px;
+            font-family: "Space Mono", monospace;
+            border-radius: 0px 0px 0px 15px;
+            width: 240px;
+
+            .sideBarTitle {
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+
+            .sideBarContent {
+                font-size: 18px;
+                list-style: none;
+                padding-left: 10px;
+            }
+        }
+    }
+}

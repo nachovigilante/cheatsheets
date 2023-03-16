@@ -1,6 +1,10 @@
 .terminal {
     border-radius: 15px;
     border: 3px solid #504e54;
+    position: relative;
+    z-index: 1;
+    background-color: #2322256d;
+    backdrop-filter: blur(20px);
 
     .titleBar {
         background-color: #2a2831;
@@ -63,7 +67,13 @@
                 font-size: 18px;
                 list-style: none;
                 padding-left: 10px;
+                padding-bottom: 60px;
             }
+        }
+
+        .mainContent {
+            flex: 1;
+            width: 100%;
         }
     }
 }

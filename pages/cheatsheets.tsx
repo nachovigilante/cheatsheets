@@ -7,6 +7,8 @@ import Cheatsheet, { CheatsheetType } from "../components/Cheatsheet";
 import { useContext } from "react";
 import { LoadingContext } from "../contexts/LoadingContext";
 import router from "next/router";
+import Terminal from "../components/utils/Terminal";
+import Background from "../components/layout/Background";
 
 const CheatsheetList = ({ cheatsheets }: { cheatsheets: CheatsheetType[] }) => {
     const { setLoading } = useContext(LoadingContext);
@@ -39,7 +41,9 @@ const Cheatsheets: NextPage = ({
             <Head>
                 <title>TIC Cheatsheets</title>
             </Head>
-            <CheatsheetList cheatsheets={cheatsheets} />
+            {/* <CheatsheetList cheatsheets={cheatsheets} /> */}
+            <Terminal title="tic://cheatsheets" />
+            <Background />
         </div>
     );
 };

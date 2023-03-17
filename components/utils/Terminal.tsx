@@ -1,10 +1,8 @@
 import styles from "./Terminal.module.scss";
 
-type TerminalProps = {
-    title: string;
-};
+// type TerminalProps = {};
 
-const Terminal = ({ title }: TerminalProps) => {
+const Terminal = () => {
     return (
         <div className={styles.terminal}>
             <div className={styles.titleBar}>
@@ -13,7 +11,7 @@ const Terminal = ({ title }: TerminalProps) => {
                     <div className={styles.minimize}></div>
                     <div className={styles.maximize}></div>
                 </div>
-                <div className={styles.title}>{title}</div>
+                <div className={styles.title}>tic://cheatsheets</div>
             </div>
             <div className={styles.content}>
                 <div className={styles.sideBar}>
@@ -29,6 +27,14 @@ const Terminal = ({ title }: TerminalProps) => {
                         <li>python.md</li>
                         <li>react.md</li>
                         <li>sql.md</li>
+                        {/* {cheatsheets.map((c) => (
+                <li key={c.slug}>
+                    <Cheatsheet
+                        cheatsheet={c}
+                        onClick={() => setLoading(true)}
+                    />
+                </li>
+            ))} */}
                     </ul>
                 </div>
                 <div className={styles.mainContent}>{/* TODO */}</div>

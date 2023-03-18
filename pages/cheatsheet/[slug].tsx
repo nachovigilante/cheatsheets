@@ -5,8 +5,6 @@ import Head from "next/head";
 import "highlight.js/styles/github-dark.css";
 import React, { useContext } from "react";
 import FloatingButton from "../../components/utils/FloatingButton";
-import Arrow, { ArrowDirection } from "../../components/utils/Arrow";
-import DownloadIcon from "../../public/assets/icons/DownloadIcon.svg";
 import { LoadingContext } from "../../contexts/LoadingContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import router from "next/router";
@@ -68,15 +66,16 @@ const CheatsheetPage = ({
                 <FloatingButton
                     onClick={() => window.scrollTo(0, 0)}
                     ariaLabel="Scroll to the top"
+                    className="mr-2"
                 >
-                    <Arrow direction={ArrowDirection.up} />
+                    <i className="fa-solid fa-arrow-up"></i>
                 </FloatingButton>
                 <FloatingButton
                     link={`/download/${slug}.pdf`}
                     ariaLabel="Download PDF"
                     download
                 >
-                    <DownloadIcon height="28" width="28" />
+                    <i className="fa-solid fa-file-arrow-down"></i>
                 </FloatingButton>
             </FloatingButtons>
         </>

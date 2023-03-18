@@ -19,6 +19,14 @@ module.exports = {
             borderRadius: {
                 default: "15px",
             },
+            colors: {
+                accent: "#e61366",
+                "accent-hover": "#be1559",
+                "accent-active": "#a20f4e",
+            },
+            boxShadow: {
+                default: "0px 0px 15px 0px rgba(0, 0, 0, 0.3)",
+            },
         },
     },
     plugins: [],

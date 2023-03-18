@@ -23,6 +23,7 @@ specifiers:
   puppeteer: ^17.0.0
   react: 18.2.0
   react-dom: 18.2.0
+  react-github-btn: ^1.4.0
   sass: ^1.54.0
   tailwind-merge: ^1.10.0
   tailwindcss: ^3.2.7
@@ -41,6 +42,7 @@ dependencies:
   next-pwa: 5.5.4_next@12.2.3
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-github-btn: 1.4.0_react@18.2.0
   sass: 1.55.0
   tailwind-merge: 1.10.0
   usehooks-ts: 2.9.1_biqbaboplfbrettd7655fr4n2y
@@ -3541,6 +3543,10 @@ packages:
       through2: 4.0.2
     dev: true
 
+  /github-buttons/2.24.0:
+    resolution: {integrity: sha512-dHpEno4S2JHjsEKPLSTGDTV50q1d08n3H7VDfNNA1m8cz5DMqLCZDdKWQxy4zyvd6M3tKvlVYLs+/H0BF3DggA==}
+    dev: false
+
   /glob-parent/5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
     engines: {node: '>= 6'}
@@ -4743,6 +4749,15 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-github-btn/1.4.0_react@18.2.0:
+    resolution: {integrity: sha512-lV4FYClAfjWnBfv0iNlJUGhamDgIq6TayD0kPZED6VzHWdpcHmPfsYOZ/CFwLfPv4Zp+F4m8QKTj0oy2HjiGXg==}
+    peerDependencies:
+      react: '>=16.3.0'
+    dependencies:
+      github-buttons: 2.24.0
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:

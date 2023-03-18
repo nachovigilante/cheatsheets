@@ -87,32 +87,3 @@ a {
     color: inherit;
     color: var(--acc-color);
 }
-
-.container {
-    margin: auto;
-    max-width: 1200px;
-    min-height: 100vh;
-    padding-top: var(--header-height);
-}
-
-.list {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 20px;
-    list-style-type: none;
-    margin: auto;
-    width: 100%;
-    user-select: none;
-
-    @media screen and (max-width: 1200px) {
-        width: 910px;
-    }
-
-    @media screen and (max-width: 910px) {
-        width: 620px;
-    }
-
-    @media screen and (max-width: 620px) {
-        width: 330px;
-    }
-}

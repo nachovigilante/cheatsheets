@@ -21,7 +21,7 @@ export type CheatsheetType = {
 const Home: NextPage = ({ cheatsheets }: { cheatsheets: CheatsheetType[] }) => {
     return (
         <>
-            <div className={[styles["home"], "container"].join(" ")}>
+            <div className="relative z-20 p-0 max-w-[1200px] m-auto">
                 <Head>
                     <title>{"<TIC_Cheatsheets/>"}</title>
                 </Head>

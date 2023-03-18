@@ -27,6 +27,9 @@ module.exports = {
             boxShadow: {
                 default: "0px 0px 15px 0px rgba(0, 0, 0, 0.3)",
             },
+            dropShadow: {
+                default: "0px 0px 10px rgba(0, 0, 0, 0.3)",
+            },
         },
     },
     plugins: [],

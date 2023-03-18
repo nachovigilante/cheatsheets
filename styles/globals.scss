@@ -3,11 +3,39 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
 @import "../public/assets/fontawesome/scss/fontawesome.scss";
 @import "../public/assets/fontawesome/scss/solid.scss";
 @import "../public/assets/fontawesome/scss/brands.scss";
 
+@layer components {
+    .glass {
+        @apply text-white filter drop-shadow-lg backdrop-blur-2xl rounded-2xl;
+        background-image: url(/assets/images/card_bg.png);
+        border: 1px solid rgba(255, 255, 255, 0.205);
+        border-bottom: 1px solid rgba(82, 75, 75, 0.205);
+        border-left: 1px solid rgba(82, 75, 75, 0.205);
+    }
+
+    .glass-container {
+        @apply rounded-2xl;
+        background: linear-gradient(
+            195deg,
+            rgba(255, 255, 255, 0.1) 5.52%,
+            rgba(255, 255, 255, 0) 62.6%
+        );
+    }
+}
+
+@layer utilities {
+    .no-ligature {
+        font-variant-ligatures: none;
+    }
+
+    .fade-bottom {
+        mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
+    }
+}
 
 :root {
     /* Colors */

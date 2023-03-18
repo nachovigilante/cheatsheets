@@ -6,7 +6,7 @@ type TerminalProps = {
 
 const Terminal = ({ cheatsheets }: TerminalProps) => {
     return (
-        <div className="rounded-default border-3 border-[#504e54] bg-[#2322256d] backdrop-blur-xl overflow-hidden">
+        <div className="rounded-default border-3 border-[#504e54] bg-[#2322256d] backdrop-blur-xl overflow-hidden w-full">
             <div className="bg-[#2a2831] font-space h-20 text-2xl flex items-center border-b-1 border-b-black">
                 <div className="flex gap-3 p-5 self-start">
                     <div className="bg-[#ff5f56] w-5 h-5 rounded-full" />

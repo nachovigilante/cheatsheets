@@ -62,11 +62,10 @@ const CheatsheetPage = ({
                     }}
                 />
             </div>
-            <FloatingButtons>
+            <div className="fixed bottom-10 right-12 z-10 flex justify-center items-center gap-3 bg-transparent">
                 <FloatingButton
                     onClick={() => window.scrollTo(0, 0)}
                     ariaLabel="Scroll to the top"
-                    className="mr-2"
                 >
                     <i className="fa-solid fa-arrow-up"></i>
                 </FloatingButton>
@@ -77,7 +76,7 @@ const CheatsheetPage = ({
                 >
                     <i className="fa-solid fa-file-arrow-down"></i>
                 </FloatingButton>
-            </FloatingButtons>
+            </div>
         </>
     );
 };

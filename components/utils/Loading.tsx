@@ -13,6 +13,7 @@ const Loading = () => {
             )}
         >
             <Image
+                alt="Loading"
                 src="/assets/images/Logo-anim.gif"
                 height="100"
                 width="100"

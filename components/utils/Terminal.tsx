@@ -1,5 +1,4 @@
 import { CheatsheetType } from "../../pages";
-import styles from "./Terminal.module.scss";
 
 type TerminalProps = {
     cheatsheets: CheatsheetType[];

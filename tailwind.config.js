@@ -30,6 +30,12 @@ module.exports = {
             dropShadow: {
                 default: "0px 0px 10px rgba(0, 0, 0, 0.3)",
             },
+            backgroundImage: {
+                main: "url('/assets/images/bg.svg')",
+            },
+            backgroundSize: {
+                200: "200%",
+            },
         },
     },
     plugins: [],

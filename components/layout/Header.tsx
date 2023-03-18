@@ -7,12 +7,12 @@ const Header = () => {
     const { pathname } = useRouter();
 
     return (
-        <header className="py-4 px-8 flex items-center justify-between fixed z-20 top-0 w-screen">
+        <header className="py-4 pb-14 px-8 flex items-center justify-between fixed z-50 top-0 w-screen backdrop-blur-sm fade-bottom">
             <Link href="/">
                 <a className="flex items-center no-underline gap-5">
                     <Logo height="45    " />
-                    <h1 className="text-2xl select-none mt-1">
-                        TIC Cheatsheets
+                    <h1 className="text-2xl select-none mt-1 font-space no-ligature">
+                        {"<TIC_Cheatsheets/>"}
                     </h1>
                 </a>
             </Link>

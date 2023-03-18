@@ -25,12 +25,31 @@ const Home: NextPage = ({ cheatsheets }: { cheatsheets: CheatsheetType[] }) => {
                 <Head>
                     <title>{"<TIC_Cheatsheets/>"}</title>
                 </Head>
-                <Section>
+                <Section className="relative h-screen">
+                    <h1 className="flex gap-5 -mt-28 flex-col text-9xl font-raleway font-black w-full items-start relative z-20 drop-shadow-md">
+                        <span>TIC</span>
+                        <span className="underline underline-offset-[20px]">
+                            CHEATSHEETS
+                        </span>
+                    </h1>
+                    <a
+                        href="#terminal"
+                        className="mt-14 text-xl font-space font-semibold no-ligature bg-black/20 border px-4 py-2 rounded-lg self-start hover:bg-black/30"
+                    >
+                        {"> Ir a la terminal"}
+                    </a>
+                    <img
+                        src="/assets/images/notebook.png"
+                        className="absolute top-40 right-0 w-[800px] drop-shadow-notebook"
+                        alt="notebook"
+                    />
+                </Section>
+                <Section className="my-40">
                     <Glassbox className="max-w-4xl">
                         <div className="flex justify-between">
-                            <h1 className="text-3xl font-space font-medium no-ligature">
+                            <h2 className="text-3xl font-space font-medium no-ligature">
                                 {"¿Qué es <TIC_Cheatsheets />?"}
-                            </h1>
+                            </h2>
                             <a
                                 href="https://github.com/nachovigilante/cheatsheets"
                                 target="_blank"
@@ -68,7 +87,7 @@ const Home: NextPage = ({ cheatsheets }: { cheatsheets: CheatsheetType[] }) => {
                         </div>
                     </Glassbox>
                 </Section>
-                <Section>
+                <Section className="mb-52" id="terminal">
                     <Terminal cheatsheets={cheatsheets} />
                 </Section>
             </div>

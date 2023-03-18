@@ -29,6 +29,7 @@ module.exports = {
             },
             dropShadow: {
                 default: "0px 0px 10px rgba(0, 0, 0, 0.3)",
+                notebook: "2px 2px 10px rgba(0, 0, 0, 0.8)",
             },
             backgroundImage: {
                 main: "url('/assets/images/bg.svg')",

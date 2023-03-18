@@ -3,43 +3,6 @@
     z-index: 20;
     padding: 120px 0px;
     width: 100%;
-    
-    h1 {
-        margin: 0 0 20px;
-    }
-
-    p {
-        margin: 15px 0;
-
-        strong {
-            text-decoration: underline;
-            text-decoration-color: var(--acc-color);
-            text-decoration-thickness: 2px;
-        }
-    }
-
-    .star {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        h2 {
-            margin: 0 20px;
-        }
-
-        .image {
-            width: 150px;
-            height: 50px;
-            background-image: url(/assets/images/starred.png);
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            
-            &:first-of-type {
-                background-image: url(/assets/images/star.png);
-            }
-        }
-    }
 
     @media screen and (max-width: 1200px) {
         padding: 120px 50px;

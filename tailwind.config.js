@@ -32,6 +32,7 @@ module.exports = {
             },
             backgroundImage: {
                 main: "url('/assets/images/bg.svg')",
+                github: "url('/assets/icons/GitHubLogo.png')",
             },
             backgroundSize: {
                 200: "200%",

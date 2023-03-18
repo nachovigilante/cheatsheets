@@ -70,7 +70,7 @@ const Home: NextPage = ({ cheatsheets }: { cheatsheets: CheatsheetType[] }) => {
                     <div className={styles["image"]} />
                 </div>
 
-                <Terminal />
+                <Terminal cheatsheets={cheatsheets} />
             </div>
             <Background />
         </>

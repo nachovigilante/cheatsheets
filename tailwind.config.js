@@ -3,10 +3,23 @@ module.exports = {
     content: [
         "./pages/**/*.{js,ts,jsx,tsx}",
         "./components/**/*.{js,ts,jsx,tsx}",
-        "./styles/**/*.{js,ts,jsx,tsx,scss,css}"
+        "./styles/**/*.{js,ts,jsx,tsx,scss,css}",
     ],
     theme: {
-        extend: {},
+        fontFamily: {
+            mono: ["Fira Code", "monospace"],
+            space: ["Space Mono", "monospace"],
+            raleway: ["Raleway", "sans-serif"],
+        },
+        extend: {
+            borderWidth: {
+                1: "1px",
+                3: "3px",
+            },
+            borderRadius: {
+                default: "15px",
+            },
+        },
     },
     plugins: [],
 };

@@ -23,7 +23,15 @@ const Terminal = ({ cheatsheets }: TerminalProps) => {
                     </div>
                     <ul className="text-lg list-none pl-3 pb-16 w-60">
                         {cheatsheets.map((c) => (
-                            <li key={c.slug}>{c.slug}.md</li>
+                            <li key={c.slug} className="flex gap-2 items-center text-xl py-[2px]">
+                                <img
+                                    src={`/assets/images/${c.slug}.svg`}
+                                    alt={`${c.slug} logo`}
+                                    width="18"
+                                    height="18"
+                                />
+                                <span>{c.slug}.md</span>
+                            </li>
                         ))}
                     </ul>
                 </div>

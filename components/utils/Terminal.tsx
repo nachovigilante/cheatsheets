@@ -1,35 +1,8 @@
-import { useReducer, useRef, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import { CheatsheetType } from "../../pages";
 
 type TerminalProps = {
     cheatsheets: CheatsheetType[];
-};
-
-const openGithub = () => {
-    window.open("https://github.com/nachovigilante/cheatsheets", "_blank");
-};
-
-const commands = {
-    about: {
-        type: "text",
-        content: "TIC Cheatsheets",
-    },
-    help: {
-        type: "text",
-        content: "Comandos posibles: about, help, github, open, export",
-    },
-    github: {
-        type: "action",
-        content: openGithub,
-    },
-    open: {
-        type: "accion",
-        content: "TODO: Abrir un cheatsheet",
-    },
-    export: {
-        type: "accion",
-        content: "TODO: Exportar un cheatsheet",
-    },
 };
 
 type AutocompleteType = {
@@ -56,15 +29,70 @@ const autocompleteReducer = (
 
 const Command = ({
     addCommand,
+    clearCommands,
+    repeatCommand,
+    initialCommand,
+    changeCommand,
+    index,
     active,
 }: {
     addCommand: () => void;
+    clearCommands: () => void;
+    repeatCommand: (i: number) => string;
+    changeCommand: (newCommand: string) => void;
+    initialCommand: string;
+    index: number;
     active: boolean;
 }) => {
     const [autocomplete, setAutocomplete] = useReducer(autocompleteReducer, {
         hidden: "",
         visible: "",
     });
+
+    const [copyCommand, setCopyCommand] = useState(index);
+
+    const commands = {
+        about: {
+            type: "text",
+            content: `¿Qué es TIC Cheatsheets? En esta web se encuentra una colección de
+                    &quot;hojas de trucos&quot; a las que se puede
+                    recurrir a la hora de programar en cualquiera de los
+                    lenguajes disponibles. La idea es que ésta sea de
+                    realización colectiva, es decir, que todos (tanto
+                    profesores como alumnos) puedan hacer su aporte a
+                    los cheatsheets, con el objetivo de aumentar la
+                    calidad y la cantidad de la información. Para
+                    aportar algún cambio o un cheatsheet nuevo, es muy
+                    importante que leas el README del repositorio.`,
+        },
+        help: {
+            type: "text",
+            content: "Comandos posibles: about, help, github, open, export",
+        },
+        github: {
+            type: "action",
+            content: () =>
+                window.open(
+                    "https://github.com/nachovigilante/cheatsheets",
+                    "_blank"
+                ),
+        },
+        open: {
+            type: "accion",
+            content: "TODO: Abrir un cheatsheet",
+            preventAdd: true,
+        },
+        export: {
+            type: "accion",
+            content: "TODO: Exportar un cheatsheet",
+            preventAdd: true,
+        },
+        clear: {
+            type: "accion",
+            content: () => clearCommands(),
+            preventAdd: true,
+        },
+    };
 
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -87,27 +115,43 @@ const Command = ({
             const command = Object.keys(commands).find((c) =>
                 c.startsWith(value)
             );
-            if (command) input.value = command;
+            if (command) {
+                input.value = command;
+                changeCommand(command);
+            }
         } else if (e.key === "Enter") {
             const value = input.value;
             const command = Object.keys(commands).find((c) =>
                 c.startsWith(value)
             );
             if (command) {
-                const { type, content } = commands[command];
+                changeCommand(value);
+                const { type, content, preventAdd } = commands[command];
                 if (type === "text") {
                     addResponse(content);
                     addCommand();
                 } else if (type === "action") {
-                    // TODO
+                    content();
+                    if (!preventAdd) addCommand();
                 }
             }
+        } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            if (copyCommand === 0) return;
+            input.value = repeatCommand(copyCommand - 1);
+            setCopyCommand(copyCommand - 1);
+        } else if (e.key === "ArrowDown") {
+            e.preventDefault();
+            if (copyCommand === index) return;
+            input.value = repeatCommand(copyCommand + 1);
+            setCopyCommand(copyCommand + 1);
         }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const input = e.target as HTMLInputElement;
         const value = input.value;
+
         if (value === "") {
             setAutocomplete({
                 type: "CLEAR",
@@ -133,7 +177,7 @@ const Command = ({
 
     return (
         <div
-            className="flex gap-3 items-start text-xl py-[2px] font-mono flex-col justify-center"
+            className="flex gap-3 items-start text-xl py-[2px] font-mono flex-col justify-center relative"
             ref={containerRef}
         >
             <div className="text-[#ED57EC] font-medium">
@@ -150,6 +194,7 @@ const Command = ({
                     onKeyDown={handleKeyDown}
                     autoFocus={active}
                     disabled={!active}
+                    defaultValue={initialCommand}
                 />
                 <span className="relative text-transparent">
                     {autocomplete.hidden}
@@ -166,6 +211,14 @@ const Terminal = ({ cheatsheets }: TerminalProps) => {
     const [commands, setCommands] = useState<string[]>([""]);
     const addCommand = () => {
         setCommands([...commands, ""]);
+    };
+    const clearCommands = () => {
+        console.log("AAAAAAAAAAA");
+        setCommands([""]);
+    };
+    const repeatCommand = (i: number) => {
+        console.log("AAAAAAAAAAA");
+        return commands[i];
     };
 
     return (
@@ -203,11 +256,20 @@ const Terminal = ({ cheatsheets }: TerminalProps) => {
                 </div>
                 <div className="flex-grow flex flex-col px-1 pb-3 pt-1">
                     <div className="p-5 flex flex-col items-start gap-3 overflow-y-scroll terminal-scroll h-full">
-                        {commands.map((c) => (
+                        {commands.map((c, i) => (
                             <Command
                                 key={c}
+                                index={i}
                                 addCommand={addCommand}
+                                clearCommands={clearCommands}
+                                repeatCommand={repeatCommand}
+                                initialCommand={c}
                                 active={c === commands[commands.length - 1]}
+                                changeCommand={(newCommand) => {
+                                    const newCommands = [...commands];
+                                    newCommands[i] = newCommand;
+                                    setCommands(newCommands);
+                                }}
                             />
                         ))}
                     </div>

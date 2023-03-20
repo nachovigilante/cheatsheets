@@ -81,23 +81,23 @@ const Command = ({
                 ),
         },
         open: {
-            type: "accion",
+            type: "action",
             content: (slug: string) => {
                 router.push(`/cheatsheet/${slug}`);
             },
             slug: true,
         },
         export: {
-            type: "accion",
+            type: "action",
             content: "TODO: Exportar un cheatsheet",
             slug: true,
         },
         clear: {
-            type: "accion",
+            type: "action",
             content: () => {
-                console.log("BBBBBBBB");
                 clearCommands();
             },
+            preventAdd: true,
         },
     };
 
@@ -133,7 +133,7 @@ const Command = ({
             );
             if (command) {
                 changeCommand(value);
-                const { type, content, slug } = commands[command];
+                const { type, content, slug, preventAdd } = commands[command];
                 if (type === "text") {
                     addResponse(content);
                     addCommand();
@@ -142,6 +142,7 @@ const Command = ({
                         if (slug) content(slug);
                         content();
                     }
+                    if (!preventAdd) addCommand();
                 }
             }
         } else if (e.key === "ArrowUp") {
@@ -225,11 +226,13 @@ const Terminal = ({ cheatsheets }: TerminalProps) => {
         setCommands([...commands, ""]);
     };
     const clearCommands = () => {
-        console.log("AAAAAAAAAAA");
-        setCommands([""]);
+        console.log("clearing...");
+        setCommands([]);
+        setTimeout(() => {
+            setCommands([""]);
+        }, 100);
     };
     const repeatCommand = (i: number) => {
-        console.log("AAAAAAAAAAA");
         return commands[i];
     };
 
@@ -270,7 +273,7 @@ const Terminal = ({ cheatsheets }: TerminalProps) => {
                     <div className="p-5 flex flex-col items-start gap-3 overflow-y-scroll terminal-scroll h-full">
                         {commands.map((c, i) => (
                             <Command
-                                key={c}
+                                key={i}
                                 index={i}
                                 addCommand={addCommand}
                                 clearCommands={clearCommands}

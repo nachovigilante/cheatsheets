@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useEffect, useReducer, useRef, useState } from "react";
 import { CheatsheetType } from "../../pages";
 
@@ -49,6 +50,8 @@ const Command = ({
         visible: "",
     });
 
+    const router = useRouter();
+
     const [copyCommand, setCopyCommand] = useState(index);
 
     const commands = {
@@ -79,18 +82,22 @@ const Command = ({
         },
         open: {
             type: "accion",
-            content: "TODO: Abrir un cheatsheet",
-            preventAdd: true,
+            content: (slug: string) => {
+                router.push(`/cheatsheet/${slug}`);
+            },
+            slug: true,
         },
         export: {
             type: "accion",
             content: "TODO: Exportar un cheatsheet",
-            preventAdd: true,
+            slug: true,
         },
         clear: {
             type: "accion",
-            content: () => clearCommands(),
-            preventAdd: true,
+            content: () => {
+                console.log("BBBBBBBB");
+                clearCommands();
+            },
         },
     };
 
@@ -126,13 +133,15 @@ const Command = ({
             );
             if (command) {
                 changeCommand(value);
-                const { type, content, preventAdd } = commands[command];
+                const { type, content, slug } = commands[command];
                 if (type === "text") {
                     addResponse(content);
                     addCommand();
                 } else if (type === "action") {
-                    content();
-                    if (!preventAdd) addCommand();
+                    if (typeof content === "function") {
+                        if (slug) content(slug);
+                        content();
+                    }
                 }
             }
         } else if (e.key === "ArrowUp") {
@@ -145,6 +154,9 @@ const Command = ({
             if (copyCommand === index) return;
             input.value = repeatCommand(copyCommand + 1);
             setCopyCommand(copyCommand + 1);
+        } else if (e.key === "l" && e.ctrlKey) {
+            e.preventDefault();
+            clearCommands();
         }
     };
 

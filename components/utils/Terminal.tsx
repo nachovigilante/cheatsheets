@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useReducer, useRef, useState } from "react";
 import { CheatsheetType } from "../../pages";
 
 type TerminalProps = {
@@ -28,35 +28,80 @@ const commands = {
     },
 };
 
+type AutocompleteType = {
+    hidden: string;
+    visible: string;
+};
+
+const autocompleteReducer = (
+    state: AutocompleteType,
+    action: { type: string; payload: { content: string; length: number } }
+) => {
+    switch (action.type) {
+        case "SET":
+            const { content, length } = action.payload;
+            const hidden = content.slice(0, length);
+            const visible = content.slice(length);
+            return { hidden, visible };
+        case "CLEAR":
+            return { hidden: "", visible: "" };
+        default:
+            return state;
+    }
+};
+
 const Command = () => {
-    const autocompleteRef = useRef<HTMLSpanElement>(null);
-    const [autocompleteValue, setAutocompleteValue] = useState("");
+    const [autocomplete, setAutocomplete] = useReducer(autocompleteReducer, {
+        hidden: "",
+        visible: "",
+    });
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         const input = e.target as HTMLInputElement;
+        if (e.key === "Tab") {
+            e.preventDefault();
+            const value = input.value;
+            const command = Object.keys(commands).find((c) =>
+                c.startsWith(value)
+            );
+            if (command) {
+                input.value = command;
+                setAutocomplete({
+                    type: "CLEAR",
+                    payload: { content: "", length: 0 },
+                });
+            }
+        }
+    };
+
+    const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        const input = e.target as HTMLInputElement;
         const value = input.value;
         if (value === "") {
-            setAutocompleteValue("");
+            setAutocomplete({
+                type: "CLEAR",
+                payload: { content: "", length: 0 },
+            });
             return;
         }
 
         if (e.key === "Enter") {
             // TODO
-        } else if (e.key === "Tab") {
-            e.preventDefault();
-            const command = Object.keys(commands).find((c) =>
-                c.startsWith(value)
-            );
-            input.value = command;
         } else {
             const command = Object.keys(commands).find((c) =>
                 c.startsWith(value)
             );
 
             if (command) {
-                setAutocompleteValue(command);
+                setAutocomplete({
+                    type: "SET",
+                    payload: { content: command, length: value.length },
+                });
             } else {
-                setAutocompleteValue("");
+                setAutocomplete({
+                    type: "CLEAR",
+                    payload: { content: "", length: 0 },
+                });
             }
         }
     };
@@ -69,15 +114,19 @@ const Command = () => {
                 <span className="text-[#E9D2F4] font-normal">(main)</span>
             </div>
             <div>
-                <span>{"> "}</span>
-                <span className="absolute text-white/40" ref={autocompleteRef}>
-                    {autocompleteValue}
-                </span>
+                <span className="mr-3">{">"}</span>
                 <input
                     type="text"
-                    className="bg-transparent outline-none font-normal"
+                    className="absolute bg-transparent outline-none font-normal"
+                    onKeyUp={handleKeyUp}
                     onKeyDown={handleKeyDown}
                 />
+                <span className="relative text-transparent">
+                    {autocomplete.hidden}
+                </span>
+                <span className="absolute text-white/40">
+                    {autocomplete.visible}
+                </span>
             </div>
         </div>
     );

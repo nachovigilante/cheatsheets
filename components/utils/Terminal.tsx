@@ -23,8 +23,12 @@ const commands = {
         content: openGithub,
     },
     open: {
-        type: "text",
-        content: "Abrir un cheatsheet",
+        type: "accion",
+        content: "TODO: Abrir un cheatsheet",
+    },
+    export: {
+        type: "accion",
+        content: "TODO: Exportar un cheatsheet",
     },
 };
 
@@ -50,11 +54,26 @@ const autocompleteReducer = (
     }
 };
 
-const Command = () => {
+const Command = ({
+    addCommand,
+    active,
+}: {
+    addCommand: () => void;
+    active: boolean;
+}) => {
     const [autocomplete, setAutocomplete] = useReducer(autocompleteReducer, {
         hidden: "",
         visible: "",
     });
+
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    const addResponse = (content: string) => {
+        const response = document.createElement("div");
+        response.className = "text-[#9FEA18] font-normal";
+        response.innerHTML = content;
+        containerRef.current?.appendChild(response);
+    };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         const input = e.target as HTMLInputElement;
@@ -69,10 +88,24 @@ const Command = () => {
                 c.startsWith(value)
             );
             if (command) input.value = command;
+        } else if (e.key === "Enter") {
+            const value = input.value;
+            const command = Object.keys(commands).find((c) =>
+                c.startsWith(value)
+            );
+            if (command) {
+                const { type, content } = commands[command];
+                if (type === "text") {
+                    addResponse(content);
+                    addCommand();
+                } else if (type === "action") {
+                    // TODO
+                }
+            }
         }
     };
 
-    const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const input = e.target as HTMLInputElement;
         const value = input.value;
         if (value === "") {
@@ -83,29 +116,26 @@ const Command = () => {
             return;
         }
 
-        if (e.key === "Enter") {
-            // TODO
-        } else {
-            const command = Object.keys(commands).find((c) =>
-                c.startsWith(value)
-            );
+        const command = Object.keys(commands).find((c) => c.startsWith(value));
 
-            if (command) {
-                setAutocomplete({
-                    type: "SET",
-                    payload: { content: command, length: value.length },
-                });
-            } else {
-                setAutocomplete({
-                    type: "CLEAR",
-                    payload: { content: "", length: 0 },
-                });
-            }
+        if (command) {
+            setAutocomplete({
+                type: "SET",
+                payload: { content: command, length: value.length },
+            });
+        } else {
+            setAutocomplete({
+                type: "CLEAR",
+                payload: { content: "", length: 0 },
+            });
         }
     };
 
     return (
-        <div className="flex gap-3 items-start text-xl py-[2px] font-mono flex-col justify-center">
+        <div
+            className="flex gap-3 items-start text-xl py-[2px] font-mono flex-col justify-center"
+            ref={containerRef}
+        >
             <div className="text-[#ED57EC] font-medium">
                 ~/ORT/TIC/cheatsheets{" "}
                 <span className="text-[#9FEA18] font-normal">git:</span>
@@ -116,8 +146,10 @@ const Command = () => {
                 <input
                     type="text"
                     className="absolute bg-transparent outline-none font-normal"
-                    onKeyUp={handleKeyUp}
+                    onChange={handleChange}
                     onKeyDown={handleKeyDown}
+                    autoFocus={active}
+                    disabled={!active}
                 />
                 <span className="relative text-transparent">
                     {autocomplete.hidden}
@@ -131,6 +163,11 @@ const Command = () => {
 };
 
 const Terminal = ({ cheatsheets }: TerminalProps) => {
+    const [commands, setCommands] = useState<string[]>([""]);
+    const addCommand = () => {
+        setCommands([...commands, ""]);
+    };
+
     return (
         <div className="rounded-default border-3 border-[#504e54] bg-[#2322256d] backdrop-blur-xl overflow-hidden w-full h-[600px]">
             <div className="bg-[#2a2831] font-space h-20 text-2xl flex items-center border-b-1 border-b-black">
@@ -166,7 +203,13 @@ const Terminal = ({ cheatsheets }: TerminalProps) => {
                 </div>
                 <div className="flex-grow flex flex-col px-1 pb-3 pt-1">
                     <div className="p-5 flex flex-col items-start gap-3 overflow-y-scroll terminal-scroll h-full">
-                        <Command />
+                        {commands.map((c) => (
+                            <Command
+                                key={c}
+                                addCommand={addCommand}
+                                active={c === commands[commands.length - 1]}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>

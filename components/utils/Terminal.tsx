@@ -58,19 +58,17 @@ const Command = () => {
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         const input = e.target as HTMLInputElement;
+        setAutocomplete({
+            type: "CLEAR",
+            payload: { content: "", length: 0 },
+        });
         if (e.key === "Tab") {
             e.preventDefault();
             const value = input.value;
             const command = Object.keys(commands).find((c) =>
                 c.startsWith(value)
             );
-            if (command) {
-                input.value = command;
-                setAutocomplete({
-                    type: "CLEAR",
-                    payload: { content: "", length: 0 },
-                });
-            }
+            if (command) input.value = command;
         }
     };
 

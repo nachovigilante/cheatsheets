@@ -89,7 +89,13 @@ const Command = ({
         },
         export: {
             type: "action",
-            content: "TODO: Exportar un cheatsheet",
+            content: (slug: string) => {
+                const anchor = document.createElement("a");
+                anchor.href = `/download/${slug}.pdf`;
+                anchor.download = `/download/${slug}.pdf`;
+                document.body.appendChild(anchor);
+                anchor.click();
+            },
             slug: true,
         },
         clear: {

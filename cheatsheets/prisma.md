@@ -40,6 +40,8 @@ image: "/assets/images/prisma.png"
 	- [Prisma Format](#prisma-format)
 	- [DB Pull](#db-pull)
 
+<br>
+
 ## Introducción a Prisma
 
 Prisma es una herramienta de ORM (Object-Relational Mapping) que ayuda a los desarrolladores a trabajar con bases de datos de una manera más sencilla y eficiente. Con Prisma, los desarrolladores pueden definir modelos de datos y trabajar con ellos como si fueran objetos, sin tener que escribir consultas complejas en SQL. Además, Prisma facilita la implementación de características avanzadas como relaciones, transacciones y migraciones.
@@ -48,7 +50,7 @@ Prisma es una herramienta de ORM (Object-Relational Mapping) que ayuda a los des
 
 Para instalar Prisma, es necesario tener [Node.js](https://nodejs.org/es/download) y [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) instalados en el sistema. Luego, se puede instalar Prisma a través de npm con el siguiente comando:
 
-```
+```bash
 npm install prisma --save
 ```
 
@@ -56,12 +58,12 @@ npm install prisma --save
 
 Para crear un nuevo proyecto con Prisma, se puede utilizar el siguiente comando:
 
-```
+```bash
 npx prisma init
 ```
 Esto creará un nuevo directorio llamado `prisma` en el proyecto, que contendrá los archivos de configuración de Prisma y un archivo `schema.prisma` donde vamos a definir nuestro modelo, este es un archivo `schema.prisma` convencional:
 
-```
+```prisma
 datasource db {
 	provider =  "postgresql"
 	url =  "postgresql://user:password@localhost:5432/mydb?schema=public"
@@ -87,7 +89,7 @@ Para crear un modelo de datos con Prisma, se utiliza su lenguaje de definición 
 ### Datasource
 El `datasource` es una de las cosas más hermosas de esta herramienta, porque es la parte que se encarga de conectarse con nuestra base de datos local con dos simples parámetros, un `provider` que define la base de datos que usaremos, como PostgreSQL, MySQL, etc. Y una `url` que es la dirección para conectarse a esta base de datos en cuestión.  Este es un ejemplo de un `datasource` general:
 
-```
+```prisma
 datasource db {
 	provider =  "postgresql"
 	url =  "postgresql://user:password@localhost:5432/mydb?schema=public"
@@ -96,7 +98,7 @@ datasource db {
 NOTA: Para evitar problemas de seguridad, se recomienda fuertemente usar un archivo de variables de entorno (También llamado [ENV](https://blog.bitsrc.io/a-gentle-introduction-to-env-files-9ad424cc5ff4)) para guardar la `url` de tu base de datos.
 ### Generator
 El `generator` es una sección que permite definir cómo Prisma debe generar el código necesario para interactuar con la base de datos según el modelo de datos definido en el esquema. Un ejemplo de `generator` seria el siguiente:
-```
+```prisma
 generator client {
 	provider =  "prisma-client-js"
 }
@@ -104,7 +106,7 @@ generator client {
 
 ### Model
 Vamos a comprender al `model` como el equivalente a las tablas y columnas de una base de datos convencional, acá tenemos un ejemplo extraído del punto anterior.
-```
+```prisma
 model User {
 	id Int @id @default(autoincrement()) 
 	name String 
@@ -123,7 +125,7 @@ Una de las características más importantes de Prisma es su capacidad para trab
 ### Uno a Muchos
 
 Una relación de uno a muchos se define cuando un modelo tiene una relación con uno o más modelos secundarios. Por ejemplo, un usuario en una aplicación de una lista de tareas, puede tener muchas anotadas, por lo que para un solo usuario, hay muchos registros de tareas pertenecientes a ese usuario. Esto en Prisma se adapta de la siguiente forma:
-```
+```prisma
 model User {
 	id Int @id @default(autoincrement()) 
 	name String 
@@ -147,7 +149,7 @@ Como ven, se crea un modelo nuevo, en este caso llamado `Todo` para almacenar to
 
 Una relación de muchos a muchos se define cuando dos o más modelos tienen una relación con múltiples instancias de otros modelos. Por ejemplo, muchos usuarios pueden pertenecer a muchos grupos.
 
-```
+```prisma
 model User { 
 	id Int @id @default(autoincrement()) 
 	name String 
@@ -166,7 +168,7 @@ En este ejemplo, la relación entre `User` y `Group` se define en ambos modelos 
 ### Enum
 Los modelos enum se utilizan para definir un conjunto finito de valores que pueden ser asignados a una columna. Por ejemplo, un modelo `Todo` puede tener una columna `status` que solo puede ser uno de los valores `"done"`, 
 `"in progress"` o `"todo"`.
-```
+```prisma
 model Todo {
   id     Int     @id @default(autoincrement())
   title  String
@@ -209,12 +211,12 @@ Es posible que algunos valores estén o no disponibles según la base de datos q
 ## Métodos
 Una vez que se ha definido el modelo de datos y se ha configurado la conexión a la base de datos, toca cubrir la parte divertida de Prisma, sus métodos, estos son usados para reemplazar las tan conocidas consultas SQL, porque no, acá no usamos SQL nunca, así que cada vez que queramos hacer un movimiento en la base de datos, utilizaremos estos métodos de a continuación. Siempre que se tengan que usar los métodos, hay que crear un `PrismaClient` en el archivo de JavaScript introduciendo el siguiente bloque de código:
 
-```
+```js
 const { PrismaClient } = require('@prisma/client') 
 const prisma = new  PrismaClient()
 ```
 Además, correr el siguiente comando:
-```
+```bash
 npx prisma generate
 ```
 Vale aclarar que todos los métodos se usan siguiendo la misma sintaxis de 
@@ -222,18 +224,18 @@ Vale aclarar que todos los métodos se usan siguiendo la misma sintaxis de
 
 ### findMany()
 El método `findMany()` se utiliza para recuperar varios registros de una tabla en la base de datos. Por ejemplo, para recuperar todos los usuarios de la tabla `User`, se puede utilizar el siguiente código:
-```
+```js
 const users = await prisma.user.findMany();
 ```
 ### findOne()
 El método `findOne()` se utiliza para recuperar un registro de una tabla en la base de datos. Por ejemplo, para recuperar un usuario de la tabla `User`, se puede utilizar el siguiente código:
-```
+```js
 const user = await prisma.user.findOne();
 ```
 NOTA: El `findOne()` siempre devuelve el primero de todos los registros que reciba.
 ### create()
 El método `create()` se utiliza para crear un nuevo registro en una tabla en la base de datos. Por ejemplo, para crear un nuevo usuario en la tabla `User`, se puede utilizar el siguiente código:
-```
+```js
 const newUser = await prisma.user.create({ 
   data: { 
 	name: "Marcelo Guiterrez", 
@@ -245,7 +247,7 @@ const newUser = await prisma.user.create({
 NOTA: En este caso, el parámetro `data` está en formato JSON, este formato lo vemos repetidas no solo en Prisma, sino que en JavaScript en general.
 ### update()
 El método `update()` se utiliza para actualizar un registro en una tabla en la base de datos. Por ejemplo, para actualizar el nombre del usuario con `id` igual a 1 en la tabla `User`, se puede utilizar el siguiente código:
-```
+```js
 const updatedUser = await prisma.user.update({
   where: {
 	id: 1
@@ -257,7 +259,7 @@ const updatedUser = await prisma.user.update({
 ```
 ### delete()
 El método `delete()` se utiliza para eliminar un registro de una tabla en la base de datos. Por ejemplo, para eliminar el usuario con `id` igual a 1 de la tabla `User`, se puede utilizar el siguiente código:
-```
+```js
 const deletedUser = await prisma.user.delete({
   where: {
 	id: 1
@@ -272,7 +274,7 @@ Como ya vimos en ejemplos anteriores, dentro del parámetro que le pasamos a cua
 ### Select
 Permite seleccionar qué campos deseas obtener de una entidad. Por ejemplo, si solo quieres obtener el nombre y el correo electrónico de los usuarios, puedes usar `select` para obtener solo esos campos.
 
-```
+```js
 const users = await prisma.user.findMany({
   select: {
     name: true,
@@ -283,7 +285,7 @@ const users = await prisma.user.findMany({
 ### Take
 Permite limitar la cantidad de registros que devuelve el método `findMany()`. Por ejemplo, si deseas seleccionar los diez primeros usuarios de la base de datos.
 
-```
+```js
 const users = await prisma.user.findMany({
 	take: 10
 })
@@ -292,7 +294,7 @@ const users = await prisma.user.findMany({
 ### Include
 Permite incluir campos de una entidad relacionada en la consulta. Por ejemplo, si deseas obtener todos los posts de un usuario y también incluir los comentarios de cada post, puedes usar `include` para obtener toda la información.
 
-```
+```js
 const user = await prisma.user.findUnique({
   where: {
     id: 1
@@ -309,7 +311,7 @@ const user = await prisma.user.findUnique({
 ### Where
 Permite filtrar los registros en función de los valores de sus campos. Por ejemplo, si solo quieres obtener los usuarios que tengan el nombre "Juan".
 
-```
+```js
 const users = await prisma.user.findMany({
   where: {
     name: "Juan"
@@ -321,7 +323,7 @@ const users = await prisma.user.findMany({
 
 Permite buscar registros que contengan una cadena determinada. Por ejemplo, si deseas buscar todos los usuarios que tengan la palabra "programador" en su descripción.
 
-```
+```js
 const users = await prisma.user.findMany({
   where: {
     description: {
@@ -332,7 +334,7 @@ const users = await prisma.user.findMany({
 ```
 ### startsWith y endsWith
 Permiten buscar registros que comiencen o terminen con una cadena determinada. Por ejemplo, si deseas buscar todos los usuarios que tengan un apellido que empiece por "a".
-```
+```js
 const users = await prisma.user.findMany({
   where: {
     surname: {
@@ -345,7 +347,7 @@ const users = await prisma.user.findMany({
 ### orderBy
 Permite ordenar los resultados por uno o más campos. Por ejemplo, si deseas obtener todos los usuarios ordenados por su nombre en orden alfabético.
 
-```
+```js
 const users = await prisma.user.findMany({
   orderBy: {
     name: "asc"
@@ -356,7 +358,7 @@ const users = await prisma.user.findMany({
 ### Connect
 Permite conectar dos entidades relacionadas en una sola consulta. Por ejemplo, si deseas obtener todos los comentarios que ha hecho un usuario en una publicación específica.
 
-```
+```js
 const comments = await prisma.comment.findMany({
   where: {
     post: {

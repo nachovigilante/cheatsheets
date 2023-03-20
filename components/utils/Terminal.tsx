@@ -112,6 +112,7 @@ const Command = ({
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         const input = e.target as HTMLInputElement;
+        let params = input.value.split(" ");
         setAutocomplete({
             type: "CLEAR",
             payload: { content: "", length: 0 },
@@ -129,7 +130,7 @@ const Command = ({
         } else if (e.key === "Enter") {
             const value = input.value;
             const command = Object.keys(commands).find((c) =>
-                c.startsWith(value)
+                c.startsWith(params[0])
             );
             if (command) {
                 changeCommand(value);
@@ -139,8 +140,8 @@ const Command = ({
                     addCommand();
                 } else if (type === "action") {
                     if (typeof content === "function") {
-                        if (slug) content(slug);
-                        content();
+                        if (slug) content(params[1]);
+                        else content();
                     }
                     if (!preventAdd) addCommand();
                 }

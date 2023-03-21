@@ -6,9 +6,61 @@ type TerminalProps = {
     cheatsheets: CheatsheetType[];
 };
 
+type AutocompleteComponentType = {
+    content: string;
+    commands?: {
+        [key: string]: { type: string; content: any; slug?: boolean };
+    };
+};
+
 type AutocompleteType = {
     hidden: string;
     visible: string;
+};
+
+const Autocomplete = ({ content, commands }: AutocompleteComponentType) => {
+    const [autocompleteValue, setAutocompleteValue] = useReducer(
+        autocompleteReducer,
+        {
+            hidden: "",
+            visible: "",
+        }
+    );
+
+    useEffect(() => {
+        if (content === "")
+            return setAutocompleteValue({
+                type: "CLEAR",
+                payload: { content: "", length: 0 },
+            });
+
+        const command = Object.keys(commands).find((c) =>
+            c.startsWith(content)
+        );
+
+        if (command) {
+            setAutocompleteValue({
+                type: "SET",
+                payload: { content: command, length: content.length },
+            });
+        } else {
+            setAutocompleteValue({
+                type: "CLEAR",
+                payload: { content: "", length: 0 },
+            });
+        }
+    }, [content]);
+
+    return (
+        <>
+            <span className="relative text-transparent">
+                {autocompleteValue.hidden}
+            </span>
+            <span className="absolute text-white/40">
+                {autocompleteValue.visible}
+            </span>
+        </>
+    );
 };
 
 const autocompleteReducer = (
@@ -45,14 +97,11 @@ const Command = ({
     index: number;
     active: boolean;
 }) => {
-    const [autocomplete, setAutocomplete] = useReducer(autocompleteReducer, {
-        hidden: "",
-        visible: "",
-    });
-
     const router = useRouter();
 
     const [copyCommand, setCopyCommand] = useState(index);
+
+    const [text, setText] = useState(initialCommand);
 
     const commands = {
         about: {
@@ -119,10 +168,9 @@ const Command = ({
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         const input = e.target as HTMLInputElement;
         let params = input.value.split(" ");
-        setAutocomplete({
-            type: "CLEAR",
-            payload: { content: "", length: 0 },
-        });
+
+        setText("");
+
         if (e.key === "Tab") {
             e.preventDefault();
             const value = input.value;
@@ -135,9 +183,7 @@ const Command = ({
             }
         } else if (e.key === "Enter") {
             const value = input.value;
-            const command = Object.keys(commands).find((c) =>
-                c.startsWith(params[0])
-            );
+            const command = Object.keys(commands).find((c) => c === value);
             if (command) {
                 changeCommand(value);
                 const { type, content, slug, preventAdd } = commands[command];
@@ -170,29 +216,7 @@ const Command = ({
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const input = e.target as HTMLInputElement;
-        const value = input.value;
-
-        if (value === "") {
-            setAutocomplete({
-                type: "CLEAR",
-                payload: { content: "", length: 0 },
-            });
-            return;
-        }
-
-        const command = Object.keys(commands).find((c) => c.startsWith(value));
-
-        if (command) {
-            setAutocomplete({
-                type: "SET",
-                payload: { content: command, length: value.length },
-            });
-        } else {
-            setAutocomplete({
-                type: "CLEAR",
-                payload: { content: "", length: 0 },
-            });
-        }
+        setText(input.value);
     };
 
     return (
@@ -216,12 +240,7 @@ const Command = ({
                     disabled={!active}
                     defaultValue={initialCommand}
                 />
-                <span className="relative text-transparent">
-                    {autocomplete.hidden}
-                </span>
-                <span className="absolute text-white/40">
-                    {autocomplete.visible}
-                </span>
+                <Autocomplete content={text} commands={commands} />
             </div>
         </div>
     );
@@ -233,7 +252,6 @@ const Terminal = ({ cheatsheets }: TerminalProps) => {
         setCommands([...commands, ""]);
     };
     const clearCommands = () => {
-        console.log("clearing...");
         setCommands([]);
         setTimeout(() => {
             setCommands([""]);

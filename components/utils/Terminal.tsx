@@ -6,19 +6,22 @@ type TerminalProps = {
     cheatsheets: CheatsheetType[];
 };
 
-type AutocompleteComponentType = {
-    content: string;
-    commands?: {
-        [key: string]: { type: string; content: any; slug?: boolean };
-    };
-};
-
 type AutocompleteType = {
     hidden: string;
     visible: string;
 };
 
-const Autocomplete = ({ content, commands }: AutocompleteComponentType) => {
+type AutocompleteComponentType = {
+    content: string;
+    list?: string[];
+    padding?: string;
+};
+
+const AutocompleteCommand = ({
+    content,
+    list,
+    padding,
+}: AutocompleteComponentType) => {
     const [autocompleteValue, setAutocompleteValue] = useReducer(
         autocompleteReducer,
         {
@@ -34,9 +37,7 @@ const Autocomplete = ({ content, commands }: AutocompleteComponentType) => {
                 payload: { content: "", length: 0 },
             });
 
-        const command = Object.keys(commands).find((c) =>
-            c.startsWith(content)
-        );
+        const command = list.find((c) => c.startsWith(content));
 
         if (command) {
             setAutocompleteValue({
@@ -54,12 +55,35 @@ const Autocomplete = ({ content, commands }: AutocompleteComponentType) => {
     return (
         <>
             <span className="relative text-transparent">
+                {padding}
                 {autocompleteValue.hidden}
             </span>
             <span className="absolute text-white/40">
                 {autocompleteValue.visible}
             </span>
         </>
+    );
+};
+
+const AutocompleteFile = ({
+    list,
+    content,
+}: {
+    list: string[];
+    content: string;
+}) => {
+    const [fileName, setFileName] = useState("");
+    const [padding, setPadding] = useState("");
+
+    useEffect(() => {
+        const command = content.split(" ");
+        // console.log(file);
+        setFileName(command[1] || "");
+        setPadding(command[0] + " ");
+    }, [content]);
+
+    return (
+        <AutocompleteCommand content={fileName} list={list} padding={padding} />
     );
 };
 
@@ -88,6 +112,7 @@ const Command = ({
     changeCommand,
     index,
     active,
+    cheatsheets,
 }: {
     addCommand: () => void;
     clearCommands: () => void;
@@ -96,12 +121,13 @@ const Command = ({
     initialCommand: string;
     index: number;
     active: boolean;
+    cheatsheets: CheatsheetType[];
 }) => {
     const router = useRouter();
 
     const [copyCommand, setCopyCommand] = useState(index);
-
     const [text, setText] = useState(initialCommand);
+    const [currentCommand, setCurrentCommand] = useState("");
 
     const commands = {
         about: {
@@ -154,6 +180,13 @@ const Command = ({
             },
             preventAdd: true,
         },
+    } as {
+        [key: string]: {
+            type: string;
+            content: any;
+            slug?: boolean;
+            preventAdd?: boolean;
+        };
     };
 
     const containerRef = useRef<HTMLDivElement>(null);
@@ -180,12 +213,14 @@ const Command = ({
             if (command) {
                 input.value = command;
                 changeCommand(command);
+                setCurrentCommand(command);
             }
         } else if (e.key === "Enter") {
             const value = input.value;
             const command = Object.keys(commands).find((c) => c === value);
             if (command) {
                 changeCommand(value);
+                setCurrentCommand(value);
                 const { type, content, slug, preventAdd } = commands[command];
                 if (type === "text") {
                     addResponse(content);
@@ -240,7 +275,16 @@ const Command = ({
                     disabled={!active}
                     defaultValue={initialCommand}
                 />
-                <Autocomplete content={text} commands={commands} />
+                <AutocompleteCommand
+                    content={text}
+                    list={Object.keys(commands)}
+                />
+                {currentCommand === "open" || currentCommand === "export" ? (
+                    <AutocompleteFile
+                        content={text}
+                        list={[...cheatsheets.map((c) => c.slug)]}
+                    />
+                ) : null}
             </div>
         </div>
     );
@@ -310,6 +354,7 @@ const Terminal = ({ cheatsheets }: TerminalProps) => {
                                     newCommands[i] = newCommand;
                                     setCommands(newCommands);
                                 }}
+                                cheatsheets={cheatsheets}
                             />
                         ))}
                     </div>

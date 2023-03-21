@@ -92,7 +92,7 @@ const Command = ({
             content: (slug: string) => {
                 const anchor = document.createElement("a");
                 anchor.href = `/download/${slug}.pdf`;
-                anchor.download = `/download/${slug}.pdf`;
+                anchor.download = `${slug}.pdf`;
                 document.body.appendChild(anchor);
                 anchor.click();
             },

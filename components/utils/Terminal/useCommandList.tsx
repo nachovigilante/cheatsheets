@@ -1,7 +1,8 @@
 type CommandItem = {
-    type: string;
-    content: any;
-    slug?: boolean;
+    type: "text" | "action";
+    content?: string;
+    action?: (...args: any[]) => void;
+    args?: string[];
     preventAdd?: boolean;
 };
 
@@ -9,17 +10,9 @@ type CommandList = {
     [key: string]: CommandItem;
 };
 
-type CommandListFunction = (
-    clearCommands: () => void,
-    cheatsheets: any[],
-    router: any
-) => CommandList;
+type CommandListFunction = (cheatsheets: any[], router: any) => CommandList;
 
-const useCommandList: CommandListFunction = (
-    clearCommands,
-    cheatsheets,
-    router
-) => {
+const useCommandList: CommandListFunction = (cheatsheets, router) => {
     return {
         about: {
             type: "text",
@@ -45,7 +38,7 @@ const useCommandList: CommandListFunction = (
         },
         github: {
             type: "action",
-            content: () =>
+            action: () =>
                 window.open(
                     "https://github.com/nachovigilante/cheatsheets",
                     "_blank"
@@ -53,25 +46,25 @@ const useCommandList: CommandListFunction = (
         },
         open: {
             type: "action",
-            content: (slug: string) => {
+            action: (slug: string) => {
                 router.push(`/cheatsheet/${slug}`);
             },
-            slug: true,
+            args: ["slug"],
         },
         export: {
             type: "action",
-            content: (slug: string) => {
+            action: (slug: string) => {
                 const anchor = document.createElement("a");
                 anchor.href = `/download/${slug}.pdf`;
                 anchor.download = `${slug}.pdf`;
                 document.body.appendChild(anchor);
                 anchor.click();
             },
-            slug: true,
+            args: ["slug"],
         },
         clear: {
             type: "action",
-            content: () => {
+            action: () => {
                 // simulate a ctrl + l
                 const event = new KeyboardEvent("keydown", {
                     ctrlKey: true,

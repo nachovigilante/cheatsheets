@@ -27,8 +27,7 @@ const Command = ({
         clearCommands,
     } = useContext(TerminalContext);
 
-    const commandList = useCommandList(clearCommands, cheatsheets, index);
-
+    const commandList = useCommandList(cheatsheets, index);
     const containerRef = useRef<HTMLDivElement>(null);
 
     const addResponse = (content: string) => {
@@ -38,59 +37,51 @@ const Command = ({
         containerRef.current?.appendChild(response);
     };
 
+    const suggestCommand = (input: HTMLInputElement) => {
+        const command = Object.keys(commandList).find((c) =>
+            c.startsWith(input.value)
+        );
+        if (command) {
+            input.value = command;
+            changeCommand(command, index);
+            setCurrentCommand(command);
+        } else {
+            setText("");
+        }
+    };
+
+    const parseCommand = (inputValue: string) => {
+        const [commandName, ...args] = inputValue.split(" ");
+        const command = commandList[commandName];
+
+        if (!command) {
+            triggerError();
+            return;
+        }
+
+        if (command.args && command.args.length !== args.length) {
+            triggerError();
+            return;
+        }
+
+        if (command.type === "action") {
+            command.action(...args);
+        } else if (command.type === "text") {
+            addResponse(command.content);
+        }
+
+        addCommand();
+    };
+
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         const input = e.target as HTMLInputElement;
-        let params = input.value.split(" ");
 
         if (e.key === "Tab") {
             e.preventDefault();
-            const value = input.value;
-            const command = Object.keys(commandList).find((c) =>
-                c.startsWith(value)
-            );
-            if (command) {
-                input.value = command;
-                changeCommand(command, index);
-                setCurrentCommand(command);
-            } else {
-                setText("");
-            }
+            suggestCommand(input);
         } else if (e.key === "Enter") {
-            const value = input.value;
-            const command = Object.keys(commandList).find(
-                (c) => c === value.split(" ")[0]
-            );
-            if (command) {
-                const { type, content, slug, preventAdd } =
-                    commandList[command];
-                if (!slug && !Object.keys(commandList).includes(command)) {
-                    triggerError();
-                    return;
-                }
-
-                if (type === "text") {
-                    addResponse(content);
-                    addCommand();
-                } else if (type === "action") {
-                    if (typeof content === "function") {
-                        if (slug) {
-                            if (cheatsheets.find((c) => c.slug === params[1])) {
-                                changeCommand(value, index);
-                                setCurrentCommand(value);
-                                content(params[1]);
-                                if (!preventAdd) addCommand();
-                            } else triggerError();
-                        } else {
-                            changeCommand(value, index);
-                            setCurrentCommand(value);
-                            content();
-                            if (!preventAdd) addCommand();
-                        }
-                    }
-                }
-            } else {
-                triggerError();
-            }
+            e.preventDefault();
+            parseCommand(input.value);
         } else if (e.key === "ArrowUp") {
             e.preventDefault();
             if (copyCommand === 0) return;

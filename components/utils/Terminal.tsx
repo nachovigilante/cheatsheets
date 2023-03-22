@@ -14,7 +14,7 @@ type AutocompleteType = {
 
 type AutocompleteComponentType = {
     content: string;
-    list?: string[];
+    list: string[];
     padding?: string;
 };
 
@@ -135,16 +135,21 @@ const Command = ({
     const commands = {
         about: {
             type: "text",
-            content: `¿Qué es TIC Cheatsheets? En esta web se encuentra una colección de
-                    &quot;hojas de trucos&quot; a las que se puede
-                    recurrir a la hora de programar en cualquiera de los
-                    lenguajes disponibles. La idea es que ésta sea de
-                    realización colectiva, es decir, que todos (tanto
-                    profesores como alumnos) puedan hacer su aporte a
-                    los cheatsheets, con el objetivo de aumentar la
-                    calidad y la cantidad de la información. Para
-                    aportar algún cambio o un cheatsheet nuevo, es muy
-                    importante que leas el README del repositorio.`,
+            content: `
+                    <span>¿Qué es &lt;TIC Cheatsheets/&gt;?</span>
+                    <br>
+                    <span>
+                        En esta web se encuentra una colección de
+                        &quot;hojas de trucos&quot; a las que se puede
+                        recurrir a la hora de programar en cualquiera de los
+                        lenguajes disponibles. La idea es que ésta sea de
+                        realización colectiva, es decir, que todos (tanto
+                        profesores como alumnos) puedan hacer su aporte a
+                        los cheatsheets, con el objetivo de aumentar la
+                        calidad y la cantidad de la información. Para
+                        aportar algún cambio o un cheatsheet nuevo, es muy
+                        importante que leas el README del repositorio.
+                    </span>`,
         },
         help: {
             type: "text",
@@ -183,6 +188,22 @@ const Command = ({
             },
             preventAdd: true,
         },
+        ls: {
+            type: "text",
+            content: `
+                <ul class="list-none">
+                    ${
+                        cheatsheets
+                            .map((c) => `<li>${c.slug}.md</li>`)
+                            .join("") || "No hay cheatsheets disponibles"
+                    }
+                </ul>
+            `,
+        },
+        pwd: {
+            type: "text",
+            content: "tic://cheatsheets/",
+        },
     } as {
         [key: string]: {
             type: string;
@@ -220,20 +241,35 @@ const Command = ({
             }
         } else if (e.key === "Enter") {
             const value = input.value;
-            const command = Object.keys(commands).find((c) => c === value);
+            const command = Object.keys(commands).find(
+                (c) => c === value.split(" ")[0]
+            );
             if (command) {
-                changeCommand(value);
-                setCurrentCommand(value);
                 const { type, content, slug, preventAdd } = commands[command];
+                if (!slug && !Object.keys(commands).includes(command)) {
+                    triggerError();
+                    return;
+                }
+
                 if (type === "text") {
                     addResponse(content);
                     addCommand();
                 } else if (type === "action") {
                     if (typeof content === "function") {
-                        if (slug) content(params[1]);
-                        else content();
+                        if (slug) {
+                            if (cheatsheets.find((c) => c.slug === params[1])) {
+                                changeCommand(value);
+                                setCurrentCommand(value);
+                                content(params[1]);
+                                if (!preventAdd) addCommand();
+                            } else triggerError();
+                        } else {
+                            changeCommand(value);
+                            setCurrentCommand(value);
+                            content();
+                            if (!preventAdd) addCommand();
+                        }
                     }
-                    if (!preventAdd) addCommand();
                 }
             } else {
                 triggerError();
@@ -296,7 +332,7 @@ const Command = ({
 };
 
 const Terminal = ({ cheatsheets }: TerminalProps) => {
-    const [commands, setCommands] = useState<string[]>([""]);
+    const [commands, setCommands] = useState([""]);
     const [error, setError] = useState(false);
     const addCommand = () => {
         setCommands([...commands, ""]);
@@ -313,7 +349,6 @@ const Terminal = ({ cheatsheets }: TerminalProps) => {
 
     useEffect(() => {
         let timeout: NodeJS.Timeout;
-        console.log("A");
         if (error) {
             timeout = setTimeout(() => {
                 setError(false);
@@ -350,7 +385,7 @@ const Terminal = ({ cheatsheets }: TerminalProps) => {
                         {cheatsheets.map((c) => (
                             <li
                                 key={c.slug}
-                                className="flex gap-2 items-center text-xl py-[2px]"
+                                className="flex gap-2 items-center text-xl py-1 px-2 hover:bg-[#2a2831] cursor-pointer"
                             >
                                 <img
                                     src={`/assets/images/${c.slug}.svg`}

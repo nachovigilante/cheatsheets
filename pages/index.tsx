@@ -1,12 +1,11 @@
 import type { NextPage } from "next";
-import styles from "./index.module.scss";
 import Head from "next/head";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import GitHubButton from "react-github-btn";
 import Background from "../components/layout/Background";
-import Terminal from "../components/utils/Terminal";
+import Terminal from "../components/utils/Terminal/Terminal";
 import Glassbox from "../components/utils/Glassbox";
 import Section from "../components/layout/Section";
 

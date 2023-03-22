@@ -64,8 +64,15 @@ const Command = ({
             return;
         }
 
-        if (command.type === "action") {
+        if (!command.args && args.length > 0) {
+            triggerError();
+            return;
+        }
+
+        if (command.type === "voidAction") {
             command.action(...args);
+        } else if (command.type === "action") {
+            addResponse(command.action(...args) as string);
         } else if (command.type === "text") {
             addResponse(command.content);
         }

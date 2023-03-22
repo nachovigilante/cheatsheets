@@ -1,9 +1,10 @@
 type CommandItem = {
-    type: "text" | "action";
+    type: "text" | "voidAction" | "action";
     content?: string;
-    action?: (...args: any[]) => void;
+    action?: ((...args: any[]) => void) | ((...args: any[]) => string);
     args?: string[];
     preventAdd?: boolean;
+    man: string;
 };
 
 type CommandList = {
@@ -13,7 +14,33 @@ type CommandList = {
 type CommandListFunction = (cheatsheets: any[], router: any) => CommandList;
 
 const useCommandList: CommandListFunction = (cheatsheets, router) => {
-    return {
+    const commands: CommandList = {
+        help: {
+            type: "text",
+            content: `
+                <span>Comandos disponibles:</span>
+                <br>
+                <ul class="list-none">
+                    <li>about</li>
+                    <li>clear</li>
+                    <li>code</li>
+                    <li>export</li>
+                    <li>github</li>
+                    <li>help</li>
+                    <li>ls</li>
+                    <li>open</li>
+                    <li>pwd</li>
+                    <li>shutdown</li>
+                </ul>
+            `,
+            man: `
+                <span>help</span>
+                <br>
+                <span>
+                    Muestra una lista de los comandos disponibles.
+                </span>
+            `,
+        },
         about: {
             type: "text",
             content: `
@@ -31,28 +58,45 @@ const useCommandList: CommandListFunction = (cheatsheets, router) => {
                         aportar algún cambio o un cheatsheet nuevo, es muy
                         importante que leas el README del repositorio.
                     </span>`,
-        },
-        help: {
-            type: "text",
-            content: "Comandos posibles: about, help, github, open, export",
+            man: `
+                <span>about</span>
+                <br>
+                <span>
+                    Muestra información sobre la web.
+                </span>
+            `,
         },
         github: {
-            type: "action",
+            type: "voidAction",
             action: () =>
                 window.open(
                     "https://github.com/nachovigilante/cheatsheets",
                     "_blank"
                 ),
+            man: `
+                <span>github</span>
+                <br>
+                <span>
+                    Abre el repositorio de la web en una nueva pestaña.
+                </span>
+            `,
         },
         open: {
-            type: "action",
+            type: "voidAction",
             action: (slug: string) => {
                 router.push(`/cheatsheet/${slug}`);
             },
             args: ["slug"],
+            man: `
+                <span>open [slug]</span>
+                <br>
+                <span>
+                    Abre el cheatsheet con el slug indicado.
+                </span>
+            `,
         },
         export: {
-            type: "action",
+            type: "voidAction",
             action: (slug: string) => {
                 const anchor = document.createElement("a");
                 anchor.href = `/download/${slug}.pdf`;
@@ -61,9 +105,16 @@ const useCommandList: CommandListFunction = (cheatsheets, router) => {
                 anchor.click();
             },
             args: ["slug"],
+            man: `
+                <span>export [slug]</span>
+                <br>
+                <span>
+                    Descarga el cheatsheet con el slug indicado.
+                </span>
+            `,
         },
         clear: {
-            type: "action",
+            type: "voidAction",
             action: () => {
                 // simulate a ctrl + l
                 const event = new KeyboardEvent("keydown", {
@@ -73,6 +124,13 @@ const useCommandList: CommandListFunction = (cheatsheets, router) => {
                 document.dispatchEvent(event);
             },
             preventAdd: true,
+            man: `
+                <span>clear</span>
+                <br>
+                <span>
+                    Limpia la terminal.
+                </span>
+            `,
         },
         ls: {
             type: "text",
@@ -85,12 +143,82 @@ const useCommandList: CommandListFunction = (cheatsheets, router) => {
                     }
                 </ul>
             `,
+            man: `
+                <span>ls</span>
+                <br>
+                <span>
+                    Muestra una lista de los cheatsheets disponibles.
+                </span>
+            `,
         },
         pwd: {
             type: "text",
             content: "tic://cheatsheets/",
+            man: `
+                <span>pwd</span>
+                <br>
+                <span>
+                    Muestra la ruta actual.
+                </span>
+            `,
+        },
+        code: {
+            type: "voidAction",
+            action: () => {
+                window.open(
+                    "https://vscode.dev/github/nachovigilante/cheatsheets",
+                    "_blank"
+                );
+            },
+            man: `
+                <span>code</span>
+                <br>
+                <span>
+                    Abre el repositorio de la web en VS Code.
+                </span>
+            `,
+        },
+        shutdown: {
+            type: "voidAction",
+            action: () => {
+                window.open(
+                    "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                    "_blank"
+                );
+            },
+            man: `
+                <span>shutdown</span>
+                <br>
+                <span>
+                    Apaga la terminal.
+                </span>
+            `,
+        },
+        man: {
+            type: "action",
+            action: (command: string) => {
+                console.log("AAAAAAAA");
+                const commandItemKey = Object.keys(commands).find(
+                    (c) => c === command
+                );
+                const commandItem = commands[commandItemKey];
+                if (commandItem) {
+                    return commandItem.man;
+                }
+                return "No se ha encontrado el comando indicado.";
+            },
+            args: ["command"],
+            man: `
+                <span>man [command]</span>
+                <br>
+                <span>
+                    Muestra la documentación del comando indicado.
+                </span>
+            `,
         },
     };
+
+    return commands;
 };
 
 export default useCommandList;

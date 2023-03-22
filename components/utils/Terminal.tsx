@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useReducer, useRef, useState } from "react";
+import { twMerge } from "tailwind-merge";
 import { CheatsheetType } from "../../pages";
 
 type TerminalProps = {
@@ -113,6 +114,7 @@ const Command = ({
     index,
     active,
     cheatsheets,
+    triggerError,
 }: {
     addCommand: () => void;
     clearCommands: () => void;
@@ -122,6 +124,7 @@ const Command = ({
     index: number;
     active: boolean;
     cheatsheets: CheatsheetType[];
+    triggerError: () => void;
 }) => {
     const router = useRouter();
 
@@ -202,8 +205,6 @@ const Command = ({
         const input = e.target as HTMLInputElement;
         let params = input.value.split(" ");
 
-        setText("");
-
         if (e.key === "Tab") {
             e.preventDefault();
             const value = input.value;
@@ -214,6 +215,8 @@ const Command = ({
                 input.value = command;
                 changeCommand(command);
                 setCurrentCommand(command);
+            } else {
+                setText("");
             }
         } else if (e.key === "Enter") {
             const value = input.value;
@@ -232,6 +235,8 @@ const Command = ({
                     }
                     if (!preventAdd) addCommand();
                 }
+            } else {
+                triggerError();
             }
         } else if (e.key === "ArrowUp") {
             e.preventDefault();
@@ -292,6 +297,7 @@ const Command = ({
 
 const Terminal = ({ cheatsheets }: TerminalProps) => {
     const [commands, setCommands] = useState<string[]>([""]);
+    const [error, setError] = useState(false);
     const addCommand = () => {
         setCommands([...commands, ""]);
     };
@@ -305,8 +311,27 @@ const Terminal = ({ cheatsheets }: TerminalProps) => {
         return commands[i];
     };
 
+    useEffect(() => {
+        let timeout: NodeJS.Timeout;
+        console.log("A");
+        if (error) {
+            timeout = setTimeout(() => {
+                setError(false);
+            }, 500);
+        }
+
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, [error]);
+
     return (
-        <div className="rounded-default border-3 border-[#504e54] bg-[#2322256d] backdrop-blur-xl overflow-hidden w-full h-[600px]">
+        <div
+            className={twMerge(
+                "transition-all duration-75 rounded-default border-3 border-[#504e54] bg-[#2322256d] backdrop-blur-xl overflow-hidden w-full h-[600px]",
+                error ? "error" : ""
+            )}
+        >
             <div className="bg-[#2a2831] font-space h-20 text-2xl flex items-center border-b-1 border-b-black">
                 <div className="flex gap-3 p-5 self-start">
                     <div className="bg-[#ff5f56] w-5 h-5 rounded-full" />
@@ -355,6 +380,7 @@ const Terminal = ({ cheatsheets }: TerminalProps) => {
                                     setCommands(newCommands);
                                 }}
                                 cheatsheets={cheatsheets}
+                                triggerError={() => setError(true)}
                             />
                         ))}
                     </div>

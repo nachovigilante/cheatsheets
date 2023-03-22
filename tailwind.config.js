@@ -38,6 +38,22 @@ module.exports = {
             backgroundSize: {
                 200: "200%",
             },
+            keyframes: {
+                shake: {
+                    "0%": {
+                        transform: "translateX(0)",
+                    },
+                    "50%": {
+                        transform: "translateX(10px)",
+                    },
+                    "100%": {
+                        transform: "translateX(0)",
+                    },
+                },
+            },
+            animation: {
+                shake: "shake 0.2s ease-in-out infinite",
+            },
         },
     },
     plugins: [],

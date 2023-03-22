@@ -35,6 +35,23 @@
     .fade-bottom {
         mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
     }
+
+    .error {
+        @apply text-red-500 border-red-500;
+        animation: error 0.15s ease-in-out infinite;
+
+        @keyframes error {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(5px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+    }
 }
 
 :root {

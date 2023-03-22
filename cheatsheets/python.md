@@ -237,7 +237,9 @@ print(lista) #[4,5,'x',9,11]
 Para agregar un elemento en algun posición específica de la lista se puede usar el método `insert`.
 
 ```python
-#Completar ejemplo de insert
+lista = [4,5,'x',9]
+lista.insert(1, "y")
+print(lista) #[4,'y',5,'x',9]
 ```
 
 Para sacar elementos de la lista, podemos usar el método `pop`, que toma como parámetro el índice que se desea eliminar.
@@ -251,7 +253,9 @@ print(lista) #[4,'x',9]
 Para sacar un elemento basado en su valor, se puede usar `remove`, que saca la primera aparición del elemento pasado por parámetro.
 
 ```python
-#Completar ejemplo de remove
+lista = [4,5,'x',9]
+lista.remove('x')
+print(lista) #[4,5,9]
 ```
 
 #### Longitud

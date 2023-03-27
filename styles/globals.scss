@@ -96,9 +96,11 @@ body {
     min-height: 100vh;
 
     /* Para los anchor scrolls */
-    scroll-padding-top: 100px;
+    scroll-padding-top: 150px;
     scroll-behavior: smooth;
     scrollbar-gutter: stable;
+
+    overflow-x: hidden;
 }
 
 a {

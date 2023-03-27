@@ -6,6 +6,14 @@ module.exports = {
         "./styles/**/*.{js,ts,jsx,tsx,scss,css}",
     ],
     theme: {
+        screens: {
+            sm: "500px",
+            md: "800px",
+            lg: "1000px",
+            xl: "1250px",
+            "2xl": "1450px",
+            "3xl": "1900px",
+        },
         fontFamily: {
             mono: ["Fira Code", "monospace"],
             space: ["Space Mono", "monospace"],

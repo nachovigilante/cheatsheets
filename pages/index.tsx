@@ -24,25 +24,27 @@ const Home: NextPage = ({ cheatsheets }: { cheatsheets: CheatsheetType[] }) => {
                 <Head>
                     <title>{"<TIC_Cheatsheets/>"}</title>
                 </Head>
-                <Section className="relative h-screen">
-                    <h1 className="flex gap-5 -mt-28 flex-col text-9xl font-raleway font-black w-full items-start relative z-20 drop-shadow-md">
-                        <span>TIC</span>
-                        <span className="underline underline-offset-[20px]">
-                            CHEATSHEETS
-                        </span>
-                    </h1>
-                    <a
-                        href="#terminal"
-                        className="mt-14 text-xl font-space font-semibold no-ligature bg-black/20 border px-4 py-2 rounded-lg self-start hover:bg-black/30"
-                    >
-                        {"> Ir a la terminal"}
-                    </a>
-                    <img
-                        src="/assets/images/notebook.png"
-                        className="absolute top-40 right-0 w-[800px] drop-shadow-notebook"
-                        alt="notebook"
-                    />
-                </Section>
+                <section className="flex justify-start items-center">
+                    <div className="relative h-[800px] flex flex-col justify-center z-20 items-start">
+                        <h1 className="flex gap-5 flex-col text-9xl relative z-20 font-raleway font-black w-full drop-shadow-md">
+                            <span>TIC</span>
+                            <span className="underline underline-offset-[20px]">
+                                CHEATSHEETS
+                            </span>
+                        </h1>
+                        <a
+                            href="#terminal"
+                            className="text-xl font-space font-semibold mt-20 relative z-20 no-ligature bg-black/20 border px-4 py-2 rounded-lg self-start hover:bg-black/30"
+                        >
+                            {"> Ir a la terminal"}
+                        </a>
+                        <img
+                            src="/assets/images/notebook.png"
+                            className="absolute top-30 left-[480px] w-[800px] drop-shadow-notebook"
+                            alt="notebook"
+                        />
+                    </div>
+                </section>
                 <Section className="my-40">
                     <Glassbox className="max-w-4xl">
                         <div className="flex justify-between">

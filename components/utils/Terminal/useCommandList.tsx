@@ -1,10 +1,14 @@
 type CommandItem = {
     type: "text" | "voidAction" | "action";
     content?: string;
-    action?: ((...args: any[]) => void) | ((...args: any[]) => string);
+    action?:
+        | ((...args: any[]) => void)
+        | ((...args: any[]) => string)
+        | ((...args: any[]) => boolean);
     args?: string[];
     preventAdd?: boolean;
     man: string;
+    usesFileNames?: boolean;
 };
 
 type CommandList = {
@@ -83,26 +87,35 @@ const useCommandList: CommandListFunction = (cheatsheets, router) => {
         },
         open: {
             type: "voidAction",
-            action: (slug: string) => {
-                router.push(`/cheatsheet/${slug}`);
+            action: (slug: string, validFileNames: string[]) => {
+                if (!validFileNames.includes(slug)) return false;
+
+                const link = slug.split(".")[0];
+                router.push(`/cheatsheet/${link}`);
+                return true;
             },
             args: ["slug"],
             man: `
-                <span>open [slug]</span>
+                <span>open [slug].md</span>
                 <br>
                 <span>
                     Abre el cheatsheet con el slug indicado.
                 </span>
             `,
+            usesFileNames: true,
         },
         export: {
             type: "voidAction",
-            action: (slug: string) => {
+            action: (slug: string, validFileNames: string[]) => {
+                if (!validFileNames.includes(slug)) return false;
+
+                const link = slug.split(".")[0];
                 const anchor = document.createElement("a");
-                anchor.href = `/download/${slug}.pdf`;
-                anchor.download = `${slug}.pdf`;
+                anchor.href = `/download/${link}.pdf`;
+                anchor.download = `${link}.pdf`;
                 document.body.appendChild(anchor);
                 anchor.click();
+                return true;
             },
             args: ["slug"],
             man: `
@@ -112,6 +125,7 @@ const useCommandList: CommandListFunction = (cheatsheets, router) => {
                     Descarga el cheatsheet con el slug indicado.
                 </span>
             `,
+            usesFileNames: true,
         },
         clear: {
             type: "voidAction",

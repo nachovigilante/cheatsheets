@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useContext, useRef, useState } from "react";
 import { TerminalContext } from "../../../contexts/TerminalContext";
 import { CheatsheetType } from "../../../pages";
@@ -18,6 +19,7 @@ const Command = ({
     const [copyCommand, setCopyCommand] = useState(index);
     const [text, setText] = useState(initialCommand);
     const [currentCommand, setCurrentCommand] = useState("");
+    const router = useRouter();
 
     const {
         triggerError,
@@ -27,7 +29,7 @@ const Command = ({
         clearCommands,
     } = useContext(TerminalContext);
 
-    const commandList = useCommandList(cheatsheets, index);
+    const commandList = useCommandList(cheatsheets, router);
     const containerRef = useRef<HTMLDivElement>(null);
 
     const addResponse = (content: string) => {
@@ -45,6 +47,33 @@ const Command = ({
             input.value = command;
             changeCommand(command, index);
             setCurrentCommand(command);
+        } else {
+            setText("");
+        }
+    };
+
+    const suggestFile = (input: HTMLInputElement) => {
+        const [commandName, ...args] = input.value.split(" ");
+        const command = commandList[commandName];
+
+        if (!command) {
+            triggerError();
+            return;
+        }
+
+        if (command.type !== "action" && command.type !== "voidAction") {
+            triggerError();
+            return;
+        }
+
+        const file =
+            (cheatsheets.find((f) => (f.slug + ".md").startsWith(args[0]))
+                ?.slug as string) + ".md";
+
+        if (file) {
+            input.value = `${commandName} ${file}`;
+            changeCommand(`${commandName} ${file}`, index);
+            setCurrentCommand(`${commandName} ${file}`);
         } else {
             setText("");
         }
@@ -70,14 +99,25 @@ const Command = ({
         }
 
         if (command.type === "voidAction") {
-            command.action(...args);
+            let result: boolean;
+            if (command.usesFileNames) {
+                result = command.action(
+                    ...args,
+                    cheatsheets.map((c) => c.slug + ".md")
+                ) as boolean;
+            } else {
+                const result = command.action(...args);
+            }
+            if (result) {
+                addCommand();
+            } else {
+                triggerError();
+            }
         } else if (command.type === "action") {
             addResponse(command.action(...args) as string);
         } else if (command.type === "text") {
             addResponse(command.content);
         }
-
-        addCommand();
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -85,7 +125,11 @@ const Command = ({
 
         if (e.key === "Tab") {
             e.preventDefault();
-            suggestCommand(input);
+            if (input.value.split(" ").length > 1) {
+                suggestFile(input);
+            } else {
+                suggestCommand(input);
+            }
         } else if (e.key === "Enter") {
             e.preventDefault();
             parseCommand(input.value);
@@ -138,7 +182,7 @@ const Command = ({
                 {currentCommand === "open" || currentCommand === "export" ? (
                     <AutocompleteFile
                         content={text}
-                        list={[...cheatsheets.map((c) => c.slug)]}
+                        list={[...cheatsheets.map((c) => c.slug + ".md")]}
                     />
                 ) : null}
             </div>

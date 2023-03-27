@@ -65,17 +65,17 @@ const Command = ({
             triggerError();
             return;
         }
-
+        
         const file =
-            (cheatsheets.find((f) => (f.slug + ".md").startsWith(args[0]))
-                ?.slug as string) + ".md";
+        (cheatsheets.find((f) => (f.slug + ".md").startsWith(args[0]))
+                ?.slug as string);
 
         if (file) {
-            input.value = `${commandName} ${file}`;
-            changeCommand(`${commandName} ${file}`, index);
-            setCurrentCommand(`${commandName} ${file}`);
+            input.value = `${commandName} ${file}.md`;
+            changeCommand(`${commandName} ${file}.md`, index);
+            setCurrentCommand(`${commandName} ${file}.md`);
         } else {
-            setText("");
+            triggerError();
         }
     };
 
@@ -106,7 +106,7 @@ const Command = ({
                     cheatsheets.map((c) => c.slug + ".md")
                 ) as boolean;
             } else {
-                const result = command.action(...args);
+                result = command.action(...args) as boolean;
             }
             if (result) {
                 addCommand();
@@ -115,8 +115,10 @@ const Command = ({
             }
         } else if (command.type === "action") {
             addResponse(command.action(...args) as string);
+            addCommand();
         } else if (command.type === "text") {
             addResponse(command.content);
+            addCommand();
         }
     };
 

@@ -2,16 +2,17 @@ import Link from "next/link";
 import Logo from "../../public/assets/icons/Logo.svg";
 import ThemeSwitch from "../utils/ThemeSwitch";
 import { useRouter } from "next/router";
+import { twMerge } from "tailwind-merge";
 
 const Header = () => {
     const { pathname } = useRouter();
 
     return (
-        <header className="py-4 pb-20 px-8 flex items-center justify-between fixed z-50 top-0 w-screen backdrop-blur-sm fade-bottom">
+        <header className="lg:pb-20 xl:px-8 px-4 py-4 pb-12 md:pb-14 md:px-5 md:py-6 flex items-center justify-between fixed z-50 top-0 w-screen backdrop-blur-sm fade-bottom">
             <Link href="/">
-                <a className="flex items-center no-underline gap-5">
-                    <Logo height="45    " />
-                    <h1 className="text-2xl select-none mt-1 font-space no-ligature">
+                <a className="flex items-center no-underline 3xl:gap-5 gap-2 md:gap-4">
+                    <Logo className="xl:h-[45px] h-[30px] md:h-[35px]" />
+                    <h1 className="xl:text-2xl text-base md:text-lg select-none 3xl:mt-1 font-space no-ligature">
                         {"<TIC_Cheatsheets/>"}
                     </h1>
                 </a>
@@ -21,7 +22,10 @@ const Header = () => {
                     href="https://github.com/nachovigilante/cheatsheets"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-8 h-8 bg-github bg-contain bg-no-repeat bg-center rounded-full mr-4"
+                    className={twMerge(
+                        "xl:w-8 xl:h-8 md:h-7 md:w-7 w-6 h-6 bg-github bg-contain bg-no-repeat bg-center rounded-full",
+                        pathname.startsWith("/cheatsheet") && "hidden"
+                    )}
                     aria-label="Repositorio en GitHub"
                 />
                 {pathname === "/cheatsheet/[slug]" ? <ThemeSwitch /> : null}

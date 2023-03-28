@@ -3,7 +3,7 @@ import matter from "gray-matter";
 import path from "path";
 import Head from "next/head";
 import "highlight.js/styles/github-dark.css";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import FloatingButton from "../../components/utils/FloatingButton";
 import { LoadingContext } from "../../contexts/LoadingContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
@@ -11,7 +11,6 @@ import router from "next/router";
 import hljs from "highlight.js";
 import marked from "marked-katex";
 import katex from "katex";
-import FloatingButtons from "../../components/layout/FloatingButtons";
 
 marked.setOptions({
     highlight: function (code, lang) {
@@ -43,8 +42,15 @@ const CheatsheetPage = ({
     const { setLoading } = useContext(LoadingContext);
     const { theme } = useContext(ThemeContext);
 
-    router.events.on("routeChangeStart", () => setLoading(true));
-    router.events.on("routeChangeComplete", () => setLoading(false));
+    useEffect(() => {
+        router.events.on("routeChangeStart", () => setLoading(true));
+        router.events.on("routeChangeComplete", () => setLoading(false));
+
+        return () => {
+            router.events.off("routeChangeStart", () => setLoading(true));
+            router.events.off("routeChangeComplete", () => setLoading(false));
+        };
+    }, []);
 
     console.log(slug);
 

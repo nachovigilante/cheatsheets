@@ -1,4 +1,5 @@
-import { useContext, useEffect } from "react";
+import Link from "next/link";
+import { useContext } from "react";
 import { twMerge } from "tailwind-merge";
 import {
     TerminalContext,
@@ -53,16 +54,17 @@ const Sidebar = ({ cheatsheets }: TerminalProps) => {
             </div>
             <ul className="list-none 2xl:w-60 xl:w-52 overflow-y-auto pb-10 pl-3 max-h-full fade-bottom-scroll">
                 {cheatsheets.map((c) => (
-                    <li
-                        key={c.slug}
-                        className="flex gap-2 items-center 2xl:text-xl xl:text-lg text-md py-1 px-2 hover:bg-[#2a2831] cursor-pointer"
-                    >
-                        <img
-                            src={`/assets/images/${c.slug}.svg`}
-                            alt={`${c.slug} logo`}
-                            className="xl:h-5 xl:w-5 h-4 w-4"
-                        />
-                        <span>{c.slug}.md</span>
+                    <li key={c.slug}>
+                        <Link href={`/cheatsheet/${c.slug}`}>
+                            <a className="flex gap-2 items-center 2xl:text-xl xl:text-lg text-md py-1 px-2 hover:bg-[#2a2831] cursor-pointer">
+                                <img
+                                    src={`/assets/images/${c.slug}.svg`}
+                                    alt={`${c.slug} logo`}
+                                    className="xl:h-5 xl:w-5 h-4 w-4"
+                                />
+                                <span>{c.slug}.md</span>
+                            </a>
+                        </Link>
                     </li>
                 ))}
             </ul>

@@ -8,7 +8,7 @@ const Header = () => {
     const { pathname } = useRouter();
 
     return (
-        <header className="lg:pb-20 xl:px-8 px-4 py-4 pb-12 md:pb-14 md:px-5 md:py-6 flex items-center justify-between fixed z-50 top-0 w-screen backdrop-blur-sm fade-bottom">
+        <header className="lg:pb-20 xl:px-8 px-4 py-4 pb-12 md:pb-14 md:px-5 md:py-6 flex items-center justify-between absolute z-50 top-0 w-screen backdrop-blur-sm fade-bottom">
             <Link href="/">
                 <a className="flex items-center no-underline 3xl:gap-5 gap-2 md:gap-4">
                     <Logo className="xl:h-[45px] h-[30px] md:h-[35px]" />

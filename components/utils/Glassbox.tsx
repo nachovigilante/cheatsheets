@@ -3,15 +3,22 @@ import { twMerge } from "tailwind-merge";
 const Glassbox = ({
     children,
     className,
+    containerClassName,
     ...props
 }: {
     children: React.ReactNode;
     className?: string;
+    containerClassName?: string;
     props?: any;
 }) => {
     return (
         <div className={twMerge(className, "glass")} {...props}>
-            <div className="glass-container py-10 px-9 flex flex-col justify-between gap-5">
+            <div
+                className={twMerge(
+                    containerClassName,
+                    "glass-container flex flex-col justify-between"
+                )}
+            >
                 {children}
             </div>
         </div>
@@ -28,7 +35,7 @@ export const TitledGlassBox = ({
     className?: string;
 }) => {
     return (
-        <Glassbox className={twMerge(className, "flex flex-col gap-5")}>
+        <Glassbox className={twMerge(className, "flex flex-col")}>
             <h1 className="text-3xl font-medium font-space no-ligature">
                 {title}
             </h1>

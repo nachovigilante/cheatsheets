@@ -16,7 +16,7 @@ const Console = ({ cheatsheets }: TerminalProps) => {
 
     return (
         <div className="flex-grow flex flex-col px-1 pb-3 pt-1">
-            <div className="p-5 flex flex-col items-start gap-3 overflow-y-scroll terminal-scroll h-full">
+            <div className="2xl:p-5 xl:p-4 p-3 flex flex-col items-start 2xl:gap-3 gap-2 overflow-y-scroll overflow-x-hidden terminal-scroll h-full">
                 {commands.map((c, i) => (
                     <Command
                         key={i}
@@ -50,21 +50,21 @@ const Window = ({ cheatsheets }: TerminalProps) => {
                 <div className="flex-grow text-center">tic://cheatsheets</div>
             </div>
             <div className="flex 2xl:h-[520px] h-[430px]">
-                <div className="bg-[#242229] p-5 font-space pb-16">
+                <div className="bg-[#242229] xl:p-5 p-4 font-space pb-16">
                     <div className="2xl:text-xl text-lg 2xl:mb-3 mb-2">
                         <i className="fa-solid fa-chevron-down mr-3"></i>
                         CHEATSHEETS
                     </div>
-                    <ul className="list-none w-60 overflow-y-auto pb-10 pl-3 max-h-full fade-bottom-scroll">
+                    <ul className="list-none 2xl:w-60 xl:w-52 overflow-y-auto pb-10 pl-3 max-h-full fade-bottom-scroll">
                         {cheatsheets.map((c) => (
                             <li
                                 key={c.slug}
-                                className="flex gap-2 items-center 2xl:text-xl text-lg py-1 px-2 hover:bg-[#2a2831] cursor-pointer"
+                                className="flex gap-2 items-center 2xl:text-xl xl:text-lg text-md py-1 px-2 hover:bg-[#2a2831] cursor-pointer"
                             >
                                 <img
                                     src={`/assets/images/${c.slug}.svg`}
                                     alt={`${c.slug} logo`}
-                                    className="h-5 w-5"
+                                    className="xl:h-5 xl:w-5 h-4 w-4"
                                 />
                                 <span>{c.slug}.md</span>
                             </li>

@@ -84,14 +84,25 @@
         /* Webkit / Blink */
         &::-webkit-scrollbar {
             width: var(--scrollbar-width);
+            opacity: 0;
         }
 
         &::-webkit-scrollbar-thumb {
             border-radius: 9999px; /* always round */
+            opacity: 0;
         }
 
         &::-webkit-scrollbar-track {
             background-color: transparent;
+        }
+
+        /* Scrollbar hover */
+        &:hover::-webkit-scrollbar {
+            opacity: 1;
+        }
+
+        &:hover::-webkit-scrollbar-thumb {
+            opacity: 1;
         }
     }
 

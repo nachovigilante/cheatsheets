@@ -158,7 +158,7 @@ const Command = ({
 
     return (
         <div
-            className="flex gap-3 items-start text-xl py-[2px] font-mono flex-col justify-center relative"
+            className="flex 2xl:gap-3 xl:gap-2 gap-1 items-start 2xl:text-xl xl:text-lg text-md py-[2px] font-mono flex-col justify-center relative"
             ref={containerRef}
         >
             <div className="text-[#ED57EC] font-medium">

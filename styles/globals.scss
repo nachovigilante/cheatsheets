@@ -106,6 +106,12 @@
         }
     }
 
+    .thin-scroll {
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+    }
+
     // .fade-top-scroll {
     //     --mask-image-content: linear-gradient(
     //         to bottom,

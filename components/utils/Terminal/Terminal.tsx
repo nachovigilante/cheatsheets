@@ -16,7 +16,7 @@ const Console = ({ cheatsheets }: TerminalProps) => {
 
     return (
         <div className="flex-grow flex flex-col px-1 pb-3 pt-1">
-            <div className="2xl:p-5 xl:p-4 p-3 flex flex-col items-start 2xl:gap-3 gap-2 overflow-y-scroll overflow-x-hidden terminal-scroll h-full">
+            <div className="thin-scroll 2xl:p-5 xl:p-4 p-3 flex flex-col items-start 2xl:gap-3 gap-2 overflow-y-scroll overflow-x-hidden terminal-scroll h-full">
                 {commands.map((c, i) => (
                     <Command
                         key={i}
@@ -31,6 +31,45 @@ const Console = ({ cheatsheets }: TerminalProps) => {
     );
 };
 
+const WindowHeader = () => {
+    return (
+        <div className="bg-[#2a2831] font-space 2xl:h-20 h-[70px] md:text-2xl sm:text-xl text-lg flex items-center border-b-1 border-b-black">
+            <div className="flex md:gap-3 gap-2 2xl:p-5 p-4 self-start">
+                <div className="bg-[#ff5f56] 2xl:w-5 2xl:h-5 md:w-4 md:h-4 h-3 w-3 rounded-full" />
+                <div className="bg-[#ffbd2e] 2xl:w-5 2xl:h-5 md:w-4 md:h-4 h-3 w-3 rounded-full" />
+                <div className="bg-[#27c93f] 2xl:w-5 2xl:h-5 md:w-4 md:h-4 h-3 w-3 rounded-full" />
+            </div>
+            <div className="flex-grow text-center">tic://cheatsheets</div>
+        </div>
+    );
+};
+
+const Sidebar = ({ cheatsheets }: TerminalProps) => {
+    return (
+        <div className="bg-[#242229] xl:p-5 p-4 font-space pb-16 hidden md:block">
+            <div className="2xl:text-xl text-lg 2xl:mb-3 mb-2">
+                <i className="fa-solid fa-chevron-down mr-3"></i>
+                CHEATSHEETS
+            </div>
+            <ul className="list-none 2xl:w-60 xl:w-52 overflow-y-auto pb-10 pl-3 max-h-full fade-bottom-scroll">
+                {cheatsheets.map((c) => (
+                    <li
+                        key={c.slug}
+                        className="flex gap-2 items-center 2xl:text-xl xl:text-lg text-md py-1 px-2 hover:bg-[#2a2831] cursor-pointer"
+                    >
+                        <img
+                            src={`/assets/images/${c.slug}.svg`}
+                            alt={`${c.slug} logo`}
+                            className="xl:h-5 xl:w-5 h-4 w-4"
+                        />
+                        <span>{c.slug}.md</span>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+};
+
 const Window = ({ cheatsheets }: TerminalProps) => {
     const { error } = useContext(TerminalContext);
 
@@ -41,36 +80,9 @@ const Window = ({ cheatsheets }: TerminalProps) => {
                 error ? "error" : ""
             )}
         >
-            <div className="bg-[#2a2831] font-space 2xl:h-20 h-[70px] text-2xl flex items-center border-b-1 border-b-black">
-                <div className="flex gap-3 2xl:p-5 p-4 self-start">
-                    <div className="bg-[#ff5f56] 2xl:w-5 2xl:h-5 w-4 h-4 rounded-full" />
-                    <div className="bg-[#ffbd2e] 2xl:w-5 2xl:h-5 w-4 h-4 rounded-full" />
-                    <div className="bg-[#27c93f] 2xl:w-5 2xl:h-5 w-4 h-4 rounded-full" />
-                </div>
-                <div className="flex-grow text-center">tic://cheatsheets</div>
-            </div>
+            <WindowHeader />
             <div className="flex 2xl:h-[520px] h-[430px]">
-                <div className="bg-[#242229] xl:p-5 p-4 font-space pb-16">
-                    <div className="2xl:text-xl text-lg 2xl:mb-3 mb-2">
-                        <i className="fa-solid fa-chevron-down mr-3"></i>
-                        CHEATSHEETS
-                    </div>
-                    <ul className="list-none 2xl:w-60 xl:w-52 overflow-y-auto pb-10 pl-3 max-h-full fade-bottom-scroll">
-                        {cheatsheets.map((c) => (
-                            <li
-                                key={c.slug}
-                                className="flex gap-2 items-center 2xl:text-xl xl:text-lg text-md py-1 px-2 hover:bg-[#2a2831] cursor-pointer"
-                            >
-                                <img
-                                    src={`/assets/images/${c.slug}.svg`}
-                                    alt={`${c.slug} logo`}
-                                    className="xl:h-5 xl:w-5 h-4 w-4"
-                                />
-                                <span>{c.slug}.md</span>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                <Sidebar cheatsheets={cheatsheets} />
                 <Console cheatsheets={cheatsheets} />
             </div>
         </div>

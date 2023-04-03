@@ -95,7 +95,6 @@ const Home: NextPage = ({ cheatsheets }: { cheatsheets: CheatsheetType[] }) => {
                     <Terminal cheatsheets={cheatsheets} />
                 </Section>
             </div>
-            <Background />
         </>
     );
 };

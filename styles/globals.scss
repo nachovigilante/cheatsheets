@@ -25,6 +25,183 @@
             rgba(255, 255, 255, 0) 62.6%
         );
     }
+
+    .cheatsheet {
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            padding: 10px 0 5px;
+        }
+
+        h2 {
+            @apply border-b border-gray-500 mb-5;
+        }
+
+        ul {
+            @apply pl-7;
+        }
+
+        p {
+            margin: 15px 0px 10px;
+        }
+
+        .result,
+        code {
+            @apply p-5 rounded-xl mb-5;
+
+            h2 {
+                border: none;
+                margin: initial;
+            }
+
+            ul,
+            ol {
+                @apply pl-5;
+
+                li {
+                    margin: initial;
+                }
+            }
+
+            p {
+                margin: initial;
+            }
+
+            a {
+                &:link {
+                    @apply text-blue-500 underline;
+                }
+
+                &:visited {
+                    @apply text-purple-500 underline;
+                }
+
+                &:hover {
+                    font-weight: initial;
+                }
+            }
+        }
+
+        .result {
+            @apply bg-doc border border-gray-500;
+            font-family: initial;
+
+            * {
+                @apply text-doc-font;
+                background-color: initial;
+            }
+        }
+
+        .css-result {
+            @apply bg-doc border border-gray-500 rounded-xl py-1 px-5 mb-5;
+            font-family: initial;
+        }
+
+        code {
+            @apply rounded-[3px] text-doc bg-[#0d1117] py-[2px] px-1;
+        }
+
+        pre {
+            @apply rounded-lg bg-[#0d1117] p-3 my-3 my-0 overflow-x-auto;
+
+            &::-webkit-scrollbar {
+                height: 12px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: rgba(0, 0, 0, 0.2);
+                border-radius: 10px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                height: 10px;
+                background: rgb(44, 42, 42);
+            }
+
+            &::-webkit-scrollbar-thumb:hover {
+                background: rgb(44, 42, 42);
+            }
+
+            code {
+                padding: 0;
+            }
+        }
+
+        a {
+            color: var(--doc-link-color);
+            font-weight: 500;
+
+            &:hover {
+                font-weight: 600;
+                text-decoration: underline;
+            }
+        }
+
+        table {
+            border-collapse: collapse;
+            border-radius: 10px;
+            border-style: hidden; /* hide standard table (collapsed) border */
+            box-shadow: 0 0 0 1px #666; /* this draws the table border  */
+
+            th,
+            td {
+                padding: 7px 15px;
+                border-right: 1px solid #666;
+
+                &:last-child {
+                    border-right: none;
+                }
+            }
+
+            thead,
+            thead tr {
+                background-color: #666;
+                color: #fff;
+                font-weight: 500;
+                border-radius: 10px 10px 0 0;
+
+                th:first-child {
+                    border-top-left-radius: 10px;
+                }
+
+                th:last-child {
+                    border-top-right-radius: 10px;
+                }
+            }
+        }
+        // @media screen and (max-width: 1100px) {
+        //     border-radius: 0;
+        //     margin-bottom: 0;
+        //     margin-top: var(--header-height);
+        // }
+    }
+
+    .dark {
+        background-color: var(--dark-doc-bg-color);
+        color: var(--dark-doc-font-color);
+
+        h1 {
+            background-color: var(--dark-doc-bg-color);
+            color: var(--dark-doc-font-color);
+        }
+
+        .cheatsheet {
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                color: var(--dark-doc-font-color);
+            }
+
+            a {
+                color: var(--dark-doc-link-color);
+            }
+        }
+    }
 }
 
 @layer utilities {

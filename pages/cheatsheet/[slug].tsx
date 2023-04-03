@@ -11,6 +11,7 @@ import router from "next/router";
 import hljs from "highlight.js";
 import marked from "marked-katex";
 import katex from "katex";
+import { twMerge } from "tailwind-merge";
 
 marked.setOptions({
     highlight: function (code, lang) {
@@ -52,23 +53,33 @@ const CheatsheetPage = ({
         };
     }, []);
 
-    console.log(slug);
+    // console.log(slug);
 
     return (
         <>
             <Head>
                 <title>{title}</title>
             </Head>
-            <div className={["doc", theme].join(" ")}>
-                <h1>{title}</h1>
+            <div
+                className={twMerge(
+                    theme === "dark" ? "bg-dark-doc dark" : "bg-doc",
+                    "text-doc-font xl:rounded-xl rounded-none m-auto xl:mb-20 mb-0 max-w-[1250px] pt-0 px-12 py-8 shadow-xl mt-32 relative z-30"
+                )}
+            >
+                <h1 className="px-10 py-3 m-auto my-0 max-w-full text-center select-none font-bold text-2xl">
+                    {title}
+                </h1>
                 <div
-                    className="cheatsheet"
+                    className={twMerge(
+                        theme === "dark" && "dark",
+                        "cheatsheet"
+                    )}
                     dangerouslySetInnerHTML={{
                         __html: marked(content),
                     }}
                 />
             </div>
-            <div className="fixed bottom-10 right-12 z-10 flex justify-center items-center gap-3 bg-transparent">
+            <div className="fixed xl:bottom-10 xl:right-12 bottom-4 right-4 z-50 flex justify-center items-center xl:gap-3 gap-2 bg-transparent">
                 <FloatingButton
                     onClick={() => window.scrollTo(0, 0)}
                     ariaLabel="Scroll to the top"

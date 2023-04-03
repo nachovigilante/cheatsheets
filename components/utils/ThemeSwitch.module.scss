@@ -1,39 +1,6 @@
 .switch {
     --size: 25px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    background-color: transparent;
 
-    .switch-body {
-        height: var(--size);
-        width: calc(var(--size) * 2);
-        border-radius: var(--size);
-        background-color: transparent;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        overflow: hidden;
-
-        .light,
-        .dark {
-            height: 100%;
-            transition: flex-grow 0.3s ease;
-        }
-
-        .light {
-            border-radius: 0px 15px 15px 0px;
-            flex-grow: 1;
-            background-color: #e2e2e2;
-        }
-        
-        .dark {
-            border-radius: 15px 0px 0px 15px;
-            flex-grow: 0;
-            width: calc(var(--size) * 0.5);
-            background-color: #0c043f;
-        }
-    }
 
     .switch-circle {
         width: calc(var(--size) + 3px);

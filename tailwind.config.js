@@ -31,6 +31,12 @@ module.exports = {
                 accent: "#e61366",
                 "accent-hover": "#be1559",
                 "accent-active": "#a20f4e",
+                doc: "#e2e2e2",
+                "dark-doc": "#170c60",
+                "doc-link": "#3c3cff",
+                "dark-doc-link": "#e61366",
+                "doc-font": "#282828",
+                "dark-doc-font": "#e2e2e2",
             },
             boxShadow: {
                 default: "0px 0px 15px 0px rgba(0, 0, 0, 0.3)",

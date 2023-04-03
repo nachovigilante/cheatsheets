@@ -1,7 +1,7 @@
 import { twMerge } from "tailwind-merge";
 
 const defaultClassName =
-    "bg-accent rounded-full w-16 h-16 flex items-center justify-center text-white text-2xl shadow-default transition-all duration-150 ease-in-out cursor-pointer border-none hover:bg-accent-hover active:bg-accent-active focus:outline-none";
+    "bg-accent rounded-full xl:w-16 xl:h-16 w-12 h-12 flex items-center justify-center text-white xl:text-2xl text-xl shadow-default transition-all duration-150 ease-in-out cursor-pointer border-none hover:bg-accent-hover active:bg-accent-active focus:outline-none";
 
 const FloatingButton = ({
     className,

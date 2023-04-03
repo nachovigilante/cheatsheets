@@ -20,8 +20,8 @@ const ThemeSwitch = () => {
             <div className="h-6 w-12 rounded-full bg-transparent flex items-center justify-between overflow-hidden shadow-sm">
                 <div
                     className={twMerge(
-                        "h-full transition-[flex-grow_0.3s_ease] rounded-[15px_0px_0px_15px] flex-grow-0 bg-[#0c043f]",
-                        theme === "dark" && "flex-grow"
+                        theme !== "dark" && "flex-grow-0",
+                        "h-full transition-[flex-grow_0.3s_ease] rounded-[15px_0px_0px_15px] flex-grow bg-[#0c043f]"
                     )}
                 />
                 <div
@@ -38,9 +38,19 @@ const ThemeSwitch = () => {
                 )}
             >
                 {theme === "dark" ? (
-                    <MoonIcon height="17px" width="17px" viewBox="0 0 25 25" />
+                    <MoonIcon
+                        height="17px"
+                        width="17px"
+                        viewBox="0 0 25 25"
+                        fill="#e2e2e2"
+                    />
                 ) : (
-                    <SunIcon height="17px" width="17px" viewBox="1 -1 25 25" fill="white" />
+                    <SunIcon
+                        height="17px"
+                        width="17px"
+                        viewBox="1 -1 25 25"
+                        fill="#170c60"
+                    />
                 )}
             </div>
         </div>

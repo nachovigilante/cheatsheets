@@ -131,12 +131,10 @@
         }
 
         a {
-            color: var(--doc-link-color);
-            font-weight: 500;
+            @apply text-doc-link font-medium;
 
             &:hover {
-                font-weight: 600;
-                text-decoration: underline;
+                @apply font-semibold underline;
             }
         }
 
@@ -158,10 +156,7 @@
 
             thead,
             thead tr {
-                background-color: #666;
-                color: #fff;
-                font-weight: 500;
-                border-radius: 10px 10px 0 0;
+                @apply bg-gray-500 text-white font-medium rounded-t-xl;
 
                 th:first-child {
                     border-top-left-radius: 10px;
@@ -189,16 +184,8 @@
         }
 
         .cheatsheet {
-            h2,
-            h3,
-            h4,
-            h5,
-            h6 {
-                color: var(--dark-doc-font-color);
-            }
-
             a {
-                color: var(--dark-doc-link-color);
+                @apply text-dark-doc-link;
             }
         }
     }

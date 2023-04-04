@@ -17,11 +17,11 @@ const ThemeSwitch = () => {
                 setTheme((theme) => (theme === "light" ? "dark" : "light"));
             }}
         >
-            <div className="h-6 w-12 rounded-full bg-transparent flex items-center justify-between overflow-hidden shadow-sm">
+            <div className="h-6 w-12 rounded-full bg-transparent flex items-center justify-between overflow-hidden shadow-lg shadow-black">
                 <div
                     className={twMerge(
                         theme !== "dark" && "flex-grow-0",
-                        "h-full transition-[flex-grow_0.3s_ease] rounded-[15px_0px_0px_15px] flex-grow bg-[#0c043f]"
+                        "h-full transition-[flex-grow_0.3s_ease] rounded-[15px_0px_0px_15px] flex-grow bg-dark-doc"
                     )}
                 />
                 <div
@@ -33,7 +33,7 @@ const ThemeSwitch = () => {
             </div>
             <div
                 className={twMerge(
-                    "w-7 h-7 rounded-full absolute ml-0 bg-doc transition-[margin_0.3s_ease] flex items-center justify-center shadow-sm",
+                    "w-7 h-7 rounded-full absolute ml-0 bg-doc transition-[margin_0.3s_ease] flex items-center justify-center shadow-lg shadow-black",
                     theme === "dark" && "ml-6 bg-dark-doc"
                 )}
             >

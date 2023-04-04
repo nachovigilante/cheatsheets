@@ -29,7 +29,7 @@ const Command = ({
         clearCommands,
     } = useContext(TerminalContext);
 
-    const commandList = useCommandList(cheatsheets, router);
+    const commandList = useCommandList(cheatsheets, router, clearCommands);
     const containerRef = useRef<HTMLDivElement>(null);
 
     const addResponse = (content: string) => {
@@ -65,10 +65,10 @@ const Command = ({
             triggerError();
             return;
         }
-        
-        const file =
-        (cheatsheets.find((f) => (f.slug + ".md").startsWith(args[0]))
-                ?.slug as string);
+
+        const file = cheatsheets.find((f) =>
+            (f.slug + ".md").startsWith(args[0])
+        )?.slug as string;
 
         if (file) {
             input.value = `${commandName} ${file}.md`;
@@ -109,7 +109,7 @@ const Command = ({
                 result = command.action(...args) as boolean;
             }
             if (result) {
-                addCommand();
+                if (!command.preventAdd) addCommand();
             } else {
                 triggerError();
             }

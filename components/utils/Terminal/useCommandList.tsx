@@ -15,9 +15,25 @@ type CommandList = {
     [key: string]: CommandItem;
 };
 
-type CommandListFunction = (cheatsheets: any[], router: any) => CommandList;
+type CommandListFunction = (
+    cheatsheets: any[],
+    router: any,
+    clearCommands: () => void
+) => CommandList;
 
-const useCommandList: CommandListFunction = (cheatsheets, router) => {
+const useCommandList: CommandListFunction = (
+    cheatsheets,
+    router,
+    clearCommands
+) => {
+    const openFile = (slug: string, validFileNames: string[]) => {
+                if (!validFileNames.includes(slug)) return false;
+
+                const link = slug.split(".")[0];
+                router.push(`/cheatsheet/${link}`);
+                return true;
+            }
+
     const commands: CommandList = {
         help: {
             type: "text",
@@ -25,17 +41,19 @@ const useCommandList: CommandListFunction = (cheatsheets, router) => {
                 <span>Comandos disponibles:</span>
                 <br>
                 <ul class="list-none">
-                    <li>about</li>
-                    <li>clear</li>
-                    <li>code</li>
-                    <li>export</li>
-                    <li>github</li>
-                    <li>help</li>
-                    <li>ls</li>
-                    <li>open</li>
-                    <li>pwd</li>
-                    <li>shutdown</li>
+                    <li class="pl-5">- about</li>
+                    <li class="pl-5">- cls</li>
+                    <li class="pl-5">- code</li>
+                    <li class="pl-5">- export</li>
+                    <li class="pl-5">- github</li>
+                    <li class="pl-5">- help</li>
+                    <li class="pl-5">- ls</li>
+                    <li class="pl-5">- open</li>
+                    <li class="pl-5">- pwd</li>
+                    <li class="pl-5">- shutdown</li>
                 </ul>
+                <br>
+                <span>Para saber cómo usarlos y qué hacen, podes utilizar 'man [comando]'</span>
             `,
             man: `
                 <span>help</span>
@@ -87,19 +105,26 @@ const useCommandList: CommandListFunction = (cheatsheets, router) => {
         },
         open: {
             type: "voidAction",
-            action: (slug: string, validFileNames: string[]) => {
-                if (!validFileNames.includes(slug)) return false;
-
-                const link = slug.split(".")[0];
-                router.push(`/cheatsheet/${link}`);
-                return true;
-            },
+            action: openFile,
             args: ["slug"],
             man: `
                 <span>open [slug].md</span>
                 <br>
                 <span>
-                    Abre el cheatsheet con el slug indicado.
+                    Abre el cheatsheet con el slug indicado (igual que cat).
+                </span>
+            `,
+            usesFileNames: true,
+        },
+        cat: {
+            type: "voidAction",
+            action: openFile,
+            args: ["slug"],
+            man: `
+                <span>cat [slug].md</span>
+                <br>
+                <span>
+                    Abre el cheatsheet con el slug indicado (igual que open).
                 </span>
             `,
             usesFileNames: true,
@@ -127,19 +152,15 @@ const useCommandList: CommandListFunction = (cheatsheets, router) => {
             `,
             usesFileNames: true,
         },
-        clear: {
+        cls: {
             type: "voidAction",
             action: () => {
-                // simulate a ctrl + l
-                const event = new KeyboardEvent("keydown", {
-                    ctrlKey: true,
-                    key: "l",
-                });
-                document.dispatchEvent(event);
+                clearCommands();
+                return true;
             },
             preventAdd: true,
             man: `
-                <span>clear</span>
+                <span>cls</span>
                 <br>
                 <span>
                     Limpia la terminal.

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { twMerge } from "tailwind-merge";
 import {
     TerminalContext,

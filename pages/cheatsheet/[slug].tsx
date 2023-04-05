@@ -63,7 +63,7 @@ const CheatsheetPage = ({
             <div
                 className={twMerge(
                     theme === "dark" ? "bg-dark-doc dark" : "bg-doc",
-                    "text-doc-font xl:rounded-xl rounded-none m-auto xl:mb-20 mb-0 max-w-[1250px] pt-0 px-12 py-8 shadow-xl mt-32 relative z-30"
+                    "text-doc-font xl:rounded-xl rounded-none m-auto xl:mb-20 mb-0 max-w-[1250px] pt-0 px-12 py-8 shadow-xl xl:mt-32 md:mt-20 mt-16 relative z-30"
                 )}
             >
                 <h1 className="px-10 py-3 m-auto my-0 max-w-full text-center select-none font-bold text-2xl">

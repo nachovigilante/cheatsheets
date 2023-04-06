@@ -176,6 +176,9 @@ const Command = ({
                     autoFocus={active}
                     disabled={!active}
                     defaultValue={initialCommand}
+                    autoCapitalize="off"
+                    autoComplete="off"
+                    autoCorrect="off"
                 />
                 <AutocompleteCommand
                     content={text}

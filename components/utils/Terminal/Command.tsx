@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { TerminalContext } from "../../../contexts/TerminalContext";
 import { CheatsheetType } from "../../../pages";
 import { AutocompleteCommand, AutocompleteFile } from "./Autocomplete";
@@ -43,6 +43,7 @@ const Command = ({
         const command = Object.keys(commandList).find((c) =>
             c.startsWith(input.value)
         );
+
         if (command) {
             input.value = command;
             changeCommand(command, index);
@@ -132,6 +133,15 @@ const Command = ({
             } else {
                 suggestCommand(input);
             }
+        } else if (e.code == "Space") {
+            const command = Object.keys(commandList).find((c) =>
+                c.startsWith(input.value.split(" ")[0])
+            );
+
+            if (command) {
+                changeCommand(command, index);
+                setCurrentCommand(command);
+            }
         } else if (e.key === "Enter") {
             e.preventDefault();
             parseCommand(input.value);
@@ -184,7 +194,9 @@ const Command = ({
                     content={text}
                     list={Object.keys(commandList)}
                 />
-                {currentCommand === "open" || currentCommand === "export" ? (
+                {currentCommand === "open" ||
+                currentCommand === "export" ||
+                currentCommand === "cat" ? (
                     <AutocompleteFile
                         content={text}
                         list={[...cheatsheets.map((c) => c.slug + ".md")]}

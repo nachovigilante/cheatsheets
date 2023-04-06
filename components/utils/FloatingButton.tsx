@@ -21,7 +21,7 @@ const FloatingButton = ({
     return link ? (
         <a
             href={link}
-            className={twMerge(className, defaultClassName)}
+            className={twMerge(className, defaultClassName, "floating-button")}
             aria-label={ariaLabel}
             download={download}
         >
@@ -29,7 +29,7 @@ const FloatingButton = ({
         </a>
     ) : (
         <button
-            className={twMerge(className, defaultClassName)}
+            className={twMerge(className, defaultClassName, "floating-button")}
             onClick={onClick}
             aria-label={ariaLabel}
         >

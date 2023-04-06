@@ -23,6 +23,7 @@ const Command = ({
 
     const {
         triggerError,
+        errorMsg,
         addCommand,
         changeCommand,
         repeatCommand,
@@ -203,6 +204,9 @@ const Command = ({
                     />
                 ) : null}
             </div>
+            {errorMsg && active && (
+                <div className="text-red-500 font-normal">{errorMsg}</div>
+            )}
         </div>
     );
 };

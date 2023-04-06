@@ -50,6 +50,7 @@ const useCommandList: CommandListFunction = (
                     <li class="pl-5">- ls</li>
                     <li class="pl-5">- open</li>
                     <li class="pl-5">- pwd</li>
+                    <li class="pl-5">- man</li>
                     <li class="pl-5">- shutdown</li>
                 </ul>
                 <br>

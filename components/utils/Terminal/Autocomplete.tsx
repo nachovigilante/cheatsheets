@@ -1,4 +1,6 @@
-import { useEffect, useReducer, useState } from "react";
+import { useContext, useEffect, useReducer, useState } from "react";
+import { TerminalContext } from "../../../contexts/TerminalContext";
+import { twMerge } from "tailwind-merge";
 
 export type AutocompleteType = {
     hidden: string;
@@ -13,7 +15,10 @@ type AutocompleteComponentType = {
 
 const autocompleteReducer = (
     state: AutocompleteType,
-    action: { type: string; payload: { content: string; length: number } }
+    action: {
+        type: "SET" | "CLEAR";
+        payload: { content: string; length: number };
+    }
 ) => {
     switch (action.type) {
         case "SET":
@@ -40,6 +45,8 @@ export const AutocompleteCommand = ({
             visible: "",
         }
     );
+
+    const { error } = useContext(TerminalContext);
 
     useEffect(() => {
         if (content === "")
@@ -69,7 +76,9 @@ export const AutocompleteCommand = ({
                 {padding}
                 {autocompleteValue.hidden}
             </span>
-            <span className="absolute text-white/40">
+            <span
+                className={twMerge("absolute text-white/40", error && "hidden")}
+            >
                 {autocompleteValue.visible}
             </span>
         </>

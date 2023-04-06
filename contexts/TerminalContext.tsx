@@ -1,14 +1,9 @@
-import {
-    createContext,
-    useState,
-    Dispatch,
-    SetStateAction,
-    useEffect,
-} from "react";
+import { createContext, useState, useEffect } from "react";
 
 type TerminalContextType = {
     error: boolean;
     triggerError: () => void;
+    errorMsg: string;
     addCommand: () => void;
     changeCommand: (newCommand: string, i: number) => void;
     repeatCommand: (i: number) => string;
@@ -27,9 +22,10 @@ export const TerminalProvider = ({
 }) => {
     const [commands, setCommands] = useState([""]);
     const [error, setError] = useState(false);
-
+    const [errorMsg, setErrorMsg] = useState("");
     const addCommand = () => {
         setCommands([...commands, ""]);
+        setErrorMsg("");
     };
 
     const clearCommands = () => {
@@ -63,6 +59,9 @@ export const TerminalProvider = ({
 
     const triggerError = () => {
         setError(true);
+        setErrorMsg(
+            "Comando no existente. Escriba 'help' para ver los comandos disponibles."
+        );
     };
 
     return (
@@ -70,6 +69,7 @@ export const TerminalProvider = ({
             <TerminalContext.Provider
                 value={{
                     error,
+                    errorMsg,
                     triggerError,
                     addCommand,
                     changeCommand,

@@ -13,6 +13,7 @@ const Header = () => {
                     <img
                         src="/assets/icons/Logo.svg"
                         className="xl:h-[45px] h-[30px] md:h-[35px]"
+                        alt="Logo"
                     />
                     <h1 className="xl:text-2xl text-base md:text-lg select-none 3xl:mt-1 font-space no-ligature">
                         {"<TIC_Cheatsheets/>"}

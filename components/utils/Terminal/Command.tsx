@@ -190,6 +190,8 @@ const Command = ({
                     autoCapitalize="off"
                     autoComplete="off"
                     autoCorrect="off"
+                    spellCheck="false"
+                    aria-label="command"
                 />
                 <AutocompleteCommand
                     content={text}

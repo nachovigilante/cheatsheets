@@ -49,12 +49,12 @@ const WindowHeader = () => {
 
 const Sidebar = ({ cheatsheets }: TerminalProps) => {
     return (
-        <div className="bg-[#242229] xl:p-5 p-4 font-space pb-16 hidden md:block">
+        <div className="bg-[#242229] xl:p-5 p-4 pb-10 font-space hidden md:block">
             <div className="2xl:text-xl text-lg 2xl:mb-3 mb-2">
                 <i className="fa-solid fa-chevron-down mr-3"></i>
                 CHEATSHEETS
             </div>
-            <ul className="list-none 2xl:w-60 xl:w-52 overflow-y-auto pb-10 pl-3 max-h-full fade-bottom-scroll">
+            <ul className="list-none 2xl:w-60 xl:w-52 overflow-y-auto pl-3 max-h-full fade-bottom-scroll mb-10">
                 {cheatsheets.map((c) => (
                     <li key={c.slug}>
                         <Link href={`/cheatsheet/${c.slug}`}>

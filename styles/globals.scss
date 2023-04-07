@@ -201,7 +201,7 @@
     }
 
     .fade-bottom-scroll {
-        --mask-height: 64px;
+        --mask-height: 32px;
         --scrollbar-width: 8px;
 
         /* Need to make sure container has bottom space, otherwise content at the bottom is always faded out */

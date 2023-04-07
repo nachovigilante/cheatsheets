@@ -3,17 +3,15 @@ import matter from "gray-matter";
 import path from "path";
 import Head from "next/head";
 import "highlight.js/styles/github-dark.css";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import FloatingButton from "../../components/utils/FloatingButton";
-import Arrow, { ArrowDirection } from "../../components/utils/Arrow";
-import DownloadIcon from "../../public/assets/icons/DownloadIcon.svg";
 import { LoadingContext } from "../../contexts/LoadingContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import router from "next/router";
 import hljs from "highlight.js";
 import marked from "marked-katex";
 import katex from "katex";
-import FloatingButtons from "../../components/layout/FloatingButtons";
+import { twMerge } from "tailwind-merge";
 
 marked.setOptions({
     highlight: function (code, lang) {
@@ -45,40 +43,57 @@ const CheatsheetPage = ({
     const { setLoading } = useContext(LoadingContext);
     const { theme } = useContext(ThemeContext);
 
-    router.events.on("routeChangeStart", () => setLoading(true));
-    router.events.on("routeChangeComplete", () => setLoading(false));
+    useEffect(() => {
+        router.events.on("routeChangeStart", () => setLoading(true));
+        router.events.on("routeChangeComplete", () => setLoading(false));
 
-    console.log(slug);
+        return () => {
+            router.events.off("routeChangeStart", () => setLoading(true));
+            router.events.off("routeChangeComplete", () => setLoading(false));
+        };
+    }, []);
+
+    // console.log(slug);
 
     return (
         <>
             <Head>
                 <title>{title}</title>
             </Head>
-            <div className={["doc", theme].join(" ")}>
-                <h1>{title}</h1>
+            <div
+                className={twMerge(
+                    theme === "dark" ? "bg-dark-doc dark" : "bg-doc",
+                    "text-doc-font xl:rounded-xl rounded-none m-auto xl:mb-20 mb-0 max-w-[1250px] pt-0 px-12 py-8 shadow-xl xl:mt-32 md:mt-20 mt-16 relative z-30"
+                )}
+            >
+                <h1 className="px-10 py-3 m-auto my-0 max-w-full text-center select-none font-bold text-2xl">
+                    {title}
+                </h1>
                 <div
-                    className="cheatsheet"
+                    className={twMerge(
+                        theme === "dark" && "dark",
+                        "cheatsheet"
+                    )}
                     dangerouslySetInnerHTML={{
                         __html: marked(content),
                     }}
                 />
             </div>
-            <FloatingButtons>
+            <div className="fixed xl:bottom-10 xl:right-12 bottom-4 right-4 z-50 flex justify-center items-center xl:gap-3 gap-2 bg-transparent">
                 <FloatingButton
                     onClick={() => window.scrollTo(0, 0)}
                     ariaLabel="Scroll to the top"
                 >
-                    <Arrow direction={ArrowDirection.up} />
+                    <i className="fa-solid fa-arrow-up"></i>
                 </FloatingButton>
                 <FloatingButton
                     link={`/download/${slug}.pdf`}
                     ariaLabel="Download PDF"
                     download
                 >
-                    <DownloadIcon height="28" width="28" />
+                    <i className="fa-solid fa-file-arrow-down"></i>
                 </FloatingButton>
-            </FloatingButtons>
+            </div>
         </>
     );
 };

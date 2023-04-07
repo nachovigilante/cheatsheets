@@ -1,88 +1,37 @@
 import Link from "next/link";
-import React, { useState } from "react";
-import styles from "./Header.module.scss";
-import Logo from "../../public/assets/icons/Logo.svg";
 import ThemeSwitch from "../utils/ThemeSwitch";
 import { useRouter } from "next/router";
-import Sidebar from "./Sidebar";
-
-const MenuButton = ({
-    open,
-    onClick,
-}: {
-    open: boolean;
-    onClick: () => void;
-}) => {
-    const { pathname } = useRouter();
-
-    return (
-        <div
-            className={[
-                styles["menu"],
-                open ? styles["active"] : "",
-                pathname === "/cheatsheet/[slug]" ? styles["cheatsheet"] : "",
-            ].join(" ")}
-            onClick={onClick}
-        >
-            <div className={styles["line"]} />
-            <div className={styles["line"]} />
-            <div className={styles["line"]} />
-        </div>
-    );
-};
-
-const NavBar = () => {
-    const { pathname } = useRouter();
-
-    return (
-        <div
-            className={[
-                styles["navbar"],
-                pathname === "/cheatsheet/[slug]" ? styles["cheatsheet"] : "",
-            ].join(" ")}
-        >
-            <Link href="/">
-                <a className={pathname === "/" ? styles["active"] : ""}>
-                    <i className="fa-solid fa-house"></i> Home
-                </a>
-            </Link>
-            <Link href="/cheatsheets">
-                <a
-                    className={
-                        pathname === "/cheatsheets" ? styles["active"] : ""
-                    }
-                >
-                    <i className="fa-solid fa-file-lines"></i> Cheatsheets
-                </a>
-            </Link>
-            <a
-                href="https://github.com/nachovigilante/cheatsheets"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles["github-link"]}
-                aria-label="Repositorio en GitHub"
-            />
-        </div>
-    );
-};
+import { twMerge } from "tailwind-merge";
 
 const Header = () => {
     const { pathname } = useRouter();
-    const [open, setOpen] = useState(false);
 
     return (
-        <header className={styles["header"]}>
+        <header className="flex items-center justify-between w-screen lg:pb-20 xl:px-12 px-4 py-4 pb-12 md:pb-14 md:px-5 md:py-6 absolute z-50 top-0 backdrop-blur-sm fade-bottom">
             <Link href="/">
-                <a className={styles["home"]}>
-                    <Logo height="45    " />
-                    <h1>TIC Cheatsheets</h1>
+                <a className="flex items-center no-underline 3xl:gap-5 gap-2 md:gap-4">
+                    <img
+                        src="/assets/icons/Logo.svg"
+                        className="xl:h-[45px] h-[30px] md:h-[35px]"
+                        alt="Logo"
+                    />
+                    <h1 className="xl:text-2xl text-base md:text-lg select-none 3xl:mt-1 font-space no-ligature">
+                        {"<TIC_Cheatsheets/>"}
+                    </h1>
                 </a>
             </Link>
-            <div className={styles["right"]}>
-                <NavBar />
+            <div className="flex">
+                <a
+                    href="https://github.com/nachovigilante/cheatsheets"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={twMerge(
+                        "xl:w-8 xl:h-8 md:h-7 md:w-7 w-6 h-6 bg-github bg-contain bg-no-repeat bg-center rounded-full",
+                        pathname.startsWith("/cheatsheet") && "hidden"
+                    )}
+                    aria-label="Repositorio en GitHub"
+                />
                 {pathname === "/cheatsheet/[slug]" ? <ThemeSwitch /> : null}
-                <Sidebar open={open} setOpen={setOpen} />
-                <MenuButton onClick={() => setOpen((o) => !o)} open={open} />
             </div>
         </header>
     );

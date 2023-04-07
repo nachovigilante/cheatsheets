@@ -1,12 +1,17 @@
-import styles from "./FloatingButton.module.scss";
+import { twMerge } from "tailwind-merge";
+
+const defaultClassName =
+    "bg-accent rounded-full xl:w-16 xl:h-16 w-12 h-12 flex items-center justify-center text-white xl:text-2xl text-xl shadow-default transition-all duration-150 ease-in-out cursor-pointer border-none hover:bg-accent-hover active:bg-accent-active focus:outline-none";
 
 const FloatingButton = ({
+    className,
     onClick,
     children,
     ariaLabel,
     link,
     download,
 }: {
+    className?: string;
     onClick?: () => void;
     children?: React.ReactNode;
     ariaLabel?: string;
@@ -16,7 +21,7 @@ const FloatingButton = ({
     return link ? (
         <a
             href={link}
-            className={[styles["floating-button"], "floating-button"].join(" ")}
+            className={twMerge(className, defaultClassName, "floating-button")}
             aria-label={ariaLabel}
             download={download}
         >
@@ -24,7 +29,7 @@ const FloatingButton = ({
         </a>
     ) : (
         <button
-            className={[styles["floating-button"], "floating-button"].join(" ")}
+            className={twMerge(className, defaultClassName, "floating-button")}
             onClick={onClick}
             aria-label={ariaLabel}
         >

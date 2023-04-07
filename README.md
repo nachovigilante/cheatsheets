@@ -14,7 +14,7 @@ Para proponer algún cambio que agregue información o mejore algo en el repo ha
 
 - Hacer un fork al repo
 - Realizar algún cambio detallando en el/los commits (utilizando [conventional commits](https://www.conventionalcommits.org/)) lo realizado
-- [Hacer un PR](#ejemplo-de-PR) con el/los commits realizados
+- [Hacer un PR](#ejemplo-de-pr) con el/los commits realizados
 - Esperar la respuesta al PR
 
 ### Convención para el commit message
@@ -39,14 +39,13 @@ Si se quiere agregar un nuevo cheatsheet de algún lenguaje o herramienta que no
 
 ### Requisitos
 
-- Agregar además del `.md` una imágen en la carpeta `/assets/images/`
+- Agregar además del `.md` un logo correspondiente en la carpeta `/assets/images/` que debe estar en formato `svg` y debe tener el mismo nombre que el archivo `.md` (ejemplo: `php.md` y `php.svg`). Intentar que el logo tenga un tamaño adecuado de alrededor de 20x20px, para que se vea bien en la web.
 
 - Tener una sección de metadata que tenga la siguiente estructura:
 
 ```plaintext
 ---
 title: {título}
-image: "/assets/images/{nombre_de_la_imágen}"
 ---
 ```
 

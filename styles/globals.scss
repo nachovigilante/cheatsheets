@@ -1,19 +1,321 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
 @import "../public/assets/fontawesome/scss/fontawesome.scss";
 @import "../public/assets/fontawesome/scss/solid.scss";
 @import "../public/assets/fontawesome/scss/brands.scss";
 
+@layer components {
+    .glass {
+        @apply text-white filter drop-shadow-lg backdrop-blur-2xl rounded-2xl;
+        background-image: url(/assets/images/card_bg.png);
+        border: 1px solid rgba(255, 255, 255, 0.205);
+        border-bottom: 1px solid rgba(82, 75, 75, 0.205);
+        border-left: 1px solid rgba(82, 75, 75, 0.205);
+    }
+
+    .glass-container {
+        @apply rounded-2xl;
+        background: linear-gradient(
+            195deg,
+            rgba(255, 255, 255, 0.1) 5.52%,
+            rgba(255, 255, 255, 0) 62.6%
+        );
+    }
+
+    .cheatsheet {
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            padding: 10px 0 5px;
+        }
+
+        h2 {
+            @apply border-b border-gray-500 mb-5 font-bold;
+        }
+
+        ul {
+            @apply pl-7;
+        }
+
+        p {
+            margin: 15px 0px 10px;
+        }
+
+        .result,
+        code {
+            @apply p-5 rounded-xl mb-5;
+
+            h2 {
+                border: none;
+                margin: initial;
+            }
+
+            ul,
+            ol {
+                @apply pl-5;
+
+                li {
+                    margin: initial;
+                }
+            }
+
+            p {
+                margin: initial;
+            }
+
+            a {
+                &:link {
+                    @apply text-blue-500 underline;
+                }
+
+                &:visited {
+                    @apply text-purple-500 underline;
+                }
+
+                &:hover {
+                    font-weight: initial;
+                }
+            }
+        }
+
+        .result {
+            @apply bg-doc border border-gray-500;
+            font-family: initial;
+
+            * {
+                @apply text-doc-font;
+                background-color: initial;
+            }
+        }
+
+        .css-result {
+            @apply bg-doc border border-gray-500 rounded-xl py-1 px-5 mb-5;
+            font-family: initial;
+        }
+
+        code {
+            @apply rounded-[3px] text-doc bg-[#0d1117] py-[2px] px-1;
+        }
+
+        pre {
+            @apply rounded-lg bg-[#0d1117] p-3 my-3 my-0 overflow-x-auto;
+
+            &::-webkit-scrollbar {
+                height: 12px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: rgba(0, 0, 0, 0.2);
+                border-radius: 10px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                height: 10px;
+                background: rgb(44, 42, 42);
+            }
+
+            &::-webkit-scrollbar-thumb:hover {
+                background: rgb(44, 42, 42);
+            }
+
+            code {
+                padding: 0;
+            }
+        }
+
+        a {
+            @apply text-doc-link font-medium;
+
+            &:hover {
+                @apply font-semibold underline;
+            }
+        }
+
+        table {
+            border-collapse: collapse;
+            border-radius: 10px;
+            border-style: hidden; /* hide standard table (collapsed) border */
+            box-shadow: 0 0 0 1px #666; /* this draws the table border  */
+
+            th,
+            td {
+                padding: 7px 15px;
+                border-right: 1px solid #666;
+
+                &:last-child {
+                    border-right: none;
+                }
+            }
+
+            thead,
+            thead tr {
+                @apply bg-gray-500 text-white font-medium rounded-t-xl;
+
+                th:first-child {
+                    border-top-left-radius: 10px;
+                }
+
+                th:last-child {
+                    border-top-right-radius: 10px;
+                }
+            }
+        }
+        // @media screen and (max-width: 1100px) {
+        //     border-radius: 0;
+        //     margin-bottom: 0;
+        //     margin-top: var(--header-height);
+        // }
+    }
+
+    .dark {
+        background-color: var(--dark-doc-bg-color);
+        color: var(--dark-doc-font-color);
+
+        h1 {
+            background-color: var(--dark-doc-bg-color);
+            color: var(--dark-doc-font-color);
+        }
+
+        .cheatsheet {
+            a {
+                @apply text-dark-doc-link;
+            }
+        }
+    }
+}
+
+@layer utilities {
+    .no-ligature {
+        font-variant-ligatures: none;
+    }
+
+    .fade-bottom {
+        mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+    }
+
+    .fade-bottom-scroll {
+        --mask-height: 64px;
+        --scrollbar-width: 8px;
+
+        /* Need to make sure container has bottom space, otherwise content at the bottom is always faded out */
+        padding-bottom: var(--mask-height);
+
+        /* Keep some space between content and scrollbar */
+        padding-right: 20px;
+
+        /* The CSS mask */
+
+        /* The content mask is a linear gradient from top to bottom */
+        --mask-image-content: linear-gradient(
+            to bottom,
+            black var(--mask-height),
+            black calc(100% - var(--mask-height)),
+            transparent
+        );
+
+        /* Here we scale the content gradient to the width of the container minus the scrollbar width. The height is the full container height */
+        --mask-size-content: calc(100% - var(--scrollbar-width)) 100%;
+
+        /* The scrollbar mask is a black pixel */
+        --mask-image-scrollbar: linear-gradient(black, black);
+
+        /* The width of our black pixel is the width of the scrollbar. The height is the full container height */
+        --mask-size-scrollbar: var(--scrollbar-width) 100%;
+
+        /* Apply the mask image and mask size variables */
+        mask-image: var(--mask-image-content), var(--mask-image-scrollbar);
+        mask-size: var(--mask-size-content), var(--mask-size-scrollbar);
+
+        /* Position the content gradient in the top left, and the scroll gradient in the top right */
+        mask-position: 0 0, 100% 0;
+
+        /* We don't repeat our mask images */
+        mask-repeat: no-repeat, no-repeat;
+
+        /* Firefox */
+        & {
+            scrollbar-width: thin; /* can also be normal, or none, to not render scrollbar */
+            scrollbar-color: currentColor transparent; /* foreground background */
+        }
+
+        /* Webkit / Blink */
+        &::-webkit-scrollbar {
+            width: var(--scrollbar-width);
+            opacity: 0;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 9999px; /* always round */
+            opacity: 0;
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        /* Scrollbar hover */
+        &:hover::-webkit-scrollbar {
+            opacity: 1;
+        }
+
+        &:hover::-webkit-scrollbar-thumb {
+            opacity: 1;
+        }
+    }
+
+    .thin-scroll {
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+    }
+
+    // .fade-top-scroll {
+    //     --mask-image-content: linear-gradient(
+    //         to bottom,
+    //         transparent,
+    //         black var(--mask-height),
+    //         black calc(100% - var(--mask-height)),
+    //         transparent
+    //     );
+    // }
+
+    .error {
+        @apply text-red-500 border-red-500;
+        animation: error 0.15s ease-in-out infinite;
+
+        @keyframes error {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(5px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+    }
+
+    .theme-border {
+        box-shadow: inset 0px 0px 0px 2px white;
+        /*, 0px 5px 17px 0px black */
+    }
+}
 
 :root {
     /* Colors */
-    --bg-color: #0c043f;
+    --bg-color: #1f0739;
     --sec-bg-color: #170c60;
     --sec-bg-color-hover: #170b52;
     --sec-bg-color-active: #1f0f6c;
     --font-color: #e2e2e2;
-    --acc-color: #e61366;
-    --acc-color-hover: #be1559;
-    --acc-color-active: #a20f4e;
 
     /* Misc */
     --shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.3);
@@ -49,8 +351,10 @@ body {
     min-height: 100vh;
 
     /* Para los anchor scrolls */
-    scroll-padding-top: 100px;
+    scroll-padding-top: 150px;
     scroll-behavior: smooth;
+
+    overflow-x: hidden;
 }
 
 a {
@@ -58,31 +362,17 @@ a {
     color: var(--acc-color);
 }
 
-.container {
-    margin: auto;
-    max-width: 1200px;
-    min-height: 100vh;
-    padding-top: var(--header-height);
+::-webkit-scrollbar {
+    width: 12px;
 }
 
-.list {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 20px;
-    list-style-type: none;
-    margin: auto;
-    width: 100%;
-    user-select: none;
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
 
-    @media screen and (max-width: 1200px) {
-        width: 910px;
-    }
-
-    @media screen and (max-width: 910px) {
-        width: 620px;
-    }
-
-    @media screen and (max-width: 620px) {
-        width: 330px;
-    }
+::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    filter: brightness(3);
+    border-radius: 10px;
 }

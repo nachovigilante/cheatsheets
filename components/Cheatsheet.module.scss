@@ -1,0 +1,34 @@
+.cheatsheet {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    margin: 20px;
+    background-color: var(--sec-bg-color);
+    text-decoration: none;
+    
+
+    img {
+        height: 150px;
+        width: 100%;
+        border-radius: 10px 10px 0px 0px;
+        background-color: var(--font-color);
+    }
+
+    span {
+        width: 100%;
+        padding: 17px;
+        color: white;
+        font-size: 20px;
+    }
+
+    &:hover {
+        box-shadow: var(--hover-shadow);
+
+        span {
+            color: var(--acc-color);
+            transition: 0.2s;
+        }
+    }
+}

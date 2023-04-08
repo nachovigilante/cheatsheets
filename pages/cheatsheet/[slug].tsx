@@ -12,6 +12,9 @@ import hljs from "highlight.js";
 import marked from "marked-katex";
 import katex from "katex";
 import { twMerge } from "tailwind-merge";
+import prisma from "./prismaHighlighter/prisma";
+
+hljs.registerLanguage("prisma", prisma);
 
 marked.setOptions({
     highlight: function (code, lang) {

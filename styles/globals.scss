@@ -19,14 +19,40 @@
 
     .glass-container {
         @apply rounded-2xl;
-        background: linear-gradient(
-            195deg,
-            rgba(255, 255, 255, 0.1) 5.52%,
-            rgba(255, 255, 255, 0) 62.6%
-        );
+        background: linear-gradient(195deg,
+                rgba(255, 255, 255, 0.1) 5.52%,
+                rgba(255, 255, 255, 0) 62.6%);
     }
 
     .cheatsheet {
+        .hljs-prisma-type {
+            color: #3fa770;
+        }
+
+        .hljs-prisma-keyword {
+            color: #4996c8;
+        }
+
+        .hljs-prisma-string {
+            color: #c8804f;
+        }
+
+        .hljs-prisma-field {
+            color: #7cc2d3;
+        }
+
+        .hljs-prisma-prop {
+            color: #ceb05d;
+        }
+
+        .hljs-prisma-bracket {
+            color: #bf5da1;
+        }
+
+        .hljs-prisma-brace {
+            color: #e6b30d;
+        }
+
         h2,
         h3,
         h4,
@@ -141,8 +167,10 @@
         table {
             border-collapse: collapse;
             border-radius: 10px;
-            border-style: hidden; /* hide standard table (collapsed) border */
-            box-shadow: 0 0 0 1px #666; /* this draws the table border  */
+            border-style: hidden;
+            /* hide standard table (collapsed) border */
+            box-shadow: 0 0 0 1px #666;
+            /* this draws the table border  */
 
             th,
             td {
@@ -167,6 +195,7 @@
                 }
             }
         }
+
         // @media screen and (max-width: 1100px) {
         //     border-radius: 0;
         //     margin-bottom: 0;
@@ -213,12 +242,10 @@
         /* The CSS mask */
 
         /* The content mask is a linear gradient from top to bottom */
-        --mask-image-content: linear-gradient(
-            to bottom,
-            black var(--mask-height),
-            black calc(100% - var(--mask-height)),
-            transparent
-        );
+        --mask-image-content: linear-gradient(to bottom,
+                black var(--mask-height),
+                black calc(100% - var(--mask-height)),
+                transparent);
 
         /* Here we scale the content gradient to the width of the container minus the scrollbar width. The height is the full container height */
         --mask-size-content: calc(100% - var(--scrollbar-width)) 100%;
@@ -241,8 +268,10 @@
 
         /* Firefox */
         & {
-            scrollbar-width: thin; /* can also be normal, or none, to not render scrollbar */
-            scrollbar-color: currentColor transparent; /* foreground background */
+            scrollbar-width: thin;
+            /* can also be normal, or none, to not render scrollbar */
+            scrollbar-color: currentColor transparent;
+            /* foreground background */
         }
 
         /* Webkit / Blink */
@@ -252,7 +281,8 @@
         }
 
         &::-webkit-scrollbar-thumb {
-            border-radius: 9999px; /* always round */
+            border-radius: 9999px;
+            /* always round */
             opacity: 0;
         }
 
@@ -294,9 +324,11 @@
             0% {
                 transform: translateX(0);
             }
+
             50% {
                 transform: translateX(5px);
             }
+
             100% {
                 transform: translateX(0);
             }

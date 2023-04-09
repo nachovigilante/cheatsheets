@@ -1,6 +1,6 @@
 /*
 Language: Prisma
-Author: Prismaster
+Author: Bauty Garcia
 Description: Language definition for Prisma schema files (.prisma)
 */
 

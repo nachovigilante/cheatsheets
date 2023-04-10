@@ -8,6 +8,9 @@ import Background from "../components/layout/Background";
 import Terminal from "../components/utils/Terminal/Terminal";
 import Glassbox from "../components/utils/Glassbox";
 import Section from "../components/layout/Section";
+import { useWindowSize } from "usehooks-ts";
+import Image from "next/image";
+import { useMemo } from "react";
 
 export type CheatsheetType = {
     slug: string;
@@ -18,6 +21,22 @@ export type CheatsheetType = {
 };
 
 const Home: NextPage = ({ cheatsheets }: { cheatsheets: CheatsheetType[] }) => {
+    const windowSize = useWindowSize();
+
+    const ratio = 20 / 17;
+
+    const imageWidth = useMemo(() => {
+        if (windowSize.width >= 1900) return 800;
+        if (windowSize.width >= 1450) return 600;
+        if (windowSize.width >= 1250) return 400;
+        if (windowSize.width >= 1000) return 380;
+        if (windowSize.width >= 800) return 320;
+        if (windowSize.width >= 500) return 250;
+        return 200;
+    }, [windowSize]);
+
+    const imageHeight = useMemo(() => imageWidth / ratio, [imageWidth]);
+
     return (
         <>
             <div className="relative z-20 p-0 3xl:max-w-[1200px] 2xl:max-w-[1000px] xl:max-w-[900px] lg:max-w-[800px] md:max-w-[640px] sm:max-w-[450px] max-w-[320px] m-auto">
@@ -38,11 +57,14 @@ const Home: NextPage = ({ cheatsheets }: { cheatsheets: CheatsheetType[] }) => {
                         >
                             {"> Ir a la terminal"}
                         </a>
-                        <img
-                            src="/assets/images/notebook.png"
-                            className="absolute top-30 3xl:left-[480px] 2xl:left-[400px] xl:left-[380px] lg:left-[300px] md:left-[250px] sm:left-[170px] left-[130px] lg:w-[380px] md:w-[320px] sm:w-[250px] 3xl:w-[800px] 2xl:w-[600px] xl:w-[400px] w-[200px] drop-shadow-notebook"
-                            alt="notebook"
-                        />
+                        <div className="absolute 3xl:w-[800px] 2xl:w-[600px] xl:w-[400px] lg:w-[380px] md:w-[320px] sm:w-[250px] w-[200px] top-30 3xl:left-[480px] 2xl:left-[400px] xl:left-[380px] lg:left-[300px] md:left-[250px] sm:left-[170px] left-[130px] drop-shadow-notebook">
+                            <Image
+                                src="/assets/images/notebook.png"
+                                alt="notebook"
+                                width={imageWidth}
+                                height={imageHeight}
+                            />
+                        </div>
                     </div>
                 </section>
                 <Section className="xl:my-40 md:my-24 mb-16">

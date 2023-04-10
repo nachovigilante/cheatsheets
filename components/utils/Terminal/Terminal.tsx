@@ -7,6 +7,8 @@ import {
 } from "../../../contexts/TerminalContext";
 import { CheatsheetType } from "../../../pages";
 import Command from "./Command";
+import Image from "next/image";
+import { useWindowSize } from "usehooks-ts";
 
 type TerminalProps = {
     cheatsheets: CheatsheetType[];
@@ -48,6 +50,8 @@ const WindowHeader = () => {
 };
 
 const Sidebar = ({ cheatsheets }: TerminalProps) => {
+    const windowSize = useWindowSize();
+
     return (
         <div className="bg-[#242229] xl:p-5 p-4 pb-10 font-space hidden md:block">
             <div className="2xl:text-xl text-lg 2xl:mb-3 mb-2">
@@ -59,10 +63,11 @@ const Sidebar = ({ cheatsheets }: TerminalProps) => {
                     <li key={c.slug}>
                         <Link href={`/cheatsheet/${c.slug}`}>
                             <a className="flex gap-2 items-center 2xl:text-xl xl:text-lg text-md py-1 px-2 hover:bg-[#2a2831] cursor-pointer">
-                                <img
+                                <Image
                                     src={`/assets/images/${c.slug}.svg`}
                                     alt={`${c.slug} logo`}
-                                    className="xl:h-5 xl:w-5 h-4 w-4"
+                                    width={windowSize.width >= 1250 ? 20 : 16}
+                                    height={windowSize.width >= 1250 ? 20 : 16}
                                 />
                                 <span>{c.slug}.md</span>
                             </a>

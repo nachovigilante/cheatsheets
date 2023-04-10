@@ -42,7 +42,7 @@ const WindowHeader = () => {
                 <div className="bg-[#ffbd2e] 2xl:w-5 2xl:h-5 md:w-4 md:h-4 sm:h-3 sm:w-3 h-2 w-2 rounded-full" />
                 <div className="bg-[#27c93f] 2xl:w-5 2xl:h-5 md:w-4 md:h-4 sm:h-3 sm:w-3 h-2 w-2 rounded-full" />
             </div>
-            <div className="flex-grow text-center md:static absolute w-full md:text-lg text-base">
+            <div className="flex-grow text-center md:static absolute w-full xl:text-2xl md:text-lg text-base">
                 tic://cheatsheets
             </div>
         </div>

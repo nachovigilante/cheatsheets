@@ -43,7 +43,7 @@ const Home: NextPage = ({ cheatsheets }: { cheatsheets: CheatsheetType[] }) => {
                 <Head>
                     <title>{"<TIC_Cheatsheets/>"}</title>
                 </Head>
-                <section className="flex justify-start items-center lg:pl-20 2xl:pl-0 md:pl-10 sm:pl-8">
+                <section className="flex justify-start items-center lg:pl-20 2xl:pl-0 md:pl-10 sm:pl-8 select-none">
                     <div className="relative xl:h-screen lg:h-[400px] md:h-[400px] sm:h-[350px] h-[300px] xl:mt-0 lg:mt-20 flex flex-col justify-center z-20 items-start">
                         <h1 className="flex lg:gap-5 sm:gap-2 flex-col 3xl:text-9xl 2xl:text-8xl xl:text-7xl lg:text-6xl md:text-5xl text-4xl relative z-20 font-raleway font-black w-full drop-shadow-md">
                             <span>TIC</span>

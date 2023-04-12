@@ -63,7 +63,7 @@ npx prisma init
 ```
 Esto creará un nuevo directorio llamado `prisma` en el proyecto, que contendrá los archivos de configuración de Prisma y un archivo `schema.prisma` donde vamos a definir nuestro modelo, este es un archivo `schema.prisma` convencional:
 
-```
+```prisma
 datasource db {
 	provider =  "postgresql"
 	url =  "postgresql://user:password@localhost:5432/mydb?schema=public"
@@ -89,7 +89,7 @@ Para crear un modelo de datos con Prisma, se utiliza su lenguaje de definición 
 ### Datasource
 El `datasource` es una de las cosas más hermosas de esta herramienta, porque es la parte que se encarga de conectarse con nuestra base de datos local con dos simples parámetros, un `provider` que define la base de datos que usaremos, como PostgreSQL, MySQL, etc. Y una `url` que es la dirección para conectarse a esta base de datos en cuestión.  Este es un ejemplo de un `datasource` general:
 
-```
+```prisma
 datasource db {
 	provider =  "postgresql"
 	url =  "postgresql://user:password@localhost:5432/mydb?schema=public"
@@ -98,7 +98,7 @@ datasource db {
 NOTA: Para evitar problemas de seguridad, se recomienda fuertemente usar un archivo de variables de entorno (También llamado [ENV](https://blog.bitsrc.io/a-gentle-introduction-to-env-files-9ad424cc5ff4)) para guardar la `url` de tu base de datos.
 ### Generator
 El `generator` es una sección que permite definir cómo Prisma debe generar el código necesario para interactuar con la base de datos según el modelo de datos definido en el esquema. Un ejemplo de `generator` seria el siguiente:
-```
+```prisma
 generator client {
 	provider =  "prisma-client-js"
 }
@@ -106,7 +106,7 @@ generator client {
 
 ### Model
 Vamos a comprender al `model` como el equivalente a las tablas y columnas de una base de datos convencional, acá tenemos un ejemplo extraído del punto anterior.
-```
+```prisma
 model User {
 	id Int @id @default(autoincrement()) 
 	name String 
@@ -125,7 +125,7 @@ Una de las características más importantes de Prisma es su capacidad para trab
 ### Uno a Muchos
 
 Una relación de uno a muchos se define cuando un modelo tiene una relación con uno o más modelos secundarios. Por ejemplo, un usuario en una aplicación de una lista de tareas, puede tener muchas anotadas, por lo que para un solo usuario, hay muchos registros de tareas pertenecientes a ese usuario. Esto en Prisma se adapta de la siguiente forma:
-```
+```prisma
 model User {
 	id Int @id @default(autoincrement()) 
 	name String 
@@ -149,12 +149,12 @@ Como ven, se crea un modelo nuevo, en este caso llamado `Todo` para almacenar to
 
 Una relación de muchos a muchos se define cuando dos o más modelos tienen una relación con múltiples instancias de otros modelos. Por ejemplo, muchos usuarios pueden pertenecer a muchos grupos.
 
-```
+```prisma
 model User { 
 	id Int @id @default(autoincrement()) 
 	name String 
-	email String @unique groups 
-	Group[] @relation("UserToGroup") 
+	email String @unique 
+	groups Group[] @relation("UserToGroup") 
 } 
 
 model Group { 
@@ -168,7 +168,7 @@ En este ejemplo, la relación entre `User` y `Group` se define en ambos modelos 
 ### Enum
 Los modelos enum se utilizan para definir un conjunto finito de valores que pueden ser asignados a una columna. Por ejemplo, un modelo `Todo` puede tener una columna `status` que solo puede ser uno de los valores `"done"`, 
 `"in progress"` o `"todo"`.
-```
+```prisma
 model Todo {
   id     Int     @id @default(autoincrement())
   title  String

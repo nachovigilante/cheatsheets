@@ -55,5 +55,5 @@ Si nosotros estamos en el archivo `index.php`, entonces para acceder a la carpet
 | ---------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------- |
 | `explorer` | `explorer .` | Abre el explorador de archivos en la carpeta actual                                                                               |
 | `code`     | `code .`     | Abre Visual Studio Code en la carpeta actual                                                                                      |
-| `git`      | `git status` | Muestra el estado del repositorio ([para más comandos](https://cheatsheets-nachovigilante.vercel.app/cheatsheet/github))          |
+| `git`      | `git status` | Muestra el estado del repositorio ([para más comandos](https://cheatsheets-nachovigilante.vercel.app/cheatsheet/git))          |
 | `npm`      | `npm start`  | Ejecuta el comando `start` de `package.json` ([para más comandos](https://cheatsheets-nachovigilante.vercel.app/cheatsheet/node)) |

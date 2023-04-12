@@ -120,13 +120,13 @@ GitHub es una plataforma de desarrollo colaborativo que permite alojar proyectos
 
 ### Crear un nuevo repositorio en GitHub
 
-Para crear un nuevo repositorio deberemos ir a la página de [GitHub](www.github.com) y hacer click en el botón `New repository`.
+Para crear un nuevo repositorio deberemos ir a la página de [GitHub](https://github.com/) y hacer click en el botón `New repository`.
 
-<img src="/assets/images/images/home.png"  width="100%" alt="Home">
-<img src="/assets/images/images/home_create.png"  width="100%" alt="Home Create Highlight">
-<img src="/assets/images/images/new.png"  width="100%"  alt="New">
-<img src="/assets/images/images/new_bottom.png"  width="100%" alt="New Button">
-<img src="/assets/images/images/new_bottom_button.png"  width="100%" alt="New Highlight">
+<img src="/assets/images/home.png"  width="100%" alt="Home">
+<img src="/assets/images/home_create.png"  width="100%" alt="Home Create Highlight">
+<img src="/assets/images/new.png"  width="100%"  alt="New">
+<img src="/assets/images/new_bottom.png"  width="100%" alt="New Button">
+<img src="/assets/images/new_bottom_button.png"  width="100%" alt="New Highlight">
 
 ### Clonar un repositorio de GitHub
 

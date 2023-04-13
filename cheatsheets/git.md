@@ -5,6 +5,33 @@ image: "/assets/images/git-github.png"
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
+## Índice
+
+- [Índice](#índice)
+- [¿Qué es?](#qué-es)
+- [Comandos básicos](#comandos-básicos)
+  - [Crear un nuevo repositorio](#crear-un-nuevo-repositorio)
+  - [Clonar un repositorio](#clonar-un-repositorio)
+  - [Añadir un archivo](#añadir-un-archivo)
+  - [Añadir todos los archivos](#añadir-todos-los-archivos)
+  - [Hacer un commit](#hacer-un-commit)
+  - [Hacer un push](#hacer-un-push)
+  - [Hacer un pull](#hacer-un-pull)
+  - [Ver el estado del repositorio](#ver-el-estado-del-repositorio)
+  - [Ver el historial de commits](#ver-el-historial-de-commits)
+- [Branches](#branches)
+  - [Nueva branch](#nueva-branch)
+  - [Ver branches existentes](#ver-branches-existentes)
+  - [Moverse entre branches](#moverse-entre-branches)
+  - [Moverse a una branch remota](#moverse-a-una-branch-remota)
+  - [Mergear branches](#mergear-branches)
+- [Red O.R.T.](#red-ort)
+- [GitHub](#github)
+  - [Crear un nuevo repositorio en GitHub](#crear-un-nuevo-repositorio-en-github)
+  - [Clonar un repositorio de GitHub](#clonar-un-repositorio-de-github)
+  - [Añadir un colaborador](#añadir-un-colaborador)
+
+
 ## ¿Qué es?
 
 Git es un sistema de control de versiones distribuido, es decir, que cada usuario tiene una copia completa del repositorio. Esto nos permite trabajar de forma local y sincronizar los cambios con el repositorio remoto cuando queramos.
@@ -41,7 +68,7 @@ git add .
 git commit -m "Mensaje del commit"
 ```
 
-#### Descripción completa
+Descripción completa
 
 ```bash
 git commit -m "Mensaje del commit" -m "Descripción del commit"

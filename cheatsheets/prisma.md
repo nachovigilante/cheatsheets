@@ -4,41 +4,41 @@ image: "/assets/images/prisma.png"
 ---
 
 ## Índice
-- [Índice](#Índice)
-- [Introducción a Prisma](#introducción-a-prisma)
-- [Instalación](#instalación)
-- [Creación de Proyecto](#creación-de-proyecto)
+- [Índice](#-ndice)
+- [Introducción a Prisma](#introducci-n-a-prisma)
+- [Instalación](#instalaci-n)
+- [Creación de Proyecto](#creaci-n-de-proyecto)
 - [Modelo de Datos](#modelo-de-datos)
-	- [Datasource](#datasource)
-	- [Generator](#generator)
-	- [Model](#model)
+	- [Datasource](#-datasource-)
+	- [Generator](#-generator-)
+	- [Model](#-model-)
 - [Relaciones](#relaciones)
-	- [Uno a Muchos](#uno-a-muchos)
-	- [Muchos a Muchos](#muchos-a-muchos)
-	- [ENUM](#enum)
+	- [Uno a Muchos](#-uno-a-muchos-)
+	- [Muchos a Muchos](#-muchos-a-muchos-)
+	- [ENUM](#-enum-)
 - [Propiedades](#propiedades)
-	- [onDelete](#ondelete)
-	- [onUpdate](#onupdate)
-- [Métodos](#métodos)
-	- [findMany](#findmany)
-	- [findOne](#findone)
-	- [create](#create)
-	- [update](#update)
-	- [delete](#delete)
+	- [onDelete](#-ondelete-)
+	- [onUpdate](#-onupdate-)
+- [Métodos](#m-todos)
+	- [findMany](#-findmany-)
+	- [findOne](#-findone-)
+	- [create](#-create-)
+	- [update](#-update-)
+	- [delete](#-delete-)
 - [Filtrado y Ordenado](#filtrado-y-ordenado)
-	- [Select](#select)
-	- [Take](#take)
-	- [Include](#include)
-	- [Where](#where)
-	- [startsWith y endsWith](#startswith-y-endswith)
-	- [orderBy](#orderby)
-	- [Connect](#connect)
+	- [Select](#-select-)
+	- [Take](#-take-)
+	- [Include](#-include-)
+	- [Where](#-where-)
+	- [startsWith y endsWith](#-startswith-y-endswith-)
+	- [orderBy](#-orderby-)
+	- [Connect](#-connect-)
 - [Comandos](#comandos)
-	- [Migrate Dev](#migrate-dev)
-	- [Migrate Deploy](#migrate-deploy)
-	- [Prisma Studio](#prisma-studio)
-	- [Prisma Format](#prisma-format)
-	- [DB Pull](#db-pull)
+	- [Migrate Dev](#-migrate-dev-)
+	- [Migrate Deploy](#-migrate-deploy-)
+	- [Prisma Studio](#-prisma-studio-)
+	- [Prisma Format](#-prisma-format-)
+	- [DB Pull](#-db-pull-)
 
 <br>
 
@@ -86,7 +86,7 @@ Si no entendés nada de lo que acabas de leer, no te preocupes, es solo para que
 
 Para crear un modelo de datos con Prisma, se utiliza su lenguaje de definición de esquemas (SDL). Dentro del modelo identificamos tres elementos principales, el `datasource`, `generator` y `model`.
 
-### Datasource
+### **Datasource**
 El `datasource` es una de las cosas más hermosas de esta herramienta, porque es la parte que se encarga de conectarse con nuestra base de datos local con dos simples parámetros, un `provider` que define la base de datos que usaremos, como PostgreSQL, MySQL, etc. Y una `url` que es la dirección para conectarse a esta base de datos en cuestión.  Este es un ejemplo de un `datasource` general:
 
 ```prisma
@@ -96,15 +96,16 @@ datasource db {
 }
 ```
 NOTA: Para evitar problemas de seguridad, se recomienda fuertemente usar un archivo de variables de entorno (También llamado [ENV](https://blog.bitsrc.io/a-gentle-introduction-to-env-files-9ad424cc5ff4)) para guardar la `url` de tu base de datos.
-### Generator
+### **Generator**
 El `generator` es una sección que permite definir cómo Prisma debe generar el código necesario para interactuar con la base de datos según el modelo de datos definido en el esquema. Un ejemplo de `generator` seria el siguiente:
+
 ```prisma
 generator client {
 	provider =  "prisma-client-js"
 }
 ```
 
-### Model
+### **Model**
 Vamos a comprender al `model` como el equivalente a las tablas y columnas de una base de datos convencional, acá tenemos un ejemplo extraído del punto anterior.
 ```prisma
 model User {
@@ -118,11 +119,11 @@ En este modelo, se definen los campos `id`, `name`, `email` y `password`. Esto, 
 
 Recomendamos ver la [documentación](https://www.prisma.io/docs/concepts/components/prisma-schema) original de Prisma para saber más.
 
-## Relaciones
+## **Relaciones**
 
 Una de las características más importantes de Prisma es su capacidad para trabajar con relaciones entre diferentes modelos de datos. A continuación, se detallan los tipos de relaciones que pueden ser definidas en el archivo `schema.prisma`, y algunas de las propiedades que pueden ser utilizadas para personalizar su comportamiento.
 
-### Uno a Muchos
+### **Uno a Muchos**
 
 Una relación de uno a muchos se define cuando un modelo tiene una relación con uno o más modelos secundarios. Por ejemplo, un usuario en una aplicación de una lista de tareas, puede tener muchas anotadas, por lo que para un solo usuario, hay muchos registros de tareas pertenecientes a ese usuario. Esto en Prisma se adapta de la siguiente forma:
 ```prisma
@@ -145,7 +146,7 @@ model Todo {
 ```
 Como ven, se crea un modelo nuevo, en este caso llamado `Todo` para almacenar todos los registros de `todos` con sus campos correspondientes, en términos de bases de datos, seria como crear una nueva tabla y agregar algunas columnas. Por otro lado, esto no crea en sí la relación, sino que lo hacen las nuevas líneas que vemos en el ejemplo. El `todo Todos[]` declara que existe la posibilidad de que en registros del modelo `Todo` se pueda hacer referencia a un registro de un usuario. A sí mismo, del otro lado se hace algo similar, ya que la propiedad `author` y `authorId` hacen que cada registro, o cada `todo` necesite tener el `ID` del autor, esto es gracias al `authorId` que es usado como clave foránea al `id` del modelo `User`.
 
-### Muchos a Muchos
+### **Muchos a Muchos**
 
 Una relación de muchos a muchos se define cuando dos o más modelos tienen una relación con múltiples instancias de otros modelos. Por ejemplo, muchos usuarios pueden pertenecer a muchos grupos.
 
@@ -165,7 +166,7 @@ model Group {
 ```
 En este ejemplo, la relación entre `User` y `Group` se define en ambos modelos usando la propiedad `@relation`. El argumento `"UserToGroup"` se utiliza para indicar que ambas tablas están relacionadas. Prisma creará automáticamente una tabla de unión para almacenar las relaciones entre los modelos.
 
-### Enum
+### **Enum**
 Los modelos enum se utilizan para definir un conjunto finito de valores que pueden ser asignados a una columna. Por ejemplo, un modelo `Todo` puede tener una columna `status` que solo puede ser uno de los valores `"done"`, 
 `"in progress"` o `"todo"`.
 ```prisma
@@ -188,7 +189,7 @@ Recomendamos ver la [documentación](https://www.prisma.io/docs/concepts/compone
 
 Existen algunas propiedades adicionales que pueden ser utilizadas para personalizar el comportamiento de las relaciones. Estas son principalmente dos, `onDelete` y `onUpdate`. Estas propiedades se usan para definir qué hacer cuando se borra o modifica un registro que tiene relaciones con otros registros. Estas propiedades tienen distintos valores posibles a adoptar para así comportarse de una u otra forma, estos son cinco; `Cascade`, `Restrict`, `NoAction`, `SetNull`, `SetDefault`.
 
-### onDelete
+### **onDelete**
 Esta propiedad define cómo se manejará la eliminación de registros en el modelo principal cuando hay registros relacionados en el modelo secundario. Se comporta diferente según que valor tenga, estos son los distintos comportamientos:
 -   `Cascade`: Cuando se elimina un registro en el modelo principal, también se eliminan automáticamente todos los registros relacionados en el modelo secundario.
 -   `Restrict`: Evita que se elimine un registro en el modelo principal si hay registros relacionados en el modelo secundario.
@@ -196,7 +197,7 @@ Esta propiedad define cómo se manejará la eliminación de registros en el mode
 -   `NoAction`: No se realiza ninguna acción en los registros relacionados en el modelo secundario cuando se elimina un registro en el modelo principal.
 -   `SetDefault`: Establece los valores de la clave foránea en su valor predeterminado en los registros relacionados en el modelo secundario cuando se elimina un registro en el modelo principal.
 
-### onUpdate
+### **onUpdate**
 Esta propiedad define cómo se manejará la actualización de registros en el modelo principal cuando hay registros relacionados en el modelo secundaria. Este es el comportamiento según los posibles valores:
 
 -  `Cascade`: Actualiza automáticamente los registros relacionados en el modelo secundario con los nuevos valores cuando se actualiza un registro en el modelo principal.
@@ -222,18 +223,18 @@ npx prisma generate
 Vale aclarar que todos los métodos se usan siguiendo la misma sintaxis de 
 `prisma.[NombreDelModelo].[NombreDelMetodo]`. También que los archivos [JSON](https://www.w3schools.com/whatis/whatis_json.asp) tanto para introducirlos como parámetros en ciertos métodos como para recibir las respuestas de los mismos.
 
-### findMany()
+### **findMany**
 El método `findMany()` se utiliza para recuperar varios registros de una tabla en la base de datos. Por ejemplo, para recuperar todos los usuarios de la tabla `User`, se puede utilizar el siguiente código:
 ```js
 const users = await prisma.user.findMany();
 ```
-### findOne()
+### **findOne**
 El método `findOne()` se utiliza para recuperar un registro de una tabla en la base de datos. Por ejemplo, para recuperar un usuario de la tabla `User`, se puede utilizar el siguiente código:
 ```js
 const user = await prisma.user.findOne();
 ```
 NOTA: El `findOne()` siempre devuelve el primero de todos los registros que reciba.
-### create()
+### **create**
 El método `create()` se utiliza para crear un nuevo registro en una tabla en la base de datos. Por ejemplo, para crear un nuevo usuario en la tabla `User`, se puede utilizar el siguiente código:
 ```js
 const newUser = await prisma.user.create({ 
@@ -245,7 +246,19 @@ const newUser = await prisma.user.create({
 });
 ```
 NOTA: En este caso, el parámetro `data` está en formato JSON, este formato lo vemos repetidas no solo en Prisma, sino que en JavaScript en general.
-### update()
+
+En el caso de que se quiera crear mas de un mismo registro en la misma tabla, se puede pasar a `data` una lista con un objeto distinto por registro. Por ejemplo:
+```js
+const newUsers = await prisma.user.createMany({ 
+  data: [ 
+	{ name: "Marcelo Guiterrez", email: "MarceG@gmail.com", password: "contraseña" },
+	{ name: "Gonzalo Vangue", email: "GonzaV@gmail.com", password: "incorrecta" },
+	{ name: "Juan Perez", email: "JuaniPerez@gmail.com", password: "123456" }
+  ] 
+});
+```
+Es importante aclarar que la idea de pasar una lista con muchos registros puede ser usada en cualquier contexto, no solo en el de crear registros, sino también en el de actualizar o eliminar registros. Ademas de no solo en el de crear en la misma tabla, sino también en el de crear registros en tablas relacionadas, como en el caso de una aplicacion de mensajes, donde mas de una persona estaria relacionada, por ejemplo, con un solo mensaje.
+### **update**
 El método `update()` se utiliza para actualizar un registro en una tabla en la base de datos. Por ejemplo, para actualizar el nombre del usuario con `id` igual a 1 en la tabla `User`, se puede utilizar el siguiente código:
 ```js
 const updatedUser = await prisma.user.update({
@@ -257,7 +270,7 @@ const updatedUser = await prisma.user.update({
   }
 });
 ```
-### delete()
+### **delete**
 El método `delete()` se utiliza para eliminar un registro de una tabla en la base de datos. Por ejemplo, para eliminar el usuario con `id` igual a 1 de la tabla `User`, se puede utilizar el siguiente código:
 ```js
 const deletedUser = await prisma.user.delete({
@@ -271,7 +284,7 @@ Recomendamos ver la [documentación](https://www.prisma.io/docs/concepts/compone
 
 Como ya vimos en ejemplos anteriores, dentro del parámetro que le pasamos a cualquier método de Prisma, podemos pasarle otras propiedades que ayudan a poder refinar nuestras consultas y obtener solo la información que necesitamos. Veremos cómo utilizar funciones como `select`, `orderBy`, `contains`, `startWith`, `endWith` y más para filtrar y ordenar datos de manera efectiva. Además, veremos cómo utilizar la función `connect` para obtener información de modelos relacionados en nuestras consultas.
 
-### Select
+### **Select**
 Permite seleccionar qué campos deseas obtener de una entidad. Por ejemplo, si solo quieres obtener el nombre y el correo electrónico de los usuarios, puedes usar `select` para obtener solo esos campos.
 
 ```js
@@ -282,7 +295,7 @@ const users = await prisma.user.findMany({
   }
 })
 ```
-### Take
+### **Take**
 Permite limitar la cantidad de registros que devuelve el método `findMany()`. Por ejemplo, si deseas seleccionar los diez primeros usuarios de la base de datos.
 
 ```js
@@ -291,7 +304,7 @@ const users = await prisma.user.findMany({
 })
 ```
 
-### Include
+### **Include**
 Permite incluir campos de una entidad relacionada en la consulta. Por ejemplo, si deseas obtener todos los posts de un usuario y también incluir los comentarios de cada post, puedes usar `include` para obtener toda la información.
 
 ```js
@@ -308,7 +321,7 @@ const user = await prisma.user.findUnique({
   }
 })
 ```
-### Where
+### **Where**
 Permite filtrar los registros en función de los valores de sus campos. Por ejemplo, si solo quieres obtener los usuarios que tengan el nombre "Juan".
 
 ```js
@@ -319,7 +332,7 @@ const users = await prisma.user.findMany({
 })
 ```
 
-### Contains
+### **Contains**
 
 Permite buscar registros que contengan una cadena determinada. Por ejemplo, si deseas buscar todos los usuarios que tengan la palabra "programador" en su descripción.
 
@@ -332,7 +345,7 @@ const users = await prisma.user.findMany({
   }
 })
 ```
-### startsWith y endsWith
+### **startsWith y endsWith**
 Permiten buscar registros que comiencen o terminen con una cadena determinada. Por ejemplo, si deseas buscar todos los usuarios que tengan un apellido que empiece por "a".
 ```js
 const users = await prisma.user.findMany({
@@ -344,7 +357,7 @@ const users = await prisma.user.findMany({
 })
 ```
 
-### orderBy
+### **orderBy**
 Permite ordenar los resultados por uno o más campos. Por ejemplo, si deseas obtener todos los usuarios ordenados por su nombre en orden alfabético.
 
 ```js
@@ -355,7 +368,7 @@ const users = await prisma.user.findMany({
 })
 ```
 
-### Connect
+### **Connect**
 Permite conectar dos entidades relacionadas en una sola consulta. Por ejemplo, si deseas obtener todos los comentarios que ha hecho un usuario en una publicación específica.
 
 ```js
@@ -376,19 +389,19 @@ Estas son solo algunas de las opciones de filtrado y ordenamiento disponibles en
 
 Acá vamos a ver algunos de los comandos más útiles en Prisma, que son esenciales para trabajar con bases de datos y realizar cambios en el esquema de la base de datos. También cómo es posible importar y exportar archivos SQL, lo que permite una mayor flexibilidad en la manipulación de los datos.
 
-### Migrate Dev
+### **Migrate Dev**
 El comando `npx prisma migrate dev` se utiliza para ejecutar migraciones en una base de datos. Las migraciones son una forma de aplicar los cambios que hicimos en el modelo del `schema.prisma` a la base de datos local, además de tener un registro de cambios. La opción `dev` se utiliza para ejecutar migraciones en un entorno de desarrollo.
 
-### Migrate Deploy
+### **Migrate Deploy**
 El comando `npx prisma migrate deploy` despliega tu esquema de Prisma a la base de datos especificada en el archivo de configuración. Es una buena práctica ejecutar este comando después de hacer cambios en tu esquema de Prisma.
 
-### Prisma Studio
+### **Prisma Studio**
 El comando `npx prisma studio` comando se utiliza para abrir Prisma Studio, una interfaz gráfica de usuario para explorar los datos almacenados en la base de datos. Prisma Studio es una herramienta muy útil para visualizar y manipular los datos en la base de datos.
 
-### Prisma Format
+### **Prisma Format**
 El comando `npx prisma format` formatea automáticamente tu archivo `schema.prisma` para que sea legible y esté bien estructurado. Generalmente después de cualquier cambio en el archivo `schema.prisma` se hace un `npx prisma format`.
 
-### DB Pull
+### **DB Pull**
 El comando `npx prisma db pull` importa la estructura de tu base de datos actual en tu archivo `schema.prisma`. Es útil si necesitas actualizar tu archivo de esquema a partir de los cambios en la base de datos.
 
 Estos son algunos de todos los posibles comandos que hay disponibles gracias a Prisma, recomendamos acceder a la [documentación](https://www.prisma.io/docs/reference/api-reference/command-reference#db-pull) original para saber más, y en cualquier caso o problema particular, buscar en internet.

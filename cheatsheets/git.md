@@ -25,7 +25,6 @@ image: "/assets/images/git-github.png"
   - [Moverse entre branches](#moverse-entre-branches)
   - [Moverse a una branch remota](#moverse-a-una-branch-remota)
   - [Mergear branches](#mergear-branches)
-- [Red O.R.T.](#red-ort)
 - [GitHub](#github)
   - [Crear un nuevo repositorio en GitHub](#crear-un-nuevo-repositorio-en-github)
   - [Clonar un repositorio de GitHub](#clonar-un-repositorio-de-github)
@@ -140,18 +139,6 @@ git merge <nombre-de-branch-a-mergear>
 ```
 
 Se mergea sobre la branch actual la branch a mergear.
-
-## Red O.R.T.
-
-La red O.R.T. tiene bloqueado la verifiación ssl para git. Es decir, todo comando que requiera conexión con el sistema remoto, como `clone`, `pull` o `push` no puede hacerse en la red wifi (si cableado o las redes especiales de TIC). Para poder conectarse a un repositorio remoto sin que se haga la verificación ssl, se puede agregar la opción `-c http.sslVerify=false`. Por ejemplo:
-
-```bash
-git -c http.sslVerify=false clone <repository-name>
-git -c http.sslVerify=false pull
-git -c http.sslVerify=false push
-```
-
-Se puede también deshabilitar la verificación ssl globalmente, pero esto se considera un riesgo de seguridad y no se recomienda. Incluso la deshabilitación temporal es riesgosa, pero es a veces necesaria para poder trabajar en aulas alejadas de una red cableada/redes wifi de TIC.
 
 ## GitHub
 

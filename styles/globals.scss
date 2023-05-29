@@ -62,7 +62,15 @@
         }
 
         h2 {
-            @apply border-b border-gray-500 mb-5 font-bold;
+            @apply border-b border-gray-500 my-5 font-bold text-2xl;
+        }
+        
+        h3 {
+            @apply font-bold text-xl;
+        }
+        
+        h4 {
+            @apply font-medium text-lg;
         }
 
         ul {

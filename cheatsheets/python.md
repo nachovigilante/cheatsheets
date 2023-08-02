@@ -52,6 +52,7 @@ image: "/assets/images/python.png"
     - [\_\_str\_\_](#__str__)
 - [Typing](#typing)
 - [Modules](#modules)
+- [Pytest](#pytest)
 
 <!-- /code_chunk_output -->
 
@@ -594,3 +595,22 @@ im = Image.open("/assets/images/python.jpg")
 im.show()
 
 ```
+
+##  Pytest
+
+Para correr pytest no se corre simplemente con python, si no que hay que correrlo a través de pytest usando el comando
+```
+python -m pytest nombre_del_archivo_de_tests.py
+```
+
+Para construir un test alcanza con declarar una función que comience con el prefijo `test` y poner uno o más `assert` con las condiciones de pasar dicho test.
+
+Supongamos que tengo una función `suma_dos` que toma un entero y le suma 2. Un posible test de esta función en pytest podría ser:
+
+```
+def test_suma_dos():
+    resultado_obtenido = suma_dos(3)
+    resultado_esperado = 5
+    assert resultado_esperado == resultado_obtenido
+```
+

@@ -25,6 +25,7 @@ image: "/assets/images/git-github.png"
   - [Moverse entre branches](#moverse-entre-branches)
   - [Moverse a una branch remota](#moverse-a-una-branch-remota)
   - [Mergear branches](#mergear-branches)
+  - [Eliminar una branch](#eliminar-una-branch)
 - [GitHub](#github)
   - [Crear un nuevo repositorio en GitHub](#crear-un-nuevo-repositorio-en-github)
   - [Clonar un repositorio de GitHub](#clonar-un-repositorio-de-github)
@@ -106,10 +107,10 @@ git log
 ### Nueva branch
 
 ```bash
-git checkout -b <nombre-de-branch>
+git switch -c <nombre-de-branch>
 ```
 
-La opción -b es para crear la branch, de otra forma `checkout` solo nos deja movernos entre branches existentes. Si se quiere crear una branch sin movernos, es `git branch <nombre-de-branch>`.
+La opción -c es para crear la branch, de otra forma `switch` solo nos deja movernos entre branches existentes. Si se quiere crear una branch sin movernos, es `git branch <nombre-de-branch>`.
 
 ### Ver branches existentes
 
@@ -120,7 +121,7 @@ git branch
 ### Moverse entre branches
 
 ```bash
-git checkout <nombre-de-branch>
+git switch <nombre-de-branch>
 ```
 
 ### Moverse a una branch remota
@@ -138,7 +139,15 @@ Se hace `git fetch` antes del `switch` para que el repositorio local conozca que
 git merge <nombre-de-branch-a-mergear>
 ```
 
-Se mergea sobre la branch actual la branch a mergear.
+Se mergea sobre la branch actual la branch a mergear. **NO** elimina la branch a mergear.
+
+### Eliminar una branch
+
+```bash
+git branch -D <nombre-de-branch>
+```
+
+La opción `-D` es para eliminar la branch, de otra forma `branch` solo crea esa branch, que falla si la branch ya existía. 
 
 ## GitHub
 

@@ -598,8 +598,8 @@ im.show()
 
 ##  Pytest
 
-Para correr pytest no se corre simplemente con python, si no que hay que correrlo a través de pytest usando el comando
-```
+Para correr los tests usando `pytest` no se corre simplemente con python, si no que hay que correrlo a través de pytest usando el comando
+```bash
 python -m pytest nombre_del_archivo_de_tests.py
 ```
 
@@ -607,7 +607,7 @@ Para construir un test alcanza con declarar una función que comience con el pre
 
 Supongamos que tengo una función `suma_dos` que toma un entero y le suma 2. Un posible test de esta función en pytest podría ser:
 
-```
+```python
 def test_suma_dos():
     resultado_obtenido = suma_dos(3)
     resultado_esperado = 5

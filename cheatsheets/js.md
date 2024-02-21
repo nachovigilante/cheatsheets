@@ -183,11 +183,11 @@ Las funciones en JavaScript, como en cualquier otro lenguaje, son procedimientos
 
 ### Declaración de funciones
 
-Las funciones se pueden declarar de dos maneras diferentes que son completamente equivalentes.
+Se pueden declarar funciones de dos formas. A efectos cotidianos, son equivalentes, pero hay una sutil diferencia: al usar el keyword `function` se puede hacer uso del keyword `this` que es usado en prototipado.
 
-#### Forma antigua
+#### Keyword Function
 
-Esta es la declaración antigua de funciones, que se utilizaba antes en JavaScript.
+Se pueden declarar funciones mediante el uso de la palabra reservada del sistema, `function`.
 
 ```javascript
 function nombreDeLaFuncion(parametros) {
@@ -195,9 +195,17 @@ function nombreDeLaFuncion(parametros) {
 }
 ```
 
-#### Forma nueva
+De forma equivalente, se puede hacer también
 
-Esta es la forma nueva de declarar funciones, que se utiliza en JavaScript desde ES6.
+```javascript
+const nombreDeLaFuncion = function (parametros) {
+    // Código de la función
+}
+```
+
+#### Arrow Functions
+
+En JavaScript, a partir de ES6 se pueden declarar funciones de la siguiente forma.
 
 ```javascript
 const nombreDeLaFuncion = (parametros) => {
@@ -205,7 +213,7 @@ const nombreDeLaFuncion = (parametros) => {
 };
 ```
 
-A priori las diferencias parecen pocas, sobre todo porque el largo de las declaraciones es parecido. Sin embargo, la forma nueva de declarar funciones es más fácil de entender y manejar, además hay que tener en cuenta que "tienen el mismo largo" únicamente porque en el último ejemplo estamos guardando la función en una constante para poder llamarla, pero en los casos donde no necesitamos nombres para las funciones resultarán más cortas.
+Como mencionamos antes, este tipo de declaración es equivalente salvo por el uso del `this`
 
 ##### Función de una sola línea
 

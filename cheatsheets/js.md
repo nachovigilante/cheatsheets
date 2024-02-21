@@ -158,7 +158,7 @@ let array3 = [1, 2, 3, "Hola", true, [1, 2, 3]]; // Pueden tener arrays dentro d
 
 #### Objects
 
-Es importante destacar que los objetos de JavaScript no son objetos como los que se conocen en otros lenguajes. En JavaScript, los objetos son una colección de pares clave-valor, y no una clase, como por ejemplo un diccionario de Python, un array asociativo de PHP o un mapping en Solidity.
+Es importante destacar que los objetos de JavaScript no son objetos como los que se conocen en otros lenguajes. En JavaScript, los objetos son una colección de pares clave-valor, como por ejemplo un diccionario de Python, un array asociativo de PHP o un mapping en Solidity. No necesitan tener que instanciarse desde una clase, ya que javascript usa otro paradigma de objetos llamado prototipado.
 
 ```javascript
 let objeto = {

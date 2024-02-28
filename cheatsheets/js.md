@@ -21,9 +21,9 @@ image: "/assets/images/javascript.png"
     - [Objects](#objects)
 - [Funciones](#funciones)
   - [Declaración de funciones](#declaración-de-funciones)
-    - [Forma antigua](#forma-antigua)
-    - [Forma nueva](#forma-nueva)
-      - [Función de una sola línea](#función-de-una-sola-línea)
+    - [Keyword Function](#keyword-function)
+    - [Arrow Functions](#arrow-functions)
+    - [Función de una sola línea](#función-de-una-sola-línea)
 - [Operadores](#operadores)
   - [Operadores aritméticos](#operadores-aritméticos)
   - [Operadores de asignación](#operadores-de-asignación)
@@ -215,7 +215,7 @@ const nombreDeLaFuncion = (parametros) => {
 
 Como mencionamos antes, este tipo de declaración es equivalente salvo por el uso del `this`
 
-##### Función de una sola línea
+#### Función de una sola línea
 
 En algunos casos, es más fácil declarar una función con una sola línea de código. Esto es posible únicamente si la función tiene una única línea de código. Además, podemos omitir el `return` de la función, ya que JavaScript asume que la función devuelve el resultado de esa línea.
 

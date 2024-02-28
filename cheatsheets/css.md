@@ -8,12 +8,12 @@ image: "/assets/images/css.png"
 - [Índice](#índice)
 - [CSS](#css)
   - [Criterios para el estilo que se aplica](#criterios-para-el-estilo-que-se-aplica)
-- [Tipos de seletores](#tipos-de-seletores)
-  - [Seletores de elemento](#seletores-de-elemento)
-  - [Seletores de clase](#seletores-de-clase)
-  - [Seletores de ID](#seletores-de-id)
-  - [Seletores de atributo](#seletores-de-atributo)
-  - [Seletores de pseudo-clase](#seletores-de-pseudo-clase)
+- [Tipos de selectores](#tipos-de-selectores)
+  - [Selectores de elemento](#selectores-de-elemento)
+  - [Selectores de clase](#selectores-de-clase)
+  - [Selectores de ID](#selectores-de-id)
+  - [Selectores de atributo](#selectores-de-atributo)
+  - [Selectores de pseudo-clase](#selectores-de-pseudo-clase)
 - [Tipos de unidades](#tipos-de-unidades)
 - [Disposición de elementos](#disposición-de-elementos)
   - [Elementos de bloque (display: block)](#elementos-de-bloque-display-block)
@@ -117,9 +117,9 @@ Y en el HTML:
 
 En este caso la regla `color` del selector de clase `.intro` sobreescribe la regla `color` del selector de elemento `h1`. Por lo tanto, el color del texto es azul en el párrafo con la clase `intro`, pero rojo en el párrafo sin clase. Sin embargo, la regla `font-size` del selector de elemento `h1` no se sobreescribe, por lo que el tamaño de la fuente es de 30px en ambos párrafos.
 
-## Tipos de seletores
+## Tipos de selectores
 
-### Seletores de elemento
+### Selectores de elemento
 
 Estos selectores se utilizan para seleccionar elementos por su nombre de etiqueta. No utilizan ningún tipo de prefijo y se aplican a todos los elementos que coincidan con el nombre de la etiqueta. Por ejemplo, si queremos cambiar el color de todos los elementos `h1` en nuestra página, podemos usar el siguiente código CSS:
 
@@ -129,7 +129,7 @@ h1 {
 }
 ```
 
-### Seletores de clase
+### Selectores de clase
 
 Los selectores de clase se utilizan para seleccionar elementos por su atributo `class`. Para usar un selector de clase, debemos anteponer un punto (`.`) al nombre de la clase. Por ejemplo, si queremos cambiar el color de todos los elementos que tengan la clase `intro`, podemos usar el siguiente código CSS:
 
@@ -161,7 +161,7 @@ El resultado sería:
     <p>Lorem ipsum dolor sit amet.</p>
 </div>
 
-### Seletores de ID
+### Selectores de ID
 
 Los selectores de ID se utilizan para seleccionar elementos por su atributo `id`. Para usar un selector de ID, debemos anteponer un numeral (`#`) al nombre del ID. Notar que como los ID's deben ser únicos, estas reglas de estilos solo afectarán a un elemento. Por ejemplo, si queremos cambiar el color de un elemento que tenga el ID `intro`, podemos usar el siguiente código CSS:
 
@@ -193,7 +193,7 @@ El resultado sería:
     <p>Lorem ipsum dolor sit amet.</p>
 </div>
 
-### Seletores de atributo
+### Selectores de atributo
 
 Los selectores de atributo se utilizan para seleccionar elementos que tengan un atributo con un valor específico. Para usar un selector de atributo, debemos especificar el nombre del atributo entre corchetes (`[]`). Si queremos seleccionar los inputs que tengan un atributo `type` con el valor `number`, podemos usar el siguiente código CSS:
 
@@ -225,7 +225,7 @@ El resultado sería:
     <input type="text" placeholder="Text">
 </div>
 
-### Seletores de pseudo-clase
+### Selectores de pseudo-clase
 
 Los selectores de pseudo-clase se utilizan para seleccionar elementos basados en su estado. Por ejemplo, si queremos cambiar el color de un elemento cuando el usuario pasa el mouse por encima (_hover_), podemos usar el siguiente código CSS:
 

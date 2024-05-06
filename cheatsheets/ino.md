@@ -420,3 +420,5 @@ Crear una librería propia en Arduino nos permite reutilizar código y hacer nue
 - [Arduino](https://www.arduino.cc/)
 - [Arduino IDE](https://www.arduino.cc/en/software)
 - [Arduino Reference](https://www.arduino.cc/reference/en/)
+- [Stack Overflow](https://stackoverflow.com/questions/tagged/arduino)
+- [Foro de Arduino](https://forum.arduino.cc/)

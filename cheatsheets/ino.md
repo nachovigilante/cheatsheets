@@ -1,6 +1,6 @@
 ---
 title: Arduino
-image: "/assets/images/ino.png"
+image: "/assets/images/ino.svg"
 ---
 
 ## Índice

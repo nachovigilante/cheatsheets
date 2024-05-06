@@ -358,6 +358,61 @@ void loop() {
 }
 ```
 
+
+## Creación de librerías
+Para crear una librería en Arduino, debemos seguir los siguientes pasos:
+1. Crear una carpeta con el nombre de la librería en la carpeta `libraries` de la carpeta de instalación de Arduino.
+2. Crear un archivo `.h` y un archivo `.cpp` con el mismo nombre que la carpeta.
+3. En el archivo `.h` debemos declarar las funciones y variables de la librería.
+4. En el archivo `.cpp` debemos definir las funciones de la librería.
+5. Incluir el archivo `.h` en el programa de Arduino.
+
+```cpp
+// MiLibreria.h
+
+#ifndef MiLibreria_h // Si la librería no está definida
+#define MiLibreria_h // Definimos la librería
+
+#include "Arduino.h" // Incluimos la librería de Arduino
+
+class MiLibreria { // Definimos la clase MiLibreria
+  public: 
+    MiLibreria(); // Constructor
+    void funcion(); // Declaración de la función
+};
+
+#endif
+```
+
+```cpp
+// MiLibreria.cpp
+
+#include "MiLibreria.h"
+
+MiLibreria::MiLibreria() {
+  // Constructor
+}
+
+void MiLibreria::funcion() { // Definición de la función indicando a qué clase pertenece
+  // Código de la función
+}
+```
+
+```cpp
+// Programa de Arduino
+
+#include <MiLibreria.h> // Incluimos la librería
+
+MiLibreria miLibreria; // Creamos un objeto de la clase MiLibreria
+
+void setup() { 
+  miLibreria.funcion(); // Llamamos a la función de la librería
+}
+```
+
+Crear una librería propia en Arduino nos permite reutilizar código y hacer nuestros programas más modulares y fáciles de mantener.
+
+
 ## Referencias
 - [Arduino](https://www.arduino.cc/)
 - [Arduino IDE](https://www.arduino.cc/en/software)

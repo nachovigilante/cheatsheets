@@ -384,6 +384,7 @@ class MiLibreria { // Definimos la clase MiLibreria
 
 #endif
 ```
+<br>
 
 ```cpp
 // MiLibreria.cpp
@@ -398,6 +399,7 @@ void MiLibreria::funcion() { // Definición de la función indicando a qué clas
   // Código de la función
 }
 ```
+<br>
 
 ```cpp
 // Programa de Arduino

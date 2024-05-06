@@ -58,7 +58,7 @@ El lenguaje de programación de Arduino es muy parecido a C y C++, pero tiene al
 ### Estructura de un programa
 Un programa de Arduino tiene dos partes: la función `setup()` y la función `loop()`, estas funciones vienen predefinidas en la librería de Arduino. La función `setup()` se ejecuta una sola vez al principio del programa, mientras que la función `loop()` se ejecuta continuamente en un bucle.
 
-```ino
+```cpp
 void setup() {
   // Inicializaciones
 }
@@ -73,42 +73,42 @@ void loop() {
 ### pinMode()
 La función `pinMode()` se utiliza para configurar un pin como entrada o salida. Por ejemplo, si queremos configurar el pin 13 como salida, podemos hacer:
 
-```ino
+```cpp
 pinMode(13, OUTPUT);
 ```
 
 ### digitalWrite()
 La función `digitalWrite()` se utiliza para escribir un valor en un pin digital. Por ejemplo, si queremos encender un LED conectado al pin 13, podemos hacer:
 
-```ino
+```cpp
 digitalWrite(13, HIGH);
 ```
 
 ### delay()
 La función `delay()` se utiliza para hacer una pausa en el programa, toma como parametro el tiempo en milisegundos. Por ejemplo, si queremos esperar un segundo, podemos hacer:
 
-```ino
+```cpp
 delay(1000);
 ```
 
 ### digitalRead()
 La función `digitalRead()` se utiliza para leer el valor de un pin digital. Por ejemplo, si queremos leer el valor del pin 2, podemos hacer:
 
-```ino
+```cpp
 int valor = digitalRead(2);
 ```
 
 ### analogRead()
 La función `analogRead()` se utiliza para leer el valor de un pin analógico. Por ejemplo, si queremos leer el valor del pin A0, podemos hacer:
 
-```ino
+```cpp
 int valor = analogRead(A0);
 ```
 
 ### analogWrite()
 La función `analogWrite()` se utiliza para escribir un valor analógico en un pin PWM. Por ejemplo, si queremos escribir un valor de 128 en el pin 9, podemos hacer:
 
-```ino
+```cpp
 analogWrite(9, 128);
 ```
 
@@ -118,13 +118,13 @@ analogWrite(9, 128);
 ### Variables
 En Arduino podemos declarar variables de la misma forma que en C o C++. Por ejemplo, para declarar una variable entera, podemos hacer:
 
-```ino
+```cpp
 int numero = 5;
 ```
 
 o para declarar una variable de tipo `string`:
 
-```ino
+```cpp
 String nombre = "Juan";
 ```
 
@@ -133,7 +133,7 @@ Y lo mismo aplica para otros tipos de variables, como `float`, `char`, `boolean`
 ### Condicionales
 En Arduino podemos utilizar condicionales para tomar decisiones en nuestro programa. Por ejemplo, si queremos encender un LED si un botón está presionado, podemos hacer:
 
-```ino
+```cpp
 int boton = 2;
 int led = 13;
 
@@ -153,7 +153,7 @@ void loop() {
 
 Ademas de `if` podemos utilizar `else if` y `else` para tomar decisiones más complejas.
 
-```ino
+```cpp
 int valor = 5;
 
 if (valor > 10) {
@@ -167,7 +167,7 @@ if (valor > 10) {
 
 Además de la estructura `if`, podemos utilizar la estructura `switch`.
 
-```ino
+```cpp
 int opcion = 2;
 
 switch (opcion) {
@@ -186,7 +186,7 @@ switch (opcion) {
 ### Operadores lógicos
 En Arduino podemos utilizar operadores lógicos para comparar valores. Por ejemplo, si queremos comprobar si un valor es mayor que otro, podemos hacer:
 
-```ino
+```cpp
 int a = 5;
 int b = 3;
 
@@ -197,7 +197,7 @@ if (a > b) {
 
 Además de `>`, podemos utilizar otros operadores lógicos como `<`, `>=`, `<=`, `==`, `!=`, `&&`, `||`, etc.
 
-```ino
+```cpp
 int a = 5;
 int b = 3;
 
@@ -217,7 +217,7 @@ if (!(a == 5)) {  // Sería lo mismo que if (a != 5)
 ### Operadores aritméticos
 En Arduino podemos utilizar operadores aritméticos para realizar operaciones matemáticas. Por ejemplo, si queremos sumar dos números, podemos hacer:
 
-```ino
+```cpp
 int a = 5;
 int b = 3;
 
@@ -229,7 +229,7 @@ Además de `+`, podemos utilizar otros operadores aritméticos como `-`, `*`, `/
 ### Loops while y for
 En Arduino podemos utilizar loops `while` y `for` repetir una parte de codigo determinadas veces.
 #### While
-```ino
+```cpp
 int contador = 0;
 
 void loop() {
@@ -240,7 +240,7 @@ void loop() {
 }
 ```
 #### For
-```ino
+```cpp
 void loop() {
   for (int i = 0; i < 10; i++) {
     // Código que se ejecuta 10 veces
@@ -251,7 +251,7 @@ void loop() {
 ### Arrays
 En Arduino podemos utilizar arrays para almacenar varios valores en una sola variable. Por ejemplo, si queremos almacenar los valores de un sensor en un array, podemos hacer:
 
-```ino
+```cpp
 int sensor[5]; // Declaramos un array de 5 elementos
 
 void setup() {
@@ -263,7 +263,7 @@ void setup() {
 
 Y después podemos acceder a los valores del array de la siguiente forma:
 
-```ino
+```cpp
 int valor = sensor[2]; // Accedemos al tercer elemento del array
 ```
 
@@ -271,7 +271,7 @@ int valor = sensor[2]; // Accedemos al tercer elemento del array
 ### Funciones
 En Arduino podemos definir nuestras propias funciones. Por ejemplo, para definir una función que sume dos números, podemos hacer:
 
-```ino
+```cpp
 int suma(int a, int b) { // Escribimos int porque la función devuelve un entero y tomamos dos parámetros enteros (a y b)
   return a + b; // Devolvemos la suma de los dos números
 }
@@ -279,7 +279,7 @@ int suma(int a, int b) { // Escribimos int porque la función devuelve un entero
 
 Y después podemos llamar a esta función desde la función `loop()`:
 
-```ino
+```cpp
 void loop() {
   int resultado = suma(5, 3); // Llamamos a la función suma con los parámetros 5 y 3
 }
@@ -288,7 +288,7 @@ void loop() {
 ### Ejemplo de programa
 A continuación, un ejemplo de un programa que enciende y apaga un LED cada segundo:
 
-```ino
+```cpp
 int led = 13; // Declaramos la variable led y le asignamos el valor 13
 
 void setup() {
@@ -308,7 +308,7 @@ En este programa, encendemos y apagamos el LED conectado al pin 13 de la placa c
 ## Librerías
 En Arduino podemos utilizar librerías para facilitar la programación. Por ejemplo, si queremos utilizar la librería `Servo`, podemos incluirla al principio del programa de la siguiente forma:
 
-```ino
+```cpp
 #include <Servo.h> // o la libreria que se desea utilizar
 ```
 Gracias a que incluimos la librería, podemos utilizar las funciones y variables que vienen predefinidas en ella.
@@ -317,7 +317,7 @@ En este caso, la librería `Servo` nos permite controlar un servo motor de una f
 ## Comunicación Serial
 En Arduino podemos comunicarnos con la computadora a través de la comunicación serial. Por ejemplo, si queremos enviar un mensaje a la computadora, podemos hacer:
 
-```ino
+```cpp
 void setup() {
   Serial.begin(9600); // Inicializamos la comunicación serial a 9600 baudios
 }
@@ -334,7 +334,7 @@ Y después podemos ver el mensaje en el monitor serial del Arduino IDE, esto es 
 
 Para recibir datos de la computadora, podemos hacer:
 
-```ino
+```cpp
 void setup() {
   Serial.begin(9600); // Inicializamos la comunicación serial a 9600 baudios
 }

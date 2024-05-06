@@ -35,6 +35,7 @@ image: "/assets/images/ino.png"
   - [Ejemplo de programa](#Ejemplo-de-programa)
 - [Librerías](#Librerías)
 - [Comunicación Serial](#Comunicación-Serial)
+- [Creación de librerías](#Creación-de-librerías)
 - [Referencias](#Referencias)
 
 <!-- /code_chunk_output -->

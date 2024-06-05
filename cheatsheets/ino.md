@@ -10,53 +10,58 @@ image: "/assets/images/ino.svg"
 <!-- code_chunk_output -->
 
 - [Índice](#índice)
-- [Introducción](#Introducción-a-Arduino)
-  - [¿Qué es un microcontrolador?](#¿Qué-es-un-microcontrolador?)
-  - [¿Qué es Arduino IDE?](#¿Qué-es-Arduino-IDE?)
-- [Lenguaje .ino](#Lenguaje-ino)
-  - [Estructura de un programa](#Estructura-de-un-programa)
-- [Funciones propias de Arduino](#Funciones-propias-de-Arduino)
-  - [pinMode()](#pinMode)
-  - [digitalWrite()](#digitalWrite)
+- [Introducción a Arduino](#introducción-a-arduino)
+  - [¿Qué es un microcontrolador?](#qué-es-un-microcontrolador)
+  - [¿Qué es Arduino IDE?](#qué-es-arduino-ide)
+- [Lenguaje .ino](#lenguaje-ino)
+  - [Estructura de un programa](#estructura-de-un-programa)
+- [Funciones propias de Arduino](#funciones-propias-de-arduino)
+  - [pinMode()](#pinmode)
+  - [digitalWrite()](#digitalwrite)
   - [delay()](#delay)
-  - [digitalRead()](#digitalRead)
-  - [analogRead()](#analogRead)
-  - [analogWrite()](#analogWrite)
-- [Programación en Arduino](#Programación-en-Arduino)
-  - [Variables](#Variables)
-  - [Condicionales](#Condicionales)
-  - [Operadores lógicos](#Operadores-lógicos)
-  - [Operadores aritméticos](#Operadores-aritméticos)
-  - [Loops while y for](#Loops-while-y-for)
-    - [While](#While)
-    - [For](#For)
-  - [Arrays](#Arrays)
-  - [Funciones](#Funciones)
-  - [Ejemplo de programa](#Ejemplo-de-programa)
-- [Librerías](#Librerías)
-- [Comunicación Serial](#Comunicación-Serial)
-- [Creación de librerías](#Creación-de-librerías)
-- [Referencias](#Referencias)
+  - [digitalRead()](#digitalread)
+  - [analogRead()](#analogread)
+  - [analogWrite()](#analogwrite)
+- [Programación en Arduino](#programación-en-arduino)
+  - [Variables](#variables)
+  - [Condicionales](#condicionales)
+  - [Operadores lógicos](#operadores-lógicos)
+  - [Operadores aritméticos](#operadores-aritméticos)
+  - [Loops while y for](#loops-while-y-for)
+    - [While](#while)
+    - [For](#for)
+  - [Arrays](#arrays)
+  - [Funciones](#funciones)
+  - [Ejemplo de programa](#ejemplo-de-programa)
+- [Librerías](#librerías)
+- [Comunicación Serial](#comunicación-serial)
+- [Creación de librerías](#creación-de-librerías)
+- [Referencias](#referencias)
 
 <!-- /code_chunk_output -->
 
 <br>
 
 ## Introducción a Arduino
-Arduino como tal, es una plataforma de desarrollo de hardware de código abierto que se basa en una placa con un microcontrolador y un entorno de desarrollo. 
+
+Arduino como tal, es una plataforma de desarrollo de hardware de código abierto que se basa en una placa con un microcontrolador y un entorno de desarrollo.
 <br>
 El microcontrolador es el cerebro de la placa y es el que se encarga de ejecutar las instrucciones que le damos. El entorno de desarrollo es el software que utilizamos para programar la placa.
 
 ### ¿Qué es un microcontrolador?
+
 Un microcontrolador es un circuito integrado que incluye los elementos necesarios para que un sistema electrónico pueda funcionar. Es decir, un microcontrolador es una especie de mini computadora que se encarga de ejecutar las instrucciones que le damos.
 
 ### ¿Qué es Arduino IDE?
+
 Arduino IDE es un entorno de desarrollo que nos permite programar el Arduino. Es un software que se instala en nuestra computadora y que nos permite escribir el código que queremos que ejecute la placa.
 
 ## Lenguaje .ino
+
 El lenguaje de programación de Arduino es muy parecido a C y C++, pero tiene algunas diferencias. Por ejemplo, no es necesario declarar las variables al principio del programa, como en C. Además, tiene algunas funciones predefinidas que nos facilitan la programación.
 
 ### Estructura de un programa
+
 Un programa de Arduino tiene dos partes: la función `setup()` y la función `loop()`, estas funciones vienen predefinidas en la librería de Arduino. La función `setup()` se ejecuta una sola vez al principio del programa, mientras que la función `loop()` se ejecuta continuamente en un bucle.
 
 ```cpp
@@ -72,6 +77,7 @@ void loop() {
 ## Funciones propias de Arduino
 
 ### pinMode()
+
 La función `pinMode()` se utiliza para configurar un pin como entrada o salida. Por ejemplo, si queremos configurar el pin 13 como salida, podemos hacer:
 
 ```cpp
@@ -79,6 +85,7 @@ pinMode(13, OUTPUT);
 ```
 
 ### digitalWrite()
+
 La función `digitalWrite()` se utiliza para escribir un valor en un pin digital. Por ejemplo, si queremos encender un LED conectado al pin 13, podemos hacer:
 
 ```cpp
@@ -86,6 +93,7 @@ digitalWrite(13, HIGH);
 ```
 
 ### delay()
+
 La función `delay()` se utiliza para hacer una pausa en el programa, toma como parametro el tiempo en milisegundos. Por ejemplo, si queremos esperar un segundo, podemos hacer:
 
 ```cpp
@@ -93,6 +101,7 @@ delay(1000);
 ```
 
 ### digitalRead()
+
 La función `digitalRead()` se utiliza para leer el valor de un pin digital. Por ejemplo, si queremos leer el valor del pin 2, podemos hacer:
 
 ```cpp
@@ -100,6 +109,7 @@ int valor = digitalRead(2);
 ```
 
 ### analogRead()
+
 La función `analogRead()` se utiliza para leer el valor de un pin analógico. Por ejemplo, si queremos leer el valor del pin A0, podemos hacer:
 
 ```cpp
@@ -107,6 +117,7 @@ int valor = analogRead(A0);
 ```
 
 ### analogWrite()
+
 La función `analogWrite()` se utiliza para escribir un valor analógico en un pin PWM. Por ejemplo, si queremos escribir un valor de 128 en el pin 9, podemos hacer:
 
 ```cpp
@@ -115,8 +126,8 @@ analogWrite(9, 128);
 
 ## Programación en Arduino
 
-
 ### Variables
+
 En Arduino podemos declarar variables de la misma forma que en C o C++. Por ejemplo, para declarar una variable entera, podemos hacer:
 
 ```cpp
@@ -132,6 +143,7 @@ String nombre = "Juan";
 Y lo mismo aplica para otros tipos de variables, como `float`, `char`, `boolean`, etc.
 
 ### Condicionales
+
 En Arduino podemos utilizar condicionales para tomar decisiones en nuestro programa. Por ejemplo, si queremos encender un LED si un botón está presionado, podemos hacer:
 
 ```cpp
@@ -185,6 +197,7 @@ switch (opcion) {
 ```
 
 ### Operadores lógicos
+
 En Arduino podemos utilizar operadores lógicos para comparar valores. Por ejemplo, si queremos comprobar si un valor es mayor que otro, podemos hacer:
 
 ```cpp
@@ -216,6 +229,7 @@ if (!(a == 5)) {  // Sería lo mismo que if (a != 5)
 ```
 
 ### Operadores aritméticos
+
 En Arduino podemos utilizar operadores aritméticos para realizar operaciones matemáticas. Por ejemplo, si queremos sumar dos números, podemos hacer:
 
 ```cpp
@@ -228,8 +242,11 @@ int suma = a + b;
 Además de `+`, podemos utilizar otros operadores aritméticos como `-`, `*`, `/`, `%`, etc.
 
 ### Loops while y for
+
 En Arduino podemos utilizar loops `while` y `for` repetir una parte de codigo determinadas veces.
+
 #### While
+
 ```cpp
 int contador = 0;
 
@@ -240,7 +257,9 @@ void loop() {
   }
 }
 ```
+
 #### For
+
 ```cpp
 void loop() {
   for (int i = 0; i < 10; i++) {
@@ -250,6 +269,7 @@ void loop() {
 ```
 
 ### Arrays
+
 En Arduino podemos utilizar arrays para almacenar varios valores en una sola variable. Por ejemplo, si queremos almacenar los valores de un sensor en un array, podemos hacer:
 
 ```cpp
@@ -268,8 +288,8 @@ Y después podemos acceder a los valores del array de la siguiente forma:
 int valor = sensor[2]; // Accedemos al tercer elemento del array
 ```
 
-
 ### Funciones
+
 En Arduino podemos definir nuestras propias funciones. Por ejemplo, para definir una función que sume dos números, podemos hacer:
 
 ```cpp
@@ -287,6 +307,7 @@ void loop() {
 ```
 
 ### Ejemplo de programa
+
 A continuación, un ejemplo de un programa que enciende y apaga un LED cada segundo:
 
 ```cpp
@@ -307,15 +328,18 @@ void loop() {
 En este programa, encendemos y apagamos el LED conectado al pin 13 de la placa cada segundo.
 
 ## Librerías
+
 En Arduino podemos utilizar librerías para facilitar la programación. Por ejemplo, si queremos utilizar la librería `Servo`, podemos incluirla al principio del programa de la siguiente forma:
 
 ```cpp
 #include <Servo.h> // o la libreria que se desea utilizar
 ```
+
 Gracias a que incluimos la librería, podemos utilizar las funciones y variables que vienen predefinidas en ella.
 En este caso, la librería `Servo` nos permite controlar un servo motor de una forma más sencilla.
 
 ## Comunicación Serial
+
 En Arduino podemos comunicarnos con la computadora a través de la comunicación serial. Por ejemplo, si queremos enviar un mensaje a la computadora, podemos hacer:
 
 ```cpp
@@ -359,9 +383,10 @@ void loop() {
 }
 ```
 
-
 ## Creación de librerías
+
 Para crear una librería en Arduino, debemos seguir los siguientes pasos:
+
 1. Crear una carpeta con el nombre de la librería en la carpeta `libraries` de la carpeta de instalación de Arduino.
 2. Crear un archivo `.h` y un archivo `.cpp` con el mismo nombre que la carpeta.
 3. En el archivo `.h` debemos declarar las funciones y variables de la librería.
@@ -377,13 +402,14 @@ Para crear una librería en Arduino, debemos seguir los siguientes pasos:
 #include "Arduino.h" // Incluimos la librería de Arduino
 
 class MiLibreria { // Definimos la clase MiLibreria
-  public: 
+  public:
     MiLibreria(); // Constructor
     void funcion(); // Declaración de la función
 };
 
 #endif
 ```
+
 <br>
 
 ```cpp
@@ -399,6 +425,7 @@ void MiLibreria::funcion() { // Definición de la función indicando a qué clas
   // Código de la función
 }
 ```
+
 <br>
 
 ```cpp
@@ -408,15 +435,15 @@ void MiLibreria::funcion() { // Definición de la función indicando a qué clas
 
 MiLibreria miLibreria; // Creamos un objeto de la clase MiLibreria
 
-void setup() { 
+void setup() {
   miLibreria.funcion(); // Llamamos a la función de la librería
 }
 ```
 
 Crear una librería propia en Arduino nos permite reutilizar código y hacer nuestros programas más modulares y fáciles de mantener.
 
-
 ## Referencias
+
 - [Arduino](https://www.arduino.cc/)
 - [Arduino IDE](https://www.arduino.cc/en/software)
 - [Arduino Reference](https://www.arduino.cc/reference/en/)

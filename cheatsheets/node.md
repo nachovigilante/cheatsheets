@@ -1,6 +1,5 @@
 ---
 title: Node.js
-image: "/assets/images/nodejs.png"
 ---
 
 ## Índice
@@ -12,8 +11,6 @@ image: "/assets/images/nodejs.png"
 - [Instalar dependencias de desarrollo](#instalar-dependencias-de-desarrollo)
 - [Instalar dependencias de forma global](#instalar-dependencias-de-forma-global)
 - [Sección `scripts`](#sección-scripts)
-- [Express](#express)
-  - [Crear un servidor](#crear-un-servidor)
 
 <br>
 
@@ -83,35 +80,4 @@ Y luego ejecutarlo con el siguiente comando:
 
 ```bash
 npm run dev
-```
-
-## Express
-
-Para instalar Express deberemos ejecutar el siguiente comando:
-
-```bash
-npm install express
-```
-
-### Crear un servidor
-
-Para crear un servidor con Express deberemos crear un archivo `index.js` y añadir el siguiente código:
-
-```js
-const express = require("express");
-const app = express();
-
-app.get("/", (req, res) => {
-    res.send("Hello World!");
-});
-
-app.listen(3000, () => {
-    console.log("Example app listening on port 3000!");
-});
-```
-
-Y luego ejecutarlo con el siguiente comando:
-
-```bash
-node index.js
 ```

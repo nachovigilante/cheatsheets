@@ -14,6 +14,7 @@ image: "/assets/images/mysql2.png"
   - [Creación de una tabla](#creación-de-una-tabla)
     - [Tipos de datos](#tipos-de-datos)
       - [Autoincremental](#autoincremental)
+  - [Claves foráneas](#claves-foráneas)
 - [pg en Node.js](#pg-en-nodejs)
   - [Instalación](#instalación)
   - [Utilización](#utilización)
@@ -88,6 +89,10 @@ En general, queremos que todos los campos sean NOT NULL, excepto los que no sean
 
 Para que un campo sea autoincremental, deberán seleccionar la columna y darle el tipo de dato `serial`. Es importante que el campo que sea autoincremental sea la clave primaria de la tabla.
 
+### Claves foráneas
+
+Para agregar una clave foránea, deberán seleccionar la columna que será clave foránea y en la pestaña "Constraints" seleccionar "Foreign Key". Luego, deberán completar los datos de la clave foránea (la clave que referencia y su respectiva tabla).
+
 ## pg en Node.js
 
 Para conectarse a la base de datos desde Node.js, se puede utilizar el paquete `pg`. Aquí su [documentación](https://node-postgres.com/).
@@ -116,6 +121,7 @@ const client = new Client({
     database: "<database>",
     password: "<password>",
     port: 5432,
+    ssl: true
 });
 
 client.connect(); // Nos conectamos a la base de datos

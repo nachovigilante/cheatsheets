@@ -91,7 +91,7 @@ Para que un campo sea autoincremental, deberán seleccionar la columna y darle e
 
 ### Claves foráneas
 
-Para agregar una clave foránea, deberán seleccionar la columna que será clave foránea y en la pestaña "Constraints" seleccionar "Foreign Key". Luego, deberán completar los datos de la clave foránea (la clave que referencia y su respectiva tabla).
+Para agregar una clave foránea, deberán dar botón derecho en la tabla, entrar en la opción "Properties". Luego, en la pesataña "Constraints" seleccionar seleccionar "Foreign Key". Finalmente, deberán completar los datos de la clave foránea (la columna que será foreign key, la clave que referencia y su respectiva tabla).
 
 ## pg en Node.js
 

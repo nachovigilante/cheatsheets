@@ -21,6 +21,7 @@ image: "/assets/images/soquetic.svg"
     - [onEvent](#onevent)
     - [sendEvent](#sendevent)
     - [startServer](#startserver)
+    - [Buenas prácticas](#buenas-prácticas)
 - [DEMOS](#demos)
 
 ## ¿Qué es?
@@ -67,18 +68,48 @@ Esta función esta pensada para mandarle información al backend o para hacerle 
 
 **Reservada para eventos en tiempo real**, es decir, para cuando el proyecto cuenta con actualizaciones periódicas del backend. Esta función está para procesar eventos iniciados desde el backend, y toma dos parámetros:
 - `type` con el que se pueden distinguir distintos eventos. Debe coincidir con alguna función del backend.
-- `callback` **función** a ser llamada cuando el servidor envía un evento al front. Esta debe tomar un único parámetro, `data`, que sería la información a recibir. Lo que recibe es lo que sea que la función que emitió el evento en el backend haya enviado.
+- `callback` **función** a ser llamada cuando el servidor envía un evento al frontend. Esta debe tomar un único parámetro, `data`, que sería la información a recibir. Lo que recibe es lo que sea que la función que emitió el evento en el backend haya enviado.
 
 #### send
 
 **DEPRECADA** al ser redundante con postData. Queda *legacy* para algunos proyectos en versiones previas de SoqueTIC.
 
 ## En Backend
+
+SoqueTIC comunica frontend y backend. Esta sección se dedica a mostrar esta herramienta desde el lado de un backend hecho con Node JS.
+
 ### Instalación
+
+SoqueTIC está publicado en npm, por lo tanto, para instalarlo alcanza con correr el siguiente comando dentro del proyecto:
+```bash
+npm i soquetic
+```
+Luego se deben importar las funciones correspondientes en cada archivo js que las use. Por ejemplo, para importar todas las funciones, se puede hacer
+```javascript
+import { onEvent, sendEvent, startServer } from "soquetic";
+```
 ### Uso
+
+Para comunicarse y recibir eventos del frontend, se pueden usar las funciones descritas a continuación.
 #### onEvent
+
+Función para escuchar eventos emitidos desde el frontend. Toma 2 parámetros.
+- `type` es un string que se utiliza para identificar el evento a responder. Debe coincidir con el llamado del frontend.
+- `callback` es la **función** a ser llamada cuando llegue dicho evento. Tiene que tomar un único parámetro, `data`, en donde llega la información necesaria para responder al evento. El retorno de esta función es lo que será enviado al frontend.
+
 #### sendEvent
+
+**Esta función se usa para eventos de tiempo real.** Esto es ya que envía eventos al frontend sin que necesariamente los pida. Toma 2 parámetros:
+- `type` con el que se pueden distinguir distintos eventos. El frontend debe tener un `recieve` con el mismo tipo.
+- `data` es la información a ser enviada al frontend. Es un único parámetro, si se quiere mandar un conjunto de datos usar una estructura de datos que modele conjuntos, como listas u objetos.
+
 #### startServer
+
+Sirve para inicializar el backend y colgarse escuchando eventos. Toma un parámetro, el puerto en donde el servidor va a escuchar requests, pero este es opcional, y en caso de no especificar, se inicializa escuchando al puerto 3000 por default. Esta función se debe usar en el archivo principal a correr para levantar el servidor. Es decir, `startServer` necesariamente se debe ejecutar en el archivo siendo corrido por Node JS para que soqueTIC funcione.
+
+#### Buenas prácticas
+
+Para usar SoqueTIC hay que hacer tantos `onEvent` como eventos quiero saber responder, y en el archivo principal a correr con `node JS` llamar a la función `startServer`. Si hay perífericos que deban actualizar su estado al frontend, usar la función `sendEvent`.
 
 ## DEMOS
 

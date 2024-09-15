@@ -150,7 +150,33 @@ La función `postData` envía el evento de nombre *type* con el parámetro *data
 
 En el backend, hay alguien esperando el evento de este tipo: la función `onEvent`. En *type* tiene el mismo string que `postData`, en este caso `envio`. Y en callback, tiene la función que se va a encargar de procesar la data enviada por el frontend, en este caso, `f(data)`. Cuando el frontend ejecuta `postData` enviando datos, el backend los recibe y llama al callback con la información recibida. En este caso, llama a f, pasandole como primer y único parámetro `dataS`.
 
-Al final la ejecución del callback de `onEvent`, lo que sea que retorne dicha función volverá al frontend como respuesta. En este caso, la ejecución de f con `dataS` retorna `dataR`. Del lado del frontend, el tercer parámetro de `postData` era el callback, en este caso, `g(data)`. Este es el encargado de recibir la respuesta del backend. Cuando el backend termina la ejecución de su callback (f), lo que sea que retorne (dataR), es enviado como primer y único parámetro a un llamado de la función de callback del frontend (g). En este caso, cuando el backend responde con `dataR`, el frontend ejecuta la función g en donde su parámetro data es `dataR`
+Al final la ejecución del callback de `onEvent`, lo que sea que retorne dicha función volverá al frontend como respuesta. En este caso, la ejecución de f con `dataS` retorna `dataR`. Del lado del frontend, el tercer parámetro de `postData` era el callback, en este caso, `g(data)`. Este es el encargado de recibir la respuesta del backend. Cuando el backend termina la ejecución de su callback (f), lo que sea que retorne (dataR), es enviado como primer y único parámetro a un llamado de la función de callback del frontend (g). En este caso, cuando el backend responde con `dataR`, el frontend ejecuta la función g en donde su parámetro data es `dataR`.
+
+Para dar un ejemplo, vamos a usar el código de la [Demo Básica](https://github.com/nachovigilante/Demo-SoqueTIC). En este caso, el usuario escribe una palabra en el input, cuando apreta un botón lo envía al backend, este lo recibe y lo devuelve. El frontend toma lo devuelto y lo muestra en pantalla. Veamos el fragmento de código relevante del frontend:
+
+```javascript
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (input.value) {
+    postData("message", { msg: input.value }, (data) => {
+      a.innerHTML = data.msg;
+    });
+    input.value = "";
+  }
+});
+```
+Se puede ver como cuando se hace "submit" del formulario (apretar el botón que hace submit), se llama a una función que ejecuta postData. Esta entonces envía el evento "message" con un objeto de un único atributo, *msg*, que tiene lo que el usuario escribió en el input (`input.value`).
+
+Del lado del backend, hay un onEvent apropiado esperándolo. A continuación el código:
+```javascript
+onEvent("message", (data) => {
+  console.log(`Mensaje recibido: ${data.msg}`);
+  return { msg: `Mensaje recibido: ${data.msg}` };
+});
+```
+En este caso, al ejecutarse postData en el frontend, el backend llama a su callback recibiendo el objeto en el parámetro *data*. Lo muestra por consola y retorna **otro** objeto con un único atributo, también de nombre *msg*, que contiene el string "Mensaje recibido: " + el string recibido en el atributo *msg* del objeto enviado por el frontend.
+
+Al retornar este objeto, el frontend lo recibe llamando a su callback y pasándoselo por parámetro. En este caso, toma el parámetro en *data*, y con ese modifica el *innerText* de un `<p>` previamente creado con el atributo *msg* del objeto con el que respondió el backend.
 
 El caso de uso de [`fetchData`](#fetchdata) es muy similar, la única diferencia es que no se envía ningún parámetro al callback de [`onEvent`](#onevent), por lo tanto, este pasa a ser una función que no toma parámetros.
 

@@ -142,6 +142,18 @@ A continuación exponemos y explicamos los casos de uso de SoqueTIC más comunes
 
 ### Comunicación iniciada por el frontend
 
+Como el usuario es quien realiza la mayoría de las acciones, y este interactúa con el frontend, es generalmente el frontend quien inicia la comunicación con el backend. Mostremos el caso en el que el frontend le envía cierta información al backend y hace algo con la respuesta. El siguiente diagrama modela esa situación, en donde el frontend usa la función [`postData`](#postdata) y el backend la función [`onEvent`](#onevent):
+
+<div style="display:flex;justify-content:center"><img src="/assets/images/soquetic/postData.png" alt="Diagrama Hardware con SoqueTIC"></div>
+
+La función `postData` envía el evento de nombre *type* con el parámetro *data* al backend. En el diagrama, type es "envio" y la data es `dataS`. `dataS` puede ser de cualquier tipo. Para enviar más de una sola cosa, usar un tipo de datos que modele conjuntos, como listas u objetos. 
+
+En el backend, hay alguien esperando el evento de este tipo: la función `onEvent`. En *type* tiene el mismo string que `postData`, en este caso `envio`. Y en callback, tiene la función que se va a encargar de procesar la data enviada por el frontend, en este caso, `f(data)`. Cuando el frontend ejecuta `postData` enviando datos, el backend los recibe y llama al callback con la información recibida. En este caso, llama a f, pasandole como primer y único parámetro `dataS`.
+
+Al final la ejecución del callback de `onEvent`, lo que sea que retorne dicha función volverá al frontend como respuesta. En este caso, la ejecución de f con `dataS` retorna `dataR`. Del lado del frontend, el tercer parámetro de `postData` era el callback, en este caso, `g(data)`. Este es el encargado de recibir la respuesta del backend. Cuando el backend termina la ejecución de su callback (f), lo que sea que retorne (dataR), es enviado como primer y único parámetro a un llamado de la función de callback del frontend (g). En este caso, cuando el backend responde con `dataR`, el frontend ejecuta la función g en donde su parámetro data es `dataR`
+
+El caso de uso de [`fetchData`](#fetchdata) es muy similar, la única diferencia es que no se envía ningún parámetro al callback de [`onEvent`](#onevent), por lo tanto, este pasa a ser una función que no toma parámetros.
+
 ### Comunicación iniciada por el backend
 
 Un ejemplo de comunicación iniciada por el backend es por ejemplo cuando hay un componente de hardware.

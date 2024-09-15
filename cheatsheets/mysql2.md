@@ -1,6 +1,6 @@
 ---
 title: mysql2
-image: "/assets/images/mysql2.png"
+image: "/assets/images/mysql2.svg"
 ---
 
 ## Índice

@@ -1,5 +1,6 @@
 ---
 title: express.js
+image: "/assets/images/express.svg"
 ---
 
 ## Índice

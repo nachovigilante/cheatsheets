@@ -25,8 +25,8 @@ image: "/assets/images/soquetic.svg"
     - [Buenas prácticas](#buenas-prácticas)
 - [DEMOS](#demos)
 - [Usos comunes con ejemplos](#usos-comunes-con-ejemplos)
-  - [Comunicación frontend \<=\> backend](#comunicación-frontend--backend)
-  - [Con Hardware](#con-hardware)
+  - [Comunicación iniciada por el frontend](#comunicación-iniciada-por-el-frontend)
+  - [Comunicación iniciada por el backend](#comunicación-iniciada-por-el-backend)
 
 ## ¿Qué es?
 
@@ -138,11 +138,15 @@ Muchas veces no hay nada mejor ver un ejemplo para entender mejor. A continuaci�
 
 ## Usos comunes con ejemplos
 
-### Comunicación frontend <=> backend
+A continuación exponemos y explicamos los casos de uso de SoqueTIC más comunes. Para que se entienda mejor, los exponemos con ejemplo
 
-### Con Hardware
+### Comunicación iniciada por el frontend
 
-En el caso de hardware, la comunicación entre frontend y backend se da igual, la diferencia ahora está en que a veces es el backend es el que desea enviar un mensaje sin que necesariamente lo pida el frontend. Como es el backend el que tiene la posibilidad de comunicarse a recursos externos como hardware, es el backend el que recibe información de ellos. Entonces, para informar al usuario, el backend debe iniciar la comunicación con el frontend en vez de esperar eventos. Para eso, utiliza la función [`sendEvent`](#sendevent). A su vez, el frontend recibe ese mensaje con la función [`recieve`](#receive). El siguiente diagrama ilustra esa situación:
+### Comunicación iniciada por el backend
+
+Un ejemplo de comunicación iniciada por el backend es por ejemplo cuando hay un componente de hardware.
+
+En este caso, la comunicación iniciada por input del usuario se da igual, ya que el usuario interactúa con el frontend. La diferencia aparece para el caso en el que el backend es el que desea enviar un mensaje, sin que necesariamente lo pida el frontend. Como es el backend el que tiene la posibilidad de comunicarse a recursos externos como hardware, es el backend el que recibe información de ellos. Entonces, para informar al usuario, el backend debe iniciar la comunicación con el frontend en vez de esperar eventos. Para eso, utiliza la función [`sendEvent`](#sendevent). A su vez, el frontend recibe ese mensaje con la función [`recieve`](#receive). El siguiente diagrama ilustra esa situación:
 <div style="display:flex;justify-content:center"><img src="/assets/images/soquetic/hardware.png" alt="Diagrama Hardware con SoqueTIC"></div>
 
 Para dar un ejemplo, vamos a usar el código de la [Demo Arduino](https://github.com/JZylber/Demo-Arduino). En esta, el usuario elige un color desde el frontend y el led toma ese color. A su vez hay un botón que prende/apaga el LED, y se ve por pantalla si el LED está prendido o apagado.

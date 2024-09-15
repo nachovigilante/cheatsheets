@@ -24,6 +24,9 @@ image: "/assets/images/soquetic.svg"
     - [startServer](#startserver)
     - [Buenas prácticas](#buenas-prácticas)
 - [DEMOS](#demos)
+- [Usos comunes con ejemplos](#usos-comunes-con-ejemplos)
+  - [Comunicación frontend \<=\> backend](#comunicación-frontend--backend)
+  - [Con Hardware](#con-hardware)
 
 ## ¿Qué es?
 
@@ -133,3 +136,36 @@ Muchas veces no hay nada mejor ver un ejemplo para entender mejor. A continuaci�
 - [Demo Arduino](https://github.com/JZylber/Demo-Arduino): Envío de mensajes entre frontend, backend y arduino
 - [Fixture](https://github.com/JZylber/Fixture): Ejemplo más complejo de frontend y backend con lectura y escritura de json.
 
+## Usos comunes con ejemplos
+
+### Comunicación frontend <=> backend
+
+### Con Hardware
+
+En el caso de hardware, la comunicación entre frontend y backend se da igual, la diferencia ahora está en que a veces es el backend es el que desea enviar un mensaje sin que necesariamente lo pida el frontend. Como es el backend el que tiene la posibilidad de comunicarse a recursos externos como hardware, es el backend el que recibe información de ellos. Entonces, para informar al usuario, el backend debe iniciar la comunicación con el frontend en vez de esperar eventos. Para eso, utiliza la función [`sendEvent`](#sendevent). A su vez, el frontend recibe ese mensaje con la función [`recieve`](#receive). El siguiente diagrama ilustra esa situación:
+<div style="display:flex;justify-content:center"><img src="/assets/images/soquetic/hardware.png" alt="Diagrama Hardware con SoqueTIC"></div>
+
+Para dar un ejemplo, vamos a usar el código de la [Demo Arduino](https://github.com/JZylber/Demo-Arduino). En esta, el usuario elige un color desde el frontend y el led toma ese color. A su vez hay un botón que prende/apaga el LED, y se ve por pantalla si el LED está prendido o apagado.
+
+La parte de enviar el color de frontend a hardware es similar a lo visto anteriormente, la única diferencia es que la función [`onEvent`](#onevent) inicia comunicación serial para informar al arduino.
+
+El caso interesante es cómo el estado del botón (el prendido y apagado del LED) llega al frontend. Lo primero que ocurre es que el estado del botón es informado al backend. Esto se hace usando comunicación serial, y el backend usa la librería serialport para realizar este tipo de comunicación. A continuación, el fragmento de código relevante del **backend**: 
+```javascript
+port.on("data", function (data) {
+  let status = data.toString().trim();
+  let ledOn = status === "on";
+  sendEvent("boton", { on: ledOn });
+});
+```
+No nos interesa deternos en la sintaxis de la librería [serialport](https://serialport.io/), basta saber que en el parámetro `data` viene la información recibida por el puerto serial. El backend procesa la información, pero a diferencia de lo visto en la sección anterior, no alcanza con retornar, ya que **no está respondiendo un pedido del frontend**. Debe iniciar activamente el intercambio con el frontend, y para eso utiliza la función [sendevent](#sendevent). El frontend, por su parte, debe estar preparado para recibir los eventos del backend. A continuación el fragmento de código relevante del **frontend**: 
+```javascript
+function botonApretado(status){
+  if(status.on){
+    estado.innerText = "prendido";
+  } else {
+    estado.innerText = "apagado";
+  }
+}
+receive("boton",botonApretado)
+```
+Como vemos, el [`recieve`](#receive) es del mismo tipo que el [`sendevent`](#sendevent), y toma en el parámetro del *callback* lo enviado por el frontend y en base a eso refleja información en pantalla.

@@ -3,9 +3,7 @@ title: Subir Imagenes (Multer & Cloudinary)
 image: "/assets/images/cloudinary_icon.png"
 ---
 
-
 ## Índice
-
 
 - [Índice](#índice)
 - [Introducción](#introducción)
@@ -17,67 +15,47 @@ image: "/assets/images/cloudinary_icon.png"
 - [Subida a la nube con Cloudinary](#subir-cloudinary)
 - [Archivos temporales con Multer (para subir a la nube)](#temporal-multer)
 
-
 <br>
-
 
 ## Introducción
 
+Con estas dos herramientas, podremos subir imágenes a Cloudinary con el objetivo de obtener el enlace público para acceder a ellas desde cualquier lugar. Utilizaremos `Multer` para recibir los archivos de fotos y, con la conexión a `Cloudinary`, podremos subirlas.
 
-Con estas dos herramientas vamos a poder subir imagenes a cloudinary con el objetivo de tener el link publico para acceder desde cualquier lado. Desde `Multer` vamos a recibir los archivos de fotos en este caso y con la conexion a `Cloudinary` vamos a tener acceso a subirlas.
+## Crear Cuenta (`Cloudinary`)
 
-
-## Crear Cuenta (Cloudinary)
-
-
-Primero debemos crearnos una cuenta en Cloudinary donde vamos a subir nuestras fotos (recomendable hacerlo con GitHub).
-
+Primero, debemos crear una cuenta en `Cloudinary` para poder subir nuestras fotos. Es recomendable hacerlo utilizando GitHub.
 
 URL: https://console.cloudinary.com/users/register_free
 
-
-
-
 ## Instalación
 
-
-Para instalar `Multer` y `Cloudinary` deberemos ejecutar los siguientes dos comandos en la consola (dentro de un proyecto de Node.js):
-
+Para instalar `Multer` y `Cloudinary`, deberemos ejecutar los siguientes comandos en la consola (dentro de un proyecto de Node.js):
 
 ```bash
 npm i cloudinary
 npm i multer
 ```
 
-
 ## Configuracion (Multer)
 
+Para configurar `Multer`, primero debemos crear una carpeta donde se almacenarán las imágenes localmente (ya sea de forma temporal o permanente). Esta carpeta debe estar ubicada dentro del proyecto, ya sea dentro de la carpeta src o en una carpeta separada.
 
-Para configurar Multer debemos primero crear una carpeta donde se van a almacenar las imagenes localmente (puede ser tanto temporal o para siempre). La misma debe estar ubicada dentro del proyecto, tanto en la carpeta SRC como una capreta separada.
+La configuración de `Multer` debe estar en el router de la ruta donde deseamos trabajar. Por ejemplo, si queremos gestionar la subida de fotos de perfil, configuraremos `Multer` en el router de usuarios.
 
-
-La configuracion de multer debe estar ubicada en el Router de la ruta donde queremos trabajar. En el caso de querer trabajar en la subida de fotos de perfil el ejemplo seria trabajarlo en el router de usuarios.
-
-
-Primero debemos importar el modulo de Multer:
-
+Primero, debemos importar el módulo de `Multer`:
 
 ```js
 import multer from 'multer';
 ```
 
-
-A continuacion debemos hacer la configuracion de Multer, asi deberia ser:
-
+A continuación, debemos realizar la configuración de `Multer`. El código debería verse así:
 
 ```js
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-
 // Poner la ubicacion de la carpeta de Uploads correspondiente, en este caso se ubica dentro del SRC
 const uploadDir = join(__dirname, "../uploads");
-
 
 // Se define donde se va a ubicar el archivo que vamos a subir y el nombre, este se puede modificar, en este caso el nombre que se le va a asignar es la fecha de subida sumado del nombre del archivo original
 const storage = multer.diskStorage({
@@ -89,7 +67,6 @@ const storage = multer.diskStorage({
     }
 });
 
-
 // El siguiente filtro es para que se suban unicamente archivos con extensiones especificas. En este caso serian JPEG, PNG y JPG
 const fileFilter = (req, file, cb) => {
     const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
@@ -100,29 +77,22 @@ const fileFilter = (req, file, cb) => {
     }
 };
 
-
 const upload = multer({
     storage: storage,
     fileFilter: fileFilter
 });
 ```
 
-
 ## Conexion (Cloudinary)
 
+Para realizar la conexión con `Cloudinary`, debemos acceder a nuestro dashboard personal de `Cloudinary` en el siguiente enlace para obtener nuestras credenciales.
 
-Para hacer la conexion con cloudinary debemos entrar a nuestro dashboard de Cloudinary personal en el siguiente link para obtener nuestras credenciales.
+Desde ahí, podemos acceder a nuestro Cloudname, que se encuentra en el centro de la página, y debemos copiarlo. A continuación, hacemos clic en el botón 'Go to API Keys', ubicado a la derecha del Cloudname, donde encontraremos la API Key y el API Secret, los cuales también debemos copiar.
 
-
-Desde ahi vamos a poder acceder a nuestro Cloudname en el centro que debemos copiarlo y a continuacion debemos entrar a "Go to API Keys" que el boton se encuentra a la derecha del Cloudname donde encontraremos la API Key y el API Secret que tambien debemos copiarlo.
-
-
-En nuestro proyecto debemos crear un archivo llamado upload.js donde vamos a crear toda la configuracion
-
+En nuestro proyecto, debemos crear un archivo llamado `upload.js`, donde configuraremos toda la conexión.
 
 ```js
 import { v2 as cloudinary } from 'cloudinary';
-
 
 cloudinary.config({
   cloud_name: "<cloudname>",
@@ -130,39 +100,28 @@ cloudinary.config({
   api_secret: "<api_secret>"
 });
 
-
 export default cloudinary;
 ```
 
-
 ## Almacenamiento de Fotos (Local)
 
-
-Para hacer que los archivos se suban localmente hay que definir desde que ruta lo vamos a hacer primero desde el Router configurando que ruta vamos a usar. El siguiente ejemplo es con la creacion de usuarios, modificar para las rutas.
-
+Para que los archivos se suban localmente, primero debemos definir desde qué ruta lo haremos, configurándolo en el router correspondiente. El siguiente ejemplo es para la creación de usuarios, pero puede modificarse para otras rutas según sea necesario.
 
 ```js
 // Crear Usuarios
 router.post("/registerUsers", upload.single('file'), registerController.registerUsers);
 ```
 
+De esta manera, cuando se suban las imágenes, se guardarán en la carpeta `uploads` que hemos creado.
 
-De esta manera cuando se suban las imagenes se van a guardar en la carpeta de Uploads que creamos.
-
-
-Despues desde el controller tambien podemos manipular las extensiones que se suben con esto:
-
+Además, desde el controlador también podemos controlar las extensiones de los archivos subidos utilizando el siguiente código:
 
 ```js
 // Crear Usuarios
 const imageFile = req.file.path;
 
-
-
-
 const extension = imageFile.split('.').pop();
 const extensionesPermitidas = ['pdf', 'png', 'jpeg', 'jpg'];
-
 
 if (!extensionesPermitidas.includes(extension)) {
     console.error('Extensión de archivo no permitida');
@@ -170,72 +129,52 @@ if (!extensionesPermitidas.includes(extension)) {
 }
 ```
 
-
 ## Subida a la nube con Cloudinary
 
-
-Para subir las imagenes de Cloudinary debemos importar la configuracion desde el archivo de configuracion que habiamos creado (upload.js) con el siguiente codigo en el controller de donde vamos a trabajar:
-
+Para subir las imágenes a `Cloudinary`, debemos importar la configuración desde el archivo que habíamos creado (`upload.js`) utilizando el siguiente código en el controlador donde vamos a trabajar:
 
 ```js
 import cloudinary from '../upload.js';
 ```
 
-
-Para subirlas a Cloudinary dentro de donde querramos trabajar debemos traer el imageFile que estabamos usando con Multer y deberiamos ejecutar la siguiente funcion para subirlas que nos va a devolver un JSON con la informacion y con la variable vamos a almacenar la URL de donde se va a ubicar la imagen:
-
+Para subir las imágenes a `Cloudinary`, dentro del controlador donde estemos trabajando, debemos usar el `imageFile` que estábamos gestionando con `Multer`. Luego, debemos ejecutar la siguiente función para subir la imagen, la cual nos devolverá un JSON con la información. Con esta información, podemos almacenar la URL de donde se ubicará la imagen:
 
 ```js
 const imageFile = req.file.path;
-
 
 const result = await cloudinary.uploader.upload(imageFile, {
     folder: 'analisis',
 });
 
-
 const imageUrl = result.secure_url;
 ```
 
-
-Que a continuacion de eso se podria guardar el link en la base de datos de la siguiente forma
-
+A continuación, podemos guardar el enlace en la base de datos de la siguiente forma:
 
 ```js
 const query = 'INSERT INTO public.users (imagen) VALUES ($1)';
 
-
 await client.query(query, [imageUrl]);
 ```
 
-
 ## Archivos temporales con Multer (para subir a la nube)
 
-
-Para hacer que los archivos se hagan temporales es tan sencillo como importar el modulo FS al controller y ejecutar la funcion de unlinkSync funcion a lo que ya teniamos creado:
-
+Para que los archivos sean temporales, simplemente importa el módulo `fs` en el controlador y ejecuta la función `unlinkSync` para eliminar los archivos después de que ya hayan sido procesados. Aquí tienes un ejemplo de cómo hacerlo:
 
 ```js
 import fs from "fs";
 
-
 const imageFile = req.file.path;
-
 
 const result = await cloudinary.uploader.upload(imageFile, {
     folder: 'analisis',
 });
 
-
 const imageUrl = result.secure_url;
-
 
 const query = 'INSERT INTO public.users (imagen) VALUES ($1)';
 
-
 await client.query(query, [imageUrl]);
-
 
 fs.unlinkSync(imageFile); // Eliminar el archivo local
 ```
-

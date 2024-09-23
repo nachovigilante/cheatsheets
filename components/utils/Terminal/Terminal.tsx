@@ -62,16 +62,22 @@ const Sidebar = ({ cheatsheets }: TerminalProps) => {
                     <li key={c.slug}>
                         <Link href={`/cheatsheet/${c.slug}`}>
                             <a className="flex gap-2 items-center 2xl:text-xl xl:text-lg text-md py-1 px-2 hover:bg-[#2a2831] cursor-pointer">
-                                <Image
-                                    src={
-                                        c.frontmatter.image
-                                            ? c.frontmatter.image
-                                            : `/assets/images/${c.slug}.svg`
-                                    }
-                                    alt={`${c.slug} logo`}
-                                    width={windowSize.width >= 1250 ? 20 : 16}
-                                    height={windowSize.width >= 1250 ? 20 : 16}
-                                />
+                                <div className="shrink-0">
+                                    <Image
+                                        src={
+                                            c.frontmatter.image
+                                                ? c.frontmatter.image
+                                                : `/assets/images/${c.slug}.svg`
+                                        }
+                                        alt={`${c.slug} logo`}
+                                        width={
+                                            windowSize.width >= 1250 ? 20 : 16
+                                        }
+                                        height={
+                                            windowSize.width >= 1250 ? 20 : 16
+                                        }
+                                    />
+                                </div>
                                 <span>{c.slug}.md</span>
                             </a>
                         </Link>

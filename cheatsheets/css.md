@@ -1,6 +1,6 @@
 ---
 title: CSS
-image: "/assets/images/css.png"
+image: "/assets/images/css.svg"
 ---
 
 ## Índice

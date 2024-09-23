@@ -1,6 +1,6 @@
 ---
 title: JavaScript
-image: "/assets/images/javascript.png"
+image: "/assets/images/js.svg"
 ---
 
 ## Índice

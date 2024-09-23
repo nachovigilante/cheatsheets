@@ -1,6 +1,6 @@
 ---
 title: SQL
-image: "/assets/images/sql.png"
+image: "/assets/images/sql.svg"
 ---
 
 ## Índice

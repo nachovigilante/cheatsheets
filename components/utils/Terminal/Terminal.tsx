@@ -51,7 +51,6 @@ const WindowHeader = () => {
 
 const Sidebar = ({ cheatsheets }: TerminalProps) => {
     const windowSize = useWindowSize();
-
     return (
         <div className="bg-[#242229] xl:p-5 p-4 pb-10 font-space hidden md:block">
             <div className="2xl:text-xl text-lg 2xl:mb-3 mb-2">
@@ -64,7 +63,11 @@ const Sidebar = ({ cheatsheets }: TerminalProps) => {
                         <Link href={`/cheatsheet/${c.slug}`}>
                             <a className="flex gap-2 items-center 2xl:text-xl xl:text-lg text-md py-1 px-2 hover:bg-[#2a2831] cursor-pointer">
                                 <Image
-                                    src={`/assets/images/${c.slug}.svg`}
+                                    src={
+                                        c.frontmatter.image
+                                            ? c.frontmatter.image
+                                            : `/assets/images/${c.slug}.svg`
+                                    }
                                     alt={`${c.slug} logo`}
                                     width={windowSize.width >= 1250 ? 20 : 16}
                                     height={windowSize.width >= 1250 ? 20 : 16}

@@ -1,5 +1,6 @@
 ---
 title: Node.js
+image: "/assets/images/node.svg"
 ---
 
 ## Índice

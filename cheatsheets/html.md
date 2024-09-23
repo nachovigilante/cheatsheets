@@ -1,6 +1,6 @@
 ---
 title: HTML
-image: "/assets/images/html.png"
+image: "/assets/images/html.svg"
 ---
 
 ## Índice

@@ -1,6 +1,6 @@
 ---
 title: PHP
-image: "/assets/images/php.png"
+image: "/assets/images/php.svg"
 ---
 
 ## Índice
@@ -24,8 +24,8 @@ image: "/assets/images/php.png"
   - [Return y tipos de retorno](#return-y-tipos-de-retorno)
 - [Cosas útiles](#cosas-útiles)
   - [Función echo](#función-echo)
-  - [Función var_dump](#función-var_dump)
-  - [Función include / include_once](#función-include--include_once)
+  - [Función var\_dump](#función-var_dump)
+  - [Función include / include\_once](#función-include--include_once)
   - [Rutas absolutas](#rutas-absolutas)
   - [Rutas relativas](#rutas-relativas)
 - [Extras (100% opcionales)](#extras-100-opcionales)

@@ -1,6 +1,6 @@
 ---
 title: React
-image: "/assets/images/react.png"
+image: "/assets/images/react.svg"
 ---
 
 ## Índice

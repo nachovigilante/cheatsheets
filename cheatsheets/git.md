@@ -1,6 +1,6 @@
 ---
 title: Git-GitHub
-image: "/assets/images/git-github.png"
+image: "/assets/images/git.svg"
 ---
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->

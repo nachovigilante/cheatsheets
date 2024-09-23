@@ -1,6 +1,6 @@
 ---
 title: Terminal (bash)
-image: "/assets/images/bash.png"
+image: "/assets/images/bash.svg"
 ---
 
 ## Índice

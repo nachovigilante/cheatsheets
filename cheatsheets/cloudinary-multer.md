@@ -1,19 +1,19 @@
 ---
 title: Subir Imagenes (Multer & Cloudinary)
-image: "/assets/images/cloudinary_icon.png"
+image: "/assets/images/cloudinary.svg"
 ---
 
 ## Índice
 
 - [Índice](#índice)
 - [Introducción](#introducción)
-- [Crear Cuenta (Cloudinary)](#creacion-cuenta)
+- [Crear Cuenta (`Cloudinary`)](#crear-cuenta-cloudinary)
 - [Instalación](#instalación)
-- [Configuracion (Multer)](#config-multer)
-- [Conexion (Cloudinary)](#conexion)
-- [Almacenamiento de Fotos (Local)](#almacenamiento-local)
-- [Subida a la nube con Cloudinary](#subir-cloudinary)
-- [Archivos temporales con Multer (para subir a la nube)](#temporal-multer)
+- [Configuracion (Multer)](#configuracion-multer)
+- [Conexion (Cloudinary)](#conexion-cloudinary)
+- [Almacenamiento de Fotos (Local)](#almacenamiento-de-fotos-local)
+- [Subida a la nube con Cloudinary](#subida-a-la-nube-con-cloudinary)
+- [Archivos temporales con Multer (para subir a la nube)](#archivos-temporales-con-multer-para-subir-a-la-nube)
 
 <br>
 

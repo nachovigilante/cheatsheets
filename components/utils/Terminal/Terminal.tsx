@@ -62,7 +62,7 @@ const Sidebar = ({ cheatsheets }: TerminalProps) => {
                     <li key={c.slug}>
                         <Link href={`/cheatsheet/${c.slug}`}>
                             <a className="flex gap-2 items-center 2xl:text-xl xl:text-lg text-md py-1 px-2 hover:bg-[#2a2831] cursor-pointer">
-                                <div className="shrink-0">
+                                <div className="flex shrink-0 items-center">
                                     <Image
                                         src={
                                             c.frontmatter.image

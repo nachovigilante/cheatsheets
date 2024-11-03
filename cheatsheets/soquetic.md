@@ -3,7 +3,7 @@ title: SoqueTIC
 image: "/assets/images/soquetic.svg"
 ---
 
-(Actualizado para SoqueTIC 1.0.4)
+(Actualizado para SoqueTIC v1.2.0 *Fueguero*)
 
 ## Índice
 - [Índice](#índice)
@@ -123,7 +123,12 @@ Función para escuchar eventos emitidos desde el frontend. Toma 2 parámetros.
 
 #### startServer
 
-Sirve para inicializar el backend y colgarse escuchando eventos. Toma un parámetro, el puerto en donde el servidor va a escuchar requests, pero este es opcional, y en caso de no especificar, se inicializa escuchando al puerto 3000 por default. Esta función se debe usar en el archivo principal a correr para levantar el servidor. Es decir, `startServer` necesariamente se debe ejecutar en el archivo siendo corrido por Node JS para que soqueTIC funcione.
+Sirve para inicializar el backend y colgarse escuchando eventos. Esta función se debe usar en el archivo principal a correr para levantar el servidor. Es decir, `startServer` necesariamente se debe ejecutar en el archivo siendo corrido por Node JS para que soqueTIC funcione.
+
+Esta función toma 2 parámetros **opcionales**:
+
+- `PORT`: número del puerto en donde el servidor va a escuchar requests. En caso de no especificar, su valor default es `3000`.
+- `DEBUG`: determina si iniciar SoqueTIC en modo DEBUG o no. En caso de no especificar, su valor default es `true`. En el modo DEBUG, el servidor escribe por la consola todo lo recibido y enviado, entre otros mensajes sobre el funcionamiento de SoqueTIC.
 
 #### Buenas prácticas
 

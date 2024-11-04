@@ -3,7 +3,7 @@ title: SoqueTIC
 image: "/assets/images/soquetic.svg"
 ---
 
-(Actualizado para SoqueTIC v1.2.3 *Carancho*)
+(Actualizado para SoqueTIC v1.2.4 *Sietecolores*)
 
 ## Índice
 - [Índice](#índice)
@@ -62,7 +62,7 @@ Para usar a SoqueTIC en un archivo HTML, se debe hacer lo siguiente:
 
 1) Importar el script de SocketIO. Esto se puede hacer con el siguiente tag:
 ```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.4/socket.io.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
 ```
 2) Descargar el archivo `socket.js`. Esto se puede hacer sacándolo de cualquiera de las demos o descargarlo de <a href="/download/socket.js" download>acá</a>. Linkearlo en el HTML con un tag `<script>` debajo del tag anterior.
 3) Linkear el archivo en el que van a usar SoqueTIC debajo de estos dos `<script>`.

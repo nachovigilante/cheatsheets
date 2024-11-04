@@ -3,7 +3,7 @@ title: SoqueTIC
 image: "/assets/images/soquetic.svg"
 ---
 
-(Actualizado para SoqueTIC v1.2.0 *Fueguero*)
+(Actualizado para SoqueTIC v1.2.3 *Carancho*)
 
 ## Índice
 - [Índice](#índice)
@@ -16,6 +16,7 @@ image: "/assets/images/soquetic.svg"
     - [postData](#postdata)
     - [receive](#receive)
     - [send](#send)
+    - [connect2Server](#connect2server)
 - [En Backend](#en-backend)
   - [Instalación](#instalación-1)
   - [Uso](#uso-1)
@@ -47,12 +48,14 @@ Por eso, a pesar qué los proyectos en 3ero sean puramente locales, necesitamos 
 <div style="display:flex;justify-content:center"><img src="/assets/images/soquetic/soqueticDiagrama.png" alt="Diagrama SoqueTIC"></div>
 
 Algunos puntos importantes:
+
 - El usuario interactúa con el frontend, que es el que tiene los elementos gráficos e interactivos. **El browser no puede ni leer ni escribir archivos. Tampoco leer el puerto serial para usar arduino, o cambiar características del sistema operativo.** Si la interacción del usuario requiere estas cosas, se debe enviar un mensaje al backend para que las haga usando SoqueTIC. 
 - El backend tiene acceso a todo salvo a la interfaz gráfica. Es decir, responde pedidos del frontend (que recibe input del usuario) e interactúa con archivos, periféricos y sistema operativo. Si el backend necesita actualizar algo en la interfaz gráfica para informar al usuario, necesariamente debe usar soqueTIC para realizarlo. **El DOM (document) solo existe en el frontend porque modela la página web**, no puede haber un llamado a `document` en el backend.
 
 ## En Frontend
 
 SoqueTIC comunica frontend y backend. Esta sección se dedica a mostrar esta herramienta desde el lado de un frontend hecho con HTML, CSS y JS para ser corrido por algún browser (Chrome, Firefox, etc.)
+
 ### Instalación
 
 Para usar a SoqueTIC en un archivo HTML, se debe hacer lo siguiente:
@@ -62,22 +65,25 @@ Para usar a SoqueTIC en un archivo HTML, se debe hacer lo siguiente:
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.4/socket.io.js"></script>
 ```
 2) Descargar el archivo `socket.js`. Esto se puede hacer sacándolo de cualquiera de las demos o descargarlo de <a href="/download/socket.js" download>acá</a>. Linkearlo en el HTML con un tag `<script>` debajo del tag anterior.
-   
 3) Linkear el archivo en el que van a usar SoqueTIC debajo de estos dos `<script>`.
 
 **IMPORTANTE:** Para poder ejecutar SoqueTIC no alcanza con abrir el HTML en el browser: hay que armar un live server. La forma más común de hacer esto es usando la [extensión de VS Code](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
+
 ### Uso
 
 Para comunicarse con el backend, se pueden usar las funciones descritas a continuación. Obviamente, si el backend no está encendido y ejecutándose, nada va a andar.
+
 #### fetchData
 
 Esta función está pensada para hacer pedidos al backend pero no es necesario mandarle nada para que pueda responder al pedido. Esta recibe 2 parámeteros:
+
 - `type` con el que se pueden distinguir distintos eventos. Debe coincidir con alguna función del backend.
 - `callback` **función** a ser llamada cuando el servidor responda con la información deseada. Esta debe tomar un único parámetro, `data`, que sería la información a recibir. Lo que recibe es lo que sea que la función a la que respondió a este evento en el backend haya retornado.
 
 #### postData
 
 Esta función esta pensada para mandarle información al backend o para hacerle pedidos que impliquen mandarle información. Esta recibe 3 parámeteros (1 opcional):
+
 - `type` con el que se pueden distinguir distintos eventos. Debe coincidir con alguna función del backend.
 - `data` es la información a ser enviada al servidor. Es un único parámetro, si se quiere mandar un conjunto de datos usar una estructura de datos que modele conjuntos, como listas u objetos.
 - `callback` (opcional, puede quedar vacío) **función** a ser llamada cuando el servidor responda con la información deseada. Esta debe tomar un único parámetro, `data`, que sería la información que recibe del servidor. Lo que recibe es lo que sea que la función a la que respondió a este evento en el backend haya retornado.
@@ -85,12 +91,19 @@ Esta función esta pensada para mandarle información al backend o para hacerle 
 #### receive
 
 **Reservada para eventos en tiempo real**, es decir, para cuando el proyecto cuenta con actualizaciones periódicas del backend. Esta función está para procesar eventos iniciados desde el backend, y toma dos parámetros:
+
 - `type` con el que se pueden distinguir distintos eventos. Debe coincidir con alguna función del backend.
 - `callback` **función** a ser llamada cuando el servidor envía un evento al frontend. Esta debe tomar un único parámetro, `data`, que sería la información a recibir. Lo que recibe es lo que sea que la función que emitió el evento en el backend haya enviado.
 
 #### send
 
 **DEPRECADA** al ser redundante con postData. Queda *legacy* para algunos proyectos en versiones previas de SoqueTIC.
+
+#### connect2Server
+
+Función necesaria para iniciar la conexión al servidor. Solo puede conectarse a servidores locales. Toma un parámetro **opcional** `PORT`, que en caso de no especificarse toma el valor 3000. Pasarle el puerto si es que el servidor está corriendo en un puerto distinto a 3000. 
+
+**IMPORTANTE:** Se debe llamar a `connect2Server` en cada archivo que utilice SoqueTIC para comunicarse con el backend.
 
 ## En Backend
 
@@ -112,12 +125,14 @@ Para comunicarse y recibir eventos del frontend, se pueden usar las funciones de
 #### onEvent
 
 Función para escuchar eventos emitidos desde el frontend. Toma 2 parámetros.
+
 - `type` es un string que se utiliza para identificar el evento a responder. Debe coincidir con el llamado del frontend.
 - `callback` es la **función** a ser llamada cuando llegue dicho evento. Tiene que tomar un único parámetro, `data`, en donde llega la información necesaria para responder al evento. El retorno de esta función es lo que será enviado al frontend.
 
 #### sendEvent
 
 **Esta función se usa para eventos de tiempo real.** Esto es ya que envía eventos al frontend sin que necesariamente los pida. Toma 2 parámetros:
+
 - `type` con el que se pueden distinguir distintos eventos. El frontend debe tener un `recieve` con el mismo tipo.
 - `data` es la información a ser enviada al frontend. Es un único parámetro, si se quiere mandar un conjunto de datos usar una estructura de datos que modele conjuntos, como listas u objetos.
 
@@ -137,6 +152,7 @@ Para usar SoqueTIC hay que hacer tantos `onEvent` como eventos quiero saber resp
 ## DEMOS
 
 Muchas veces no hay nada mejor ver un ejemplo para entender mejor. A continuación una serie de proyectos de prueba hechos por el equipo docente usando SoqueTIC.
+
 - [Demo Básica](https://github.com/nachovigilante/Demo-SoqueTIC): Envío de mensajes de frontend a backend
 - [Demo Arduino](https://github.com/JZylber/Demo-Arduino): Envío de mensajes entre frontend, backend y arduino
 - [Fixture](https://github.com/JZylber/Fixture): Ejemplo más complejo de frontend y backend con lectura y escritura de json.

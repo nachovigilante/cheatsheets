@@ -64,7 +64,9 @@ Para usar a SoqueTIC en un archivo HTML, se debe hacer lo siguiente:
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
 ```
+
 2) Descargar el archivo `socket.js`. Esto se puede hacer sacándolo de cualquiera de las demos o descargarlo de <a href="/download/socket.js" download>acá</a>. Linkearlo en el HTML con un tag `<script>` debajo del tag anterior.
+
 3) Linkear el archivo en el que van a usar SoqueTIC debajo de estos dos `<script>`.
 
 **IMPORTANTE:** Para poder ejecutar SoqueTIC no alcanza con abrir el HTML en el browser: hay que armar un live server. La forma más común de hacer esto es usando la [extensión de VS Code](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).

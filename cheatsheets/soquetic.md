@@ -3,7 +3,7 @@ title: SoqueTIC
 image: "/assets/images/soquetic.svg"
 ---
 
-(Actualizado para SoqueTIC v1.2.4 *Sietecolores*)
+(Actualizado para SoqueTIC v1.2.6 *Hornero*)
 
 ## Índice
 - [Índice](#índice)
@@ -12,7 +12,7 @@ image: "/assets/images/soquetic.svg"
 - [En Frontend](#en-frontend)
   - [Instalación](#instalación)
   - [Uso](#uso)
-    - [fetchData](#fetchdata)
+    - [getData](#getdata)
     - [postData](#postdata)
     - [receive](#receive)
     - [send](#send)
@@ -60,14 +60,12 @@ SoqueTIC comunica frontend y backend. Esta sección se dedica a mostrar esta her
 
 Para usar a SoqueTIC en un archivo HTML, se debe hacer lo siguiente:
 
-1) Importar el script de SocketIO. Esto se puede hacer con el siguiente tag:
+1) Importar el script de SocketIO y el de SoqueTIC Esto se puede hacer con los siguientes tags:
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/JZylber/SoqueTIC-Client@v1.2.6/soquetic-client.js"></script>
 ```
-
-2) Descargar el archivo `socket.js`. Esto se puede hacer sacándolo de cualquiera de las demos o descargarlo de <a href="/download/socket.js" download>acá</a>. Linkearlo en el HTML con un tag `<script>` debajo del tag anterior.
-
-3) Linkear el archivo en el que van a usar SoqueTIC debajo de estos dos `<script>`.
+2) Linkear el archivo en el que van a usar SoqueTIC debajo de estos dos `<script>`.
 
 **IMPORTANTE:** Para poder ejecutar SoqueTIC no alcanza con abrir el HTML en el browser: hay que armar un live server. La forma más común de hacer esto es usando la [extensión de VS Code](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
 
@@ -75,7 +73,7 @@ Para usar a SoqueTIC en un archivo HTML, se debe hacer lo siguiente:
 
 Para comunicarse con el backend, se pueden usar las funciones descritas a continuación. Obviamente, si el backend no está encendido y ejecutándose, nada va a andar.
 
-#### fetchData
+#### getData
 
 Esta función está pensada para hacer pedidos al backend pero no es necesario mandarle nada para que pueda responder al pedido. Esta recibe 2 parámeteros:
 
@@ -201,7 +199,7 @@ En este caso, al ejecutarse postData en el frontend, el backend llama a su callb
 
 Al retornar este objeto, el frontend lo recibe llamando a su callback y pasándoselo por parámetro. En este caso, toma el parámetro en *data*, y con ese modifica el *innerText* de un `<p>` previamente creado con el atributo *msg* del objeto con el que respondió el backend.
 
-El caso de uso de [`fetchData`](#fetchdata) es muy similar, la única diferencia es que no se envía ningún parámetro al callback de [`onEvent`](#onevent), por lo tanto, este pasa a ser una función que no toma parámetros.
+El caso de uso de [`getData`](#getData) es muy similar, la única diferencia es que no se envía ningún parámetro al callback de [`onEvent`](#onevent), por lo tanto, este pasa a ser una función que no toma parámetros.
 
 ### Comunicación iniciada por el backend
 

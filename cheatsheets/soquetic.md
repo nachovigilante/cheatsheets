@@ -169,7 +169,7 @@ A continuación exponemos y explicamos los casos de uso de SoqueTIC más comunes
 
 Como el usuario es quien realiza la mayoría de las acciones, y este interactúa con el frontend, es generalmente el frontend quien inicia la comunicación con el backend. Mostremos el caso en el que el frontend le envía cierta información al backend y hace algo con la respuesta. El siguiente diagrama modela esa situación, en donde el frontend usa la función [`postEvent`](#postevent) y el backend la función [`subscribePOSTEvent`](#subscribepostevent):
 
-<div style="display:flex;justify-content:center"><img src="/assets/images/soquetic/postData.png" alt="Diagrama Hardware con SoqueTIC"></div>
+<div style="display:flex;justify-content:center"><img src="/assets/images/soquetic/postEvent.png" alt="Diagrama Hardware con SoqueTIC"></div>
 
 La función `postEvent` envía el evento de nombre *type* con el parámetro *data* al backend. En el diagrama, type es "envio" y la data es `dataS`. `dataS` puede ser de cualquier tipo. Para enviar más de una sola cosa, usar un tipo de datos que modele conjuntos, como listas u objetos.
 
@@ -190,7 +190,7 @@ form.addEventListener("submit", (e) => {
   }
 });
 ```
-Se puede ver como cuando se hace "submit" del formulario (apretar el botón que hace submit), se llama a una función que ejecuta postData. Esta entonces envía el evento "message" con un objeto de un único atributo, *msg*, que tiene lo que el usuario escribió en el input (`input.value`).
+Se puede ver como cuando se hace "submit" del formulario (apretar el botón que hace submit), se llama a una función que ejecuta postEvent. Esta entonces envía el evento "message" con un objeto de un único atributo, *msg*, que tiene lo que el usuario escribió en el input (`input.value`).
 
 Del lado del backend, hay un onEvent apropiado esperándolo. A continuación el código:
 ```javascript
@@ -199,7 +199,7 @@ subscribePOSTEvent("message", (data) => {
   return { msg: `Mensaje recibido: ${data.msg}` };
 });
 ```
-En este caso, al ejecutarse postData en el frontend, el backend llama a su callback recibiendo el objeto en el parámetro *data*. Lo muestra por consola y retorna **otro** objeto con un único atributo, también de nombre *msg*, que contiene el string "Mensaje recibido: " + el string recibido en el atributo *msg* del objeto enviado por el frontend.
+En este caso, al ejecutarse postEvent en el frontend, el backend llama a su callback recibiendo el objeto en el parámetro *data*. Lo muestra por consola y retorna **otro** objeto con un único atributo, también de nombre *msg*, que contiene el string "Mensaje recibido: " + el string recibido en el atributo *msg* del objeto enviado por el frontend.
 
 Al retornar este objeto, el frontend lo recibe llamando a su callback y pasándoselo por parámetro. En este caso, toma el parámetro en *data*, y con ese modifica el *innerText* de un `<p>` previamente creado con el atributo *msg* del objeto con el que respondió el backend.
 

@@ -19,8 +19,8 @@ image: "/assets/images/soquetic.svg"
 - [En Backend](#en-backend)
   - [Instalación](#instalación-1)
   - [Uso](#uso-1)
-    - [subscribeGetEvent](#subscribegetevent)
-    - [subscribePostEvent](#subscribepostevent)
+    - [subscribeGETEvent](#subscribegetevent)
+    - [subscribePOSTEvent](#subscribepostevent)
     - [realTimeEvent](#realtimeevent)
     - [startServer](#startserver)
     - [Buenas prácticas](#buenas-prácticas)
@@ -113,20 +113,20 @@ npm i soquetic
 ```
 Luego se deben importar las funciones correspondientes en cada archivo js que las use. Por ejemplo, para importar todas las funciones, se puede hacer
 ```javascript
-import { subscribeGetEvent, subscribePostEvent, realTimeEvent, startServer } from "soquetic";
+import { subscribeGETEvent, subscribePOSTEvent, realTimeEvent, startServer } from "soquetic";
 ```
 ### Uso
 
 Para comunicarse y recibir eventos del frontend, se pueden usar las funciones descritas a continuación.
 
-#### subscribeGetEvent
+#### subscribeGETEvent
 
 Función para escuchar eventos **GET** emitidos desde el frontend. Toma 2 parámetros.
 
 - `type` es un string que se utiliza para identificar el evento a responder. Debe coincidir con el llamado del frontend.
 - `callback` es la **función** a ser llamada cuando llegue dicho evento. No tiene que tomar ningún parámetro ya que los eventos GET no tienen información asociada. El retorno de esta función es lo que será enviado al frontend.
 
-#### subscribePostEvent
+#### subscribePOSTEvent
 
 Función para escuchar eventos **POST** emitidos desde el frontend. Toma 2 parámetros.
 
@@ -151,7 +151,7 @@ Esta función toma 2 parámetros **opcionales**:
 
 #### Buenas prácticas
 
-Para usar SoqueTIC hay que hacer tantos `subscribeGetEvent`/`subscribePostEvent` como eventos quiero saber responder, y en el archivo principal a correr con `node JS` llamar a la función `startServer`. Si hay perífericos que deban actualizar su estado al frontend, usar la función `realTimeEvent`.
+Para usar SoqueTIC hay que hacer tantos `subscribeGETEvent`/`subscribePOSTEvent` como eventos quiero saber responder, y en el archivo principal a correr con `node JS` llamar a la función `startServer`. Si hay perífericos que deban actualizar su estado al frontend, usar la función `realTimeEvent`.
 
 ## DEMOS
 
@@ -167,15 +167,15 @@ A continuación exponemos y explicamos los casos de uso de SoqueTIC más comunes
 
 ### Comunicación iniciada por el frontend
 
-Como el usuario es quien realiza la mayoría de las acciones, y este interactúa con el frontend, es generalmente el frontend quien inicia la comunicación con el backend. Mostremos el caso en el que el frontend le envía cierta información al backend y hace algo con la respuesta. El siguiente diagrama modela esa situación, en donde el frontend usa la función [`postEvent`](#postevent) y el backend la función [`subscribePostEvent`](#subscribepostevent):
+Como el usuario es quien realiza la mayoría de las acciones, y este interactúa con el frontend, es generalmente el frontend quien inicia la comunicación con el backend. Mostremos el caso en el que el frontend le envía cierta información al backend y hace algo con la respuesta. El siguiente diagrama modela esa situación, en donde el frontend usa la función [`postEvent`](#postevent) y el backend la función [`subscribePOSTEvent`](#subscribepostevent):
 
 <div style="display:flex;justify-content:center"><img src="/assets/images/soquetic/postData.png" alt="Diagrama Hardware con SoqueTIC"></div>
 
 La función `postEvent` envía el evento de nombre *type* con el parámetro *data* al backend. En el diagrama, type es "envio" y la data es `dataS`. `dataS` puede ser de cualquier tipo. Para enviar más de una sola cosa, usar un tipo de datos que modele conjuntos, como listas u objetos.
 
-En el backend, hay alguien esperando el evento de este tipo: la función `subscribePostEvent`. En *type* tiene el mismo string que `postEvent`, en este caso `envio`. Y en callback, tiene la función que se va a encargar de procesar la data enviada por el frontend, en este caso, `f(data)`. Cuando el frontend ejecuta `postEvent` enviando datos, el backend los recibe y llama al callback con la información recibida. En este caso, llama a f, pasandole como primer y único parámetro `dataS`.
+En el backend, hay alguien esperando el evento de este tipo: la función `subscribePOSTEvent`. En *type* tiene el mismo string que `postEvent`, en este caso `envio`. Y en callback, tiene la función que se va a encargar de procesar la data enviada por el frontend, en este caso, `f(data)`. Cuando el frontend ejecuta `postEvent` enviando datos, el backend los recibe y llama al callback con la información recibida. En este caso, llama a f, pasandole como primer y único parámetro `dataS`.
 
-Al final la ejecución del callback de `subscribePostEvent`, lo que sea que retorne dicha función volverá al frontend como respuesta. En este caso, la ejecución de f con `dataS` retorna `dataR`. Del lado del frontend, el tercer parámetro de `postEvent` era el callback, en este caso, `g(data)`. Este es el encargado de recibir la respuesta del backend. Cuando el backend termina la ejecución de su callback (f), lo que sea que retorne (dataR), es enviado como primer y único parámetro a un llamado de la función de callback del frontend (g). En este caso, cuando el backend responde con `dataR`, el frontend ejecuta la función g en donde su parámetro data es `dataR`.
+Al final la ejecución del callback de `subscribePOSTEvent`, lo que sea que retorne dicha función volverá al frontend como respuesta. En este caso, la ejecución de f con `dataS` retorna `dataR`. Del lado del frontend, el tercer parámetro de `postEvent` era el callback, en este caso, `g(data)`. Este es el encargado de recibir la respuesta del backend. Cuando el backend termina la ejecución de su callback (f), lo que sea que retorne (dataR), es enviado como primer y único parámetro a un llamado de la función de callback del frontend (g). En este caso, cuando el backend responde con `dataR`, el frontend ejecuta la función g en donde su parámetro data es `dataR`.
 
 Para dar un ejemplo, vamos a usar el código de la [Demo Básica](https://github.com/nachovigilante/Demo-SoqueTIC). En este caso, el usuario escribe una palabra en el input, cuando apreta un botón lo envía al backend, este lo recibe y lo devuelve. El frontend toma lo devuelto y lo muestra en pantalla. Veamos el fragmento de código relevante del frontend:
 
@@ -194,7 +194,7 @@ Se puede ver como cuando se hace "submit" del formulario (apretar el botón que 
 
 Del lado del backend, hay un onEvent apropiado esperándolo. A continuación el código:
 ```javascript
-subscribePostEvent("message", (data) => {
+subscribePOSTEvent("message", (data) => {
   console.log(`Mensaje recibido: ${data.msg}`);
   return { msg: `Mensaje recibido: ${data.msg}` };
 });
@@ -203,7 +203,7 @@ En este caso, al ejecutarse postData en el frontend, el backend llama a su callb
 
 Al retornar este objeto, el frontend lo recibe llamando a su callback y pasándoselo por parámetro. En este caso, toma el parámetro en *data*, y con ese modifica el *innerText* de un `<p>` previamente creado con el atributo *msg* del objeto con el que respondió el backend.
 
-El caso de uso de [`getEvent`](#getevent) es muy similar, la única diferencia es que no se envía ningún parámetro, y el callback es [`subscribeGetEvent`](#subscribegetevent), por lo tanto, este pasa a ser una función que no toma parámetros.
+El caso de uso de [`getEvent`](#getevent) es muy similar, la única diferencia es que no se envía ningún parámetro, y el callback es [`subscribeGETEvent`](#subscribegetevent), por lo tanto, este pasa a ser una función que no toma parámetros.
 
 ### Comunicación iniciada por el backend
 
@@ -214,7 +214,7 @@ En este caso, la comunicación iniciada por input del usuario se da igual, ya qu
 
 Para dar un ejemplo, vamos a usar el código de la [Demo Arduino](https://github.com/JZylber/Demo-Arduino). En esta, el usuario elige un color desde el frontend y el led toma ese color. A su vez hay un botón que prende/apaga el LED, y se ve por pantalla si el LED está prendido o apagado.
 
-La parte de enviar el color de frontend a hardware es similar a lo visto anteriormente, la única diferencia es que la función [`subscribePostEvent`](#subscribepostevent) inicia comunicación serial para informar al arduino.
+La parte de enviar el color de frontend a hardware es similar a lo visto anteriormente, la única diferencia es que la función [`subscribePOSTEvent`](#subscribepostevent) inicia comunicación serial para informar al arduino.
 
 El caso interesante es cómo el estado del botón (el prendido y apagado del LED) llega al frontend. Lo primero que ocurre es que el estado del botón es informado al backend. Esto se hace usando comunicación serial, y el backend usa la librería serialport para realizar este tipo de comunicación. A continuación, el fragmento de código relevante del **backend**: 
 ```javascript

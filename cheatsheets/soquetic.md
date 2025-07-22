@@ -3,12 +3,15 @@ title: SoqueTIC
 image: "/assets/images/soquetic.svg"
 ---
 
-(Actualizado para SoqueTIC v1.3.0 *Caburé*)
+(Actualizado para SoqueTIC v1.4.0 *Gavilán*)
 
 ## Índice
 - [Índice](#índice)
 - [¿Qué es?](#qué-es)
 - [Inspiración e Idea](#inspiración-e-idea)
+- [Eventos](#eventos)
+  - [Nombres de los eventos](#nombres-de-los-eventos)
+  - [Query params](#query-params)
 - [En Frontend](#en-frontend)
   - [Instalación](#instalación)
   - [Uso](#uso)
@@ -16,6 +19,7 @@ image: "/assets/images/soquetic.svg"
     - [postEvent](#postevent)
     - [subscribeRealTimeEvent](#subscriberealtimeevent)
     - [connect2Server](#connect2server)
+    - [Buenas prácticas](#buenas-prácticas)
 - [En Backend](#en-backend)
   - [Instalación](#instalación-1)
   - [Uso](#uso-1)
@@ -23,7 +27,7 @@ image: "/assets/images/soquetic.svg"
     - [subscribePOSTEvent](#subscribepostevent)
     - [realTimeEvent](#realtimeevent)
     - [startServer](#startserver)
-    - [Buenas prácticas](#buenas-prácticas)
+    - [Buenas prácticas](#buenas-prácticas-1)
 - [DEMOS](#demos)
 - [Usos comunes con ejemplos](#usos-comunes-con-ejemplos)
   - [Comunicación iniciada por el frontend](#comunicación-iniciada-por-el-frontend)
@@ -52,6 +56,27 @@ Algunos puntos importantes:
 - El usuario interactúa con el frontend, que es el que tiene los elementos gráficos e interactivos. **El browser no puede ni leer ni escribir archivos. Tampoco leer el puerto serial para usar arduino, o cambiar características del sistema operativo.** Si la interacción del usuario requiere estas cosas, se debe enviar un mensaje al backend para que las haga usando SoqueTIC. 
 - El backend tiene acceso a todo salvo a la interfaz gráfica. Es decir, responde pedidos del frontend (que recibe input del usuario) e interactúa con archivos, periféricos y sistema operativo. Si el backend necesita actualizar algo en la interfaz gráfica para informar al usuario, necesariamente debe usar soqueTIC para realizarlo. **El DOM (document) solo existe en el frontend porque modela la página web**, no puede haber un llamado a `document` en el backend.
 
+## Eventos
+
+SoqueTIC utiliza un sistema de eventos para comunicar acciones entre el frontend y el backend. Los eventos son mensajes que se envían a través de la conexión de SocketIO y permiten que ambos lados reaccionen a acciones del usuario o cambios en el estado de la aplicación. En particular, SoqueTIC utiliza 3 tipos de eventos:
+
+- **GET**: Eventos iniciados desde el frontend que no requieren enviar información al backend o requieren enviar poca información. Se utilizan para solicitar datos o realizar acciones que no necesitan parámetros adicionales.
+- **POST**: Eventos iniciados desde el frontend que requieren enviar información al backend. Se utilizan para enviar datos o realizar acciones que necesitan parámetros adicionales.
+- **REALTIME**: Eventos iniciados desde el backend. Se utilizan para enviar datos desde el backend al frontend sin que este los haya solicitado explícitamente. Son útiles para actualizaciones en tiempo real, como notificaciones o cambios de estado.
+
+### Nombres de los eventos
+
+Los eventos se identifican por un nombre único, que es un string. Este nombre debe ser el mismo tanto en el frontend como en el backend para que la comunicación funcione correctamente. Por ejemplo, si el frontend envía un evento llamado "mensaje", el backend debe tener una función que escuche ese evento con el mismo nombre.
+
+Los nombres son independientes de los tipos de eventos, es decir, se pueden usar los mismos nombres para eventos GET, POST y REALTIME. Sin embargo, recomendamos usar nombres descriptivos y específicos para cada tipo de evento para evitar confusiones.
+
+Los único no permitido en los nombres de eventos es el caracter `?` ya que se utiliza para los query params, explicados a continuación. El resto de los caracteres son válidos, incluyendo espacios, guiones y guiones bajos. Sin embargo, recomendamos evitar espacios y usar [camelCase](https://keepcoding.io/blog/camelcase-que-es-como-funciona-y-beneficios/).
+
+### Query params
+
+SoqueTIC permite enviar información adicional a los eventos GET y POST mediante query params, de la misma forma que se hace con [URLs](https://medium.com/@a.herrerapuertas/query-params-path-params-614e878957ce). Estos son parámetros adicionales que se envían junto con el evento y se pueden utilizar para proporcionar información adicional al backend.
+Los query params se extraen del nombre del evento, y se separan del nombre con un `?`. Por ejemplo, si el evento es "mensaje?user=Juan&color=rojo", el backend recibirá el evento "mensaje" con los query params `user` y `color`.
+
 ## En Frontend
 
 SoqueTIC comunica frontend y backend. Esta sección se dedica a mostrar esta herramienta desde el lado de un frontend hecho con HTML, CSS y JS para ser corrido por algún browser (Chrome, Firefox, etc.)
@@ -63,7 +88,7 @@ Para usar a SoqueTIC en un archivo HTML, se debe hacer lo siguiente:
 1) Importar el script de SocketIO y el de SoqueTIC Esto se puede hacer con los siguientes tags:
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/JZylber/SoqueTIC-Client@v1.3.0/soquetic-client.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/JZylber/SoqueTIC-Client@v1.4.0/soquetic-client.js"></script>
 ```
 2) Linkear el archivo en el que van a usar SoqueTIC debajo de estos dos `<script>`.
 
@@ -75,16 +100,16 @@ Para comunicarse con el backend, se pueden usar las funciones descritas a contin
 
 #### getEvent
 
-Esta función está pensada para hacer pedidos al backend donde no es necesario mandarle nada para que pueda responder al pedido. Esta recibe 2 parámeteros:
+Esta función está pensada para hacer pedidos al backend donde no es necesario mandarle nada para que pueda responder al pedido, o se debe enviarle muy poquita información. Esta recibe 2 parámeteros:
 
-- `type` con el que se pueden distinguir distintos eventos. Debe coincidir con algún evento del backend.
+- `type` con el que se pueden distinguir distintos eventos. Debe coincidir con algún evento del backend. Se le pueden adicionar [query params](#query-params) para enviar información adicional al backend.
 - `callback` **función** a ser llamada cuando el servidor responda con la información deseada. Esta debe tomar un único parámetro, `data`, que sería la información a recibir. Lo que recibe es lo que sea que la función a la que respondió a este evento en el backend haya retornado.
 
 #### postEvent
 
 Esta función esta pensada para mandarle información al backend o para hacerle pedidos que impliquen mandarle información. Esta recibe 3 parámeteros (1 opcional):
 
-- `type` con el que se pueden distinguir distintos eventos. Debe coincidir con alguna función del backend.
+- `type` con el que se pueden distinguir distintos eventos. Debe coincidir con alguna función del backend. Se le pueden adicionar [query params](#query-params) para enviar información adicional al backend, aunque no tiene mucho sentido si ya van a enviar el parámetro `data`.
 - `data` es la información a ser enviada al servidor. Es un único parámetro, si se quiere mandar un conjunto de datos usar una estructura de datos que modele conjuntos, como listas u objetos.
 - `callback` (opcional, puede quedar vacío) **función** a ser llamada cuando el servidor responda con la información deseada. Esta debe tomar un único parámetro, `data`, que sería la información que recibe del servidor. Lo que recibe es lo que sea que la función a la que respondió a este evento en el backend haya retornado.
 
@@ -100,6 +125,10 @@ Esta función esta pensada para mandarle información al backend o para hacerle 
 Función necesaria para iniciar la conexión al servidor. Solo puede conectarse a servidores locales. Toma un parámetro **opcional** `PORT`, que en caso de no especificarse toma el valor 3000. Pasarle el puerto si es que el servidor está corriendo en un puerto distinto a 3000.
 
 **IMPORTANTE:** Se debe llamar a `connect2Server` en cada archivo que utilice SoqueTIC para comunicarse con el backend.
+
+#### Buenas prácticas
+
+En general, cuando se tiene que buscar información al backend, se usa la función [`getEvent`](#getevent) y si se necesita hacer alguna especificación adicional se pueden usar los [query params](#query-params). Si se necesita enviar un volumen mayor de información al backend, ya sea para una búsqueda compleja o para escribir archivos, se usa la función [`postEvent`](#postevent). Si se quiere recibir información del backend sin que este lo haya pedido, se usa la función [`subscribeRealTimeEvent`](#subscriberealtimeevent).
 
 ## En Backend
 
@@ -124,14 +153,14 @@ Para comunicarse y recibir eventos del frontend, se pueden usar las funciones de
 Función para escuchar eventos **GET** emitidos desde el frontend. Toma 2 parámetros.
 
 - `type` es un string que se utiliza para identificar el evento a responder. Debe coincidir con el llamado del frontend.
-- `callback` es la **función** a ser llamada cuando llegue dicho evento. No tiene que tomar ningún parámetro ya que los eventos GET no tienen información asociada. El retorno de esta función es lo que será enviado al frontend.
+- `callback` es la **función** a ser llamada cuando llegue dicho evento. Puede tomar un parámetro que representa la información enviada por query params, pero en general no toma ninguno. El retorno de esta función es lo que será enviado al frontend.
 
 #### subscribePOSTEvent
 
 Función para escuchar eventos **POST** emitidos desde el frontend. Toma 2 parámetros.
 
 - `type` es un string que se utiliza para identificar el evento a responder. Debe coincidir con el llamado del frontend.
-- `callback` es la **función** a ser llamada cuando llegue dicho evento. Tiene que tomar un único parámetro, `data`, en donde llega la información necesaria para responder al evento. El retorno de esta función es lo que será enviado al frontend.
+- `callback` es la **función** a ser llamada cuando llegue dicho evento. Tiene que tomar al menos un parámetro, `data`, en donde llega la información necesaria para responder al evento. Puede opcionalmente tomar un segundo parámetro que tiene los query params. El retorno de esta función es lo que será enviado al frontend.
 
 #### realTimeEvent
 

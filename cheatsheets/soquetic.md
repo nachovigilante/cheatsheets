@@ -13,21 +13,21 @@ image: "/assets/images/soquetic.svg"
   - [Nombres de los eventos](#nombres-de-los-eventos)
   - [Query params](#query-params)
 - [En Frontend](#en-frontend)
-  - [Instalación](#instalación)
-  - [Uso](#uso)
+  - [Instalación en Frontend](#instalación-en-frontend)
+  - [Uso en Frontend](#uso-en-frontend)
     - [getEvent](#getevent)
     - [postEvent](#postevent)
     - [subscribeRealTimeEvent](#subscriberealtimeevent)
     - [connect2Server](#connect2server)
-    - [Buenas prácticas](#buenas-prácticas)
+    - [Buenas prácticas en frontend](#buenas-prácticas-en-frontend)
 - [En Backend](#en-backend)
-  - [Instalación](#instalación-1)
-  - [Uso](#uso-1)
+  - [Instalación en Backend](#instalación-en-backend)
+  - [Uso en Backend](#uso-en-backend)
     - [subscribeGETEvent](#subscribegetevent)
     - [subscribePOSTEvent](#subscribepostevent)
     - [realTimeEvent](#realtimeevent)
     - [startServer](#startserver)
-    - [Buenas prácticas](#buenas-prácticas-1)
+    - [Buenas prácticas en backend](#buenas-prácticas-en-backend)
 - [DEMOS](#demos)
 - [Usos comunes con ejemplos](#usos-comunes-con-ejemplos)
   - [Comunicación iniciada por el frontend](#comunicación-iniciada-por-el-frontend)
@@ -81,20 +81,22 @@ Los query params se extraen del nombre del evento, y se separan del nombre con u
 
 SoqueTIC comunica frontend y backend. Esta sección se dedica a mostrar esta herramienta desde el lado de un frontend hecho con HTML, CSS y JS para ser corrido por algún browser (Chrome, Firefox, etc.)
 
-### Instalación
+### Instalación en Frontend
 
 Para usar a SoqueTIC en un archivo HTML, se debe hacer lo siguiente:
 
-1) Importar el script de SocketIO y el de SoqueTIC Esto se puede hacer con los siguientes tags:
+1) Importar el script de SocketIO y el de SoqueTIC con los siguientes tags:
+
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/JZylber/SoqueTIC-Client@v1.4.2/soquetic-client.js"></script>
 ```
-2) Linkear el archivo en el que van a usar SoqueTIC debajo de estos dos `<script>`.
+
+1) Linkear el archivo en el que van a usar SoqueTIC debajo de estos dos `<script>`.
 
 **IMPORTANTE:** Para poder ejecutar SoqueTIC no alcanza con abrir el HTML en el browser: hay que armar un live server. La forma más común de hacer esto es usando la [extensión de VS Code](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
 
-### Uso
+### Uso en Frontend
 
 Para comunicarse con el backend, se pueden usar las funciones descritas a continuación. Obviamente, si el backend no está encendido y ejecutándose, nada va a andar.
 
@@ -126,7 +128,7 @@ Función necesaria para iniciar la conexión al servidor. Solo puede conectarse 
 
 **IMPORTANTE:** Se debe llamar a `connect2Server` en cada archivo que utilice SoqueTIC para comunicarse con el backend.
 
-#### Buenas prácticas
+#### Buenas prácticas en frontend
 
 En general, cuando se tiene que buscar información al backend, se usa la función [`getEvent`](#getevent) y si se necesita hacer alguna especificación adicional se pueden usar los [query params](#query-params). Si se necesita enviar un volumen mayor de información al backend, ya sea para una búsqueda compleja o para escribir archivos, se usa la función [`postEvent`](#postevent). Si se quiere recibir información del backend sin que este lo haya pedido, se usa la función [`subscribeRealTimeEvent`](#subscriberealtimeevent).
 
@@ -134,17 +136,21 @@ En general, cuando se tiene que buscar información al backend, se usa la funci�
 
 SoqueTIC comunica frontend y backend. Esta sección se dedica a mostrar esta herramienta desde el lado de un backend hecho con Node JS.
 
-### Instalación
+### Instalación en Backend
 
 SoqueTIC está publicado en npm, por lo tanto, para instalarlo alcanza con correr el siguiente comando dentro del proyecto:
+
 ```bash
 npm i soquetic
 ```
+
 Luego se deben importar las funciones correspondientes en cada archivo js que las use. Por ejemplo, para importar todas las funciones, se puede hacer
+
 ```javascript
 import { subscribeGETEvent, subscribePOSTEvent, realTimeEvent, startServer } from "soquetic";
 ```
-### Uso
+
+### Uso en Backend
 
 Para comunicarse y recibir eventos del frontend, se pueden usar las funciones descritas a continuación.
 
@@ -178,7 +184,7 @@ Esta función toma 2 parámetros **opcionales**:
 - `PORT`: número del puerto en donde el servidor va a escuchar requests. En caso de no especificar, su valor default es `3000`.
 - `DEBUG`: determina si iniciar SoqueTIC en modo DEBUG o no. En caso de no especificar, su valor default es `true`. En el modo DEBUG, el servidor escribe por la consola todo lo recibido y enviado, entre otros mensajes sobre el funcionamiento de SoqueTIC.
 
-#### Buenas prácticas
+#### Buenas prácticas en backend
 
 Para usar SoqueTIC hay que hacer tantos `subscribeGETEvent`/`subscribePOSTEvent` como eventos quiero saber responder, y en el archivo principal a correr con `node JS` llamar a la función `startServer`. Si hay perífericos que deban actualizar su estado al frontend, usar la función `realTimeEvent`.
 
@@ -219,15 +225,18 @@ form.addEventListener("submit", (e) => {
   }
 });
 ```
+
 Se puede ver como cuando se hace "submit" del formulario (apretar el botón que hace submit), se llama a una función que ejecuta postEvent. Esta entonces envía el evento "message" con un objeto de un único atributo, *msg*, que tiene lo que el usuario escribió en el input (`input.value`).
 
 Del lado del backend, hay un onEvent apropiado esperándolo. A continuación el código:
+
 ```javascript
 subscribePOSTEvent("message", (data) => {
   console.log(`Mensaje recibido: ${data.msg}`);
   return { msg: `Mensaje recibido: ${data.msg}` };
 });
 ```
+
 En este caso, al ejecutarse postEvent en el frontend, el backend llama a su callback recibiendo el objeto en el parámetro *data*. Lo muestra por consola y retorna **otro** objeto con un único atributo, también de nombre *msg*, que contiene el string "Mensaje recibido: " + el string recibido en el atributo *msg* del objeto enviado por el frontend.
 
 Al retornar este objeto, el frontend lo recibe llamando a su callback y pasándoselo por parámetro. En este caso, toma el parámetro en *data*, y con ese modifica el *innerText* de un `<p>` previamente creado con el atributo *msg* del objeto con el que respondió el backend.
@@ -239,6 +248,7 @@ El caso de uso de [`getEvent`](#getevent) es muy similar, la única diferencia e
 Un ejemplo de comunicación iniciada por el backend es por ejemplo cuando hay un componente de hardware.
 
 En este caso, la comunicación iniciada por input del usuario se da igual, ya que el usuario interactúa con el frontend. La diferencia aparece para el caso en el que el backend es el que desea enviar un mensaje, sin que necesariamente lo pida el frontend. Como es el backend el que tiene la posibilidad de comunicarse a recursos externos como hardware, es el backend el que recibe información de ellos. Entonces, para informar al usuario, el backend debe iniciar la comunicación con el frontend en vez de esperar eventos. Para eso, utiliza la función [`realTimeEvent`](#realtimeevent). A su vez, el frontend recibe ese mensaje con la función [`subscribeRealTimeEvent`](#subscriberealtimeevent). El siguiente diagrama ilustra esa situación:
+
 <div style="display:flex;justify-content:center"><img src="/assets/images/soquetic/hardware.png" alt="Diagrama Hardware con SoqueTIC"></div>
 
 Para dar un ejemplo, vamos a usar el código de la [Demo Arduino](https://github.com/JZylber/Demo-Arduino). En esta, el usuario elige un color desde el frontend y el led toma ese color. A su vez hay un botón que prende/apaga el LED, y se ve por pantalla si el LED está prendido o apagado.
@@ -246,6 +256,7 @@ Para dar un ejemplo, vamos a usar el código de la [Demo Arduino](https://github
 La parte de enviar el color de frontend a hardware es similar a lo visto anteriormente, la única diferencia es que la función [`subscribePOSTEvent`](#subscribepostevent) inicia comunicación serial para informar al arduino.
 
 El caso interesante es cómo el estado del botón (el prendido y apagado del LED) llega al frontend. Lo primero que ocurre es que el estado del botón es informado al backend. Esto se hace usando comunicación serial, y el backend usa la librería serialport para realizar este tipo de comunicación. A continuación, el fragmento de código relevante del **backend**: 
+
 ```javascript
 port.on("data", function (data) {
   let status = data.toString().trim();
@@ -253,7 +264,9 @@ port.on("data", function (data) {
   realTimeEvent("boton", { on: ledOn });
 });
 ```
-No nos interesa deternos en la sintaxis de la librería [serialport](https://serialport.io/), basta saber que en el parámetro `data` viene la información recibida por el puerto serial. El backend procesa la información, pero a diferencia de lo visto en la sección anterior, no alcanza con retornar, ya que **no está respondiendo un pedido del frontend**. Debe iniciar activamente el intercambio con el frontend, y para eso utiliza la función [realTimeEvent](#realtimeevent). El frontend, por su parte, debe estar preparado para recibir los eventos del backend. A continuación el fragmento de código relevante del **frontend**: 
+
+No nos interesa deternos en la sintaxis de la librería [serialport](https://serialport.io/), basta saber que en el parámetro `data` viene la información recibida por el puerto serial. El backend procesa la información, pero a diferencia de lo visto en la sección anterior, no alcanza con retornar, ya que **no está respondiendo un pedido del frontend**. Debe iniciar activamente el intercambio con el frontend, y para eso utiliza la función [realTimeEvent](#realtimeevent). El frontend, por su parte, debe estar preparado para recibir los eventos del backend. A continuación el fragmento de código relevante del **frontend**:
+
 ```javascript
 function botonApretado(status){
   if(status.on){
@@ -264,4 +277,5 @@ function botonApretado(status){
 }
 receive("boton",botonApretado)
 ```
+
 Como vemos, el [`subscribeRealTimeEvent`](#subscriberealtimeevent) es del mismo tipo que el [`realTimeEvent`](#realtimeevent), y toma en el parámetro del *callback* lo enviado por el frontend y en base a eso refleja información en pantalla.

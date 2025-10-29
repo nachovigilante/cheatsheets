@@ -89,13 +89,6 @@ const CheatsheetPage = ({
                 >
                     <i className="fa-solid fa-arrow-up"></i>
                 </FloatingButton>
-                <FloatingButton
-                    link={`/download/${slug}.pdf`}
-                    ariaLabel="Download PDF"
-                    download
-                >
-                    <i className="fa-solid fa-file-arrow-down"></i>
-                </FloatingButton>
             </div>
         </>
     );

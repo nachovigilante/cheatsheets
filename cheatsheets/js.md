@@ -3,7 +3,7 @@ title: JavaScript
 image: "/assets/images/js.svg"
 ---
 
-## Índice
+## Índicel
 
 - [Índice](#índice)
 - [Variables](#variables)
@@ -54,6 +54,20 @@ image: "/assets/images/js.svg"
   - [Función map](#función-map)
   - [Función filter](#función-filter)
   - [Operador spread](#operador-spread)
+- [Destructuring](#destructuring)
+  - [Destructuring de arrays](#destructuring-de-arrays)
+  - [Destructuring de objetos](#destructuring-de-objetos)
+  - [Valores por defecto](#valores-por-defecto)
+  - [Renombrar variables](#renombrar-variables)
+  - [Rest en destructuring](#rest-en-destructuring)
+  - [Destructuring en parámetros de funciones](#destructuring-en-parámetros-de-funciones)
+- [Async / Await](#async--await)
+  - [Funciones asíncronas](#funciones-asíncronas)
+  - [Await](#await)
+  - [Manejo de errores con try/catch](#manejo-de-errores-con-trycatch)
+- [Fetch](#fetch)
+  - [GET](#get)
+  - [POST](#post)
 
 <br>
 
@@ -578,4 +592,252 @@ const sumar = (a, b, c) => {
 
 let x = [1, 2, 3];
 let z = sumar(...x); // z = 6
+```
+
+## Destructuring
+
+El destructuring es una sintaxis de ES6 que permite extraer valores de arrays u objetos y asignarlos a variables de forma concisa.
+
+### Destructuring de arrays
+
+Permite extraer elementos de un array por su posición.
+
+```javascript
+const numeros = [1, 2, 3];
+
+// Sin destructuring
+const a = numeros[0]; // 1
+const b = numeros[1]; // 2
+
+// Con destructuring
+const [x, y, z] = numeros;
+console.log(x); // 1
+console.log(y); // 2
+console.log(z); // 3
+```
+
+Se pueden saltear elementos usando comas:
+
+```javascript
+const [primero, , tercero] = [10, 20, 30];
+console.log(primero); // 10
+console.log(tercero); // 30
+```
+
+### Destructuring de objetos
+
+Permite extraer propiedades de un objeto por su nombre.
+
+```javascript
+const persona = {
+    nombre: "Juan",
+    apellido: "Perez",
+    edad: 30,
+};
+
+// Sin destructuring
+const nombre = persona.nombre;
+const edad = persona.edad;
+
+// Con destructuring
+const { nombre, apellido, edad } = persona;
+console.log(nombre);   // "Juan"
+console.log(apellido); // "Perez"
+console.log(edad);     // 30
+```
+
+También funciona con objetos anidados:
+
+```javascript
+const usuario = {
+    nombre: "Ana",
+    direccion: {
+        ciudad: "Buenos Aires",
+        pais: "Argentina",
+    },
+};
+
+const { nombre, direccion: { ciudad, pais } } = usuario;
+console.log(ciudad); // "Buenos Aires"
+console.log(pais);   // "Argentina"
+```
+
+### Valores por defecto
+
+Se puede asignar un valor por defecto en caso de que la propiedad o elemento no exista.
+
+```javascript
+// En arrays
+const [a = 0, b = 0, c = 0] = [1, 2];
+console.log(a); // 1
+console.log(b); // 2
+console.log(c); // 0  ← valor por defecto
+
+// En objetos
+const { nombre = "Sin nombre", edad = 18 } = { nombre: "Carlos" };
+console.log(nombre); // "Carlos"
+console.log(edad);   // 18  ← valor por defecto
+```
+
+### Renombrar variables
+
+Al hacer destructuring de objetos, se puede renombrar la variable con la sintaxis `propiedad: nuevoNombre`.
+
+```javascript
+const producto = { nombre: "Laptop", precio: 1500 };
+
+const { nombre: nombreProducto, precio: precioProducto } = producto;
+console.log(nombreProducto);  // "Laptop"
+console.log(precioProducto);  // 1500
+```
+
+### Rest en destructuring
+
+El operador rest (`...`) permite agrupar los elementos o propiedades restantes en una nueva variable.
+
+```javascript
+// En arrays
+const [primero, segundo, ...resto] = [1, 2, 3, 4, 5];
+console.log(primero); // 1
+console.log(segundo); // 2
+console.log(resto);   // [3, 4, 5]
+
+// En objetos
+const { nombre, ...datos } = { nombre: "Luis", edad: 25, ciudad: "Córdoba" };
+console.log(nombre); // "Luis"
+console.log(datos);  // { edad: 25, ciudad: "Córdoba" }
+```
+
+### Destructuring en parámetros de funciones
+
+Se puede usar destructuring directamente en los parámetros de una función, lo que es muy útil cuando se recibe un objeto como argumento.
+
+```javascript
+// Sin destructuring
+const saludar = (persona) => {
+    console.log(`Hola, ${persona.nombre}! Tenés ${persona.edad} años.`);
+};
+
+// Con destructuring en el parámetro
+const saludar = ({ nombre, edad }) => {
+    console.log(`Hola, ${nombre}! Tenés ${edad} años.`);
+};
+
+const persona = { nombre: "María", edad: 28 };
+saludar(persona); // "Hola, María! Tenés 28 años."
+```
+
+## Async / Await
+
+JavaScript es un lenguaje de un solo hilo, pero puede ejecutar operaciones asíncronas (como llamadas a una API o lectura de archivos) sin bloquear el resto del código. `async` y `await` son palabras clave de ES2017 que simplifican el trabajo con código asíncrono.
+
+### Funciones asíncronas
+
+Una función declarada con `async` siempre devuelve una **Promise** (promesa). Esto significa que su resultado no está disponible de inmediato, sino en algún momento futuro.
+
+```javascript
+// Función asíncrona con keyword function
+async function obtenerDatos() {
+    return "datos";
+}
+
+// Función asíncrona con arrow function
+const obtenerDatos = async () => {
+    return "datos";
+};
+
+// El resultado es una Promise
+console.log(obtenerDatos()); // Promise { 'datos' }
+```
+
+### Await
+
+La palabra clave `await` solo puede usarse **dentro de una función `async`**. Pausa la ejecución de la función hasta que la Promise se resuelva, y devuelve el valor resultante.
+
+```javascript
+const esperar = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const ejecutar = async () => {
+    console.log("Inicio");
+    await esperar(2000); // espera 2 segundos
+    console.log("Fin");  // se ejecuta después de los 2 segundos
+};
+
+ejecutar();
+```
+
+### Manejo de errores con try/catch
+
+Cuando una Promise falla (es rechazada), `await` lanza un error. Para manejarlo se usa un bloque `try/catch`.
+
+```javascript
+const obtenerDatos = async () => {
+    try {
+        const resultado = await algunaOperacionAsincrona();
+        console.log(resultado);
+    } catch (error) {
+        console.error("Ocurrió un error:", error);
+    } finally {
+        // Este bloque se ejecuta siempre, haya error o no
+        console.log("Operación finalizada");
+    }
+};
+```
+
+## Fetch
+
+`fetch` es la API nativa del navegador (y de Node.js 18+) para hacer peticiones HTTP. Devuelve una Promise.
+
+### GET
+
+Se usa para **obtener datos** de un servidor.
+
+```javascript
+const obtenerUsuario = async (id) => {
+    try {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+
+        // Verificar que la respuesta fue exitosa
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+
+        // Convertir la respuesta a JSON
+        const usuario = await response.json();
+        console.log(usuario);
+    } catch (error) {
+        console.error("Error al obtener el usuario:", error);
+    }
+};
+
+obtenerUsuario(1);
+```
+
+### POST
+
+Se usa para **enviar datos** al servidor. Se deben especificar el método, los headers y el cuerpo de la petición.
+
+```javascript
+const crearUsuario = async (nuevoUsuario) => {
+    try {
+        const response = await fetch("https://jsonplaceholder.typicode.com/users", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(nuevoUsuario), // convertir objeto a JSON string
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+
+        const usuarioCreado = await response.json();
+        console.log("Usuario creado:", usuarioCreado);
+    } catch (error) {
+        console.error("Error al crear el usuario:", error);
+    }
+};
+
+crearUsuario({ nombre: "Juan", email: "juan@ejemplo.com" });
 ```

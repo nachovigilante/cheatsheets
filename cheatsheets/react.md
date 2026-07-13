@@ -12,6 +12,12 @@ image: "/assets/images/react.svg"
 - [Componentes](#componentes)
   - [Fragmentos de React](#fragmentos-de-react)
 - [Propiedades](#propiedades)
+  - [Destructuring de props](#destructuring-de-props)
+- [Eventos](#eventos)
+  - [onClick](#onclick)
+  - [onChange](#onchange)
+  - [onSubmit](#onsubmit)
+- [Formularios controlados](#formularios-controlados)
 - [Condicionales](#condicionales)
   - [Operadores ternarios](#operadores-ternarios)
   - [If](#if)
@@ -23,6 +29,8 @@ image: "/assets/images/react.svg"
   - [useRef](#useref)
   - [useMemo](#usememo)
   - [useCallback](#usecallback)
+  - [Custom hooks](#custom-hooks)
+- [Fetch con useEffect](#fetch-con-useeffect)
 
 <br>
 
@@ -117,50 +125,154 @@ function App() {
 
 ## Propiedades
 
-Al crear componentes en React, podemos añadirle propiedades con el parametro props, el cual recibe todos los atributos que se le pasan al crearlo en otro componente.
-
-Por ejemplo, en el componente App puedo crear el componente User y pasar la propiedad nombre para que se muestre ese texto en el otro componente.
+Al crear componentes en React, podemos añadirle propiedades. Estas se reciben como un objeto llamado `props` que contiene todos los atributos pasados al componente.
 
 ```javascript
 function App() {
-    return <User nombre="John Doe" />;
+    return <User nombre="John Doe" edad={30} />;
 }
 
 function User(props) {
-    return <h1>Hola, {props.nombre}</h1>;
+    return <h1>Hola, {props.nombre}. Tenés {props.edad} años.</h1>;
 }
 ```
 
-Esto resultará en
-
-```html
-<h1>Hola, John Doe</h1>
-```
-
-Hay algunas propiedades que se pasan por defecto, como la propiedad children, la cual contiene los elementos que pusiste adentro del componente.
-
-Por ejemplo
+Hay algunas propiedades que se pasan por defecto, como `children`, la cual contiene los elementos que pusiste adentro del componente.
 
 ```javascript
 function App() {
     return (
-        <User>
+        <Tarjeta>
             <h1>Hola, John Doe</h1>
-        </User>
+        </Tarjeta>
     );
 }
 
-function User(props) {
-    return <div>{props.children}</div>;
+function Tarjeta(props) {
+    return <div className="tarjeta">{props.children}</div>;
 }
 ```
 
-Esto resultará en
+### Destructuring de props
 
-```html
-<div>
-    <h1>Hola, John Doe</h1>
-</div>
+Es una práctica muy común desestructurar las props directamente en el parámetro de la función, lo que hace el código más limpio y legible.
+
+```javascript
+// Sin destructuring
+function User(props) {
+    return <h1>Hola, {props.nombre}. Tenés {props.edad} años.</h1>;
+}
+
+// Con destructuring (forma recomendada)
+function User({ nombre, edad }) {
+    return <h1>Hola, {nombre}. Tenés {edad} años.</h1>;
+}
+
+// Con valor por defecto
+function User({ nombre, edad = 18 }) {
+    return <h1>Hola, {nombre}. Tenés {edad} años.</h1>;
+}
+```
+
+## Eventos
+
+En React, los eventos se manejan con atributos similares a los de HTML pero escritos en camelCase y pasando una función (no una cadena de texto).
+
+### onClick
+
+Se dispara cuando el usuario hace clic en un elemento.
+
+```javascript
+function App() {
+    const handleClick = () => {
+        console.log("¡Botón clickeado!");
+    };
+
+    return <button onClick={handleClick}>Hacer clic</button>;
+}
+```
+
+Si necesitás pasar argumentos a la función, usá una arrow function:
+
+```javascript
+function App() {
+    const saludar = (nombre) => {
+        console.log(`Hola, ${nombre}!`);
+    };
+
+    return <button onClick={() => saludar("Juan")}>Saludar</button>;
+}
+```
+
+### onChange
+
+Se dispara cada vez que el valor de un input cambia. Recibe el evento `e` del cual se puede extraer `e.target.value`.
+
+```javascript
+function App() {
+    const handleChange = (e) => {
+        console.log("Valor actual:", e.target.value);
+    };
+
+    return <input type="text" onChange={handleChange} />;
+}
+```
+
+### onSubmit
+
+Se dispara cuando se envía un formulario. Es importante llamar a `e.preventDefault()` para evitar que la página se recargue.
+
+```javascript
+function App() {
+    const handleSubmit = (e) => {
+        e.preventDefault(); // evita la recarga de la página
+        console.log("Formulario enviado");
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <input type="text" />
+            <button type="submit">Enviar</button>
+        </form>
+    );
+}
+```
+
+## Formularios controlados
+
+Un formulario controlado es aquel en el que el valor de los inputs está ligado a un estado de React. Esto permite tener control total sobre los datos del formulario en todo momento.
+
+```javascript
+import { useState } from "react";
+
+function FormularioLogin() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("Email:", email);
+        console.log("Password:", password);
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+            />
+            <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Contraseña"
+            />
+            <button type="submit">Iniciar sesión</button>
+        </form>
+    );
+}
 ```
 
 ## Condicionales
@@ -200,23 +312,27 @@ function App() {
 
 ## Listas
 
-Para crear una lista con un array, se debe usar el método map, el cual recibe una función que se ejecutará por cada elemento del array.
-
-Por ejemplo, si quiero mostrar una lista de usuarios, puedo usar un array de la siguiente manera
+Para renderizar una lista desde un array, se usa el método `map`. Cada elemento renderizado **debe tener una prop `key` única**, que ayuda a React a identificar qué elementos cambiaron, se agregaron o eliminaron.
 
 ```javascript
 function App() {
-    const users = ["John Doe", "Jane Doe", "Jack Doe"];
+    const users = [
+        { id: 1, nombre: "John Doe" },
+        { id: 2, nombre: "Jane Doe" },
+        { id: 3, nombre: "Jack Doe" },
+    ];
 
     return (
         <div>
             {users.map((user) => (
-                <User nombre={user} />
+                <User key={user.id} nombre={user.nombre} />
             ))}
         </div>
     );
 }
 ```
+
+> ⚠️ Evitá usar el índice del array como `key` si la lista puede reordenarse o filtrarse. Usá siempre un identificador único como un `id`.
 
 ## Hooks
 
@@ -242,15 +358,40 @@ function App() {
 
 ### useEffect
 
-El hook useEffect nos permite ejecutar código cuando se renderiza el componente o cuando se actualiza una variable de estado.
+`useEffect` permite ejecutar código como efecto secundario (side effect) del renderizado. Recibe dos argumentos: una función y un **array de dependencias** que controla cuándo se ejecuta.
 
-Por ejemplo, si quiero ejecutar un código cuando se renderiza el componente, puedo usar el hook useEffect de la siguiente manera
+```javascript
+useEffect(() => {
+    // código a ejecutar
+}, [dependencias]);
+```
+
+**Sin array de dependencias** → se ejecuta en cada renderizado:
+
+```javascript
+useEffect(() => {
+    console.log("Se ejecuta en cada render");
+});
+```
+
+**Con array vacío `[]`** → se ejecuta solo una vez, al montar el componente:
+
+```javascript
+useEffect(() => {
+    console.log("Se ejecuta solo al montar el componente");
+}, []);
+```
+
+**Con dependencias** → se ejecuta cada vez que cambia alguna de las variables listadas:
 
 ```javascript
 function App() {
+    const [count, setCount] = useState(0);
+
     useEffect(() => {
-        console.log("Se renderizó el componente");
-    }, []);
+        console.log("count cambió a:", count);
+    }, [count]); // solo se ejecuta cuando cambia count
+
     return (
         <div>
             <p>Count: {count}</p>
@@ -260,21 +401,16 @@ function App() {
 }
 ```
 
-Si quiero ejecutar un código cuando se actualiza una variable de estado, puedo usar el hook useEffect de la siguiente manera
+**Función de limpieza (cleanup)** → se ejecuta antes de que el efecto se vuelva a correr o cuando el componente se desmonta:
 
 ```javascript
-function App() {
-    const [count, setCount] = useState(0);
-    useEffect(() => {
-        console.log("Se actualizó la variable count");
-    }, [count]);
-    return (
-        <div>
-            <p>Count: {count}</p>
-            <button onClick={() => setCount(count + 1)}>Incrementar</button>
-        </div>
-    );
-}
+useEffect(() => {
+    const intervalo = setInterval(() => {
+        console.log("tick");
+    }, 1000);
+
+    return () => clearInterval(intervalo); // limpieza
+}, []);
 ```
 
 ### useContext
@@ -357,6 +493,100 @@ function App() {
             <p>Count: {count}</p>
             <button onClick={incrementar}>Incrementar</button>
         </div>
+    );
+}
+```
+
+### Custom hooks
+
+Un custom hook es una función que empieza con `use` y que encapsula lógica reutilizable usando otros hooks. Permiten extraer lógica de los componentes y compartirla.
+
+Por ejemplo, un hook para manejar el valor de un input:
+
+```javascript
+// useInput.js
+import { useState } from "react";
+
+function useInput(valorInicial = "") {
+    const [valor, setValor] = useState(valorInicial);
+
+    const handleChange = (e) => setValor(e.target.value);
+
+    const reset = () => setValor(valorInicial);
+
+    return { valor, handleChange, reset };
+}
+
+export default useInput;
+```
+
+```javascript
+// App.jsx
+import useInput from "./useInput";
+
+function App() {
+    const nombre = useInput("");
+    const email = useInput("");
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(nombre.valor, email.valor);
+        nombre.reset();
+        email.reset();
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <input value={nombre.valor} onChange={nombre.handleChange} placeholder="Nombre" />
+            <input value={email.valor} onChange={email.handleChange} placeholder="Email" />
+            <button type="submit">Enviar</button>
+        </form>
+    );
+}
+```
+
+## Fetch con useEffect
+
+Uno de los usos más comunes de `useEffect` es hacer una petición a una API cuando el componente se monta. El patrón estándar es: estado para los datos, estado para el loading, y estado para el error.
+
+```javascript
+import { useState, useEffect } from "react";
+
+function ListaUsuarios() {
+    const [usuarios, setUsuarios] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchUsuarios = async () => {
+            try {
+                const response = await fetch("https://jsonplaceholder.typicode.com/users");
+
+                if (!response.ok) {
+                    throw new Error("Error al obtener los usuarios");
+                }
+
+                const datos = await response.json();
+                setUsuarios(datos);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchUsuarios();
+    }, []); // [] = solo se ejecuta al montar el componente
+
+    if (loading) return <p>Cargando...</p>;
+    if (error) return <p>Error: {error}</p>;
+
+    return (
+        <ul>
+            {usuarios.map((u) => (
+                <li key={u.id}>{u.name}</li>
+            ))}
+        </ul>
     );
 }
 ```

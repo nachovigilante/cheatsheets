@@ -53,6 +53,7 @@ image: "/assets/images/js.svg"
   - [Función forEach](#función-foreach)
   - [Función map](#función-map)
   - [Función filter](#función-filter)
+  - [Función find](#función-find)
   - [Operador spread](#operador-spread)
 - [Destructuring](#destructuring)
   - [Destructuring de arrays](#destructuring-de-arrays)
@@ -68,6 +69,10 @@ image: "/assets/images/js.svg"
 - [Fetch](#fetch)
   - [GET](#get)
   - [POST](#post)
+- [Módulos ES](#módulos-es)
+  - [Exportación nombrada](#exportación-nombrada)
+  - [Exportación por defecto](#exportación-por-defecto)
+  - [Importación](#importación)
 
 <br>
 
@@ -574,6 +579,28 @@ let x = [1, 2, 3, 4, 5];
 let y = x.filter((elemento) => elemento % 2 === 0); // y = [2, 4]
 ```
 
+### Función find
+
+Esta función devuelve el **primer elemento** del array que cumpla la condición de la función. Si ningún elemento la cumple, devuelve `undefined`.
+
+```javascript
+let x = [1, 2, 3, 4, 5];
+let encontrado = x.find((elemento) => elemento > 3); // 4
+```
+
+Es muy útil para buscar objetos dentro de un array:
+
+```javascript
+const usuarios = [
+    { id: 1, nombre: "Ana" },
+    { id: 2, nombre: "Carlos" },
+    { id: 3, nombre: "Luis" },
+];
+
+const usuario = usuarios.find((u) => u.id === 2);
+console.log(usuario); // { id: 2, nombre: "Carlos" }
+```
+
 ### Operador spread
 
 Este operador (`...`) permite "desarmar" un array en una serie de elementos, de forma que podemos, por ejemplo, pasarlo como parámetro a una función.
@@ -840,4 +867,60 @@ const crearUsuario = async (nuevoUsuario) => {
 };
 
 crearUsuario({ nombre: "Juan", email: "juan@ejemplo.com" });
+```
+
+## Módulos ES
+
+Los módulos ES (ESModules) permiten dividir el código en archivos separados y compartir funcionalidades entre ellos usando `export` e `import`. Es la forma estándar de organizar código en JavaScript moderno.
+
+### Exportación nombrada
+
+Se pueden exportar múltiples cosas desde un mismo archivo. Al importarlas, se deben usar los mismos nombres.
+
+```javascript
+// archivo: matematica.js
+export const PI = 3.1416;
+
+export const sumar = (a, b) => a + b;
+
+export const restar = (a, b) => a - b;
+```
+
+### Exportación por defecto
+
+Cada archivo puede tener **una sola** exportación por defecto. Al importarla, se puede usar cualquier nombre.
+
+```javascript
+// archivo: saludo.js
+const saludar = (nombre) => {
+    console.log(`Hola, ${nombre}!`);
+};
+
+export default saludar;
+```
+
+### Importación
+
+Se usa la palabra clave `import` para traer lo exportado desde otro archivo.
+
+```javascript
+// Importar exportaciones nombradas (con llaves)
+import { PI, sumar, restar } from "./matematica.js";
+
+console.log(PI);         // 3.1416
+console.log(sumar(2, 3)); // 5
+
+// Importar exportación por defecto (sin llaves, cualquier nombre)
+import saludar from "./saludo.js";
+
+saludar("Juan"); // "Hola, Juan!"
+
+// Importar todo de un módulo bajo un alias
+import * as Mate from "./matematica.js";
+
+console.log(Mate.PI);          // 3.1416
+console.log(Mate.sumar(4, 5)); // 9
+
+// Mezclar default y nombradas en un solo import
+import saludar, { PI, sumar } from "./otro-archivo.js";
 ```

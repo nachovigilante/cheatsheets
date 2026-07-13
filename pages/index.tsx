@@ -121,6 +121,28 @@ const Home: NextPage = ({ cheatsheets }: { cheatsheets: CheatsheetType[] }) => {
     );
 };
 
+const CHEATSHEET_ORDER = [
+    "bash",
+    "cloudinary-multer",
+    "css",
+    "express",
+    "git",
+    "html",
+    "ino",
+    "js",
+    "ts",
+    "mysql2",
+    "nextjs",
+    "node",
+    "php",
+    "postgres",
+    "prisma",
+    "python",
+    "react",
+    "soquetic",
+    "sql",
+];
+
 export const getStaticProps = async () => {
     const files = fs.readdirSync(path.join("cheatsheets"));
 
@@ -138,6 +160,14 @@ export const getStaticProps = async () => {
             slug,
             frontmatter,
         } as CheatsheetType;
+    });
+
+    cheatsheets.sort((a, b) => {
+        const indexA = CHEATSHEET_ORDER.indexOf(a.slug);
+        const indexB = CHEATSHEET_ORDER.indexOf(b.slug);
+        const orderA = indexA === -1 ? CHEATSHEET_ORDER.length : indexA;
+        const orderB = indexB === -1 ? CHEATSHEET_ORDER.length : indexB;
+        return orderA - orderB;
     });
 
     return {
